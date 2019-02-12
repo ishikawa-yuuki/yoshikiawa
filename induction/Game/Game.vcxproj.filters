@@ -24,6 +24,8 @@
     <ClCompile Include="Stage_Select.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Fade.cpp" />
+    <ClCompile Include="Help.cpp" />
+    <ClCompile Include="Credit.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -36,6 +38,8 @@
     <ClInclude Include="Stage_Select.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Fade.h" />
+    <ClInclude Include="Help.h" />
+    <ClInclude Include="Credit.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc">
@@ -54,10 +58,6 @@
     <ImageContentTask Include="Assets\sprite\Title_induction.png" />
     <ImageContentTask Include="Assets\sprite\stage_select.png" />
     <ImageContentTask Include="Assets\sprite\arrow.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="Assets\sprite\fade.png">
-      <Filter>Assets\sprite</Filter>
-    </Image>
+    <ImageContentTask Include="Assets\sprite\fade.png" />
   </ItemGroup>
 </Project>
