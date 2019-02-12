@@ -19,6 +19,11 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Human.cpp" />
+    <ClCompile Include="Title.cpp" />
+    <ClCompile Include="Stage_Select.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Fade.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -26,6 +31,11 @@
     </CLInclude>
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Human.h" />
+    <ClInclude Include="Title.h" />
+    <ClInclude Include="Stage_Select.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="Fade.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc">
@@ -41,5 +51,13 @@
     <ImageContentTask Include="Assets\sprite\dummy.png">
       <Filter>Assets\sprite</Filter>
     </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\Title_induction.png" />
+    <ImageContentTask Include="Assets\sprite\stage_select.png" />
+    <ImageContentTask Include="Assets\sprite\arrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\sprite\fade.png">
+      <Filter>Assets\sprite</Filter>
+    </Image>
   </ItemGroup>
 </Project>

@@ -3,7 +3,8 @@
 #include "tkEngine/graphics/effect/tkEffect.h"
 #include "tkEngine/physics/tkPhysicsGhostObject.h"
 #include "tkEngine/character/tkCharacterController.h"
-
+class Human;
+class Player;
 class Game : public IGameObject
 {
 public:
@@ -11,6 +12,8 @@ public:
 	~Game();
 	bool Start();
 	void Update();
-	prefab::CSkinModelRender* m_skinModelRender = nullptr;		//スキンモデルレンダラー。
+private:
+	Human * m_human;
+	Player* m_player;
 };
 
