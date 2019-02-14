@@ -7,7 +7,7 @@ public:
 	bool Start()override;
 	void Update()override;
 	void PostRender(CRenderContext&rc) override;
-	void StartFadeIn() {
+	/*void StartFadeIn() {
 		m_fade = enState_FadeIn;
 	}
 	void StartFadeOut() {
@@ -28,6 +28,6 @@ private:
 	CShaderResourceView m_texture;
 	CSprite m_sprite;
 	enState_Fade m_fade = enState_Idle;
-	float m_currentAlpha = 1.0f;
+	float m_currentAlpha = 1.0f;*/
 };
 
