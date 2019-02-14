@@ -47,7 +47,7 @@ void Title::Update()
 void Title::Choice()
 {
 	const float arrow_move = -100.0f;//‹|‚ÌˆÚ“®‹——£
-	if (Pad(0).IsTrigger(enButtonUp)) {
+	if (Pad(0).IsTrigger(enButtonDown)) {
 		switch (m_select) {
 		case select1:
 			m_select = select2;
@@ -59,7 +59,7 @@ void Title::Choice()
 			break;
 		}
 	}
-	else if (Pad(0).IsTrigger(enButtonDown)) {
+	else if (Pad(0).IsTrigger(enButtonUp)) {
 		switch (m_select) {
 		case select2:
 			m_select = select1;
