@@ -1765,6 +1765,7 @@
     <ClCompile Include="Credit.cpp" />
     <ClCompile Include="Fade.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameCamera.cpp" />
     <ClCompile Include="Help.cpp" />
     <ClCompile Include="Human.cpp" />
     <ClCompile Include="main.cpp" />
@@ -1796,6 +1797,7 @@
     <ClInclude Include="Credit.h" />
     <ClInclude Include="Fade.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameCamera.h" />
     <ClInclude Include="Help.h" />
     <ClInclude Include="Human.h" />
     <ClInclude Include="Player.h" />
@@ -1806,6 +1808,7 @@
     <ResourceCompile Include="Game.rc" />
   </ItemGroup>
   <ItemGroup>
+    <MeshContentTask Include="Assets\modelData\stage_test.fbx" />
     <MeshContentTask Include="Assets\modelData\unityChan.fbx" />
   </ItemGroup>
   <ItemGroup>

@@ -40,7 +40,7 @@ void Stage_Select::Update()
 
 void Stage_Select::Choice()
 {
-	float arrow_move = 215.0f;
+	const float arrow_move = 215.0f;
 	if (Pad(0).IsTrigger(enButtonRight)) {
 		switch (m_stage) {
 		case stage1:

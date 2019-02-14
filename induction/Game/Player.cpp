@@ -14,14 +14,17 @@ Player::~Player()
 bool Player::Start()
 {
 	m_effect = NewGO<prefab::CEffect>(0);
-	
 	m_effect->Play(L"effect/hikari.efk");
 	m_effect->SetScale({ 30.0f,30.0f,30.0f });
+	
 	return true;
 }
 
 void Player::Update()
 {
+	//プレイヤーの光の色を変えてHumanに簡単な指示を出せるような
+	//そんなプログラムを考えてます、、、、
+
 	Move();
 	m_effect->SetPosition(m_position);
 }

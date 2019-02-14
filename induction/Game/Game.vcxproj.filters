@@ -26,6 +26,7 @@
     <ClCompile Include="Fade.cpp" />
     <ClCompile Include="Help.cpp" />
     <ClCompile Include="Credit.cpp" />
+    <ClCompile Include="GameCamera.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -40,6 +41,7 @@
     <ClInclude Include="Fade.h" />
     <ClInclude Include="Help.h" />
     <ClInclude Include="Credit.h" />
+    <ClInclude Include="GameCamera.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc">
@@ -48,6 +50,9 @@
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\unityChan.fbx">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\stage_test.fbx">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
   </ItemGroup>
