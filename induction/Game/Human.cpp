@@ -53,6 +53,7 @@ void Human::Update()
 
 void Human::Move()
 {
+	float humanspeed = 60.0f;
 	CVector3 diff = m_position - m_player->GetPosition();
 	if (diff.LengthSq() <= 130.0f * 130.0f) {
 		m_movespeed = CVector3::Zero;
@@ -62,6 +63,7 @@ void Human::Move()
 		m_movespeed.y = 0.0f;
 		m_movespeed.Normalize();
 		m_movespeed *= diff.LengthSq() / (400.0f * 400.0f) * 12.0;
+		//m_movespeed = m_movespeed* GameTime().GetFrameDeltaTime();
 	}
 	m_position += m_movespeed;
 	m_skinModelRender->SetPosition(m_position);
@@ -69,7 +71,7 @@ void Human::Move()
 
 void Human::Turn()
 {
-	if (fabsf(m_movespeed.x) <= 0.001f //fabsfは絶対値。m_movespeed.x&m_movespeedzが,
+	if (fabsf(m_movespeed.x) <= 0.001f    //fabsfは絶対値。m_movespeed.x&m_movespeedzが
 		&&fabsf(m_movespeed.z <=0.001f)) {//0.001以下の時には何もしない。
 		return;
 	}

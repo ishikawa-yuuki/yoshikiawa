@@ -32,5 +32,6 @@ private:
 	};
 	CAnimationClip m_animClip[enAnimationClip_num];
 	CFont m_font;
+	
 };
 

@@ -65,4 +65,12 @@
     <ImageContentTask Include="Assets\sprite\arrow.png" />
     <ImageContentTask Include="Assets\sprite\fade.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\sprite\retire.png">
+      <Filter>Assets\sprite</Filter>
+    </Image>
+    <Image Include="Assets\sprite\BacktoGame.png">
+      <Filter>Assets\sprite</Filter>
+    </Image>
+  </ItemGroup>
 </Project>

@@ -1826,6 +1826,10 @@
   <ItemGroup>
     <ImageContentTask Include="Assets\sprite\fade.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Assets\sprite\BacktoGame.png" />
+    <ImageContentTask Include="Assets\sprite\retire.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="$(VCTargetsPath)\BuildCustomizations\ImageContentTask.targets" />

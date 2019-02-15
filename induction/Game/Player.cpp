@@ -9,6 +9,7 @@ Player::Player()
 
 Player::~Player()
 {
+	DeleteGO(m_effect);
 }
 
 bool Player::Start()
@@ -31,7 +32,7 @@ void Player::Update()
 
 void Player::Move()
 {
-	float pl_speed = 10.0f;//Œõ‚Ì‘¬“x
+	float pl_speed = 600.0f;//Œõ‚Ì‘¬“x
 	float L_Stick_X = Pad(0).GetLStickXF();
 	float L_Stick_Y = Pad(0).GetLStickYF();
 
@@ -43,7 +44,7 @@ void Player::Move()
 	CameraRight.y = 0.0f;
 	CameraRight.Normalize();//•ûŒüî•ñE‰¡
 
-	m_position += CameraForword * L_Stick_Y * pl_speed;
-	m_position += CameraRight * L_Stick_X * pl_speed;
+	m_position += CameraForword * L_Stick_Y * pl_speed * GameTime().GetFrameDeltaTime();
+	m_position += CameraRight * L_Stick_X * pl_speed * GameTime().GetFrameDeltaTime();
 
 }
