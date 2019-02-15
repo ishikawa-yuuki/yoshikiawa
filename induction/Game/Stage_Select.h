@@ -1,4 +1,5 @@
 #pragma once
+class Fade;
 class Stage_Select : public IGameObject
 {
 public:
@@ -16,6 +17,9 @@ private:
 		stage2,
 		stage3
 	};
+	bool m_isWaitFadeout = false;
+	bool m_Tile = false;
+	Fade* m_fade = nullptr;
 	Stage m_stage = stage1;
 };
 

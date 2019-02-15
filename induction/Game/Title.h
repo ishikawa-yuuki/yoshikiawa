@@ -1,4 +1,5 @@
 #pragma once
+class Fade;
 class Title : public IGameObject
 {
 public:
@@ -17,5 +18,7 @@ private:
 		select3//クレジット
 	};
 	Select m_select = select1;
+	bool m_isWaitFadeout = false;
+	Fade* m_fade = nullptr;
 };
 

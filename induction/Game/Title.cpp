@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Title.h"
+#include "Fade.h"
 #include "Game.h"
 #include "Stage_Select.h"
 #include "Help.h"
@@ -13,6 +14,7 @@ Title::~Title()
 {
 	DeleteGO(m_spriteRender);
 	DeleteGO(m_arrow);
+	DeleteGO(m_fade);
 }
 
 bool Title::Start()
@@ -21,28 +23,36 @@ bool Title::Start()
 	m_spriteRender->Init(L"sprite/Title_induction.dds",1280.0f,720.0f);
 	m_arrow = NewGO<prefab::CSpriteRender>(0);
 	m_arrow->Init(L"sprite/arrow.dds", 32.0f, 32.0f);
+	m_fade = NewGO<Fade>(0,"Fade");
+	m_fade->StartFadeIn();
 	return true;
 }
 
 void Title::Update()
 {
-	if (Pad(0).IsTrigger(enButtonA)) {
-		switch (m_select) {
-		case select1:
-			NewGO<Stage_Select>(0, "Stage_Select");
-			DeleteGO(this);
-			break;
-		case select2:
-			NewGO<Help>(0, "Help");
-			DeleteGO(this);
-			break;
-		case select3:
-			NewGO<Credit>(0, "Credit");
-			DeleteGO(this);
-			break;
+	if (m_isWaitFadeout) {
+		if (!m_fade->IsFade()) {
+			if (m_select == select1) {
+				NewGO<Stage_Select>(0, "Stage_Select");
+				DeleteGO(this);
+			}
+			else if (m_select == select2) {
+				NewGO<Help>(0, "Help");
+				DeleteGO(this);
+			}
+			else if (m_select == select3) {
+				NewGO<Credit>(0, "Credit");
+				DeleteGO(this);
+			}
 		}
 	}
-	Choice();
+	else {
+		if (Pad(0).IsTrigger(enButtonA)) {
+			m_isWaitFadeout = true;
+			m_fade->StartFadeOut();
+		}
+		Choice();
+	}
 }
 void Title::Choice()
 {

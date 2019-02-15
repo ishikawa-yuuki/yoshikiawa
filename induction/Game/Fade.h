@@ -7,14 +7,14 @@ public:
 	bool Start()override;
 	void Update()override;
 	void PostRender(CRenderContext&rc) override;
-	/*void StartFadeIn() {
-		m_fade = enState_FadeIn;
+	void StartFadeIn() {
+		m_state = enState_FadeIn;
 	}
 	void StartFadeOut() {
-		m_fade = enState_FideOut;
+		m_state = enState_FideOut;
 	}
-	bool InFade() const {
-		return m_fade != enState_Idle;
+	bool IsFade() const {
+		return m_state != enState_Idle;
 	}
 	float GetCurrentAlpha() const{
 		return m_currentAlpha;
@@ -27,7 +27,7 @@ private:
 	};
 	CShaderResourceView m_texture;
 	CSprite m_sprite;
-	enState_Fade m_fade = enState_Idle;
-	float m_currentAlpha = 1.0f;*/
+	enState_Fade m_state = enState_Idle;
+	float m_currentAlpha = 1.0f;
 };
 
