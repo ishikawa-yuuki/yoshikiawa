@@ -22,8 +22,6 @@ Game::~Game()
 
 bool Game::Start()
 {
-	m_fade = NewGO<Fade>(0, "Fade");
-	m_fade->StartFadeIn();
 	m_player = NewGO<Player>(0, "Player");
 	m_human = NewGO<Human>(0, "Human");
 	m_gamecamera = NewGO<GameCamera>(0, "GameCamera");
@@ -31,6 +29,8 @@ bool Game::Start()
 	m_skinModelRender = NewGO<prefab::CSkinModelRender>(0);
 	m_skinModelRender->Init(L"modelData/stage_test.cmo");//仮ステージ
 	m_skinModelRender->SetScale({ 20.0f,20.0f,20.0f });//思ったより小さかったので20倍
+	m_fade = NewGO<Fade>(0, "Fade");
+	m_fade->StartFadeIn();
 	return true;
 }
 
