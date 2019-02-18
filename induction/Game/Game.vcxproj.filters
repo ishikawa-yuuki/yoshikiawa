@@ -29,7 +29,7 @@
     <ClCompile Include="GameCamera.cpp" />
     <ClCompile Include="SSPlayer.cpp" />
     <ClCompile Include="SSGameCamera.cpp" />
-    <ClCompile Include="GameOver.cpp" />
+    <ClCompile Include="SSHuman.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -47,7 +47,7 @@
     <ClInclude Include="GameCamera.h" />
     <ClInclude Include="SSPlayer.h" />
     <ClInclude Include="SSGameCamera.h" />
-    <ClInclude Include="GameOver.h" />
+    <ClInclude Include="SSHuman.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc">

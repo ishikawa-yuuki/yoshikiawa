@@ -1772,6 +1772,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SSGameCamera.cpp" />
+    <ClCompile Include="SSHuman.cpp" />
     <ClCompile Include="SSPlayer.cpp" />
     <ClCompile Include="Stage_Select.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -1807,6 +1808,7 @@
     <ClInclude Include="Player.h" />
     <CLInclude Include="resource.h" />
     <ClInclude Include="SSGameCamera.h" />
+    <ClInclude Include="SSHuman.h" />
     <ClInclude Include="SSPlayer.h" />
     <ClInclude Include="Stage_Select.h" />
     <ClInclude Include="stdafx.h" />

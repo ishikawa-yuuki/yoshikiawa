@@ -9,6 +9,6 @@ public:
 	void Update();
 private:
 	SSPlayer * m_ssplayer = nullptr;
-	CVector3 SSPlayerPos; // target(’‹“_)‚Å‚·B
+	
 };
 
