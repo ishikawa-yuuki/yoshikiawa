@@ -3,6 +3,7 @@
 #include "tkEngine/graphics/effect/tkEffect.h"
 #include "tkEngine/physics/tkPhysicsGhostObject.h"
 #include "tkEngine/character/tkCharacterController.h"
+class Fade;
 class Human;
 class Player;
 class GameCamera;
@@ -18,6 +19,7 @@ public:
 		return m_isPose;
 	}
 private:
+	Fade * m_fade = nullptr;
 	Human * m_human;
 	Player* m_player;
 	GameCamera * m_gamecamera;
@@ -26,7 +28,7 @@ private:
 	prefab::CSpriteRender* m_sprite_Retire = nullptr;
 	prefab::CSpriteRender* m_sprite_toGame = nullptr;
 	prefab::CSpriteRender* m_sprite_arrow = nullptr;
-
+	bool m_isWaitFadeout = false; //true‚È‚ç‰æ–Ê‚ğØ‚è‘Ö‚¦‚éB
 	bool m_isPose = false;
 	CVector3 m_Retirepos = { -200.0f,-100.0f,0.0f };
 	CVector3 m_toGamepos = { 200.0f,-100.0f,0.0f };
