@@ -37,53 +37,88 @@ bool GameCamera::Start()
 
 void GameCamera::Update()
 {
-//	const float r = 450.0f;
-	PlayerPos = m_player->GetPosition();
-//
-//	CVector3 Stick_R;
-//	Stick_R.x = Pad(0).GetRStickXF();
-//	Stick_R.y = Pad(0).GetRStickYF();
-//	Stick_R.z = 0.0f;
-//	右のスティック
-//	m_sdegreexz = -Stick_R.x * 1.0f;
-//	m_sdegreey = -Stick_R.y * 1.0f;
-//
-//	m_degreexz += m_sdegreexz;
-//	m_degreey += m_sdegreey;
-//
-//	m_degreey = 45.0f;
-//	/*if (m_degreexz >= 70.0f) {
-//	m_degreexz = 70.0f;
-//	}
-//	if (m_degreexz <= -70.0f) {
-//	m_degreexz = -70.0f;
-//	}
-//*/
-//	m_radianx = M_PI / 180.0f * m_degreexz;
-//	m_radiany = M_PI / 180.0f * m_degreey;
-//	CQuaternion qrot;
-//	qrot.SetRotation(CVector3::AxisY,m_radianx);
-//	CVector3 m_ToPos = { 0.0f,0.0f,2.0f };
-//	qrot.Multiply(m_ToPos);
-//
-//	CVector3 rotAxis;
-//	rotAxis.Cross(m_ToPos, CVector3::AxisY);
-//	rotAxis.Normalize();
-//	qrot.SetRotation(rotAxis, m_radiany);
-//	qrot.Multiply(m_ToPos);
-//	m_ToPos *= r;
-//	m_position = PlayerPos + m_ToPos;
-//	m_position.y += 250.0f;
-//	
-//	/*CVector3 CameraPos = PlayerPos + m_ToPos * 2.0;
-//	m_ToPos *= 2;
-//	
-//	PlayerPos -= m_ToPos;
-//	m_ToPos *= 1.5f;*/
+	m_PlayerPos = m_player->GetPosition();
+	CVector3 stickR;
+	stickR.x = -Pad(0).GetRStickXF();	//アナログスティックのxの入力量を取得。
+	stickR.y = Pad(0).GetLStickYF();	//アナログスティックのxの入力量を取得。
+	stickR.z = 0.0f;
+	//右スティックの入力
+	//右スティック
+	m_sdegreexz = -stickR.x * 1.0f;
+	m_sdegreey = -stickR.y*1.0f;
+
+	//回転度加算
+	m_degreey += m_sdegreey;
+	m_degreexz += m_sdegreexz;
+	//上下方向のカメラ移動を固定
+	m_degreey = 30.0f;
+	/*if (m_degreey >= 30.0f) {//cameraを上方向に動かすプログラム
+	m_degreey = 30.0f;         //ただしあまり強く上には動かない。
+	}
+	if (m_degreey <= 10.0f) {
+	m_degreey = 10.0f;
+	}*/
+	/*if (m_degreexz >= 70.0f) {
+	m_degreexz = 70.0f;
+	}
+	if (m_degreexz <= -70.0f) {
+	m_degreexz = -70.0f;
+	}*/
+
+	//角度をラジアン単位に直す
+	m_radianx = M_PI / 180 * m_degreexz;
+	m_radiany = M_PI / 180 * m_degreey;
+	Hutu();
 	follow();
-	//m_springCamera.SetTarget(PlayerPos);//プレイヤーの位置を注視点にする。
-	//m_springCamera.SetPosition(m_position);
-	//m_springCamera.Update();
+	//m_target.z += 350.0f;
+	//視点z
+	m_springCamera.SetTarget(m_target);
+	//座標
+	m_springCamera.SetPosition(m_position);
+	//カメラの更新。
+	m_springCamera.Update();
+	
+}
+
+void GameCamera::Hutu()
+{
+	m_target = { 0.0f,0.0f,0.0f };
+	m_target.y += 20.0f;
+	m_target += m_player->GetPosition();
+	//注視点を計算する。
+	//target.y += 200.0f;
+	//Y軸周りに回転させる。
+	CQuaternion qRot;
+	qRot.SetRotation(CVector3::AxisY, m_radianx);
+	CVector3 ToPos = { 0.0f, 0.0f, 3.0f };
+	qRot.Multiply(ToPos);
+	//上下の回転。
+	//まずは回す軸を計算する。
+	CVector3 rotAxis;
+
+	rotAxis.Cross(ToPos, CVector3::AxisY);
+	//ベクトルを正規化する。
+	rotAxis.Normalize();
+	qRot.SetRotation(rotAxis, m_radiany);
+	qRot.Multiply(ToPos);
+	ToPos *= m_r;
+	m_position = m_target + ToPos * 2.0f;
+
+	/*ps = toPos / r;
+	CVector3 rotAxis3;
+	rotAxis3.Cross(toPos, CVector3::AxisY);
+	rotAxis3.Normalize();
+	rotAxis3.y -= rotAxis3.y;
+	ps = rotAxis3;*/
+
+	ToPos *= 2;
+	//m_toPos.y = 0.0f;
+	m_target -= ToPos;
+	ToPos *= 1.5f;
+	/*toPos.x = -r * cos(radianx);
+	toPos.y = r * sin(radiany);
+	toPos.z=r*(sin(radianx)+cos(radiany));*/
+	//toPos.z = r * sin(radianx);
 }
 
 void GameCamera::follow()
@@ -92,22 +127,22 @@ void GameCamera::follow()
 	//横方向には自由に回転させることができるようにしたい。
 	CVector3 Old_Topos = m_ToPos;
 	CVector3 HumanPos = m_human->GetPosition();
-	CVector3 diff = PlayerPos - HumanPos;
+	CVector3 diff = m_PlayerPos - HumanPos;
 	float len = diff.Length();
 	if (len >= 300.0f) {
-		m_ToPos += {0.0f, 2.0f, 2.0f};//だんだん離れる
-		if (m_ToPos.y > 750.0f) {
+		m_ToPos += {0.0f, 4.0f, 0.0f};//だんだん離れる
+		if (m_ToPos.y > 950.0f) {
 			m_ToPos = Old_Topos; //カメラが光に離れすぎないよう固定
 		}
 	}
 	else if (len <= 150.f) {
-		m_ToPos -= {0.0f, 5.0f, 5.0f};//どんどん近寄る
+		m_ToPos -= {0.0f, 6.0f, 0.0f};//どんどん近寄る
 		if (m_ToPos.y < 450.0f) {
 			m_ToPos = Old_Topos;//カメラが光に寄りすぎないよう固定
 		}
 	}
-	CVector3 CameraPos = PlayerPos + m_ToPos;
-	m_springCamera.SetTarget(PlayerPos);//プレイヤーの位置を注視点にする。
+	CVector3 CameraPos = m_PlayerPos + m_ToPos;
+	m_springCamera.SetTarget(m_PlayerPos);//プレイヤーの位置を注視点にする。
 	m_springCamera.SetPosition(CameraPos);
 	m_springCamera.Update();
 }

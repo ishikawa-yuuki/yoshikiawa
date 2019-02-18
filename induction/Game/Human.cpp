@@ -32,6 +32,7 @@ bool Human::Start()
 
 	m_animClip[enAnimationClip_jump].SetLoopFlag(false);
 	m_animClip[enAnimationClip_KneelDown].SetLoopFlag(false);
+	m_animClip[enAnimationClip_damage].SetLoopFlag(false);
 	m_animClip[enAnimationClip_clear].SetLoopFlag(false);
 	//trueにしたら問題がある奴だけfalseに直した。
 
@@ -49,59 +50,83 @@ void Human::Update()
 	Move();
 	Turn();
 	AnimeControll();
+	isDead();
 }
 
 void Human::Move()
 {
-	float humanspeed = 60.0f;
-	CVector3 diff = m_position - m_player->GetPosition();
-	if (diff.LengthSq() <= 130.0f * 130.0f) {
-		m_movespeed = CVector3::Zero;
+	if (m_isDead != true) {
+		CVector3 diff = m_position - m_player->GetPosition();
+		if (diff.LengthSq() <= 130.0f * 130.0f) {
+			m_movespeed = CVector3::Zero;
+		}
+		else {
+			auto humanspeed = 30.0f;
+			m_movespeed = m_player->GetPosition() - m_position;
+			m_movespeed.y = 0.0f;
+			m_movespeed.Normalize();
+			m_movespeed *= diff.LengthSq() / (400.0f * 400.0f) * 12.0;
+			m_movespeed = m_movespeed * humanspeed * GameTime().GetFrameDeltaTime();
+		}
+		m_position += m_movespeed;
+		m_skinModelRender->SetPosition(m_position);
 	}
-	else {
-		m_movespeed = m_player->GetPosition() - m_position;
-		m_movespeed.y = 0.0f;
-		m_movespeed.Normalize();
-		m_movespeed *= diff.LengthSq() / (400.0f * 400.0f) * 12.0;
-		//m_movespeed = m_movespeed* GameTime().GetFrameDeltaTime();
-	}
-	m_position += m_movespeed;
-	m_skinModelRender->SetPosition(m_position);
 }
 
 void Human::Turn()
 {
-	if (fabsf(m_movespeed.x) <= 0.001f    //fabsfは絶対値。m_movespeed.x&m_movespeedzが
-		&&fabsf(m_movespeed.z <=0.001f)) {//0.001以下の時には何もしない。
-		return;
+	if (m_isDead != true) {
+		if (fabsf(m_movespeed.x) <= 0.001f    //fabsfは絶対値。m_movespeed.x&m_movespeedzが
+			&&fabsf(m_movespeed.z <= 0.001f)) {//0.001以下の時には何もしない。
+			return;
+		}
+		else {
+			float angle = atan2(m_movespeed.x, m_movespeed.z);
+			m_qrot.SetRotation(CVector3::AxisY, angle);
+		}
+		m_skinModelRender->SetRotation(m_qrot);
 	}
-	else {
-		float angle = atan2(m_movespeed.x, m_movespeed.z);
-		m_qrot.SetRotation(CVector3::AxisY, angle);
-	}
-	m_skinModelRender->SetRotation(m_qrot);
 }
 
 void Human::AnimeControll()
 {
-	const float run_true = 6.0f*6.0f;
-	const float walk_true = 2.0f*2.0f;
-	if (m_movespeed.LengthSq() > run_true) {
-		m_skinModelRender->PlayAnimation(enAnimationClip_run, 0.2);
-	}
-	else if (m_movespeed.LengthSq() > walk_true) {
-		m_skinModelRender->PlayAnimation(enAnimationClip_walk, 0.2);
-	}
-	else {
-		m_skinModelRender->PlayAnimation(enAnimationClip_idle, 0.2);
+	if (m_isDead != true) {
+		const float run_true = 6.0f*6.0f;
+		const float walk_true = 2.0f*2.0f;
+		if (m_movespeed.LengthSq() > run_true) {
+			m_skinModelRender->PlayAnimation(enAnimationClip_run, 0.2);
+		}
+		else if (m_movespeed.LengthSq() > walk_true) {
+			m_skinModelRender->PlayAnimation(enAnimationClip_walk, 0.2);
+		}
+		else {
+			m_skinModelRender->PlayAnimation(enAnimationClip_idle, 0.2);
+		}
 	}
 }
 
-void Human::PostRender(CRenderContext& renderContext) //何かを調べるためのポストレンダラ、今は移動スピード。
+//void Human::PostRender(CRenderContext& renderContext) //何かを調べるためのポストレンダラ、今は移動スピード。
+//{
+//	m_font.Begin(renderContext);
+//	wchar_t MoveSPeeed[100];
+//	swprintf(MoveSPeeed, L"x%f,y%f,z%f", m_movespeed.x, m_movespeed.y, m_movespeed.z);
+//	m_font.Draw(MoveSPeeed, { 0,0 });
+//	m_font.End(renderContext);
+//}
+
+void Human::isDead()
 {
-	m_font.Begin(renderContext);
-	wchar_t MoveSPeeed[100];
-	swprintf(MoveSPeeed, L"x%f,y%f,z%f", m_movespeed.x, m_movespeed.y, m_movespeed.z);
-	m_font.Draw(MoveSPeeed, { 0,0 });
-	m_font.End(renderContext);
+	//敵もギミックもないので今のところはボタン押すだけで死ぬスペランカーです。
+	if (m_isDead != true) {
+		if (Pad(0).IsTrigger(enButtonB)) {
+			m_isDead = true; //これがtrueになれば死
+			m_skinModelRender->PlayAnimation(enAnimationClip_KneelDown, 0.2f);
+			m_movespeed = CVector3::Zero;
+		}
+	}
+	else {
+		if (m_skinModelRender->IsPlayingAnimation() == false) {
+			m_skinModelRender->PlayAnimation(enAnimationClip_clear, 0.2f);
+		}
+	}
 }

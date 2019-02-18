@@ -3,7 +3,7 @@
  */
 #include "stdafx.h"
 #include "Title.h"
-
+#include "Fade.h"
 namespace {
 	/*!
 	*@brief	低スペックPC向けにtkEngineのConfigを設定する。
@@ -135,6 +135,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 
 	//エンジンを初期化。
 	if (Engine().Init(initParam) == true) {
+		//NewGO<Fade>(0, "Fade");
 		NewGO<Title>(0, nullptr);
 
 		//ゲームループを実行。
