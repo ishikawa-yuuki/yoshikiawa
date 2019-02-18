@@ -1770,6 +1770,8 @@
     <ClCompile Include="Human.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="SSGameCamera.cpp" />
+    <ClCompile Include="SSPlayer.cpp" />
     <ClCompile Include="Stage_Select.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -1802,6 +1804,8 @@
     <ClInclude Include="Human.h" />
     <ClInclude Include="Player.h" />
     <CLInclude Include="resource.h" />
+    <ClInclude Include="SSGameCamera.h" />
+    <ClInclude Include="SSPlayer.h" />
     <ClInclude Include="Stage_Select.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Title.h" />

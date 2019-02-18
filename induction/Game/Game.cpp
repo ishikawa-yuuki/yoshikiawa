@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Game.h"
 #include "tkEngine/light/tkDirectionLight.h"
+#include "Fade.h"
 #include "Human.h"
 #include "Player.h"
 #include "Title.h"
@@ -12,13 +13,17 @@ Game::Game()
 
 Game::~Game()
 {
+	DeleteGO(m_fade);
 	DeleteGO(m_player);
 	DeleteGO(m_human);
 	DeleteGO(m_gamecamera);
+	DeleteGO(m_skinModelRender);
 }
 
 bool Game::Start()
 {
+	m_fade = NewGO<Fade>(0, "Fade");
+	m_fade->StartFadeIn();
 	m_player = NewGO<Player>(0, "Player");
 	m_human = NewGO<Human>(0, "Human");
 	m_gamecamera = NewGO<GameCamera>(0, "GameCamera");
@@ -31,7 +36,16 @@ bool Game::Start()
 
 void Game::Update()
 {
-	Pose();
+	if (m_isWaitFadeout) {
+		if (!m_fade->IsFade()) {
+			NewGO<Title>(0);
+			DeleteGO(this);
+		}
+	}
+	else {
+			Pose();
+	}
+	
 }
 
 void Game::Pose()
@@ -81,8 +95,8 @@ void Game::Pose()
 				DeleteGO(m_sprite_Retire);
 				DeleteGO(m_sprite_toGame);
 				DeleteGO(m_sprite_arrow);
-				NewGO<Title>(0);
-				DeleteGO(this);
+				m_fade->StartFadeOut();
+				m_isWaitFadeout = true;
 				break;
 			case Game::togame:
 				DeleteGO(m_sprite_Retire);

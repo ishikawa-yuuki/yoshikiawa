@@ -1,8 +1,11 @@
 #include "stdafx.h"
 #include "Stage_Select.h"
+#include "SSPlayer.h"
+#include "SSGameCamera.h"
 #include "Game.h"
 #include "Fade.h"
 #include "Title.h"
+
 
 Stage_Select::Stage_Select()
 {
@@ -11,19 +14,22 @@ Stage_Select::Stage_Select()
 
 Stage_Select::~Stage_Select()
 {
-	DeleteGO(m_spriteRender);
-	DeleteGO(m_arrow);
+	//DeleteGO(m_spriteRender);
 	DeleteGO(m_fade);
+	DeleteGO(m_ssPlayer);
+	DeleteGO(m_ssGC);
 }
 
 bool Stage_Select::Start()
 {
-	m_spriteRender = NewGO<prefab::CSpriteRender>(0);
-	m_spriteRender->Init(L"sprite/Stage_Select.dds", 1280.0f, 720.0f);
-	m_arrow = NewGO<prefab::CSpriteRender>(0);
-	m_arrow->Init(L"sprite/arrow.dds", 32.0f, 32.0f);
+	//m_spriteRender = NewGO<prefab::CSpriteRender>(0);
+	//m_spriteRender->Init(L"sprite/Stage_Select.dds", 1280.0f, 720.0f);
+	//m_arrow = NewGO<prefab::CSpriteRender>(0);
+	//m_arrow->Init(L"sprite/arrow.dds", 32.0f, 32.0f);
 	m_fade = NewGO<Fade>(0, "Fade");
 	m_fade->StartFadeIn();
+	m_ssPlayer = NewGO<SSPlayer>(0, "SSPlayer");
+	m_ssGC = NewGO<SSGameCamera>(0, "SSGameCamera");
 	return true;
 }
 
@@ -35,9 +41,9 @@ void Stage_Select::Update()
 			  NewGO<Title>(0, "Title");
 			  DeleteGO(this);
 		     }
-		     else if (m_stage == stage1) {
-				NewGO<Game>(0, "Game");
+		     else if (m_stage == stage1 || m_stage == stage2 || m_stage == stage3) {
 				DeleteGO(this);
+				NewGO<Game>(0, "Game");
 			 }
 		 }
 	}
@@ -57,16 +63,16 @@ void Stage_Select::Update()
 
 void Stage_Select::Choice()
 {
-	const float arrow_move = 215.0f;
+	//const float arrow_move = 215.0f;
 	if (Pad(0).IsTrigger(enButtonRight)) {
 		switch (m_stage) {
 		case stage1:
 			m_stage = stage2;
-			m_arrowPos.x += arrow_move;
+			//m_arrowPos.x += arrow_move;
 			break;
 		case stage2:
 			m_stage = stage3;
-			m_arrowPos.x += arrow_move;
+			//m_arrowPos.x += arrow_move;
 			break;
 		}
 	}
@@ -74,13 +80,13 @@ void Stage_Select::Choice()
 		switch (m_stage) {
 		case stage2:
 			m_stage = stage1;
-			m_arrowPos.x -= arrow_move;
+			//m_arrowPos.x -= arrow_move;
 			break;
 		case stage3:
 			m_stage = stage2;
-			m_arrowPos.x -= arrow_move;
+			//m_arrowPos.x -= arrow_move;
 			break;
 		}
 	}
-	m_arrow->SetPosition(m_arrowPos);
+//	m_arrow->SetPosition(m_arrowPos);
 }

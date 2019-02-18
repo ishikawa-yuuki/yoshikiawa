@@ -18,7 +18,7 @@ private:
 		select3//クレジット
 	};
 	Select m_select = select1;
-	bool m_isWaitFadeout = false;
+	bool m_isWaitFadeout = false;//trueなら画面を切り替える。
 	Fade* m_fade = nullptr;
 };
 
