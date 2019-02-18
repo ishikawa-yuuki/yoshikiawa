@@ -11,7 +11,7 @@ public:
 	void Update();
 	void Choice(); //ステージ選択するための関数
 private:
-	
+	prefab::CSkinModelRender* m_skin = nullptr;
 	enum Stage {
 		stage1,
 		stage2,

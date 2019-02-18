@@ -30,6 +30,9 @@ bool Stage_Select::Start()
 	m_fade->StartFadeIn();
 	m_ssPlayer = NewGO<SSPlayer>(0, "SSPlayer");
 	m_ssGC = NewGO<SSGameCamera>(0, "SSGameCamera");
+	//m_skin = NewGO<prefab::CSkinModelRender>(0);
+	//m_skin->Init(L"modelData/SS.cmo");//仮ステージ
+	//m_skin->SetScale({ 20.0f,20.0f,20.0f });//
 	return true;
 }
 
