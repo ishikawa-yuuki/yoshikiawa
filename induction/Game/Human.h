@@ -10,9 +10,14 @@ public:
 	void Move();
 	void Turn();
 	void AnimeControll();//プレイヤーのアニメの変更
-	void PostRender(CRenderContext& rc);
+	void isDead();
+	/*void PostRender(CRenderContext& rc);*/
 	CVector3 GetPosition() const{
 		return m_position;
+	}
+	//死んだかどうかを返す関数
+	bool GetisDead()const {
+		return m_isDead;
 	}
 private:
 	prefab::CSkinModelRender* m_skinModelRender = nullptr;//スキンモデルレンダラー
@@ -32,6 +37,6 @@ private:
 	};
 	CAnimationClip m_animClip[enAnimationClip_num];
 	CFont m_font;
-	
+	bool m_isDead = false;
 };
 
