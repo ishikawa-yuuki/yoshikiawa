@@ -23,7 +23,8 @@ bool SSGameCamera::Start()
 }
 void SSGameCamera::Update()
 {
-	SSPlayerPos = m_ssplayer->GetPosition();
+	// target(注視点)です。
+	 CVector3 SSPlayerPos = m_ssplayer->GetPosition();
 	SSPlayerPos.y = 0;
 	SSPlayerPos.y += 235.0f;	//注視点はプレイヤーのちょっと上にする。
 

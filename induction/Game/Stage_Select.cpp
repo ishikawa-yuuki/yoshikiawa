@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Stage_Select.h"
 #include "SSPlayer.h"
+#include "SSHuman.h"
 #include "SSGameCamera.h"
 #include "Game.h"
 #include "Fade.h"
@@ -17,7 +18,9 @@ Stage_Select::~Stage_Select()
 	//DeleteGO(m_spriteRender);
 	DeleteGO(m_fade);
 	DeleteGO(m_ssPlayer);
+	DeleteGO(m_ssHuman);
 	DeleteGO(m_ssGC);
+	DeleteGO(m_skin);
 }
 
 bool Stage_Select::Start()
@@ -29,10 +32,11 @@ bool Stage_Select::Start()
 	m_fade = NewGO<Fade>(0, "Fade");
 	m_fade->StartFadeIn();
 	m_ssPlayer = NewGO<SSPlayer>(0, "SSPlayer");
+	m_ssHuman = NewGO<SSHuman>(0, "SSHuman");
 	m_ssGC = NewGO<SSGameCamera>(0, "SSGameCamera");
-	//m_skin = NewGO<prefab::CSkinModelRender>(0);
-	//m_skin->Init(L"modelData/SS.cmo");//仮ステージ
-	//m_skin->SetScale({ 20.0f,20.0f,20.0f });//
+	m_skin = NewGO<prefab::CSkinModelRender>(0);
+    m_skin->Init(L"modelData/StageSelect/SS.cmo");//仮ステージ
+	m_skin->SetScale({ 2.0f,2.0f, 2.0f });//
 	return true;
 }
 

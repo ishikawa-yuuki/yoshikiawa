@@ -21,7 +21,7 @@ bool SSPlayer::Start()
 
 void SSPlayer::Update()
 {
-	//Move();
+	Move();
 	m_effect->SetPosition(m_position);
 }
 

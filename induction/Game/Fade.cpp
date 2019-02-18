@@ -22,14 +22,14 @@ void Fade::Update()
 {
 	switch(m_state) {
 	case enState_FadeIn:
-		m_currentAlpha -= 0.5f*GameTime().GetFrameDeltaTime();
+		m_currentAlpha -= 1.0f*GameTime().GetFrameDeltaTime();
 		if (m_currentAlpha <= 0.0f) {
 			m_currentAlpha = 0.0f;
 			m_state = enState_Idle;
 		}
 		break;
 	case enState_FideOut:
-		m_currentAlpha += 0.5f* GameTime().GetFrameDeltaTime();
+		m_currentAlpha += 1.0f* GameTime().GetFrameDeltaTime();
 		if (m_currentAlpha >= 1.0f) {
 			m_currentAlpha = 1.0f;
 			m_state = enState_Idle;

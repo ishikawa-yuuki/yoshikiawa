@@ -1,6 +1,7 @@
 #pragma once
 class Fade;
 class SSPlayer;
+class SSHuman;
 class SSGameCamera;
 class Stage_Select : public IGameObject
 {
@@ -22,6 +23,7 @@ private:
 	Fade* m_fade = nullptr;
 	Stage m_stage = stage1;
 	SSPlayer* m_ssPlayer = nullptr;
+	SSHuman* m_ssHuman = nullptr;
 	SSGameCamera* m_ssGC = nullptr;
 };
 
