@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Human.h"
 #include "Player.h"
+#include "GameOver.h"
 
 Human::Human()
 {
@@ -125,6 +126,7 @@ void Human::isDead()
 		}
 	}
 	else {
+		//死亡時のアニメーションが終わったらGameOverクラスへ
 		if (m_skinModelRender->IsPlayingAnimation() == false) {
 			m_skinModelRender->PlayAnimation(enAnimationClip_clear, 0.2f);
 		}

@@ -1,5 +1,6 @@
 #pragma once
 class Player;
+class GameOver;
 class Human : public IGameObject
 {
 public:
@@ -37,6 +38,6 @@ private:
 	};
 	CAnimationClip m_animClip[enAnimationClip_num];
 	CFont m_font;
-	bool m_isDead = false;
+	bool m_isDead = false;//Ž€‚ñ‚¾‚©‚Ç‚¤‚©
 };
 
