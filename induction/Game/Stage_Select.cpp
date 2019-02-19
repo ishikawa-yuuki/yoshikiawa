@@ -48,9 +48,21 @@ void Stage_Select::Update()
 			  NewGO<Title>(0, "Title");
 			  DeleteGO(this);
 		     }
-		     else if (m_stage == stage1 || m_stage == stage2 || m_stage == stage3) {
-				DeleteGO(this);
-				NewGO<Game>(0, "Game");
+		     else {
+				 switch (m_ssPlayer->GetStagenum()) {
+				 case 1:
+					 NewGO<Game>(0, "Game");
+					 DeleteGO(this);
+					 break;
+				 case 2:
+					 NewGO<Game>(0, "Game");
+					 DeleteGO(this);
+					 break;
+				 case 3:
+					 NewGO<Game>(0, "Game");
+					 DeleteGO(this);
+					 break;
+				 }
 			 }
 		 }
 	}
@@ -64,36 +76,5 @@ void Stage_Select::Update()
 			m_Tile = true;
 			m_fade->StartFadeOut();
 		}
-		Choice();
 	}
-}
-
-void Stage_Select::Choice()
-{
-	//const float arrow_move = 215.0f;
-	if (Pad(0).IsTrigger(enButtonRight)) {
-		switch (m_stage) {
-		case stage1:
-			m_stage = stage2;
-			//m_arrowPos.x += arrow_move;
-			break;
-		case stage2:
-			m_stage = stage3;
-			//m_arrowPos.x += arrow_move;
-			break;
-		}
-	}
-	else if (Pad(0).IsTrigger(enButtonLeft)) {
-		switch (m_stage) {
-		case stage2:
-			m_stage = stage1;
-			//m_arrowPos.x -= arrow_move;
-			break;
-		case stage3:
-			m_stage = stage2;
-			//m_arrowPos.x -= arrow_move;
-			break;
-		}
-	}
-//	m_arrow->SetPosition(m_arrowPos);
 }
