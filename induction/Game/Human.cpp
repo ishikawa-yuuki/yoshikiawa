@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "Human.h"
 #include "Player.h"
+#include "Game.h"
+#include "GameOver.h"
 
 Human::Human()
 {
@@ -15,6 +17,7 @@ Human::~Human()
 bool Human::Start()
 {
 	m_player = FindGO<Player>("Player");
+	m_game = FindGO<Game>("Game");
 	
 	m_animClip[enAnimationClip_idle].Load(L"animData/unityChan/idle.tka");
 	m_animClip[enAnimationClip_walk].Load(L"animData/unityChan/walk.tka");
@@ -55,19 +58,26 @@ void Human::Update()
 
 void Human::Move()
 {
-	if (m_isDead != true) {
-		CVector3 diff = m_position - m_player->GetPosition();
-		if (diff.LengthSq() <= 130.0f * 130.0f) {
-			m_movespeed = CVector3::Zero;
+	if (m_player->GetColor() == false) {
+		if (m_isDead != true) {
+			CVector3 diff = m_position - m_player->GetPosition();
+			if (diff.LengthSq() <= 105.0f * 105.0f) {
+				m_movespeed = CVector3::Zero;
+			}
+			else {
+				auto humanspeed = 30.0f;
+				m_movespeed = m_player->GetPosition() - m_position;
+				m_movespeed.y = 0.0f;
+				m_movespeed.Normalize();
+				m_movespeed *= diff.LengthSq() / (400.0f * 400.0f) * 12.0;
+				m_movespeed = m_movespeed * humanspeed * GameTime().GetFrameDeltaTime();
+			}
+			m_position += m_movespeed;
+			m_skinModelRender->SetPosition(m_position);
 		}
-		else {
-			auto humanspeed = 30.0f;
-			m_movespeed = m_player->GetPosition() - m_position;
-			m_movespeed.y = 0.0f;
-			m_movespeed.Normalize();
-			m_movespeed *= diff.LengthSq() / (400.0f * 400.0f) * 12.0;
-			m_movespeed = m_movespeed * humanspeed * GameTime().GetFrameDeltaTime();
-		}
+	}
+	else if (m_player->GetColor() == true) {//赤色になった時の処理、とりあえず止まってる
+		m_movespeed = CVector3::Zero;
 		m_position += m_movespeed;
 		m_skinModelRender->SetPosition(m_position);
 	}
@@ -88,11 +98,11 @@ void Human::Turn()
 	}
 }
 
-void Human::AnimeControll()
+void Human::AnimeControll()//アニメーションを管理する関数、プレイヤーのスピードで変わる。
 {
 	if (m_isDead != true) {
-		const float run_true = 6.0f*6.0f;
-		const float walk_true = 2.0f*2.0f;
+		const float run_true = 5.5f*5.5f;
+		const float walk_true = 0.45f*0.45f;
 		if (m_movespeed.LengthSq() > run_true) {
 			m_skinModelRender->PlayAnimation(enAnimationClip_run, 0.2);
 		}
@@ -116,17 +126,24 @@ void Human::AnimeControll()
 
 void Human::isDead()
 {
-	//敵もギミックもないので今のところはボタン押すだけで死ぬスペランカーです。
-	if (m_isDead != true) {
-		if (Pad(0).IsTrigger(enButtonB)) {
-			m_isDead = true; //これがtrueになれば死
-			m_skinModelRender->PlayAnimation(enAnimationClip_KneelDown, 0.2f);
-			m_movespeed = CVector3::Zero;
+	if (m_game->GetifPose() != true) {
+		//敵もギミックもないので今のところはボタン押すだけで死ぬスペランカーです。
+		if (m_isDead != true) {
+			if (Pad(0).IsTrigger(enButtonB)) {
+				m_isDead = true; //これがtrueになれば死
+				m_game->GetDamage();//gameクラスにダメージ中であることを知らせている。死んでるけど・・・
+				m_skinModelRender->PlayAnimation(enAnimationClip_KneelDown, 0.2f);
+				m_movespeed = CVector3::Zero;
+			}
 		}
-	}
-	else {
-		if (m_skinModelRender->IsPlayingAnimation() == false) {
-			m_skinModelRender->PlayAnimation(enAnimationClip_clear, 0.2f);
+		else {
+			//死亡時のアニメーションが終わったらGameOverクラスへ
+			if (m_skinModelRender->IsPlayingAnimation() == false
+				&& m_isGameOver != true) {
+				m_isGameOver = true;
+				//m_skinModelRender->PlayAnimation(enAnimationClip_clear, 0.2f);
+				NewGO<GameOver>(0);
+			}
 		}
 	}
 }

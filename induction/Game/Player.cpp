@@ -25,7 +25,7 @@ void Player::Update()
 {
 	//プレイヤーの光の色を変えてHumanに簡単な指示を出せるような
 	//そんなプログラムを考えてます、、、、
-
+	Color_Change();
 	Move();
 	m_effect->SetPosition(m_position);
 }
@@ -47,4 +47,26 @@ void Player::Move()
 	m_position += CameraForword * L_Stick_Y * pl_speed * GameTime().GetFrameDeltaTime();
 	m_position += CameraRight * L_Stick_X * pl_speed * GameTime().GetFrameDeltaTime();
 
+}
+
+void Player::Color_Change()
+{
+	if (Pad(0).IsTrigger(enButtonUp)) {
+		switch (m_color) {
+		case hikari_hutu:
+			m_color = hikari_red;
+			m_effect->Release();
+			m_effect->Play(L"effect/red_hikari.efk");
+			m_effect->SetScale({ 30.0f,30.0f,30.0f });
+		}
+	}
+	else if (Pad(0).IsTrigger(enButtonDown)) {
+		switch (m_color){
+		case hikari_red:
+			m_color = hikari_hutu;
+			m_effect->Release();
+			m_effect->Play(L"effect/hikari.efk");
+			m_effect->SetScale({ 30.0f,30.0f,30.0f });
+		}
+	}
 }
