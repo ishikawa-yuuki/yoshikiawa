@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<EffekseerProject>
+  <Root>
+    <Name>Root</Name>
+    <Children>
+      <Node>
+        <CommonValues>
+          <RemoveWhenLifeIsExtinct>False</RemoveWhenLifeIsExtinct>
+        </CommonValues>
+        <ScalingValues>
+          <Fixed>
+            <Scale>
+              <X>3</X>
+              <Y>3</Y>
+              <Z>3</Z>
+            </Scale>
+          </Fixed>
+        </ScalingValues>
+        <RendererCommonValues>
+          <ColorTexture>Texture/Particle04_bokashi_hard.png</ColorTexture>
+          <FadeInType>1</FadeInType>
+          <FadeIn>
+            <Frame>20</Frame>
+          </FadeIn>
+        </RendererCommonValues>
+        <DrawingValues>
+          <Sprite>
+            <ColorAll_Fixed>
+              <B>128</B>
+            </ColorAll_Fixed>
+          </Sprite>
+        </DrawingValues>
+        <Name>Node</Name>
+        <Children />
+      </Node>
+    </Children>
+  </Root>
+  <ToolVersion>1.32</ToolVersion>
+  <Version>3</Version>
+  <StartFrame>0</StartFrame>
+  <EndFrame>100</EndFrame>
+  <IsLoop>True</IsLoop>
+</EffekseerProject>

@@ -15,8 +15,18 @@ public:
 	bool Start();
 	void Update();
 	void Pose();
-	bool GetifPose() const{
+	//ここから下の関数はごり押しです・・・なんかいい書き方がある気がする・・・
+
+	bool GameOwari() {//ゲームクラスを消したいときに使う関数、基本GameOverクラスから呼ばれる
+		m_Gamesyuuryou = true;
+		return m_Gamesyuuryou;
+	}
+	bool GetifPose() const{//ポーズ中であるかどうかの関数、敵やギミックがこれで止まるかも
 		return m_isPose;
+	}
+	bool GetDamage(){//ダメージ中であるかどうかの関数、HumanやEnemyクラスに使われるかも
+		m_damege = true;
+		return m_damege;
 	}
 private:
 	Fade * m_fade = nullptr;
@@ -39,5 +49,7 @@ private:
 		posenum
 	};
 	pose m_state = retire;
+	bool m_Gamesyuuryou = false;
+	bool m_damege = false;
 };
 

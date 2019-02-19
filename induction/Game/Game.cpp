@@ -45,7 +45,10 @@ void Game::Update()
 	else {
 			Pose();
 	}
-	
+	if (m_Gamesyuuryou != false) {
+		m_Gamesyuuryou = false;
+		DeleteGO(this);
+	}
 }
 
 void Game::Pose()
@@ -53,22 +56,24 @@ void Game::Pose()
 	const float tate = 150.0f;
 	const float yoko = 280.0f;
 	if (m_isPose != true) {
-		if (Pad(0).IsTrigger(enButtonStart)) {
-			m_isPose = true;
+		if (m_damege != true) {
+			if (Pad(0).IsTrigger(enButtonStart)) {
+				m_isPose = true;
 
-			m_sprite_Retire = NewGO<prefab::CSpriteRender>(0);
-			m_sprite_toGame = NewGO<prefab::CSpriteRender>(0);
-			m_sprite_arrow = NewGO<prefab::CSpriteRender>(0);
+				m_sprite_Retire = NewGO<prefab::CSpriteRender>(0);
+				m_sprite_toGame = NewGO<prefab::CSpriteRender>(0);
+				m_sprite_arrow = NewGO<prefab::CSpriteRender>(0);
 
-			m_sprite_Retire->Init(L"sprite/retire.dds", yoko, tate);
-			m_sprite_toGame->Init(L"sprite/BacktoGame.dds", yoko, tate);
-			m_sprite_arrow->Init(L"sprite/arrow.dds", 32.0f, 32.0f);
+				m_sprite_Retire->Init(L"sprite/retire.dds", yoko, tate);
+				m_sprite_toGame->Init(L"sprite/BacktoGame.dds", yoko, tate);
+				m_sprite_arrow->Init(L"sprite/arrow.dds", 32.0f, 32.0f);
 
-			m_sprite_Retire->SetPosition(m_Retirepos);
-			m_sprite_toGame->SetPosition(m_toGamepos);
-			m_sprite_arrow->SetPosition(m_arrowpos);
+				m_sprite_Retire->SetPosition(m_Retirepos);
+				m_sprite_toGame->SetPosition(m_toGamepos);
+				m_sprite_arrow->SetPosition(m_arrowpos);
+			}
+			return;
 		}
-		return;
 	}
 	else {
 		if (Pad(0).IsTrigger(enButtonRight)) {
@@ -95,6 +100,7 @@ void Game::Pose()
 				DeleteGO(m_sprite_Retire);
 				DeleteGO(m_sprite_toGame);
 				DeleteGO(m_sprite_arrow);
+				m_isPose = false;
 				m_fade->StartFadeOut();
 				m_isWaitFadeout = true;
 				break;

@@ -1,4 +1,5 @@
 #pragma once
+class Game;
 class GameOver : public IGameObject
 {
 public:
@@ -8,5 +9,6 @@ public:
 	void Update();
 private:
 	prefab::CSpriteRender* m_spriteRender = nullptr;
+	Game* m_game;
 };
 
