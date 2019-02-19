@@ -27,19 +27,29 @@ void SSPlayer::Update()
 
 void SSPlayer::Move()
 {
-	float pl_speed = 600.0f;//光の速度
-	float L_Stick_X = Pad(0).GetLStickXF();
-	float L_Stick_Y = Pad(0).GetLStickYF();
-
-	CVector3 CameraForword = MainCamera().GetForward(); // カメラの前方向の取得
-	CVector3 CameraRight = MainCamera().GetRight();  //カメラの横方向の取得
-
-	CameraForword.y = 0.0f;
-	CameraForword.Normalize();//方向情報・前
-	CameraRight.y = 0.0f;
-	CameraRight.Normalize();//方向情報・横
-
-	m_position += CameraForword * L_Stick_Y * pl_speed * GameTime().GetFrameDeltaTime();
-	m_position += CameraRight * L_Stick_X * pl_speed * GameTime().GetFrameDeltaTime();
-
+ 	const float pl_speed = 600.0f;//光の速度 
+	if (Pad(0).IsTrigger(enButtonRight)) {
+		switch (m_stage) {
+		case stage1:
+			m_position.x += pl_speed;
+			m_stage = stage2;
+			break;
+		case stage2:
+			m_position.x += pl_speed;
+			m_stage = stage3;
+			break;
+		}
+	}
+	else if (Pad(0).IsTrigger(enButtonLeft)) {
+		switch (m_stage) {
+		case stage3:
+			m_position.x -= pl_speed;
+			m_stage = stage2;
+			break;
+		case stage2:
+			m_position.x -= pl_speed;
+			m_stage = stage1;
+			break;
+		}
+	}
 }

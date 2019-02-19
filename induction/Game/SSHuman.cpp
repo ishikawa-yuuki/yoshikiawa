@@ -87,6 +87,9 @@ void SSHuman::AnimeControll()
 	}
 	else {
 		m_skin->PlayAnimation(enAnimationClip_idle, 0.2);
+		m_qrot.SetRotation(CVector3::AxisY, 135);
+	
+	    m_skin->SetRotation(m_qrot);
 	}
 }
 

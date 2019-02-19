@@ -23,18 +23,18 @@ bool SSGameCamera::Start()
 }
 void SSGameCamera::Update()
 {
-	// target(注視点)です。
-	 CVector3 SSPlayerPos = m_ssplayer->GetPosition();
-	SSPlayerPos.y = 0;
-	SSPlayerPos.y += 235.0f;	//注視点はプレイヤーのちょっと上にする。
+	// 
+	 CVector3 target = m_ssplayer->GetPosition();
+	target.y = 0;
+	target.y += 235.0f;	//注視点はプレイヤーのちょっと上にする。
 
 						//続いて視点を計算する。
-	CVector3 position = SSPlayerPos;
+	CVector3 position = target;
 	//視点は注視点からy方向に+100、Z方向に-500にする。
 	//position.y += 300.0f;
 	position.z -= 200.0f;
 	//メインカメラに注視点と視点を設定して更新する。
-	MainCamera().SetTarget(SSPlayerPos);
+	MainCamera().SetTarget(target);
 	MainCamera().SetPosition(position);
 	MainCamera().Update();
 }
