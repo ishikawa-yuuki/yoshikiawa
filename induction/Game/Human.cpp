@@ -58,7 +58,9 @@ void Human::Update()
 
 void Human::Move()
 {
-	if (m_player->GetColor() == false) {
+	const int light_Yellow = 0;
+	const int light_Red = 1;
+	if (m_player->GetColor() == light_Yellow) {
 		if (m_isDead != true) {
 			CVector3 diff = m_position - m_player->GetPosition();
 			if (diff.LengthSq() <= 105.0f * 105.0f) {//プレイヤーと近ければhumanは止まる
@@ -70,7 +72,7 @@ void Human::Move()
 				m_movespeed.y = 0.0f;
 				m_movespeed.Normalize();
 				
-				m_movespeed *= diff.LengthSq() / (400.0f * 400.0f) * 12.0;
+				m_movespeed *= diff.LengthSq() / (400.0f * 400.0f) * 12.0f;
 				if (diff.LengthSq() >= 800.0f*800.0f) {//プレイヤーと離れすぎたときにだせるmovespeedの最高速
 					diff.Normalize();
 					diff*=-40.0f;//-だと近づく+なら遠のく
@@ -85,7 +87,7 @@ void Human::Move()
 			m_skinModelRender->SetPosition(m_position);
 		}
 	}
-	else if (m_player->GetColor() == true) {//赤色になった時の処理、とりあえず止まってる
+	else if (m_player->GetColor() == light_Red) {//赤色になった時の処理、とりあえず止まってる
 		m_movespeed = CVector3::Zero;
 		m_position += m_movespeed;
 		m_skinModelRender->SetPosition(m_position);
