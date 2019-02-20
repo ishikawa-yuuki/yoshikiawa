@@ -30,6 +30,8 @@
     <ClCompile Include="SSPlayer.cpp" />
     <ClCompile Include="SSGameCamera.cpp" />
     <ClCompile Include="SSHuman.cpp" />
+    <ClCompile Include="GameOver.cpp" />
+    <ClCompile Include="SSPoint.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -48,6 +50,8 @@
     <ClInclude Include="SSPlayer.h" />
     <ClInclude Include="SSGameCamera.h" />
     <ClInclude Include="SSHuman.h" />
+    <ClInclude Include="GameOver.h" />
+    <ClInclude Include="SSPoint.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc">
@@ -62,6 +66,9 @@
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\StageSelect\SS.fbx">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\StageSelect\StagePoint.fbx">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
   </ItemGroup>
