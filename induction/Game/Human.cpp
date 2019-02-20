@@ -48,7 +48,7 @@ bool Human::Start()
 void Human::Update()
 {
 	//Playerである光の信号を受け取ったら
-	//行動を変える関数を考えています、、、
+	//行動を変える関数を考えています、、、<-move()に書いてます。
 
 	Move();
 	Turn();
@@ -61,7 +61,7 @@ void Human::Move()
 	if (m_player->GetColor() == false) {
 		if (m_isDead != true) {
 			CVector3 diff = m_position - m_player->GetPosition();
-			if (diff.LengthSq() <= 105.0f * 105.0f) {
+			if (diff.LengthSq() <= 105.0f * 105.0f) {//プレイヤーと近ければhumanは止まる
 				m_movespeed = CVector3::Zero;
 			}
 			else {
@@ -69,8 +69,17 @@ void Human::Move()
 				m_movespeed = m_player->GetPosition() - m_position;
 				m_movespeed.y = 0.0f;
 				m_movespeed.Normalize();
+				
 				m_movespeed *= diff.LengthSq() / (400.0f * 400.0f) * 12.0;
-				m_movespeed = m_movespeed * humanspeed * GameTime().GetFrameDeltaTime();
+				if (diff.LengthSq() >= 800.0f*800.0f) {//プレイヤーと離れすぎたときにだせるmovespeedの最高速
+					diff.Normalize();
+					diff*=-40.0f;//-だと近づく+なら遠のく
+					m_movespeed = diff;
+					m_movespeed = m_movespeed * humanspeed * GameTime().GetFrameDeltaTime();
+				}
+				else {//playerと離れすぎず近すぎないときの処理
+					m_movespeed = m_movespeed * humanspeed * GameTime().GetFrameDeltaTime();
+				}
 			}
 			m_position += m_movespeed;
 			m_skinModelRender->SetPosition(m_position);
