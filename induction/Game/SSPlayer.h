@@ -28,6 +28,7 @@ public:
 private:
 	bool m_SelectOK = true;
 	bool m_State = false;
+	bool m_AfterState = false;
 	Stage_Select * m_SS = nullptr;
 	SSPoint * m_sspoint = nullptr;
 	CVector3 m_position = CVector3::Zero;
