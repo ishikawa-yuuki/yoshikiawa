@@ -2,6 +2,7 @@
 #include "Stage_Select.h"
 #include "SSPlayer.h"
 #include "SSHuman.h"
+#include "SSPoint.h"
 #include "SSGameCamera.h"
 #include "Game.h"
 #include "Fade.h"
@@ -15,20 +16,22 @@ Stage_Select::Stage_Select()
 
 Stage_Select::~Stage_Select()
 {
-	//DeleteGO(m_spriteRender);
 	DeleteGO(m_fade);
 	DeleteGO(m_ssPlayer);
 	DeleteGO(m_ssHuman);
 	DeleteGO(m_ssGC);
 	DeleteGO(m_skin);
+	for (int i = 0; i < point; i++) {
+		DeleteGO(m_ssPoint[i]);
+	}
 }
 
 bool Stage_Select::Start()
 {
-	//m_spriteRender = NewGO<prefab::CSpriteRender>(0);
-	//m_spriteRender->Init(L"sprite/Stage_Select.dds", 1280.0f, 720.0f);
-	//m_arrow = NewGO<prefab::CSpriteRender>(0);
-	//m_arrow->Init(L"sprite/arrow.dds", 32.0f, 32.0f);
+	for (int i = 0; i < point; i++) {
+		m_ssPoint[i] = NewGO<SSPoint>(0, "SSPoint");
+		m_ssPoint[i]->m_position.x += i * 1200;
+	}
 	m_fade = NewGO<Fade>(0, "Fade");
 	m_fade->StartFadeIn();
 	m_ssPlayer = NewGO<SSPlayer>(0, "SSPlayer");
@@ -37,6 +40,7 @@ bool Stage_Select::Start()
 	m_skin = NewGO<prefab::CSkinModelRender>(0);
     m_skin->Init(L"modelData/StageSelect/SS.cmo");//仮ステージ
 	m_skin->SetScale({ 2.0f,2.0f, 2.0f });//
+	
 	return true;
 }
 
@@ -55,7 +59,7 @@ void Stage_Select::Update()
 					 DeleteGO(this);
 					 break;
 				 case 2:
-					 NewGO<Game>(0, "Game");
+					 NewGO<Title>(0, "Title");
 					 DeleteGO(this);
 					 break;
 				 case 3:
@@ -66,7 +70,7 @@ void Stage_Select::Update()
 			 }
 		 }
 	}
-	else {
+	else if (m_ssPlayer->GetOK()) {
 		if (Pad(0).IsTrigger(enButtonA)) {
 			m_isWaitFadeout = true;
 			m_fade->StartFadeOut();

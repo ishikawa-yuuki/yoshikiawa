@@ -30,7 +30,8 @@ bool SSHuman::Start()
 
 	m_skin = NewGO<prefab::CSkinModelRender>(0);
 	m_skin->Init(L"modelData/unityChan.cmo", m_animClip, enAnimationClip_num, enFbxUpAxisY);
-
+	m_position.x -= 50;
+	m_skin->SetPosition(m_position);
 	return true;
 }
 
@@ -48,7 +49,7 @@ void SSHuman::Move()
 {
 	float humanspeed = 60.0f;
 	CVector3 diff = m_position - m_ssplayer->GetPosition();
-	if (diff.LengthSq() <= 130.0f * 130.0f) {
+	if (diff.LengthSq() <= 100.0f * 100.0f) {
 		m_movespeed = CVector3::Zero;
 	}
 	else {
@@ -58,7 +59,7 @@ void SSHuman::Move()
 		m_movespeed *= diff.LengthSq() / (400.0f * 400.0f) * 12.0;
 		//m_movespeed = m_movespeed* GameTime().GetFrameDeltaTime();
 	}
-	m_position += m_movespeed;
+	m_position += m_movespeed ;
 	m_skin->SetPosition(m_position);
 }
 
@@ -77,8 +78,8 @@ void SSHuman::Turn()
 
 void SSHuman::AnimeControll()
 {
-	const float run_true = 6.0f*6.0f;
-	const float walk_true = 2.0f*2.0f;
+	const float run_true = 7.0f*7.0f;
+	const float walk_true = 1.0f*1.0f;
 	if (m_movespeed.LengthSq() > run_true) {
 		m_skin->PlayAnimation(enAnimationClip_run, 0.2);
 	}
