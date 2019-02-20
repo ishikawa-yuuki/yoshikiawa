@@ -5,7 +5,7 @@ class Player : public IGameObject
 {
 private:
 	//ここに書いたほうが都合がいいので
-	//ここだけprivateにしています。
+    //ここだけprivateにしています。
 	enum Color {
 		hikari_hutu,
 		hikari_red
@@ -23,8 +23,18 @@ public:
 	}
 
 	/*光の色を変えます*/
-	Color GetColor()const {//光の色を返すぜ//　　　ポインタ使うといいかもしれない。
-		return m_color;
+	int GetColor(){//光の色を返すぜ//　　　ポインタ使うといいかもしれない。 //int型になった。。。
+		int number = 0;
+		switch (m_color)
+		{
+		case hikari_hutu:
+			number = 0;
+			break;
+		case hikari_red:
+			number = 1;
+			break;
+		}
+		return number;
 	}
 private:
 	CVector3 m_position = CVector3::Zero;
