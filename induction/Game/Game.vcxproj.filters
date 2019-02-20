@@ -32,6 +32,7 @@
     <ClCompile Include="SSHuman.cpp" />
     <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="SSPoint.cpp" />
+    <ClCompile Include="Light_Object.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -52,6 +53,7 @@
     <ClInclude Include="SSHuman.h" />
     <ClInclude Include="GameOver.h" />
     <ClInclude Include="SSPoint.h" />
+    <ClInclude Include="Light_Object.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc">
