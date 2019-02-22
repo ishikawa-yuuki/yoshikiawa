@@ -8,6 +8,7 @@
           <MaxGeneration>
             <Value>2</Value>
           </MaxGeneration>
+          <RemoveWhenLifeIsExtinct>False</RemoveWhenLifeIsExtinct>
           <RemoveWhenParentIsRemoved>True</RemoveWhenParentIsRemoved>
         </CommonValues>
         <LocationValues>
