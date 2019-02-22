@@ -46,7 +46,7 @@ void Light_Object::Update()
 			m_isLightOn = true;
 			housenlight();
 			InitPointLight();
-			//Dirlight();
+			//Dirlight();使わない
 			m_effect = NewGO<prefab::CEffect>(0);
 			m_effect->Play(L"effect/spotlight.efk");//スポットライトのエフェクト。明かりで強調したいときに使う。
 			m_effect->SetScale({ 4.0f, 4.0f, 4.0f });

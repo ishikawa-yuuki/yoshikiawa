@@ -1821,6 +1821,7 @@
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\lanthanum.fbx" />
+    <MeshContentTask Include="Assets\modelData\mini_lanthanum.fbx" />
     <MeshContentTask Include="Assets\modelData\StageSelect\SS.fbx" />
     <MeshContentTask Include="Assets\modelData\StageSelect\StagePoint.fbx" />
     <MeshContentTask Include="Assets\modelData\stage_test.fbx" />
