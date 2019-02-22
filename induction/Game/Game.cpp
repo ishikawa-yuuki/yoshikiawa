@@ -19,6 +19,7 @@ Game::~Game()
 	DeleteGO(m_human);
 	DeleteGO(m_gamecamera);
 	DeleteGO(m_skinModelRender);
+	DeleteGO(m_lightobject);
 }
 
 bool Game::Start()
@@ -57,8 +58,8 @@ void Game::Pose()
 {
 	const float tate = 150.0f;
 	const float yoko = 280.0f;
-	if (m_isPose != true) {
-		if (m_damege != true) {
+	if (!m_isPose) { //!=trueÇ∆Ç©==trueÇ∆Ç©ÇÇ»Ç≠ÇµÇ‹ÇµÇΩÅB
+		if (!m_damege) {
 			if (Pad(0).IsTrigger(enButtonStart)) {
 				m_isPose = true;
 

@@ -61,7 +61,7 @@ void Human::Move()
 	const int light_Yellow = 0;
 	const int light_Red = 1;
 	if (m_player->GetColor() == light_Yellow) {
-		if (m_isDead != true) {
+		if (!m_isDead) {
 			CVector3 diff = m_position - m_player->GetPosition();
 			if (diff.LengthSq() <= 105.0f * 105.0f) {//ƒvƒŒƒCƒ„[‚Æ‹ß‚¯‚ê‚Îhuman‚Í~‚Ü‚é
 				m_movespeed = CVector3::Zero;
@@ -96,7 +96,7 @@ void Human::Move()
 
 void Human::Turn()
 {
-	if (m_isDead != true) {
+	if (!m_isDead) {
 		if (fabsf(m_movespeed.x) <= 0.001f    //fabsf‚Íâ‘Î’lBm_movespeed.x&m_movespeedz‚ª
 			&&fabsf(m_movespeed.z <= 0.001f)) {//0.001ˆÈ‰º‚Ì‚É‚Í‰½‚à‚µ‚È‚¢B
 			return;
@@ -111,7 +111,7 @@ void Human::Turn()
 
 void Human::AnimeControll()//ƒAƒjƒ[ƒVƒ‡ƒ“‚ğŠÇ—‚·‚éŠÖ”AƒvƒŒƒCƒ„[‚ÌƒXƒs[ƒh‚Å•Ï‚í‚éB
 {
-	if (m_isDead != true) {
+	if (!m_isDead) {
 		const float run_true = 5.5f*5.5f;
 		const float walk_true = 0.45f*0.45f;
 		if (m_movespeed.LengthSq() > run_true) {
@@ -137,9 +137,9 @@ void Human::AnimeControll()//ƒAƒjƒ[ƒVƒ‡ƒ“‚ğŠÇ—‚·‚éŠÖ”AƒvƒŒƒCƒ„[‚ÌƒXƒs[ƒh‚
 
 void Human::isDead()
 {
-	if (m_game->GetifPose() != true) {
+	if (!m_game->GetifPose()) {//!= trueC³
 		//“G‚àƒMƒ~ƒbƒN‚à‚È‚¢‚Ì‚Å¡‚Ì‚Æ‚±‚ë‚Íƒ{ƒ^ƒ“‰Ÿ‚·‚¾‚¯‚Å€‚ÊƒXƒyƒ‰ƒ“ƒJ[‚Å‚·B
-		if (m_isDead != true) {
+		if (!m_isDead) {
 			if (Pad(0).IsTrigger(enButtonB)) {
 				m_isDead = true; //‚±‚ê‚ªtrue‚É‚È‚ê‚Î€
 				m_game->GetDamage();//gameƒNƒ‰ƒX‚Éƒ_ƒ[ƒW’†‚Å‚ ‚é‚±‚Æ‚ğ’m‚ç‚¹‚Ä‚¢‚éB€‚ñ‚Å‚é‚¯‚ÇEEE

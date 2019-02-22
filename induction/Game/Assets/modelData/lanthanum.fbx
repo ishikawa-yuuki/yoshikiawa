@@ -8,11 +8,11 @@ FBXHeaderExtension:  {
 		Version: 1000
 		Year: 2019
 		Month: 2
-		Day: 22
-		Hour: 22
-		Minute: 10
-		Second: 9
-		Millisecond: 915
+		Day: 23
+		Hour: 0
+		Minute: 14
+		Second: 3
+		Millisecond: 563
 	}
 	Creator: "FBX SDK/FBX Plugins version 2018.1"
 	SceneInfo: "SceneInfo::GlobalInfo", "UserData" {
@@ -34,13 +34,13 @@ FBXHeaderExtension:  {
 			P: "Original|ApplicationVendor", "KString", "", "", "Autodesk"
 			P: "Original|ApplicationName", "KString", "", "", "3ds Max"
 			P: "Original|ApplicationVersion", "KString", "", "", "2018"
-			P: "Original|DateTime_GMT", "DateTime", "", "", "22/02/2019 13:10:09.912"
+			P: "Original|DateTime_GMT", "DateTime", "", "", "22/02/2019 15:14:03.502"
 			P: "Original|FileName", "KString", "", "", "C:\Users\GC1831\Desktop\git\yoshikiawa\induction\Game\Assets\modelData\lanthanum.fbx"
 			P: "LastSaved", "Compound", "", ""
 			P: "LastSaved|ApplicationVendor", "KString", "", "", "Autodesk"
 			P: "LastSaved|ApplicationName", "KString", "", "", "3ds Max"
 			P: "LastSaved|ApplicationVersion", "KString", "", "", "2018"
-			P: "LastSaved|DateTime_GMT", "DateTime", "", "", "22/02/2019 13:10:09.912"
+			P: "LastSaved|DateTime_GMT", "DateTime", "", "", "22/02/2019 15:14:03.502"
 			P: "Original|ApplicationActiveProject", "KString", "", "", "C:\Users\GC1831\Documents\3dsMax"
 			P: "Original|ApplicationNativeFile", "KString", "", "", "C:\Users\GC1831\Documents\3dsMax\scenes\rantan_seltuti_denQ2.max"
 		}
@@ -77,7 +77,7 @@ GlobalSettings:  {
 
 Documents:  {
 	Count: 1
-	Document: 2319190923840, "", "Scene" {
+	Document: 2388466912720, "", "Scene" {
 		Properties70:  {
 			P: "SourceObject", "object", "", ""
 			P: "ActiveAnimStackName", "KString", "", "", ""
@@ -305,7 +305,7 @@ Definitions:  {
 ;------------------------------------------------------------------
 
 Objects:  {
-	Geometry: 2319202828800, "Geometry::", "Mesh" {
+	Geometry: 2388459476992, "Geometry::", "Mesh" {
 		Properties70:  {
 			P: "Color", "ColorRGB", "Color", "",0.23921568627451,0.529411764705882,0.0235294117647059
 		}
@@ -515,7 +515,7 @@ Objects:  {
 			}
 		}
 	}
-	Geometry: 2319202826080, "Geometry::", "Mesh" {
+	Geometry: 2388459478080, "Geometry::", "Mesh" {
 		Properties70:  {
 			P: "Color", "ColorRGB", "Color", "",0.23921568627451,0.529411764705882,0.0235294117647059
 		}
@@ -659,31 +659,31 @@ Objects:  {
 			}
 		}
 	}
-	Model: 2319250795920, "Model::Box001", "Mesh" {
+	Model: 2388579731840, "Model::Box001", "Mesh" {
 		Version: 232
 		Properties70:  {
 			P: "InheritType", "enum", "", "",1
 			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
 			P: "DefaultAttributeIndex", "int", "Integer", "",0
-			P: "Lcl Translation", "Lcl Translation", "", "A",34.0099334716797,-5.88357215747237e-06,134.600448608398
+			P: "Lcl Translation", "Lcl Translation", "", "A",-0.248477935791016,-5.88357215747237e-06,134.600448608398
 			P: "MaxHandle", "int", "Integer", "UH",3
 		}
 		Shading: T
 		Culling: "CullingOff"
 	}
-	Model: 2319250811264, "Model::Box002", "Mesh" {
+	Model: 2388579747184, "Model::Box002", "Mesh" {
 		Version: 232
 		Properties70:  {
 			P: "InheritType", "enum", "", "",1
 			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
 			P: "DefaultAttributeIndex", "int", "Integer", "",0
-			P: "Lcl Translation", "Lcl Translation", "", "A",34.206371307373,0.0473361797630787,135.437896728516
+			P: "Lcl Translation", "Lcl Translation", "", "A",-0.0520401000976563,0.0473361797630787,135.437896728516
 			P: "MaxHandle", "int", "Integer", "UH",13
 		}
 		Shading: T
 		Culling: "CullingOff"
 	}
-	Material: 2319264995168, "Material::01 - Default", "" {
+	Material: 2388466292144, "Material::01 - Default", "" {
 		Version: 102
 		ShadingModel: "phong"
 		MultiLayer: 0
@@ -706,7 +706,7 @@ Objects:  {
 			P: "Reflectivity", "double", "Number", "",0
 		}
 	}
-	Material: 2319265001408, "Material::07 - Default", "" {
+	Material: 2388466271984, "Material::07 - Default", "" {
 		Version: 102
 		ShadingModel: "phong"
 		MultiLayer: 0
@@ -729,7 +729,7 @@ Objects:  {
 			P: "Reflectivity", "double", "Number", "",0
 		}
 	}
-	Material: 2319264994208, "Material::02 - Default", "" {
+	Material: 2388466285424, "Material::02 - Default", "" {
 		Version: 102
 		ShadingModel: "phong"
 		MultiLayer: 0
@@ -753,7 +753,7 @@ Objects:  {
 			P: "Reflectivity", "double", "Number", "",0
 		}
 	}
-	Video: 2319264999008, "Video::マップ #2", "Clip" {
+	Video: 2388466266224, "Video::マップ #2", "Clip" {
 		Type: "Clip"
 		Properties70:  {
 			P: "Path", "KString", "XRefUrl", "", "C:\Users\GC1831\Documents\グラフィックス\New_T_map\いろいろ\CARPTGRY.JPG"
@@ -763,7 +763,7 @@ Objects:  {
 		Filename: "C:\Users\GC1831\Documents\グラフィックス\New_T_map\いろいろ\CARPTGRY.JPG"
 		RelativeFilename: "..\..\..\..\..\..\..\Documents\グラフィックス\New_T_map\いろいろ\CARPTGRY.JPG"
 	}
-	Video: 2319265019648, "Video::マップ #3", "Clip" {
+	Video: 2388466275824, "Video::マップ #3", "Clip" {
 		Type: "Clip"
 		Properties70:  {
 			P: "Path", "KString", "XRefUrl", "", "C:\Users\GC1831\Documents\グラフィックス\New_T_map\いろいろ\LIMESTN1.JPG"
@@ -773,7 +773,7 @@ Objects:  {
 		Filename: "C:\Users\GC1831\Documents\グラフィックス\New_T_map\いろいろ\LIMESTN1.JPG"
 		RelativeFilename: "..\..\..\..\..\..\..\Documents\グラフィックス\New_T_map\いろいろ\LIMESTN1.JPG"
 	}
-	Video: 2319264995648, "Video::マップ #0", "Clip" {
+	Video: 2388466266704, "Video::マップ #0", "Clip" {
 		Type: "Clip"
 		Properties70:  {
 			P: "Path", "KString", "XRefUrl", "", "C:\Users\GC1831\Documents\グラフィックス\New_T_map\いろいろ\glass05.jpg"
@@ -783,7 +783,7 @@ Objects:  {
 		Filename: "C:\Users\GC1831\Documents\グラフィックス\New_T_map\いろいろ\glass05.jpg"
 		RelativeFilename: "..\..\..\..\..\..\..\Documents\グラフィックス\New_T_map\いろいろ\glass05.jpg"
 	}
-	Texture: 2319264999488, "Texture::マップ #2", "" {
+	Texture: 2388466264784, "Texture::マップ #2", "" {
 		Type: "TextureVideoClip"
 		Version: 202
 		TextureName: "Texture::マップ #2"
@@ -799,7 +799,7 @@ Objects:  {
 		Texture_Alpha_Source: "None"
 		Cropping: 0,0,0,0
 	}
-	Texture: 2319265008128, "Texture::マップ #3", "" {
+	Texture: 2388466278224, "Texture::マップ #3", "" {
 		Type: "TextureVideoClip"
 		Version: 202
 		TextureName: "Texture::マップ #3"
@@ -815,7 +815,7 @@ Objects:  {
 		Texture_Alpha_Source: "None"
 		Cropping: 0,0,0,0
 	}
-	Texture: 2319265019168, "Texture::マップ #0", "" {
+	Texture: 2388466272464, "Texture::マップ #0", "" {
 		Type: "TextureVideoClip"
 		Version: 202
 		TextureName: "Texture::マップ #0"
@@ -831,13 +831,13 @@ Objects:  {
 		Texture_Alpha_Source: "None"
 		Cropping: 0,0,0,0
 	}
-	AnimationStack: 2317256397936, "AnimStack::Take 001", "" {
+	AnimationStack: 2388275330368, "AnimStack::Take 001", "" {
 		Properties70:  {
 			P: "LocalStop", "KTime", "Time", "",153953860000
 			P: "ReferenceStop", "KTime", "Time", "",153953860000
 		}
 	}
-	AnimationLayer: 2317298388080, "AnimLayer::BaseLayer", "" {
+	AnimationLayer: 2388299517920, "AnimLayer::BaseLayer", "" {
 	}
 }
 
@@ -847,46 +847,46 @@ Objects:  {
 Connections:  {
 	
 	;Model::Box001, Model::RootNode
-	C: "OO",2319250795920,0
+	C: "OO",2388579731840,0
 	
 	;Model::Box002, Model::RootNode
-	C: "OO",2319250811264,0
+	C: "OO",2388579747184,0
 	
 	;AnimLayer::BaseLayer, AnimStack::Take 001
-	C: "OO",2317298388080,2317256397936
+	C: "OO",2388299517920,2388275330368
 	
 	;Geometry::, Model::Box001
-	C: "OO",2319202828800,2319250795920
+	C: "OO",2388459476992,2388579731840
 	
 	;Material::01 - Default, Model::Box001
-	C: "OO",2319264995168,2319250795920
+	C: "OO",2388466292144,2388579731840
 	
 	;Material::07 - Default, Model::Box001
-	C: "OO",2319265001408,2319250795920
+	C: "OO",2388466271984,2388579731840
 	
 	;Geometry::, Model::Box002
-	C: "OO",2319202826080,2319250811264
+	C: "OO",2388459478080,2388579747184
 	
 	;Material::02 - Default, Model::Box002
-	C: "OO",2319264994208,2319250811264
+	C: "OO",2388466285424,2388579747184
 	
 	;Texture::マップ #2, Material::01 - Default
-	C: "OP",2319264999488,2319264995168, "DiffuseColor"
+	C: "OP",2388466264784,2388466292144, "DiffuseColor"
 	
 	;Video::マップ #2, Texture::マップ #2
-	C: "OO",2319264999008,2319264999488
+	C: "OO",2388466266224,2388466264784
 	
 	;Texture::マップ #3, Material::07 - Default
-	C: "OP",2319265008128,2319265001408, "DiffuseColor"
+	C: "OP",2388466278224,2388466271984, "DiffuseColor"
 	
 	;Video::マップ #3, Texture::マップ #3
-	C: "OO",2319265019648,2319265008128
+	C: "OO",2388466275824,2388466278224
 	
 	;Texture::マップ #0, Material::02 - Default
-	C: "OP",2319265019168,2319264994208, "DiffuseColor"
+	C: "OP",2388466272464,2388466285424, "DiffuseColor"
 	
 	;Video::マップ #0, Texture::マップ #0
-	C: "OO",2319264995648,2319265019168
+	C: "OO",2388466266704,2388466272464
 }
 ;Takes section
 ;----------------------------------------------------
