@@ -5,6 +5,7 @@
 #include "Human.h"
 #include "Player.h"
 #include "Title.h"
+#include "Light_Object.h"
 #include "GameCamera.h"
 Game::Game()
 {
@@ -25,6 +26,7 @@ bool Game::Start()
 	m_player = NewGO<Player>(0, "Player");
 	m_human = NewGO<Human>(0, "Human");
 	m_gamecamera = NewGO<GameCamera>(0, "GameCamera");
+	m_lightobject = NewGO<Light_Object>(0, "LightObject");
 
 	m_skinModelRender = NewGO<prefab::CSkinModelRender>(0);
 	m_skinModelRender->Init(L"modelData/stage_test.cmo");//仮ステージ

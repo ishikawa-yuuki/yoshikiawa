@@ -6,6 +6,7 @@
 class Fade;
 class Human;
 class Player;
+class Light_Object;
 class GameCamera;
 class Game : public IGameObject
 {
@@ -33,6 +34,7 @@ private:
 	Human * m_human;
 	Player* m_player;
 	GameCamera * m_gamecamera;
+	Light_Object* m_lightobject;
 
 	prefab::CSkinModelRender* m_skinModelRender = nullptr;
 	prefab::CSpriteRender* m_sprite_Retire = nullptr;
