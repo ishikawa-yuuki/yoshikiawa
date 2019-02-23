@@ -40,5 +40,6 @@ private:
 	CVector3 m_position = CVector3::Zero;
 	prefab::CEffect* m_effect;
 	GameCamera* m_gamecamera = nullptr;
+	CCharacterController m_charaCon;
 };
 

@@ -26,10 +26,10 @@ bool SSPlayer::Start()
 void SSPlayer::Update()
 {
 	
-	if (m_AfterState == true) {
+	if (m_State == true) {
 		MoveState();
 	}
-	 if(m_State == false){
+	 if(m_SelectOK == true){
 		Move();
 	}
 	m_position.y = 50;
@@ -41,7 +41,6 @@ void SSPlayer::Move()
 
 	
 	if (Pad(0).IsTrigger(enButtonRight)) {
-		m_AfterState = true;
 		m_State = true;
 		m_SelectOK = false;
 		switch (m_stage) {
@@ -56,7 +55,6 @@ void SSPlayer::Move()
 		}
 	}
 	else if (Pad(0).IsTrigger(enButtonLeft)) {
-		m_AfterState = true;
 		m_State = true;
 		m_SelectOK = false;
 		switch (m_stage) {
@@ -76,10 +74,9 @@ void SSPlayer::MoveState()
 	m_v = m_position - m_sspoint->m_position;
 	if (m_v.LengthSq() <= 60.0f * 60.0f) {
 		m_moveSpeed = CVector3::Zero;
-		m_AfterState = false;
+		m_State = false;
 	}
     if (m_v.LengthSq() <= 250.0f * 250.0f) {
-			m_State = false;
 			m_SelectOK = true;
 			
 	}

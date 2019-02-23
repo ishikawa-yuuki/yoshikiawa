@@ -1,4 +1,5 @@
 #pragma once
+#include  "tkEngine/physics/tkPhysicsGhostObject.h"
 class Player;
 class Game;
 class GameOver;
@@ -13,6 +14,7 @@ public:
 	void Turn();
 	void AnimeControll();//プレイヤーのアニメの変更
 	void isDead();//やったか！を判定する
+	void Hanntei();
 	/*void PostRender(CRenderContext& rc);*/
 	CVector3 GetPosition() const{
 		return m_position;
@@ -29,9 +31,11 @@ private:
 	prefab::CSkinModelRender* m_skinModelRender = nullptr;//スキンモデルレンダラー
 	Player* m_player;
 	Game* m_game;
-	CVector3 m_position;
-	CVector3 m_movespeed;
+	CVector3 m_position = CVector3::Zero;
+	CVector3 m_movespeed = CVector3::Zero;
+	CVector3 m_Bedspeed = CVector3::Zero;
 	CQuaternion m_qrot = CQuaternion::Identity;
+	CCharacterController m_charaCon;
 	enum HumanAnimationClip {
 		enAnimationClip_idle,
 		enAnimationClip_walk,

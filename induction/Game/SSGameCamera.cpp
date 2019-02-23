@@ -30,8 +30,6 @@ void SSGameCamera::Update()
 
 						//続いて視点を計算する。
 	CVector3 position = target;
-	//視点は注視点からy方向に+100、Z方向に-500にする。
-	//position.y += 300.0f;
 	position.z -= 200.0f;
 	//メインカメラに注視点と視点を設定して更新する。
 	MainCamera().SetTarget(target);

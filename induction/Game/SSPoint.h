@@ -1,4 +1,5 @@
 #pragma once
+//ステージのposition
 class SSPoint : public IGameObject
 {
 public:

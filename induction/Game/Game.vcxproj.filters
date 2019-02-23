@@ -32,6 +32,7 @@
     <ClCompile Include="SSHuman.cpp" />
     <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="SSPoint.cpp" />
+    <ClCompile Include="MoveBed.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -52,6 +53,7 @@
     <ClInclude Include="SSHuman.h" />
     <ClInclude Include="GameOver.h" />
     <ClInclude Include="SSPoint.h" />
+    <ClInclude Include="MoveBed.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc">
@@ -69,6 +71,9 @@
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\StageSelect\StagePoint.fbx">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\MoveBed\MoveBed.FBX">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
   </ItemGroup>

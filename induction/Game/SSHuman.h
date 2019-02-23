@@ -1,6 +1,6 @@
 #pragma once
 class SSPlayer;
-class SSHuman : public IGameObject
+class SSHuman : public IGameObject//ステージ選択専用
 {
 public:
 	SSHuman();
@@ -11,7 +11,7 @@ public:
 	void Turn();
 	void AnimeControll();//プレイヤーのアニメの変更
 	void PostRender(CRenderContext& rc);
-	CVector3 GetPosition() const {
+	CVector3 GetPosition() const { // プレイヤーの場所を返す関数。
 		return m_position;
 	}
 private:

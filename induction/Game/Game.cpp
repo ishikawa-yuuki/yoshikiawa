@@ -4,6 +4,7 @@
 #include "Fade.h"
 #include "Human.h"
 #include "Player.h"
+#include "MoveBed.h"
 #include "Title.h"
 #include "GameCamera.h"
 Game::Game()
@@ -13,9 +14,9 @@ Game::Game()
 
 Game::~Game()
 {
-	DeleteGO(m_fade);
 	DeleteGO(m_player);
 	DeleteGO(m_human);
+	DeleteGO(m_movebed);
 	DeleteGO(m_gamecamera);
 	DeleteGO(m_skinModelRender);
 }
@@ -25,11 +26,12 @@ bool Game::Start()
 	m_player = NewGO<Player>(0, "Player");
 	m_human = NewGO<Human>(0, "Human");
 	m_gamecamera = NewGO<GameCamera>(0, "GameCamera");
-
+	m_movebed = NewGO<MoveBed>(0, "MoveBed");
 	m_skinModelRender = NewGO<prefab::CSkinModelRender>(0);
 	m_skinModelRender->Init(L"modelData/stage_test.cmo");//仮ステージ
-	m_skinModelRender->SetScale({ 20.0f,20.0f,20.0f });//思ったより小さかったので20倍
-	m_fade = NewGO<Fade>(0, "Fade");
+	CVector3 m_scale =  { 20.0f,20.0f,20.0f } ;
+	m_skinModelRender->SetScale(m_scale);//思ったより小さかったので20倍
+	m_fade = FindGO<Fade>("Fade");
 	m_fade->StartFadeIn();
 	return true;
 }

@@ -16,7 +16,7 @@ public:
 	int GetStagenum() const{//選択したステージの番号
 		return m_stage;
 	}
-	bool GetOK() const {
+	bool GetOK() const {//今スタートできるか調べる関数
 		return m_SelectOK;
 	}
 	enum Stage {
@@ -26,9 +26,8 @@ public:
 	};
 	Stage m_stage = stage1;
 private:
-	bool m_SelectOK = true;
-	bool m_State = false;
-	bool m_AfterState = false;
+	bool m_SelectOK = true;//trueならスタート
+	bool m_State = false;//trueなら移動中
 	Stage_Select * m_SS = nullptr;
 	SSPoint * m_sspoint = nullptr;
 	CVector3 m_position = CVector3::Zero;

@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "Game.h"
 #include "GameOver.h"
+#include "MoveBed.h"
 
 Human::Human()
 {
@@ -41,7 +42,13 @@ bool Human::Start()
 
 	m_skinModelRender = NewGO<prefab::CSkinModelRender>(0);
 	m_skinModelRender->Init(L"modelData/unityChan.cmo",m_animClip,enAnimationClip_num,enFbxUpAxisY);
-
+	/*m_charaCon.Init(
+		20.0f,
+		30.0f,
+		m_position
+	);
+	//m_position.y = 150;
+	//m_skinModelRender->SetPosition(m_position);*/
 	return true;
 }
 
@@ -83,15 +90,16 @@ void Human::Move()
 					m_movespeed = m_movespeed * humanspeed * GameTime().GetFrameDeltaTime();
 				}
 			}
-			m_position += m_movespeed;
-			m_skinModelRender->SetPosition(m_position);
 		}
 	}
 	else if (m_player->GetColor() == light_Red) {//赤色になった時の処理、とりあえず止まってる
 		m_movespeed = CVector3::Zero;
-		m_position += m_movespeed;
-		m_skinModelRender->SetPosition(m_position);
 	}
+	m_movespeed.y -= 10.0f * GameTime().GetFrameDeltaTime();
+	CVector3 pos = m_movespeed + m_Bedspeed;
+	m_position += pos;
+	m_charaCon.SetPosition(m_position);
+	m_skinModelRender->SetPosition(m_position);
 }
 
 void Human::Turn()
@@ -157,4 +165,23 @@ void Human::isDead()
 			}
 		}
 	}
+}
+void Human::Hanntei()
+{
+	 m_Bedspeed = CVector3::Zero;
+		QueryGOs<MoveBed>("MoveBed", [&](MoveBed* move) {
+			CPhysicsGhostObject* ghostObj = move->GetGhost();
+			PhysicsWorld().ContactTest(m_charaCon, [&](const btCollisionObject& contactObject) {
+				if (ghostObj->IsSelf(contactObject) == true) {
+					//このフレームのボックスの移動量を計算
+					CVector3 boxMoveValue;
+					boxMoveValue = move->GetPosition() - move->GetLastPos();
+					//ボックスの移動速度を求める
+					CVector3 boxMoveSpeed;
+					boxMoveSpeed = boxMoveValue / GameTime().GetFrameDeltaTime();
+					m_Bedspeed += boxMoveSpeed;
+				}
+			});
+			return true;
+		});
 }
