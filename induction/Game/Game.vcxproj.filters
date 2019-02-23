@@ -33,6 +33,7 @@
     <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="SSPoint.cpp" />
     <ClCompile Include="Light_Object.cpp" />
+    <ClCompile Include="BackGround.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -54,6 +55,7 @@
     <ClInclude Include="GameOver.h" />
     <ClInclude Include="SSPoint.h" />
     <ClInclude Include="Light_Object.h" />
+    <ClInclude Include="BackGround.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc">
@@ -90,13 +92,7 @@
     <ImageContentTask Include="Assets\sprite\fade.png" />
     <ImageContentTask Include="Assets\sprite\BacktoGame.png" />
     <ImageContentTask Include="Assets\sprite\retire.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="Assets\modelData\glass05_S.png">
-      <Filter>Assets\modelData</Filter>
-    </Image>
-    <Image Include="Assets\modelData\glass05_N.png">
-      <Filter>Assets\modelData</Filter>
-    </Image>
+    <ImageContentTask Include="Assets\modelData\glass05_N.png" />
+    <ImageContentTask Include="Assets\modelData\glass05_S.png" />
   </ItemGroup>
 </Project>

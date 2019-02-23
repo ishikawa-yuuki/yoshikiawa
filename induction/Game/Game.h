@@ -8,6 +8,7 @@ class Human;
 class Player;
 class Light_Object;
 class GameCamera;
+class BackGround;
 class Game : public IGameObject
 {
 public:
@@ -33,10 +34,10 @@ private:
 	Fade * m_fade = nullptr;
 	Human * m_human;
 	Player* m_player;
+	BackGround* m_background;
 	GameCamera * m_gamecamera;
 	Light_Object* m_lightobject;
 
-	prefab::CSkinModelRender* m_skinModelRender = nullptr;
 	prefab::CSpriteRender* m_sprite_Retire = nullptr;
 	prefab::CSpriteRender* m_sprite_toGame = nullptr;
 	prefab::CSpriteRender* m_sprite_arrow = nullptr;

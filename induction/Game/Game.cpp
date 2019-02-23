@@ -7,6 +7,7 @@
 #include "Title.h"
 #include "Light_Object.h"
 #include "GameCamera.h"
+#include "BackGround.h"
 Game::Game()
 {
 }
@@ -17,8 +18,8 @@ Game::~Game()
 	DeleteGO(m_fade);
 	DeleteGO(m_player);
 	DeleteGO(m_human);
+	DeleteGO(m_background);
 	DeleteGO(m_gamecamera);
-	DeleteGO(m_skinModelRender);
 	DeleteGO(m_lightobject);
 }
 
@@ -26,12 +27,10 @@ bool Game::Start()
 {
 	m_player = NewGO<Player>(0, "Player");
 	m_human = NewGO<Human>(0, "Human");
+	m_background = NewGO<BackGround>(0, "BackGround");
 	m_gamecamera = NewGO<GameCamera>(0, "GameCamera");
 	m_lightobject = NewGO<Light_Object>(0, "LightObject");
 
-	m_skinModelRender = NewGO<prefab::CSkinModelRender>(0);
-	m_skinModelRender->Init(L"modelData/stage_test.cmo");//仮ステージ
-	m_skinModelRender->SetScale({ 20.0f,20.0f,20.0f });//思ったより小さかったので20倍
 	m_fade = NewGO<Fade>(0, "Fade");
 	m_fade->StartFadeIn();
 	return true;
