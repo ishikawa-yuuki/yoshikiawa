@@ -6,7 +6,9 @@
 #include "Player.h"
 #include "MoveBed.h"
 #include "Title.h"
+#include "Light_Object.h"
 #include "GameCamera.h"
+#include "BackGround.h"
 Game::Game()
 {
 }
@@ -16,16 +18,20 @@ Game::~Game()
 {
 	DeleteGO(m_player);
 	DeleteGO(m_human);
+	DeleteGO(m_background);
 	DeleteGO(m_movebed);
 	DeleteGO(m_gamecamera);
-	DeleteGO(m_skinModelRender);
+	DeleteGO(m_lightobject);
 }
 
 bool Game::Start()
 {
 	m_player = NewGO<Player>(0, "Player");
 	m_human = NewGO<Human>(0, "Human");
+	m_background = NewGO<BackGround>(0, "BackGround");
 	m_gamecamera = NewGO<GameCamera>(0, "GameCamera");
+	m_lightobject = NewGO<Light_Object>(0, "LightObject");
+
 	m_movebed = NewGO<MoveBed>(0, "MoveBed");
 	m_skinModelRender = NewGO<prefab::CSkinModelRender>(0);
 	m_skinModelRender->Init(L"modelData/stage_test.cmo");//仮ステージ
@@ -57,8 +63,8 @@ void Game::Pose()
 {
 	const float tate = 150.0f;
 	const float yoko = 280.0f;
-	if (m_isPose != true) {
-		if (m_damege != true) {
+	if (!m_isPose) { //!=trueとか==trueとかをなくしました。
+		if (!m_damege) {
 			if (Pad(0).IsTrigger(enButtonStart)) {
 				m_isPose = true;
 

@@ -16,16 +16,25 @@ public:
 	void isDead();//やったか！を判定する
 	void Hanntei();
 	/*void PostRender(CRenderContext& rc);*/
-	CVector3 GetPosition() const{
+	CVector3 GetPosition() const
+	{
 		return m_position;
 	}
 	//死んだかどうかを返す関数
-	bool GetisDead()const {
+	bool GetisDead()const 
+	{
 		return m_isDead;
 	}
 	//ゲームオーバーかどうか返す関数
 	bool GetisGameOver()const {
 		return m_isGameOver;
+	}
+	//humanを倒すときの関数、enemyとかが使うと思います。
+	void isKill() 
+	{
+		if (!m_isDead) {
+			m_isDead = true;
+		}
 	}
 private:
 	prefab::CSkinModelRender* m_skinModelRender = nullptr;//スキンモデルレンダラー

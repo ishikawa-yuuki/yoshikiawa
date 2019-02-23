@@ -32,6 +32,8 @@
     <ClCompile Include="SSHuman.cpp" />
     <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="SSPoint.cpp" />
+    <ClCompile Include="Light_Object.cpp" />
+    <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="MoveBed.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -53,6 +55,8 @@
     <ClInclude Include="SSHuman.h" />
     <ClInclude Include="GameOver.h" />
     <ClInclude Include="SSPoint.h" />
+    <ClInclude Include="Light_Object.h" />
+    <ClInclude Include="BackGround.h" />
     <ClInclude Include="MoveBed.h" />
   </ItemGroup>
   <ItemGroup>
@@ -73,6 +77,12 @@
     <MeshContentTask Include="Assets\modelData\StageSelect\StagePoint.fbx">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\lanthanum.fbx">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\mini_lanthanum.fbx">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\MoveBed\MoveBed.FBX">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
@@ -87,5 +97,7 @@
     <ImageContentTask Include="Assets\sprite\fade.png" />
     <ImageContentTask Include="Assets\sprite\BacktoGame.png" />
     <ImageContentTask Include="Assets\sprite\retire.png" />
+    <ImageContentTask Include="Assets\modelData\glass05_N.png" />
+    <ImageContentTask Include="Assets\modelData\glass05_S.png" />
   </ItemGroup>
 </Project>
