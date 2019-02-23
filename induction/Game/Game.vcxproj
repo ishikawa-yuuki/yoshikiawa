@@ -1846,6 +1846,10 @@
     <ImageContentTask Include="Assets\sprite\BacktoGame.png" />
     <ImageContentTask Include="Assets\sprite\retire.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Assets\modelData\glass05_N.png" />
+    <ImageContentTask Include="Assets\modelData\glass05_S.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="$(VCTargetsPath)\BuildCustomizations\ImageContentTask.targets" />

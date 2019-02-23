@@ -12,8 +12,14 @@ Light_Object::Light_Object()
 Light_Object::~Light_Object()
 {
 	DeleteGO(m_skinModelRender);//Queryになるかも
-	DeleteGO(m_effect);
-	DeleteGO(m_ptLight);
+	if (m_effect != nullptr) {
+		DeleteGO(m_effect);
+	}
+
+	if (m_ptLight != nullptr) {
+		DeleteGO(m_ptLight);
+	}
+
 	if (m_directionLig != nullptr) {
 		DeleteGO(m_directionLig);
 	}
@@ -29,8 +35,8 @@ bool Light_Object::Start()
 	m_skinModelRender->SetPosition(m_position);
 
 	//法線マップをロード。
-	m_normalMapSRV.CreateFromDDSTextureFromFile(L"modelData/glass04.dds");
-	m_specularMapSRV.CreateFromDDSTextureFromFile(L"modelData/glass04.dds");
+	m_normalMapSRV.CreateFromDDSTextureFromFile(L"modelData/glass05_N.dds");
+	m_specularMapSRV.CreateFromDDSTextureFromFile(L"modelData/glass05_S.dds");
 	//m_lnormalMapSRV.CreateFromDDSTextureFromFile(L"modelData/.dds");
 	//m_lspecularMapSRV.CreateFromDDSTextureFromFile(L"modelData/.dds");
 	return true;
@@ -88,6 +94,7 @@ void Light_Object::housenlight()
 	//正直よくわからんけど画像を読み込んで
 	//その画像に色を足している感じがする。
 	//SRVはシェーダーリソースビューの略　スペキュラは鏡面反射光の事
+
 	int materialID = 1;
 	//マテリアルIDを設定
 	m_skinModelRender->FindMaterial([&](auto material) {
@@ -98,6 +105,6 @@ void Light_Object::housenlight()
 		}
 	});
 	m_directionLig = NewGO<prefab::CDirectionLight>(0);
-	m_directionLig->SetColor({ 20.5f,20.5f,1.5f,1.0f });
+	m_directionLig->SetColor({ 15.5f,15.5f,1.5f,1.0f });
 	m_directionLig->SetLightingMaterialIDGroup(1 << materialID);
 }

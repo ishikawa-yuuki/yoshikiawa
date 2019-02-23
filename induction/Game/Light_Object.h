@@ -26,8 +26,8 @@ private:
 	CShaderResourceView m_lnormalMapSRV;
 	CShaderResourceView m_lspecularMapSRV;
 	//スポットライト用のeffect
-	prefab::CEffect* m_effect;
+	prefab::CEffect* m_effect = nullptr;
 	//ポイントライトを生成
-	prefab::CPointLight* m_ptLight;
+	prefab::CPointLight* m_ptLight = nullptr;
 };
 

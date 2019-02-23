@@ -91,4 +91,12 @@
     <ImageContentTask Include="Assets\sprite\BacktoGame.png" />
     <ImageContentTask Include="Assets\sprite\retire.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\modelData\glass05_S.png">
+      <Filter>Assets\modelData</Filter>
+    </Image>
+    <Image Include="Assets\modelData\glass05_N.png">
+      <Filter>Assets\modelData</Filter>
+    </Image>
+  </ItemGroup>
 </Project>

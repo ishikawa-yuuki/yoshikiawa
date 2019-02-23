@@ -38,10 +38,9 @@ bool Human::Start()
 	m_animClip[enAnimationClip_damage].SetLoopFlag(false);
 	m_animClip[enAnimationClip_clear].SetLoopFlag(false);
 	//true‚É‚µ‚½‚ç–â‘è‚ª‚ ‚é“z‚¾‚¯false‚É’¼‚µ‚½B
-
+	
 	m_skinModelRender = NewGO<prefab::CSkinModelRender>(0);
 	m_skinModelRender->Init(L"modelData/unityChan.cmo",m_animClip,enAnimationClip_num,enFbxUpAxisY);
-
 	return true;
 }
 
