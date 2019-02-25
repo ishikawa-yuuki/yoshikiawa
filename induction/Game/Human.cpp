@@ -42,13 +42,13 @@ bool Human::Start()
 	
 	m_skinModelRender = NewGO<prefab::CSkinModelRender>(0);
 	m_skinModelRender->Init(L"modelData/unityChan.cmo",m_animClip,enAnimationClip_num,enFbxUpAxisY);
-	/*m_charaCon.Init(
+	m_charaCon.Init(
 		20.0f,
 		30.0f,
 		m_position
 	);
 	//m_position.y = 150;
-	//m_skinModelRender->SetPosition(m_position);*/
+	//m_skinModelRender->SetPosition(m_position);
 	return true;
 }
 
@@ -60,6 +60,7 @@ void Human::Update()
 	Move();
 	Turn();
 	AnimeControll();
+	Hanntei();
 	isDead();
 }
 
@@ -84,10 +85,10 @@ void Human::Move()
 					diff.Normalize();
 					diff*=-40.0f;//-‚¾‚Æ‹ß‚Ã‚­+‚È‚ç‰“‚Ì‚­
 					m_movespeed = diff;
-					m_movespeed = m_movespeed * humanspeed * GameTime().GetFrameDeltaTime();
+					m_movespeed = m_movespeed * humanspeed;// *GameTime().GetFrameDeltaTime();
 				}
 				else {//player‚Æ—£‚ê‚·‚¬‚¸‹ß‚·‚¬‚È‚¢‚Æ‚«‚Ìˆ—
-					m_movespeed = m_movespeed * humanspeed * GameTime().GetFrameDeltaTime();
+					m_movespeed = m_movespeed * humanspeed;// *GameTime().GetFrameDeltaTime();
 				}
 			}
 		}
@@ -95,11 +96,11 @@ void Human::Move()
 	else if (m_player->GetColor() == light_Red) {//ÔF‚É‚È‚Á‚½Žž‚Ìˆ—A‚Æ‚è‚ ‚¦‚¸Ž~‚Ü‚Á‚Ä‚é
 		m_movespeed = CVector3::Zero;
 	}
-	m_movespeed.y -= 10.0f * GameTime().GetFrameDeltaTime();
+	m_movespeed.y -= 50.0f*GameTime().GetFrameDeltaTime();
 	CVector3 pos = m_movespeed + m_Bedspeed;
-	m_position += pos;
+	m_position = m_charaCon.Execute(pos, GameTime().GetFrameDeltaTime());
 	m_charaCon.SetPosition(m_position);
-	m_skinModelRender->SetPosition(m_position);
+	m_skinModelRender->SetPosition(m_charaCon.GetPosition());
 }
 
 void Human::Turn()

@@ -1,5 +1,6 @@
 #pragma once
 #include "tkEngine/graphics/effect/tkEffect.h"
+#include "tkEngine/character/tkCharacterController.h"
 class GameCamera;
 class Player : public IGameObject
 {
@@ -38,6 +39,7 @@ public:
 	}
 private:
 	CVector3 m_position = CVector3::Zero;
+	CVector3 m_moveSpeed = CVector3::Zero;
 	prefab::CEffect* m_effect;
 	GameCamera* m_gamecamera = nullptr;
 	CCharacterController m_charaCon;

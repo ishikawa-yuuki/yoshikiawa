@@ -2,7 +2,6 @@
 #include "tkEngine/physics/tkPhysicsStaticObject.h"
 #include "tkEngine/graphics/effect/tkEffect.h"
 #include "tkEngine/physics/tkPhysicsGhostObject.h"
-#include "tkEngine/character/tkCharacterController.h"
 class Fade;
 class Human;
 class Player;

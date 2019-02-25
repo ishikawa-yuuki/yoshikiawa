@@ -1,5 +1,5 @@
 #pragma once
-#include  "tkEngine/physics/tkPhysicsGhostObject.h"
+#include "tkEngine/character/tkCharacterController.h"
 class Player;
 class Game;
 class GameOver;

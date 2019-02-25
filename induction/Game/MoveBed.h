@@ -19,7 +19,8 @@ public:
 	}
 private:
 	prefab::CSkinModelRender* m_skin = nullptr;
-	CVector3 m_position = {800.0f, -160.0f, -900.0f};
+	CVector3 m_position = { 0.0f, 0.0f, -900.0f };//{800.0f, -160.0f, -900.0f};
+	CVector3 m_ppos = m_position;
 	CVector3 m_protpos = m_position;
 	CVector3 m_moveSpeed = { 2.0f, 0.0f, 0.0f };
 	CVector3 m_lastFramepos = m_position;

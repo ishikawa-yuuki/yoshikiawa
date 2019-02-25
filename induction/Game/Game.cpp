@@ -31,12 +31,7 @@ bool Game::Start()
 	m_background = NewGO<BackGround>(0, "BackGround");
 	m_gamecamera = NewGO<GameCamera>(0, "GameCamera");
 	m_lightobject = NewGO<Light_Object>(0, "LightObject");
-
 	m_movebed = NewGO<MoveBed>(0, "MoveBed");
-	m_skinModelRender = NewGO<prefab::CSkinModelRender>(0);
-	m_skinModelRender->Init(L"modelData/stage_test.cmo");//仮ステージ
-	CVector3 m_scale =  { 20.0f,20.0f,20.0f } ;
-	m_skinModelRender->SetScale(m_scale);//思ったより小さかったので20倍
 	m_fade = FindGO<Fade>("Fade");
 	m_fade->StartFadeIn();
 	return true;
