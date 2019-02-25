@@ -40,7 +40,7 @@ void MoveBed::Update()
 		m_moveSpeed.x = -2.0f;
 	}
 	m_position.x += m_moveSpeed.x;
-	m_ppos = m_position;
+	m_ppos = m_position;//ボックス形状の調整
 	m_ppos.z += 100;
 	m_ppos.y += 70;
 	m_ppos.x -= 50;
