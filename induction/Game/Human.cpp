@@ -131,7 +131,7 @@ void Human::AnimeControll()//ƒAƒjƒ[ƒVƒ‡ƒ“‚ðŠÇ—‚·‚éŠÖ”AƒvƒŒƒCƒ„[‚ÌƒXƒs[ƒh‚
 		}
 		else {
 			m_skinModelRender->PlayAnimation(enAnimationClip_idle, 0.2);
-		}
+		}   
 	}
 }
 
