@@ -59,5 +59,6 @@ private:
 	CFont m_font;//調べるためのフォント、何かに使うかも
 	bool m_isDead = false;//死んだかどうか
 	bool m_isGameOver = false;//ゲームオーバーかどうか
+	bool m_siboustop = false;//一回しか殺したくないのでストッパー。
 };
 

@@ -69,15 +69,14 @@ void GameCamera::Update()
 	m_radianx = M_PI / 180 * m_degreexz;
 	m_radiany = M_PI / 180 * m_degreey;
 	Hutu();
-	follow();
+	//follow();
 	//m_target.z += 350.0f;
 	//視点z
-	m_springCamera.SetTarget(m_target);
+	MainCamera().SetTarget(m_target);
 	//座標
-	m_springCamera.SetPosition(m_position);
+	MainCamera().SetPosition(m_position);
 	//カメラの更新。
-	m_springCamera.Update();
-	
+	MainCamera().Update();
 }
 
 void GameCamera::Hutu()
@@ -128,8 +127,8 @@ void GameCamera::follow()
 	CVector3 Old_Topos = m_ToPos;
 	CVector3 HumanPos = m_human->GetPosition();
 	CVector3 diff = m_PlayerPos - HumanPos;
-	float len = diff.Length();
-	if (len >= 300.0f) {
+	float len = diff.LengthSq();
+	if (len >= 300.0f*300.0f) {
 		m_ToPos += {0.0f, 4.0f, 0.0f};//だんだん離れる
 		if (m_ToPos.y > 950.0f) {
 			m_ToPos = Old_Topos; //カメラが光に離れすぎないよう固定
@@ -142,7 +141,7 @@ void GameCamera::follow()
 		}
 	}
 	CVector3 CameraPos = m_PlayerPos + m_ToPos;
-	m_springCamera.SetTarget(m_PlayerPos);//プレイヤーの位置を注視点にする。
-	m_springCamera.SetPosition(CameraPos);
-	m_springCamera.Update();
+	MainCamera().SetTarget(m_PlayerPos);//プレイヤーの位置を注視点にする。
+	MainCamera().SetPosition(CameraPos);
+	MainCamera().Update();
 }
