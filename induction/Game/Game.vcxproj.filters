@@ -34,6 +34,7 @@
     <ClCompile Include="SSPoint.cpp" />
     <ClCompile Include="Light_Object.cpp" />
     <ClCompile Include="BackGround.cpp" />
+    <ClCompile Include="MoveBed.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -56,6 +57,7 @@
     <ClInclude Include="SSPoint.h" />
     <ClInclude Include="Light_Object.h" />
     <ClInclude Include="BackGround.h" />
+    <ClInclude Include="MoveBed.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc">
@@ -79,6 +81,9 @@
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\mini_lanthanum.fbx">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\MoveBed\MoveBed.FBX">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
   </ItemGroup>

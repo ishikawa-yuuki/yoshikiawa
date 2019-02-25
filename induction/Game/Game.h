@@ -1,11 +1,11 @@
 #pragma once
-
+#include "tkEngine/physics/tkPhysicsStaticObject.h"
 #include "tkEngine/graphics/effect/tkEffect.h"
 #include "tkEngine/physics/tkPhysicsGhostObject.h"
-#include "tkEngine/character/tkCharacterController.h"
 class Fade;
 class Human;
 class Player;
+class MoveBed;
 class Light_Object;
 class GameCamera;
 class BackGround;
@@ -34,6 +34,7 @@ private:
 	Fade * m_fade = nullptr;
 	Human * m_human;
 	Player* m_player;
+	MoveBed* m_movebed;
 	BackGround* m_background;
 	GameCamera * m_gamecamera;
 	Light_Object* m_lightobject;

@@ -4,6 +4,7 @@
 #include "Fade.h"
 #include "Human.h"
 #include "Player.h"
+#include "MoveBed.h"
 #include "Title.h"
 #include "Light_Object.h"
 #include "GameCamera.h"
@@ -15,10 +16,10 @@ Game::Game()
 
 Game::~Game()
 {
-	DeleteGO(m_fade);
 	DeleteGO(m_player);
 	DeleteGO(m_human);
 	DeleteGO(m_background);
+	DeleteGO(m_movebed);
 	DeleteGO(m_gamecamera);
 	DeleteGO(m_lightobject);
 }
@@ -30,8 +31,8 @@ bool Game::Start()
 	m_background = NewGO<BackGround>(0, "BackGround");
 	m_gamecamera = NewGO<GameCamera>(0, "GameCamera");
 	m_lightobject = NewGO<Light_Object>(0, "LightObject");
-
-	m_fade = NewGO<Fade>(0, "Fade");
+	m_movebed = NewGO<MoveBed>(0, "MoveBed");
+	m_fade = FindGO<Fade>("Fade");
 	m_fade->StartFadeIn();
 	return true;
 }

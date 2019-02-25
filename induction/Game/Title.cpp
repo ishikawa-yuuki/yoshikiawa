@@ -14,7 +14,6 @@ Title::~Title()
 {
 	DeleteGO(m_spriteRender);
 	DeleteGO(m_arrow);
-	DeleteGO(m_fade);
 }
 
 bool Title::Start()
@@ -23,7 +22,7 @@ bool Title::Start()
 	m_spriteRender->Init(L"sprite/Title_induction.dds",1280.0f,720.0f);
 	m_arrow = NewGO<prefab::CSpriteRender>(0);
 	m_arrow->Init(L"sprite/arrow.dds", 32.0f, 32.0f);
-	m_fade = NewGO<Fade>(0,"Fade");
+	m_fade = FindGO<Fade>("Fade");
 	m_fade->StartFadeIn();
 	return true;
 }

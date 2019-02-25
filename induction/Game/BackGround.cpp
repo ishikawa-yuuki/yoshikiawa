@@ -18,6 +18,7 @@ bool BackGround::Start()
 	m_skinModelRender->Init(L"modelData/stage_test.cmo");//仮ステージ
 	CVector3 scale = { 20.0f,20.0f,20.0f };
 	m_skinModelRender->SetScale(scale);//思ったより小さかったので20倍
+	m_physicsStaticObject.CreateMesh(m_position, CQuaternion::Identity, scale, m_skinModelRender);
 	return true;
 }
 void BackGround::Update()

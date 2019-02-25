@@ -37,9 +37,6 @@ bool SSHuman::Start()
 
 void SSHuman::Update()
 {
-	//Playerである光の信号を受け取ったら
-	//行動を変える関数を考えています、、、
-
 	Move();
 	Turn();
 	AnimeControll();
@@ -57,7 +54,6 @@ void SSHuman::Move()
 		m_movespeed.y = 0.0f;
 		m_movespeed.Normalize();
 		m_movespeed *= diff.LengthSq() / (400.0f * 400.0f) * 12.0;
-		//m_movespeed = m_movespeed* GameTime().GetFrameDeltaTime();
 	}
 	m_position += m_movespeed ;
 	m_skin->SetPosition(m_position);

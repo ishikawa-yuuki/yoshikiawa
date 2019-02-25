@@ -17,7 +17,13 @@ bool Player::Start()
 	m_effect = NewGO<prefab::CEffect>(0);
 	m_effect->Play(L"effect/hikari.efk");
 	m_effect->SetScale({ 30.0f,30.0f,30.0f });
-	
+	m_position.y = 100;
+	m_charaCon.Init(
+		20.0f,
+		20.0f,
+		m_position
+	);
+	m_effect->SetPosition(m_position);
 	return true;
 }
 
@@ -44,9 +50,10 @@ void Player::Move()
 	CameraRight.y = 0.0f;
 	CameraRight.Normalize();//ï˚å¸èÓïÒÅEâ°
 
-	m_position += CameraForword * L_Stick_Y * pl_speed * GameTime().GetFrameDeltaTime();
-	m_position += CameraRight * L_Stick_X * pl_speed * GameTime().GetFrameDeltaTime();
-
+	m_position += CameraForword * L_Stick_Y * pl_speed *GameTime().GetFrameDeltaTime();
+	m_position += CameraRight * L_Stick_X * pl_speed *GameTime().GetFrameDeltaTime();
+	m_charaCon.Execute(m_position);
+	m_charaCon.SetPosition(m_position);
 }
 
 void Player::Color_Change()

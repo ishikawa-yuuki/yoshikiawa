@@ -16,7 +16,6 @@ Stage_Select::Stage_Select()
 
 Stage_Select::~Stage_Select()
 {
-	DeleteGO(m_fade);
 	DeleteGO(m_ssPlayer);
 	DeleteGO(m_ssHuman);
 	DeleteGO(m_ssGC);
@@ -32,7 +31,7 @@ bool Stage_Select::Start()
 		m_ssPoint[i] = NewGO<SSPoint>(0, "SSPoint");
 		m_ssPoint[i]->m_position.x += i * 1200;
 	}
-	m_fade = NewGO<Fade>(0, "Fade");
+	m_fade = FindGO<Fade>("Fade");
 	m_fade->StartFadeIn();
 	m_ssPlayer = NewGO<SSPlayer>(0, "SSPlayer");
 	m_ssHuman = NewGO<SSHuman>(0, "SSHuman");
