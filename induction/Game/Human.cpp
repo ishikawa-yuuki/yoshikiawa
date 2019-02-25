@@ -56,10 +56,9 @@ void Human::Update()
 {
 	//Player‚Å‚ ‚éŒõ‚ÌM†‚ğó‚¯æ‚Á‚½‚ç
 	//s“®‚ğ•Ï‚¦‚éŠÖ”‚ğl‚¦‚Ä‚¢‚Ü‚·AAA<-move()‚É‘‚¢‚Ä‚Ü‚·B
-
+	AnimeControll();
 	Move();
 	Turn();
-	AnimeControll();
 	Hanntei();
 	isDead();
 }
@@ -82,6 +81,7 @@ void Human::Move()
 				
 				m_movespeed *= diff.LengthSq() / (400.0f * 400.0f) * 12.0f;
 				if (diff.LengthSq() >= 800.0f*800.0f) {//ƒvƒŒƒCƒ„[‚Æ—£‚ê‚·‚¬‚½‚Æ‚«‚É‚¾‚¹‚émovespeed‚ÌÅ‚‘¬
+					diff.y = 0.0f;
 					diff.Normalize();
 					diff*=-40.0f;//-‚¾‚Æ‹ß‚Ã‚­+‚È‚ç‰“‚Ì‚­
 					m_movespeed = diff;
@@ -96,11 +96,18 @@ void Human::Move()
 	else if (m_player->GetColor() == light_Red) {//ÔF‚É‚È‚Á‚½‚Ìˆ—A‚Æ‚è‚ ‚¦‚¸~‚Ü‚Á‚Ä‚é
 		m_movespeed = CVector3::Zero;
 	}
-	m_movespeed.y -= 50.0f*GameTime().GetFrameDeltaTime();
+
+	if (m_charaCon.IsOnGround()) {
+		m_movespeed.y = 0.0f;
+	}
+	else {
+		m_movespeed.y -= 1000.0f*GameTime().GetFrameDeltaTime();
+	}
+	
 	CVector3 pos = m_movespeed + m_Bedspeed;
 	m_position = m_charaCon.Execute(pos, GameTime().GetFrameDeltaTime());
 	m_charaCon.SetPosition(m_position);
-	m_skinModelRender->SetPosition(m_charaCon.GetPosition());
+	m_skinModelRender->SetPosition(m_position);
 }
 
 void Human::Turn()
@@ -123,7 +130,11 @@ void Human::AnimeControll()//ƒAƒjƒ[ƒVƒ‡ƒ“‚ğŠÇ—‚·‚éŠÖ”AƒvƒŒƒCƒ„[‚ÌƒXƒs[ƒh‚
 	if (!m_isDead) {
 		const float run_true = 5.5f*5.5f;
 		const float walk_true = 0.45f*0.45f;
-		if (m_movespeed.LengthSq() > run_true) {
+	//	m_movespeed.y = 0.0f;
+		if (m_position.y <= -100.0f) {
+			m_isDead = true;
+		}
+		else if (m_movespeed.LengthSq() > run_true) {
 			m_skinModelRender->PlayAnimation(enAnimationClip_run, 0.2);
 		}
 		else if (m_movespeed.LengthSq() > walk_true) {
@@ -148,8 +159,10 @@ void Human::isDead()
 {
 	if (!m_game->GetifPose()) {//!= trueC³
 		//“G‚àƒMƒ~ƒbƒN‚à‚È‚¢‚Ì‚Å¡‚Ì‚Æ‚±‚ë‚Íƒ{ƒ^ƒ“‰Ÿ‚·‚¾‚¯‚Å€‚ÊƒXƒyƒ‰ƒ“ƒJ[‚Å‚·B
-		if (!m_isDead) {
-			if (Pad(0).IsTrigger(enButtonB)) {
+		if (!m_siboustop) {
+			if (Pad(0).IsTrigger(enButtonB)
+				||m_isDead) {
+				m_siboustop = true;
 				m_isDead = true; //‚±‚ê‚ªtrue‚É‚È‚ê‚Î€
 				m_game->GetDamage();//gameƒNƒ‰ƒX‚Éƒ_ƒ[ƒW’†‚Å‚ ‚é‚±‚Æ‚ğ’m‚ç‚¹‚Ä‚¢‚éB€‚ñ‚Å‚é‚¯‚ÇEEE
 				m_skinModelRender->PlayAnimation(enAnimationClip_KneelDown, 0.2f);

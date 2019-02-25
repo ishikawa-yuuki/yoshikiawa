@@ -51,7 +51,7 @@ void Light_Object::Update()
 		if (diff.LengthSq() < 500.0f*500.0f) {
 			m_isLightOn = true;
 			housenlight();
-			InitPointLight();
+			//InitPointLight();
 			//Dirlight();使わない
 			m_effect = NewGO<prefab::CEffect>(0);
 			m_effect->Play(L"effect/spotlight.efk");//スポットライトのエフェクト。明かりで強調したいときに使う。
@@ -65,12 +65,12 @@ void Light_Object::InitPointLight()
 {
 	m_ptLight = NewGO<prefab::CPointLight>(0);
 	//m_position.y = 100.0f;
-	m_position.y += 70.0f;
+	m_position.y += 1.0f;
 	m_ptLight->SetPosition(m_position);//位置決め
 	CVector3 color = { 10.0f,10.0f,0.0f,};
 	m_ptLight->SetColor(color);//色決め
 	CVector3 attn = CVector3::Zero;
-	attn.x = 600.0f;//光の影響範囲距離
+	attn.x = 60.0f;//光の影響範囲距離
 	attn.y = 10.0f;//光の減衰
 	m_ptLight->SetAttn(attn);//影響範囲と減衰の強さ
 }

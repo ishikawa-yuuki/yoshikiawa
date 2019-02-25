@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Player.h"
-
+#include "GameCamera.h"
 
 Player::Player()
 {
@@ -17,13 +17,16 @@ bool Player::Start()
 	m_effect = NewGO<prefab::CEffect>(0);
 	m_effect->Play(L"effect/hikari.efk");
 	m_effect->SetScale({ 30.0f,30.0f,30.0f });
-	m_position.y = 100;
+	m_position.y = 100.0f;
 	m_charaCon.Init(
 		20.0f,
 		20.0f,
-		m_position
+		m_position//0,100,0
 	);
+	m_charaCon.Execute(m_position);
+	m_charaCon.SetPosition(m_position);
 	m_effect->SetPosition(m_position);
+	
 	return true;
 }
 
@@ -34,11 +37,12 @@ void Player::Update()
 	Color_Change();
 	Move();
 	m_effect->SetPosition(m_position);
+	m_charaCon.SetPosition(m_position);
 }
 
 void Player::Move()
 {
-	float pl_speed = 600.0f;//光の速度
+	const float pl_speed = 600.0f;//光の速度
 	float L_Stick_X = Pad(0).GetLStickXF();
 	float L_Stick_Y = Pad(0).GetLStickYF();
 
@@ -49,11 +53,10 @@ void Player::Move()
 	CameraForword.Normalize();//方向情報・前
 	CameraRight.y = 0.0f;
 	CameraRight.Normalize();//方向情報・横
-
-	m_position += CameraForword * L_Stick_Y * pl_speed *GameTime().GetFrameDeltaTime();
-	m_position += CameraRight * L_Stick_X * pl_speed *GameTime().GetFrameDeltaTime();
-	m_charaCon.Execute(m_position);
-	m_charaCon.SetPosition(m_position);
+	m_moveSpeed = CVector3::Zero;
+	m_moveSpeed += CameraForword * L_Stick_Y * pl_speed;
+	m_moveSpeed += CameraRight * L_Stick_X * pl_speed;
+	m_position =m_charaCon.Execute(m_moveSpeed, GameTime().GetFrameDeltaTime());
 }
 
 void Player::Color_Change()
