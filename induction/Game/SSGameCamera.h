@@ -1,6 +1,7 @@
 #pragma once
 class SSPlayer;
-class SSGameCamera : public IGameObject//ステージ選択専用
+//ステージ選択専用
+class SSGameCamera : public IGameObject
 {
 public:
 	SSGameCamera();

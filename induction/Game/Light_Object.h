@@ -14,11 +14,14 @@ public:
 	void housenlight();
 private:
 	prefab::CSkinModelRender* m_skinModelRender = nullptr;
-	CVector3 m_position = { 0.0f,-70.0f,-3000.0f };//レベルデザインで設計するのでとりあえず仮
+	//レベルデザインで設計するのでとりあえず仮
+	CVector3 m_position = { 0.0f,-70.0f,-3000.0f };
 	Player* m_player;
 	bool m_isLightOn = false;
-	prefab::CDirectionLight* m_lig;			//ライト。
-	CVector3 m_lightDir;					//ライトの方向。
+	//ライト。
+	prefab::CDirectionLight* m_lig;			
+	//ライトの方向。
+	CVector3 m_lightDir;					
 	prefab::CDirectionLight* m_directionLig = nullptr;
 	//housenlight()で使う。
 	CShaderResourceView m_normalMapSRV;

@@ -19,14 +19,20 @@ public:
 	void Pose();
 	//ここから下の関数はごり押しです・・・なんかいい書き方がある気がする・・・
 
-	bool GameOwari() {//ゲームクラスを消したいときに使う関数、基本GameOverクラスから呼ばれる
+	//ゲームクラスを消したいときに使う関数、基本GameOverクラスから呼ばれる
+	bool GameOwari()
+	{
 		m_Gamesyuuryou = true;
 		return m_Gamesyuuryou;
 	}
-	bool GetifPose() const{//ポーズ中であるかどうかの関数、敵やギミックがこれで止まるかも
+	//ポーズ中であるかどうかの関数、敵やギミックがこれで止まるかも
+	bool GetifPose() const
+	{
 		return m_isPose;
 	}
-	bool GetDamage(){//ダメージ中であるかどうかの関数、HumanやEnemyクラスに使われるかも
+	//ダメージ中であるかどうかの関数、HumanやEnemyクラスに使われるかも
+	bool GetDamage()
+	{
 		m_damege = true;
 		return m_damege;
 	}
@@ -42,7 +48,8 @@ private:
 	prefab::CSpriteRender* m_sprite_Retire = nullptr;
 	prefab::CSpriteRender* m_sprite_toGame = nullptr;
 	prefab::CSpriteRender* m_sprite_arrow = nullptr;
-	bool m_isWaitFadeout = false; //trueなら画面を切り替える。
+	//trueなら画面を切り替える。
+	bool m_isWaitFadeout = false;
 	bool m_isPose = false;
 	CVector3 m_Retirepos = { -200.0f,-100.0f,0.0f };
 	CVector3 m_toGamepos = { 200.0f,-100.0f,0.0f };

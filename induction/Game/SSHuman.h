@@ -1,6 +1,7 @@
 #pragma once
 class SSPlayer;
-class SSHuman : public IGameObject//ステージ選択専用
+//ステージ選択専用
+class SSHuman : public IGameObject
 {
 public:
 	SSHuman();
@@ -9,13 +10,16 @@ public:
 	void Update();
 	void Move();
 	void Turn();
-	void AnimeControll();//プレイヤーのアニメの変更
+	//プレイヤーのアニメの変更
+	void AnimeControll();
 	void PostRender(CRenderContext& rc);
-	CVector3 GetPosition() const { // プレイヤーの場所を返す関数。
+	// プレイヤーの場所を返す関数。
+	CVector3 GetPosition() const { 
 		return m_position;
 	}
 private:
-	prefab::CSkinModelRender* m_skin = nullptr;//スキンモデルレンダラー
+	//スキンモデルレンダラー
+	prefab::CSkinModelRender* m_skin = nullptr;
 	SSPlayer* m_ssplayer;
 	CVector3 m_position;
 	CVector3 m_movespeed;

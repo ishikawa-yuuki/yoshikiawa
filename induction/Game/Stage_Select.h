@@ -15,8 +15,10 @@ public:
 	SSPoint* m_ssPoint[point] = { nullptr };
 private:
 	prefab::CSkinModelRender* m_skin = nullptr;
-	bool m_isWaitFadeout = false;//trueなら画面を切り替える。
-	bool m_Tile = false;//タイトル切り替えtrueなら切り替える
+	//trueなら画面を切り替える。
+	bool m_isWaitFadeout = false;
+	//タイトル切り替えtrueなら切り替える
+	bool m_Tile = false;
 	Fade* m_fade = nullptr;
 	SSPlayer* m_ssPlayer = nullptr;
 	SSHuman* m_ssHuman = nullptr;

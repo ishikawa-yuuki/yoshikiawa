@@ -17,14 +17,19 @@ public:
 	~Player();
 	bool Start();
 	void Update();
-	void Move(); // プレイヤーの基本的な動き
-	void Color_Change();//光の色変更、ラチェクラのクランクイメージ、
-	CVector3 GetPosition() const{ // プレイヤーの場所を返す関数。
+	// プレイヤーの基本的な動き
+	void Move(); 
+	//光の色変更、ラチェクラのクランクイメージ、
+	void Color_Change();
+	// プレイヤーの場所を返す関数。
+	CVector3 GetPosition() const
+	{ 
 		return m_position;
 	}
 
 	/*光の色を変えます*/
-	int GetColor(){//光の色を返すぜ//　　　ポインタ使うといいかもしれない。 //int型になった。。。
+	//光の色を返すぜ int型になった。。。
+	int GetColor(){
 		int number = 0;
 		switch (m_color)
 		{

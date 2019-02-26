@@ -15,7 +15,9 @@ public:
 	void AnimeControll();//プレイヤーのアニメの変更
 	void isDead();//やったか！を判定する
 	void Hanntei();
+
 	/*void PostRender(CRenderContext& rc);*/
+
 	CVector3 GetPosition() const
 	{
 		return m_position;
@@ -37,7 +39,8 @@ public:
 		}
 	}
 private:
-	prefab::CSkinModelRender* m_skinModelRender = nullptr;//スキンモデルレンダラー
+	//スキンモデルレンダラー
+	prefab::CSkinModelRender* m_skinModelRender = nullptr;
 	Player* m_player;
 	Game* m_game;
 	CVector3 m_position = CVector3::Zero;
@@ -55,10 +58,15 @@ private:
 		enAnimationClip_KneelDown,
 		enAnimationClip_num
 	};
-	CAnimationClip m_animClip[enAnimationClip_num];//アニメーションクリップ詰め合わせ
-	CFont m_font;//調べるためのフォント、何かに使うかも
-	bool m_isDead = false;//死んだかどうか
-	bool m_isGameOver = false;//ゲームオーバーかどうか
-	bool m_siboustop = false;//一回しか殺したくないのでストッパー。
+	//アニメーションクリップ詰め合わせ
+	CAnimationClip m_animClip[enAnimationClip_num];
+	//調べるためのフォント、何かに使うかも
+	CFont m_font;
+	//死んだかどうか
+	bool m_isDead = false;
+	//ゲームオーバーかどうか
+	bool m_isGameOver = false;
+	//一回しか殺したくないのでストッパー。
+	bool m_siboustop = false;
 };
 

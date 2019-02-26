@@ -42,17 +42,22 @@ void Player::Update()
 
 void Player::Move()
 {
-	const float pl_speed = 600.0f;//光の速度
+	//光の速度
+	const float pl_speed = 600.0f;
 	float L_Stick_X = Pad(0).GetLStickXF();
 	float L_Stick_Y = Pad(0).GetLStickYF();
 
-	CVector3 CameraForword = MainCamera().GetForward(); // カメラの前方向の取得
-	CVector3 CameraRight = MainCamera().GetRight();  //カメラの横方向の取得
+	//カメラの前方向の取得
+	CVector3 CameraForword = MainCamera().GetForward();
+	//カメラの横方向の取得
+	CVector3 CameraRight = MainCamera().GetRight();  
 
 	CameraForword.y = 0.0f;
-	CameraForword.Normalize();//方向情報・前
+	//方向情報・前
+	CameraForword.Normalize();
 	CameraRight.y = 0.0f;
-	CameraRight.Normalize();//方向情報・横
+	//方向情報・横
+	CameraRight.Normalize();
 	m_moveSpeed = CVector3::Zero;
 	m_moveSpeed += CameraForword * L_Stick_Y * pl_speed;
 	m_moveSpeed += CameraRight * L_Stick_X * pl_speed;
