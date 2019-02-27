@@ -1824,12 +1824,13 @@
     <ResourceCompile Include="Game.rc" />
   </ItemGroup>
   <ItemGroup>
-    <MeshContentTask Include="Assets\modelData\lanthanum.fbx" />
-    <MeshContentTask Include="Assets\modelData\mini_lanthanum.fbx" />
+    <MeshContentTask Include="Assets\modelData\LightObject\lanthanum.fbx" />
+    <MeshContentTask Include="Assets\modelData\LightObject\mini_lanthanum.fbx" />
     <MeshContentTask Include="Assets\modelData\MoveBed\MoveBed.FBX" />
+    <MeshContentTask Include="Assets\modelData\StageMap\Stage1.fbx" />
+    <MeshContentTask Include="Assets\modelData\StageMap\stage_test.fbx" />
     <MeshContentTask Include="Assets\modelData\StageSelect\SS.fbx" />
     <MeshContentTask Include="Assets\modelData\StageSelect\StagePoint.fbx" />
-    <MeshContentTask Include="Assets\modelData\stage_test.fbx" />
     <MeshContentTask Include="Assets\modelData\unityChan.fbx" />
   </ItemGroup>
   <ItemGroup>
@@ -1850,10 +1851,6 @@
   <ItemGroup>
     <ImageContentTask Include="Assets\sprite\BacktoGame.png" />
     <ImageContentTask Include="Assets\sprite\retire.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <ImageContentTask Include="Assets\modelData\glass05_N.png" />
-    <ImageContentTask Include="Assets\modelData\glass05_S.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

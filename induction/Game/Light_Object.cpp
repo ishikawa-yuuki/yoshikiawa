@@ -30,13 +30,13 @@ bool Light_Object::Start()
 	m_player = FindGO<Player>("Player");
 
 	m_skinModelRender = NewGO<prefab::CSkinModelRender>(0);
-	m_skinModelRender->Init(L"modelData/lanthanum.cmo");
+	m_skinModelRender->Init(L"modelData/LightObject/lanthanum.cmo");
 	m_skinModelRender->SetScale({ 2.0f,2.0f,2.0f });
 	m_skinModelRender->SetPosition(m_position);
 
 	//法線マップをロード。
-	m_normalMapSRV.CreateFromDDSTextureFromFile(L"modelData/glass05_N.dds");
-	m_specularMapSRV.CreateFromDDSTextureFromFile(L"modelData/glass05_S.dds");
+	m_normalMapSRV.CreateFromDDSTextureFromFile(L"modelData/LightObject/glass05_N.dds");
+	m_specularMapSRV.CreateFromDDSTextureFromFile(L"modelData/LightObject/glass05_S.dds");
 	//m_lnormalMapSRV.CreateFromDDSTextureFromFile(L"modelData/.dds");
 	//m_lspecularMapSRV.CreateFromDDSTextureFromFile(L"modelData/.dds");
 	return true;
@@ -54,7 +54,7 @@ void Light_Object::Update()
 			//InitPointLight();
 			//Dirlight();使わない
 			m_effect = NewGO<prefab::CEffect>(0);
-			m_effect->Play(L"effect/spotlight.efk");//スポットライトのエフェクト。明かりで強調したいときに使う。
+			m_effect->Play(L"effect/spotlight.efk");
 			m_effect->SetScale({ 4.0f, 4.0f, 4.0f });
 			m_effect->SetPosition(m_position);
 		}

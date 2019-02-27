@@ -19,7 +19,7 @@ bool Human::Start()
 {
 	m_player = FindGO<Player>("Player");
 	m_game = FindGO<Game>("Game");
-	
+
 	m_animClip[enAnimationClip_idle].Load(L"animData/unityChan/idle.tka");
 	m_animClip[enAnimationClip_walk].Load(L"animData/unityChan/walk.tka");
 	m_animClip[enAnimationClip_run].Load(L"animData/unityChan/run.tka");
@@ -28,6 +28,7 @@ bool Human::Start()
 	m_animClip[enAnimationClip_KneelDown].Load(L"animData/unityChan/KneelDown.tka");
 	m_animClip[enAnimationClip_clear].Load(L"animData/unityChan/clear.tka");
 	//アニメクリップをすべてロード、全部使う必要は特にないです。
+
 
 	for (int i = 0; i < enAnimationClip_num; i++) {
 		m_animClip[i].SetLoopFlag(true);
@@ -68,8 +69,11 @@ void Human::Move()
 	const int light_Yellow = 0;
 	const int light_Red = 1;
 	if (m_player->GetColor() == light_Yellow) {
+		//死なない時の普通の処理
 		if (!m_isDead) {
 			CVector3 diff = m_position - m_player->GetPosition();
+			//Yの数値は除外
+			diff.y = 0.0f;
 			if (diff.LengthSq() <= 105.0f * 105.0f) {//プレイヤーと近ければhumanは止まる
 				m_movespeed = CVector3::Zero;
 			}
@@ -92,16 +96,22 @@ void Human::Move()
 				}
 			}
 		}
+		else 
+		{
+			//死んだときの処理
+			m_movespeed = CVector3::Zero;
+		}
 	}
 	else if (m_player->GetColor() == light_Red) {//赤色になった時の処理、とりあえず止まってる
 		m_movespeed = CVector3::Zero;
+		m_movespeed.y -= 10000.0f*GameTime().GetFrameDeltaTime();
 	}
 
 	if (m_charaCon.IsOnGround()) {
 		m_movespeed.y = 0.0f;
 	}
 	else {
-		m_movespeed.y -= 1000.0f*GameTime().GetFrameDeltaTime();
+		m_movespeed.y -= 10000.0f*GameTime().GetFrameDeltaTime();
 	}
 	
 	CVector3 pos = m_movespeed + m_Bedspeed;
@@ -128,8 +138,8 @@ void Human::Turn()
 void Human::AnimeControll()//アニメーションを管理する関数、プレイヤーのスピードで変わる。
 {
 	if (!m_isDead) {
-		const float run_true = 5.5f*5.5f;
-		const float walk_true = 0.45f*0.45f;
+		const float run_true = 100.0f*100.0f;
+		const float walk_true = 10.0f*10.0f;
 	//	m_movespeed.y = 0.0f;
 		if (m_position.y <= -100.0f) {
 			m_isDead = true;
@@ -166,7 +176,6 @@ void Human::isDead()
 				m_isDead = true; //これがtrueになれば死
 				m_game->GetDamage();//gameクラスにダメージ中であることを知らせている。死んでるけど・・・
 				m_skinModelRender->PlayAnimation(enAnimationClip_KneelDown, 0.2f);
-				m_movespeed = CVector3::Zero;
 			}
 		}
 		else {
