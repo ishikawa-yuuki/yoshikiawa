@@ -2,7 +2,6 @@
 #include "SSPlayer.h"
 #include "SSHuman.h"
 
-
 SSHuman::SSHuman()
 {
 }
@@ -15,7 +14,6 @@ SSHuman::~SSHuman()
 bool SSHuman::Start()
 {
 	m_ssplayer = FindGO<SSPlayer>("SSPlayer");
-
 	m_animClip[enAnimationClip_idle].Load(L"animData/unityChan/idle.tka");
 	m_animClip[enAnimationClip_walk].Load(L"animData/unityChan/walk.tka");
 	m_animClip[enAnimationClip_run].Load(L"animData/unityChan/run.tka");

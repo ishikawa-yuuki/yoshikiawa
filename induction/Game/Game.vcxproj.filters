@@ -35,6 +35,7 @@
     <ClCompile Include="Light_Object.cpp" />
     <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="MoveBed.cpp" />
+    <ClCompile Include="Stage_Number.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -58,6 +59,7 @@
     <ClInclude Include="Light_Object.h" />
     <ClInclude Include="BackGround.h" />
     <ClInclude Include="MoveBed.h" />
+    <ClInclude Include="Stage_Number.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc">

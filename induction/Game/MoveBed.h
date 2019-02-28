@@ -8,6 +8,11 @@ public:
 	~MoveBed();
 	bool Start();
 	void Update();
+	//レベルで設置した所にm_positionを置く
+	void SetPosition(const CVector3& pos)
+	{
+		m_position = pos;
+	}
 	// プレイヤーの場所を返す関数。
 	CVector3 GetPosition() const
 	{

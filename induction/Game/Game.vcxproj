@@ -1778,6 +1778,7 @@
     <ClCompile Include="SSHuman.cpp" />
     <ClCompile Include="SSPlayer.cpp" />
     <ClCompile Include="SSPoint.cpp" />
+    <ClCompile Include="Stage_Number.cpp" />
     <ClCompile Include="Stage_Select.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -1818,6 +1819,7 @@
     <ClInclude Include="SSHuman.h" />
     <ClInclude Include="SSPlayer.h" />
     <ClInclude Include="SSPoint.h" />
+    <ClInclude Include="Stage_Number.h" />
     <ClInclude Include="Stage_Select.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Title.h" />
