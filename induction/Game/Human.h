@@ -18,7 +18,7 @@ public:
 
 	/*void PostRender(CRenderContext& rc);*/
 
-	CVector3 GetPosition() const
+	const CVector3& GetPosition() const
 	{
 		return m_position;
 	}

@@ -5,6 +5,7 @@
 class Fade;
 class Human;
 class Player;
+class Enemy;
 class MoveBed;
 class Light_Object;
 class GameCamera;
@@ -40,6 +41,7 @@ private:
 	Fade * m_fade = nullptr;
 	Human * m_human;
 	Player* m_player;
+	Enemy* m_enemy;
 	MoveBed* m_movebed;
 	BackGround* m_background;
 	GameCamera * m_gamecamera;

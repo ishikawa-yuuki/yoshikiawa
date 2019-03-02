@@ -35,6 +35,9 @@
     <ClCompile Include="Light_Object.cpp" />
     <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="MoveBed.cpp" />
+    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnemyMoveLoop.cpp" />
+    <ClCompile Include="Path.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -58,6 +61,9 @@
     <ClInclude Include="Light_Object.h" />
     <ClInclude Include="BackGround.h" />
     <ClInclude Include="MoveBed.h" />
+    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="EnemyMoveLoop.h" />
+    <ClInclude Include="Path.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc">

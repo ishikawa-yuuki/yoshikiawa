@@ -1764,6 +1764,8 @@
   <ItemGroup>
     <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="Credit.cpp" />
+    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnemyMoveLoop.cpp" />
     <ClCompile Include="Fade.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameCamera.cpp" />
@@ -1773,6 +1775,7 @@
     <ClCompile Include="Light_Object.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MoveBed.cpp" />
+    <ClCompile Include="Path.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SSGameCamera.cpp" />
     <ClCompile Include="SSHuman.cpp" />
@@ -1804,6 +1807,8 @@
   <ItemGroup>
     <ClInclude Include="BackGround.h" />
     <ClInclude Include="Credit.h" />
+    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="EnemyMoveLoop.h" />
     <ClInclude Include="Fade.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameCamera.h" />
@@ -1812,6 +1817,7 @@
     <ClInclude Include="Human.h" />
     <ClInclude Include="MoveBed.h" />
     <ClInclude Include="Light_Object.h" />
+    <ClInclude Include="Path.h" />
     <ClInclude Include="Player.h" />
     <CLInclude Include="resource.h" />
     <ClInclude Include="SSGameCamera.h" />

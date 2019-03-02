@@ -4,6 +4,7 @@
 #include "Fade.h"
 #include "Human.h"
 #include "Player.h"
+#include "Enemy.h"
 #include "MoveBed.h"
 #include "Title.h"
 #include "Light_Object.h"
@@ -18,6 +19,7 @@ Game::~Game()
 {
 	DeleteGO(m_player);
 	DeleteGO(m_human);
+	DeleteGO(m_enemy);
 	DeleteGO(m_background);
 	DeleteGO(m_movebed);
 	DeleteGO(m_gamecamera);
@@ -28,6 +30,7 @@ bool Game::Start()
 {
 	m_player = NewGO<Player>(0, "Player");
 	m_human = NewGO<Human>(0, "Human");
+	m_enemy = NewGO<Enemy>(0, "Enemy");
 	m_background = NewGO<BackGround>(0, "BackGround");
 	m_gamecamera = NewGO<GameCamera>(0, "GameCamera");
 	m_lightobject = NewGO<Light_Object>(0, "LightObject");
