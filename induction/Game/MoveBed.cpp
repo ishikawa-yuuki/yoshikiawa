@@ -25,7 +25,7 @@ bool MoveBed::Start()
 	m_GhostObject.CreateBox(
 		m_ppos,
 		CQuaternion::Identity,
-		{ 605.0f, 15.0f, 455.0f }
+		{ 605.0f, 150.0f, 455.0f }
 	);
 	return true;
 }

@@ -61,7 +61,10 @@ void Human::Update()
 	Move();
 	Turn();
 	Hanntei();
+	CVector3 Pos = m_position + m_Bedspeed;
 	isDead();
+	m_charaCon.SetPosition(Pos);
+	m_skinModelRender->SetPosition(Pos);
 }
 
 void Human::Move()
@@ -76,7 +79,7 @@ void Human::Move()
 			diff.y = 0.0f;
 			if (diff.LengthSq() <= 105.0f * 105.0f) {//プレイヤーと近ければhumanは止まる
 				m_movespeed = CVector3::Zero;
-				m_movespeed += m_Bedspeed;
+				//m_movespeed += m_Bedspeed;
 			}
 			else {
 				auto humanspeed = 30.0f;
@@ -91,11 +94,11 @@ void Human::Move()
 					diff*=-40.0f;//-だと近づく+なら遠のく
 					m_movespeed = diff;
 					m_movespeed = m_movespeed * humanspeed;// *GameTime().GetFrameDeltaTime();
-					m_movespeed += m_Bedspeed;
+				//	m_movespeed += m_Bedspeed;
 				}
 				else {//playerと離れすぎず近すぎないときの処理
 					m_movespeed = m_movespeed * humanspeed;// *GameTime().GetFrameDeltaTime();
-					m_movespeed += m_Bedspeed;
+				//	m_movespeed += m_Bedspeed;
 				}
 			}
 		}
@@ -119,8 +122,7 @@ void Human::Move()
 	
 	CVector3 pos = m_movespeed + m_Bedspeed;
 	m_position = m_charaCon.Execute(pos, GameTime().GetFrameDeltaTime());
-	m_charaCon.SetPosition(m_position);
-	m_skinModelRender->SetPosition(m_position);
+	
 }
 
 void Human::Turn()
@@ -195,7 +197,7 @@ void Human::isDead()
 void Human::Hanntei()
 {
 	 m_Bedspeed = CVector3::Zero;
-		QueryGOs<MoveBed>("MoveBed", [&](MoveBed* move) {
+		QueryGOs<MoveBed>("MoveBed1", [&](MoveBed* move) {
 			CPhysicsGhostObject* ghostObj = move->GetGhost();
 			PhysicsWorld().ContactTest(m_charaCon, [&](const btCollisionObject& contactObject) {
 				if (ghostObj->IsSelf(contactObject) == true) {
@@ -204,7 +206,25 @@ void Human::Hanntei()
 					boxMoveValue = move->GetPosition() - move->GetLastPos();
 					//ボックスの移動速度を求める
 					CVector3 boxMoveSpeed;
-					boxMoveSpeed = boxMoveValue / GameTime().GetFrameDeltaTime();
+					boxMoveSpeed = boxMoveValue;
+						// GameTime().GetFrameDeltaTime();
+					m_Bedspeed += boxMoveSpeed;
+				}
+			});
+			return true;
+		});
+
+		QueryGOs<MoveBed>("MoveBed2", [&](MoveBed* move) {
+			CPhysicsGhostObject* ghostObj = move->GetGhost();
+			PhysicsWorld().ContactTest(m_charaCon, [&](const btCollisionObject& contactObject) {
+				if (ghostObj->IsSelf(contactObject) == true) {
+					//このフレームのボックスの移動量を計算
+					CVector3 boxMoveValue;
+					boxMoveValue = move->GetPosition() - move->GetLastPos();
+					//ボックスの移動速度を求める
+					CVector3 boxMoveSpeed;
+					boxMoveSpeed = boxMoveValue;
+					// GameTime().GetFrameDeltaTime();
 					m_Bedspeed += boxMoveSpeed;
 				}
 			});
