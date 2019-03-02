@@ -13,6 +13,11 @@ public:
 	{
 		m_position = pos;
 	}
+	//レベルで設定した大きさを代入する。
+	void SetScale(const CVector3& scale)
+	{
+		m_scale = scale;
+	}
 	// プレイヤーの場所を返す関数。
 	CVector3 GetPosition() const
 	{
@@ -40,5 +45,7 @@ private:
 	CVector3 m_lastFramepos = m_position;
 	CPhysicsStaticObject m_StaticObject;
 	CPhysicsGhostObject m_GhostObject;
+	//レベルデザイン用のスケールを足しました
+	CVector3 m_scale = CVector3::Zero;
 };
 

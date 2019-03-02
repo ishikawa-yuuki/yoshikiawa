@@ -76,6 +76,7 @@ void Human::Move()
 			diff.y = 0.0f;
 			if (diff.LengthSq() <= 105.0f * 105.0f) {//ƒvƒŒƒCƒ„[‚Æ‹ß‚¯‚ê‚Îhuman‚ÍŽ~‚Ü‚é
 				m_movespeed = CVector3::Zero;
+				m_movespeed += m_Bedspeed;
 			}
 			else {
 				auto humanspeed = 30.0f;
@@ -90,9 +91,11 @@ void Human::Move()
 					diff*=-40.0f;//-‚¾‚Æ‹ß‚Ã‚­+‚È‚ç‰“‚Ì‚­
 					m_movespeed = diff;
 					m_movespeed = m_movespeed * humanspeed;// *GameTime().GetFrameDeltaTime();
+					m_movespeed += m_Bedspeed;
 				}
 				else {//player‚Æ—£‚ê‚·‚¬‚¸‹ß‚·‚¬‚È‚¢‚Æ‚«‚Ìˆ—
 					m_movespeed = m_movespeed * humanspeed;// *GameTime().GetFrameDeltaTime();
+					m_movespeed += m_Bedspeed;
 				}
 			}
 		}

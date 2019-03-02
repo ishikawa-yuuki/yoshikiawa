@@ -52,17 +52,21 @@ bool Game::Start()
 			MoveBed* movebed = NewGO<MoveBed>(0,"MoveBed1");
 			//m_movebed = NewGO<MoveBed>(0, "MoveBed");
 			movebed->SetPosition(objdata.position);
+			movebed->SetScale(objdata.scale);
 			m_moveBedList.push_back(movebed);
 			return true;
 		}
 		//“®‚­°‚Í2í—Ş‚ ‚éAMoveBed2‚Í‘OŒãˆÚ“®‚·‚é‚à‚Ì
 		if (objdata.EqualObjectName(L"MoveBed2")) {
 			MoveBed* movebed2 = NewGO<MoveBed>(0, "MoveBed2");
-			//m_movebed = NewGO<MoveBed>(0, "MoveBed2");
+			//m_movebed = NewGO<MoveBed>(0,"MoveBed2");
 			movebed2->SetPosition(objdata.position);
+			movebed2->SetScale(objdata.scale);
 			m_moveBedList2.push_back(movebed2);
 			return true;
+
 		}
+		return false;
 	});
 	m_fade->StartFadeIn();
 	return true;

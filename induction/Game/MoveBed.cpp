@@ -15,16 +15,17 @@ bool MoveBed::Start()
 {
 	m_skin = NewGO<prefab::CSkinModelRender>(0);
 	m_skin->Init(L"modelData/MoveBed/MoveBed.cmo");
-	m_skin->SetScale({ 20.0f,20.0f,20.0f });//Žv‚Á‚½‚æ‚è¬‚³‚©‚Á‚½‚Ì‚Å20”{
+	//m_skin->SetScale({ 20.0f,20.0f,20.0f });//Žv‚Á‚½‚æ‚è¬‚³‚©‚Á‚½‚Ì‚Å20”{
+	m_skin->SetScale(m_scale);//GameƒNƒ‰ƒX‚©‚ç‘å‚«‚³‚ð“n‚³‚ê‚Ä‚¢‚Ü‚·
 	m_StaticObject.CreateBox(
 		m_ppos,
 		CQuaternion::Identity,
-		{400.0f, 100.0f, 300.0f}
+		{600.0f, 100.0f, 450.0f}
 	);
 	m_GhostObject.CreateBox(
 		m_ppos,
 		CQuaternion::Identity,
-		{ 405.0f, 105.0f, 295.0f }
+		{ 605.0f, 15.0f, 455.0f }
 	);
 	return true;
 }
