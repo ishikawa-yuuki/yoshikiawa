@@ -38,11 +38,11 @@ public:
 		return m_damege;
 	}
 private:
+	/*ポインタ群*/
 	Fade * m_fade = nullptr;
 	Human * m_human;
 	Player* m_player;
 	Enemy* m_enemy;
-	MoveBed* m_movebed;
 	BackGround* m_background;
 	GameCamera * m_gamecamera;
 	Light_Object* m_lightobject;
@@ -64,5 +64,11 @@ private:
 	pose m_state = retire;
 	bool m_Gamesyuuryou = false;
 	bool m_damege = false;
+
+	//level
+	CLevel m_level;
+	//可変長配列
+	std::vector<MoveBed*> m_moveBedList;
+	std::vector<MoveBed*> m_moveBedList2;
 };
 

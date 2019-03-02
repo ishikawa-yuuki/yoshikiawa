@@ -120,6 +120,7 @@ void GameCamera::Hutu()
 	//toPos.z = r * sin(radianx);
 }
 
+//今は使えないfollow関数、
 void GameCamera::follow()
 {
 	//プレイヤーに追従するばねカメラ

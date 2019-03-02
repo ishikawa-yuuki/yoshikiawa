@@ -38,6 +38,7 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyMoveLoop.cpp" />
     <ClCompile Include="Path.cpp" />
+    <ClCompile Include="Stage_Number.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -64,6 +65,7 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyMoveLoop.h" />
     <ClInclude Include="Path.h" />
+    <ClInclude Include="Stage_Number.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc">

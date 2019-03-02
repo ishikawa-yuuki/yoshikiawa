@@ -12,6 +12,10 @@ public:
 	void InitPointLight();
 	void Dirlight();
 	void housenlight();
+	void SetPosition(const CVector3& pos) 
+	{
+		m_position = pos;
+	}
 private:
 	prefab::CSkinModelRender* m_skinModelRender = nullptr;
 	//レベルデザインで設計するのでとりあえず仮

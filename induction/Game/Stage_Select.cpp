@@ -7,6 +7,7 @@
 #include "Game.h"
 #include "Fade.h"
 #include "Title.h"
+#include "Stage_Number.h"
 
 
 Stage_Select::Stage_Select()
@@ -59,6 +60,9 @@ void Stage_Select::Update()
 					 break;
 				 case 2:
 					 NewGO<Title>(0, "Title");
+					 Stage_Number* stagenum;
+					 stagenum = FindGO<Stage_Number>("Stage_Number");
+					 stagenum->IsTitle();
 					 DeleteGO(this);
 					 break;
 				 case 3:

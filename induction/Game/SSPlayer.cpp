@@ -2,7 +2,7 @@
 #include "Stage_Select.h"
 #include "SSPoint.h"
 #include "SSPlayer.h"
-
+#include "Stage_Number.h"
 
 SSPlayer::SSPlayer()
 {
@@ -15,6 +15,7 @@ SSPlayer::~SSPlayer()
 }
 bool SSPlayer::Start()
 {
+	NewGO<Stage_Number>(0,"Stage_Number");
 	m_SS = FindGO<Stage_Select>("Stage_Select");
 	m_effect = NewGO<prefab::CEffect>(0);
 	m_effect->Play(L"effect/hikari.efk");

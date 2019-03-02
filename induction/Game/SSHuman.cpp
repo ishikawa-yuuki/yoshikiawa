@@ -2,7 +2,6 @@
 #include "SSPlayer.h"
 #include "SSHuman.h"
 
-
 SSHuman::SSHuman()
 {
 }
@@ -15,7 +14,6 @@ SSHuman::~SSHuman()
 bool SSHuman::Start()
 {
 	m_ssplayer = FindGO<SSPlayer>("SSPlayer");
-
 	m_animClip[enAnimationClip_idle].Load(L"animData/unityChan/idle.tka");
 	m_animClip[enAnimationClip_walk].Load(L"animData/unityChan/walk.tka");
 	m_animClip[enAnimationClip_run].Load(L"animData/unityChan/run.tka");
@@ -44,7 +42,6 @@ void SSHuman::Update()
 
 void SSHuman::Move()
 {
-	float humanspeed = 60.0f;
 	CVector3 diff = m_position - m_ssplayer->GetPosition();
 	if (diff.LengthSq() <= 100.0f * 100.0f) {
 		m_movespeed = CVector3::Zero;
@@ -53,7 +50,7 @@ void SSHuman::Move()
 		m_movespeed = m_ssplayer->GetPosition() - m_position;
 		m_movespeed.y = 0.0f;
 		m_movespeed.Normalize();
-		m_movespeed *= diff.LengthSq() / (400.0f * 400.0f) * 12.0;
+		m_movespeed *= diff.LengthSq() / (400.0f * 400.0f) * 12.0f;
 	}
 	m_position += m_movespeed ;
 	m_skin->SetPosition(m_position);
