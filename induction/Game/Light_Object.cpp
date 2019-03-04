@@ -35,8 +35,9 @@ bool Light_Object::Start()
 	m_skinModelRender->SetPosition(m_position);
 
 	//法線マップをロード。
-	m_normalMapSRV.CreateFromDDSTextureFromFile(L"modelData/LightObject/glass05_N.dds");
-	m_specularMapSRV.CreateFromDDSTextureFromFile(L"modelData/LightObject/glass05_S.dds");
+	//今は使えなさそう。消しても問題ではない
+	//m_normalMapSRV.CreateFromDDSTextureFromFile(L"modelData/LightObject/glass05_N.dds");
+	//m_specularMapSRV.CreateFromDDSTextureFromFile(L"modelData/LightObject/glass05_S.dds");
 	//m_lnormalMapSRV.CreateFromDDSTextureFromFile(L"modelData/.dds");
 	//m_lspecularMapSRV.CreateFromDDSTextureFromFile(L"modelData/.dds");
 	return true;
@@ -91,7 +92,7 @@ void Light_Object::Dirlight()
 
 void Light_Object::housenlight()
 {
-	//正直よくわからんけど画像を読み込んで
+	//わからんけど画像を読み込んで
 	//その画像に色を足している感じがする。
 	//SRVはシェーダーリソースビューの略　スペキュラは鏡面反射光の事
 

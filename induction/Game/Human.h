@@ -3,6 +3,7 @@
 class Player;
 class Game;
 class GameOver;
+class Fade;
 class Human : public IGameObject
 {
 public:
@@ -43,6 +44,7 @@ private:
 	prefab::CSkinModelRender* m_skinModelRender = nullptr;
 	Player* m_player;
 	Game* m_game;
+	Fade* m_fade;
 	CVector3 m_position = CVector3::Zero;
 	CVector3 m_movespeed = CVector3::Zero;
 	CVector3 m_Bedspeed = CVector3::Zero;
@@ -68,5 +70,7 @@ private:
 	bool m_isGameOver = false;
 	//一回しか殺したくないのでストッパー。
 	bool m_siboustop = false;
+	//ゲームオーバーを一回だけ出すけんね
+	bool m_gameover_one = false;
 };
 

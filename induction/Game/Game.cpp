@@ -6,6 +6,7 @@
 #include "Player.h"
 #include "Enemy.h"
 #include "MoveBed.h"
+#include "MoveBed_zengo.h"
 #include "Title.h"
 #include "Light_Object.h"
 #include "GameCamera.h"
@@ -24,8 +25,8 @@ Game::~Game()
 	for (auto&moveBed : m_moveBedList) {
 		DeleteGO(moveBed);
 	}
-	for (auto&moveBed2 : m_moveBedList2) {
-		DeleteGO(moveBed2);
+	for (auto&moveBed_zengo : m_moveBed_zengoList) {
+		DeleteGO(moveBed_zengo);
 	}
 	DeleteGO(m_gamecamera);
 	DeleteGO(m_lightobject);
@@ -50,22 +51,25 @@ bool Game::Start()
 			m_lightobject->SetPosition(objdata.position);
 			return true;
 		}
-		//動く床は2種類ある、MoveBed1は横移動するもの
+		//動く床は2種類ある、MoveBedは横移動するもの
 		if (objdata.EqualObjectName(L"MoveBed1")) {
 			MoveBed* movebed = NewGO<MoveBed>(0,"MoveBed1");
 			//m_movebed = NewGO<MoveBed>(0, "MoveBed");
 			movebed->SetPosition(objdata.position);
 			movebed->SetScale(objdata.scale);
 			m_moveBedList.push_back(movebed);
+
+
 			return true;
 		}
 		//動く床は2種類ある、MoveBed2は前後移動するもの
 		if (objdata.EqualObjectName(L"MoveBed2")) {
-			MoveBed* movebed2 = NewGO<MoveBed>(0, "MoveBed2");
+			MoveBed_zengo* movebed2 = NewGO<MoveBed_zengo>(0, "MoveBed2");
 			//m_movebed = NewGO<MoveBed>(0,"MoveBed2");
 			movebed2->SetPosition(objdata.position);
 			movebed2->SetScale(objdata.scale);
-			m_moveBedList2.push_back(movebed2);
+			movebed2->SetProtPos(objdata.position);
+			m_moveBed_zengoList.push_back(movebed2);
 			return true;
 
 		}

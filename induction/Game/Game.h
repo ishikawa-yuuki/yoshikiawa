@@ -7,6 +7,7 @@ class Human;
 class Player;
 class Enemy;
 class MoveBed;
+class MoveBed_zengo;
 class Light_Object;
 class GameCamera;
 class BackGround;
@@ -69,6 +70,6 @@ private:
 	CLevel m_level;
 	//‰Â•Ï’·”z—ñ
 	std::vector<MoveBed*> m_moveBedList;
-	std::vector<MoveBed*> m_moveBedList2;
+	std::vector<MoveBed_zengo*> m_moveBed_zengoList;
 };
 

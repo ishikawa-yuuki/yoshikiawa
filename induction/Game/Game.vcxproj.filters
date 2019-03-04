@@ -39,6 +39,7 @@
     <ClCompile Include="EnemyMoveLoop.cpp" />
     <ClCompile Include="Path.cpp" />
     <ClCompile Include="Stage_Number.cpp" />
+    <ClCompile Include="MoveBed_zengo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -66,6 +67,7 @@
     <ClInclude Include="EnemyMoveLoop.h" />
     <ClInclude Include="Path.h" />
     <ClInclude Include="Stage_Number.h" />
+    <ClInclude Include="MoveBed_zengo.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc">
@@ -82,9 +84,6 @@
     <MeshContentTask Include="Assets\modelData\StageSelect\StagePoint.fbx">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\MoveBed\MoveBed.FBX">
-      <Filter>Assets\modelData</Filter>
-    </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\LightObject\mini_lanthanum.fbx">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
@@ -95,6 +94,12 @@
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\StageMap\Stage1.fbx">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\MoveBed\MoveBed2.fbx">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\MoveBed\MoveBed1.fbx">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
   </ItemGroup>

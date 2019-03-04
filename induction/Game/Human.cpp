@@ -4,6 +4,8 @@
 #include "Game.h"
 #include "GameOver.h"
 #include "MoveBed.h"
+#include "MoveBed_zengo.h"
+#include "Fade.h"
 
 Human::Human()
 {
@@ -19,6 +21,7 @@ bool Human::Start()
 {
 	m_player = FindGO<Player>("Player");
 	m_game = FindGO<Game>("Game");
+	m_fade = FindGO<Fade>("Fade");
 
 	m_animClip[enAnimationClip_idle].Load(L"animData/unityChan/idle.tka");
 	m_animClip[enAnimationClip_walk].Load(L"animData/unityChan/walk.tka");
@@ -79,7 +82,6 @@ void Human::Move()
 			diff.y = 0.0f;
 			if (diff.LengthSq() <= 105.0f * 105.0f) {//ƒvƒŒƒCƒ„[‚Æ‹ß‚¯‚ê‚Îhuman‚ÍŽ~‚Ü‚é
 				m_movespeed = CVector3::Zero;
-				//m_movespeed += m_Bedspeed;
 			}
 			else {
 				auto humanspeed = 30.0f;
@@ -94,11 +96,9 @@ void Human::Move()
 					diff*=-40.0f;//-‚¾‚Æ‹ß‚Ã‚­+‚È‚ç‰“‚Ì‚­
 					m_movespeed = diff;
 					m_movespeed = m_movespeed * humanspeed;// *GameTime().GetFrameDeltaTime();
-				//	m_movespeed += m_Bedspeed;
 				}
 				else {//player‚Æ—£‚ê‚·‚¬‚¸‹ß‚·‚¬‚È‚¢‚Æ‚«‚Ìˆ—
 					m_movespeed = m_movespeed * humanspeed;// *GameTime().GetFrameDeltaTime();
-				//	m_movespeed += m_Bedspeed;
 				}
 			}
 		}
@@ -119,7 +119,7 @@ void Human::Move()
 	else {
 		m_movespeed.y -= 10000.0f*GameTime().GetFrameDeltaTime();
 	}
-	
+	//“®‚­°‚ÆŽ©•ª‚ÌƒXƒs[ƒh‚ð‘«‚·B
 	CVector3 pos = m_movespeed + m_Bedspeed;
 	m_position = m_charaCon.Execute(pos, GameTime().GetFrameDeltaTime());
 	
@@ -129,7 +129,7 @@ void Human::Turn()
 {
 	if (!m_isDead) {
 		if (fabsf(m_movespeed.x) <= 0.001f    //fabsf‚Íâ‘Î’lBm_movespeed.x&m_movespeedz‚ª
-			&&fabsf(m_movespeed.z <= 0.001f)) {//0.001ˆÈ‰º‚ÌŽž‚É‚Í‰½‚à‚µ‚È‚¢B
+			&&fabsf(m_movespeed.z)<= 0.001f) {//0.001ˆÈ‰º‚ÌŽž‚É‚Í‰½‚à‚µ‚È‚¢B
 			return;
 		}
 		else {
@@ -146,7 +146,7 @@ void Human::AnimeControll()//ƒAƒjƒ[ƒVƒ‡ƒ“‚ðŠÇ—‚·‚éŠÖ”AƒvƒŒƒCƒ„[‚ÌƒXƒs[ƒh‚
 		const float run_true = 100.0f*100.0f;
 		const float walk_true = 10.0f*10.0f;
 	//	m_movespeed.y = 0.0f;
-		if (m_position.y <= -100.0f) {
+		if (m_position.y <= -200.0f) {
 			m_isDead = true;
 		}
 		else if (m_movespeed.LengthSq() > run_true) {
@@ -186,10 +186,20 @@ void Human::isDead()
 		else {
 			//Ž€–SŽž‚ÌƒAƒjƒ[ƒVƒ‡ƒ“‚ªI‚í‚Á‚½‚çGameOverƒNƒ‰ƒX‚Ö
 			if (m_skinModelRender->IsPlayingAnimation() == false
-				&& m_isGameOver != true) {
+				&& m_isGameOver != true
+				) {
+				//‚±‚±‚ÅˆÃ“]
 				m_isGameOver = true;
-				//m_skinModelRender->PlayAnimation(enAnimationClip_clear, 0.2f);
+				m_fade->StartFadeOut();
+				
+			}
+		}
+	}
+	if (!m_fade->IsFade()) {
+		if (m_isGameOver) {
+			if (!m_gameover_one) {
 				NewGO<GameOver>(0);
+				m_gameover_one = true;
 			}
 		}
 	}
@@ -214,7 +224,7 @@ void Human::Hanntei()
 			return true;
 		});
 
-		QueryGOs<MoveBed>("MoveBed2", [&](MoveBed* move) {
+		QueryGOs<MoveBed_zengo>("MoveBed2", [&](MoveBed_zengo* move) {
 			CPhysicsGhostObject* ghostObj = move->GetGhost();
 			PhysicsWorld().ContactTest(m_charaCon, [&](const btCollisionObject& contactObject) {
 				if (ghostObj->IsSelf(contactObject) == true) {
