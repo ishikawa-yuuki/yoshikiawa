@@ -1,46 +1,46 @@
 #include "stdafx.h"
-#include "MoveBed.h"
+#include "MoveBed_zengo.h"
 
 
-MoveBed::MoveBed()
+MoveBed_zengo::MoveBed_zengo()
 {
 }
 
 
-MoveBed::~MoveBed()
+MoveBed_zengo::~MoveBed_zengo()
 {
 	DeleteGO(m_skin);
 }
-bool MoveBed::Start()
+bool MoveBed_zengo::Start()
 {
 	m_skin = NewGO<prefab::CSkinModelRender>(0);
-	m_skin->Init(L"modelData/MoveBed/MoveBed1.cmo");
+	m_skin->Init(L"modelData/MoveBed/MoveBed2.cmo");
 	//m_skin->SetScale({ 20.0f,20.0f,20.0f });//思ったより小さかったので20倍
 	m_skin->SetScale(m_scale);//Gameクラスから大きさを渡されています
 	m_StaticObject.CreateBox(
 		m_ppos,
 		CQuaternion::Identity,
-		{600.0f, 100.0f, 450.0f}
+		{ 450.0f, 100.0f, 600.0f }
 	);
 	m_GhostObject.CreateBox(
 		m_ppos,
 		CQuaternion::Identity,
-		{ 605.0f, 105.0f, 455.0f }
+		{ 455.0f, 150.0f, 605.0f }
 	);
 	return true;
 }
-void MoveBed::Update()
+void MoveBed_zengo::Update()
 {
 	m_lastFramepos = m_position;
-	if (m_position.x <= m_protpos.x - 500) {
-		m_position.x = m_lastFramepos.x;
-		m_moveSpeed.x = 4.0f;
+	if (m_position.z >= m_protpos.z + 600) {
+		m_position.z = m_lastFramepos.z;
+		m_moveSpeed.z = -4.0f;
 	}
-	else if(m_position.x >= m_protpos.x + 500 ){
-		m_position.x = m_lastFramepos.x;
-		m_moveSpeed.x = -4.0f;
+	else if (m_position.z <= m_protpos.z - 600) {
+		m_position.z = m_lastFramepos.z;
+		m_moveSpeed.z = +4.0f;
 	}
-	m_position.x += m_moveSpeed.x;
+	m_position.z += m_moveSpeed.z;
 	m_ppos = m_position;//ボックス形状の調整
 	m_ppos.z += 100;
 	m_ppos.y += 70;
