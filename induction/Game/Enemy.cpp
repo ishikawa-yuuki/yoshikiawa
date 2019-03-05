@@ -41,7 +41,7 @@ void Enemy::NotifyRestart()
 void Enemy::SearchPlayer()
 {
 	CVector3 pos = m_human->GetPosition() - m_position;
-	if (pos.Length() < 400.0f) {
+	if (pos.LengthSq() < 400.0f*400.0f) {
 		//Ž‹–ìŠp‚ð”»’èB
 		pos.Normalize();
 		float angle = acosf(pos.Dot(m_forward));

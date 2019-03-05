@@ -59,7 +59,7 @@ void SSHuman::Move()
 void SSHuman::Turn()
 {
 	if (fabsf(m_movespeed.x) <= 0.001f    //fabsfは絶対値。m_movespeed.x&m_movespeedzが
-		&&fabsf(m_movespeed.z <= 0.001f)) {//0.001以下の時には何もしない。
+		&&fabsf(m_movespeed.z) <= 0.001f) {//0.001以下の時には何もしない。
 		return;
 	}
 	else {
