@@ -20,19 +20,19 @@ bool MoveBed_zengo::Start()
 	m_StaticObject.CreateBox(
 		m_ppos,
 		CQuaternion::Identity,
-		{ 450.0f, 100.0f, 600.0f }
+		{ 450.0f, 100.0f, 500.0f }
 	);
 	m_GhostObject.CreateBox(
 		m_ppos,
 		CQuaternion::Identity,
-		{ 455.0f, 150.0f, 605.0f }
+		{ 455.0f, 105.0f, 505.0f }
 	);
 	return true;
 }
 void MoveBed_zengo::Update()
 {
 	m_lastFramepos = m_position;
-	if (m_position.z >= m_protpos.z + 600) {
+	if (m_position.z >= m_protpos.z) {
 		m_position.z = m_lastFramepos.z;
 		m_moveSpeed.z = -4.0f;
 	}
@@ -42,10 +42,11 @@ void MoveBed_zengo::Update()
 	}
 	m_position.z += m_moveSpeed.z;
 	m_ppos = m_position;//ボックス形状の調整
-	m_ppos.z += 100;
-	m_ppos.y += 70;
-	m_ppos.x -= 50;
+	m_ppos.x += 50;
+	m_ppos.y += 50;
+	m_ppos.z += 50;
 	m_skin->SetPosition(m_position);
 	m_StaticObject.SetPositionAndRotation(m_ppos, CQuaternion::Identity);
 	m_GhostObject.SetPosition(m_ppos);
 }
+

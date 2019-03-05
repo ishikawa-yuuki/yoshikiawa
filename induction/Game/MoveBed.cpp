@@ -42,9 +42,9 @@ void MoveBed::Update()
 	}
 	m_position.x += m_moveSpeed.x;
 	m_ppos = m_position;//ボックス形状の調整
-	m_ppos.z += 100;
-	m_ppos.y += 70;
-	m_ppos.x -= 50;
+	//m_ppos.z += 100;
+	//m_ppos.y += 70;
+	//m_ppos.x -= 50;
 	m_skin->SetPosition(m_position);
 	m_StaticObject.SetPositionAndRotation(m_ppos, CQuaternion::Identity);
 	m_GhostObject.SetPosition(m_ppos);

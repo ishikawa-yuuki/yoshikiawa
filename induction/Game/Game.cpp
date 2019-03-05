@@ -11,6 +11,8 @@
 #include "Light_Object.h"
 #include "GameCamera.h"
 #include "BackGround.h"
+#include "Exit.h"
+
 Game::Game()
 {
 }
@@ -22,6 +24,7 @@ Game::~Game()
 	DeleteGO(m_human);
 	DeleteGO(m_enemy);
 	DeleteGO(m_background);
+	DeleteGO(m_exit);
 	for (auto&moveBed : m_moveBedList) {
 		DeleteGO(moveBed);
 	}
@@ -41,9 +44,10 @@ bool Game::Start()
 	m_fade = FindGO<Fade>("Fade");
 
 
-	m_level.Init(L"level/level_Stage01.tkl", [&](LevelObjectData& objdata) {
+	m_level.Init(L"level/level_Stage1_sisaku.tkl", [&](LevelObjectData& objdata) {
 		if (objdata.EqualObjectName(L"Stage1")) {
-			m_background = NewGO<BackGround>(0, "BackGround");
+			m_background = NewGO<BackGround
+			>(0, "BackGround");
 			return true;
 		}
 		if (objdata.EqualObjectName(L"lanthanum")) {
@@ -58,8 +62,6 @@ bool Game::Start()
 			movebed->SetPosition(objdata.position);
 			movebed->SetScale(objdata.scale);
 			m_moveBedList.push_back(movebed);
-
-
 			return true;
 		}
 		//動く床は2種類ある、MoveBed2は前後移動するもの
@@ -71,7 +73,14 @@ bool Game::Start()
 			movebed2->SetProtPos(objdata.position);
 			m_moveBed_zengoList.push_back(movebed2);
 			return true;
-
+		}
+		//オブジェクトねーーむ確認
+		if (objdata.EqualObjectName(L"Goal")) {
+			m_exit = NewGO<Exit>(0, "Exit");
+			m_exit->SetPosition(objdata.position);
+			m_exit->SetQrot(objdata.rotation);
+			m_exit->SetScale(objdata.scale);
+			return true;
 		}
 		return false;
 	});

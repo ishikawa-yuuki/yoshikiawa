@@ -11,6 +11,7 @@ class MoveBed_zengo;
 class Light_Object;
 class GameCamera;
 class BackGround;
+class Exit;
 class Game : public IGameObject
 {
 public:
@@ -47,7 +48,9 @@ private:
 	BackGround* m_background;
 	GameCamera * m_gamecamera;
 	Light_Object* m_lightobject;
+	Exit* m_exit;
 
+	prefab::CSkinModelRender* m_goal = nullptr;
 	prefab::CSpriteRender* m_sprite_Retire = nullptr;
 	prefab::CSpriteRender* m_sprite_toGame = nullptr;
 	prefab::CSpriteRender* m_sprite_arrow = nullptr;

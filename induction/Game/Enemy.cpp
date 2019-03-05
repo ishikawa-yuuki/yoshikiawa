@@ -16,6 +16,7 @@ bool Enemy::Start()
 	m_human = FindGO<Human>("Human");
 	m_game = FindGO<Game>("Game");
 
+
 	m_animClip[enAnimationClip_idle].Load(L"animData/unityChan/idle.tka");
 	m_animClip[enAnimationClip_walk].Load(L"animData/unityChan/walk.tka");
 	//アニメクリップをすべてロード、全部使う必要は特にないです。
@@ -25,7 +26,7 @@ bool Enemy::Start()
 		m_animClip[i].SetLoopFlag(true);
 	}
 	m_skin = NewGO<prefab::CSkinModelRender>(0);
-	m_skin->Init(L"modelData/unityChan.cmo", m_animClip, enAnimationClip_num, enFbxUpAxisY);
+	m_skin->Init(L"modelData/BlackUnityChan.cmo", m_animClip, enAnimationClip_num, enFbxUpAxisY);
 	m_charaCon.Init(
 		20.0f,
 		30.0f,

@@ -101,7 +101,7 @@ void GameCamera::Hutu()
 	qRot.SetRotation(rotAxis, m_radiany);
 	qRot.Multiply(ToPos);
 	ToPos *= m_r;
-	m_position = m_target + ToPos * 2.0f;
+	m_position = m_target + ToPos * 1.75f;
 
 	/*ps = toPos / r;
 	CVector3 rotAxis3;
