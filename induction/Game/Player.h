@@ -3,6 +3,7 @@
 #include "tkEngine/character/tkCharacterController.h"
 #include "tkEngine/light/tkPointLight.h"
 class GameCamera;
+class Human;
 class Player : public IGameObject
 {
 private:
@@ -48,6 +49,7 @@ private:
 	CVector3 m_moveSpeed = CVector3::Zero;
 	prefab::CEffect* m_effect;
 	GameCamera* m_gamecamera = nullptr;
+	Human* m_human = nullptr;
 	CCharacterController m_charaCon;
 	prefab::CPointLight* m_ptLight = nullptr;
 };

@@ -34,6 +34,11 @@ public:
 	{
 		return m_isDead;
 	}
+	//クリアしたかどうかを返す関数
+	bool GetisClear()const
+	{
+		return m_Clear_one;
+	}
 	//ゲームオーバーかどうか返す関数
 	bool GetisGameOver()const {
 		return m_isGameOver;
