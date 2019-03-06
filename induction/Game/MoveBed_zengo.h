@@ -38,6 +38,11 @@ public:
 	{
 		return &m_GhostObject;
 	}
+	//この関数が呼ばれると処理が変わる。
+	bool isLongFrag() {
+		m_islong = true;
+		return m_islong;
+	}
 private:
 	prefab::CSkinModelRender* m_skin = nullptr;
 	CVector3 m_position = { 0.0f, 0.0f, -900.0f };
@@ -52,4 +57,6 @@ private:
 	CPhysicsGhostObject m_GhostObject;
 	//レベルデザイン用のスケールを足しました
 	CVector3 m_scale = CVector3::Zero;
+	//移動する距離が長いか判定
+	bool m_islong = false;
 };

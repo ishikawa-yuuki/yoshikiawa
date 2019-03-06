@@ -78,5 +78,6 @@ private:
 	CAnimationClip m_animClip[enAnimationClip_num];
 	CCharacterController m_charaCon;
 	bool m_isFindPlayer = false;
+  
 };
 

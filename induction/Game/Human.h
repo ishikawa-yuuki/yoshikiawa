@@ -4,6 +4,7 @@ class Player;
 class Game;
 class GameOver;
 class Fade;
+class Light_Object;
 class Human : public IGameObject
 {
 public:
@@ -13,9 +14,14 @@ public:
 	void Update();
 	void Move();
 	void Turn();
-	void AnimeControll();//プレイヤーのアニメの変更
-	void isDead();//やったか！を判定する
+	//プレイヤーのアニメの変更
+	void AnimeControll();
+	//やったか！を判定する
+	void isDead();
+	//動く床の判定
 	void Hanntei();
+	//クリアかどうか
+	void isClear();
 
 	/*void PostRender(CRenderContext& rc);*/
 
@@ -45,6 +51,7 @@ private:
 	Player* m_player;
 	Game* m_game;
 	Fade* m_fade;
+	Light_Object* m_lightObject;
 	CVector3 m_position = CVector3::Zero;
 	CVector3 m_movespeed = CVector3::Zero;
 	CVector3 m_Bedspeed = CVector3::Zero;
@@ -72,5 +79,7 @@ private:
 	bool m_siboustop = false;
 	//ゲームオーバーを一回だけ出すけんね
 	bool m_gameover_one = false;
+	//ゲームクリアも一回だけ。
+	bool m_Clear_one = false;
 };
 

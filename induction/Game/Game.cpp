@@ -39,20 +39,18 @@ bool Game::Start()
 {
 	m_player = NewGO<Player>(0, "Player");
 	m_human = NewGO<Human>(0, "Human");
-	m_enemy = NewGO<Enemy>(0, "Enemy");
 	m_gamecamera = NewGO<GameCamera>(0, "GameCamera");
 	m_fade = FindGO<Fade>("Fade");
 
 
 	m_level.Init(L"level/level_Stage1_sisaku.tkl", [&](LevelObjectData& objdata) {
 		if (objdata.EqualObjectName(L"Stage1")) {
-			m_background = NewGO<BackGround
-			>(0, "BackGround");
+			m_background = NewGO<BackGround>(0, "BackGround");
 			return true;
 		}
 		if (objdata.EqualObjectName(L"lanthanum")) {
 			m_lightobject = NewGO<Light_Object>(0, "LightObject");
-			m_lightobject->SetPosition(objdata.position);
+			m_lightobject->SetPosition(objdata.position);//試験したいなら{0,0,0}
 			return true;
 		}
 		//動く床は2種類ある、MoveBedは横移動するもの
@@ -74,12 +72,30 @@ bool Game::Start()
 			m_moveBed_zengoList.push_back(movebed2);
 			return true;
 		}
+		//MoveBed2_longは移動距離が長くなる。
+		if (objdata.EqualObjectName(L"MoveBed2_long")) {
+			MoveBed_zengo* movebed2_long = NewGO<MoveBed_zengo>(0, "MoveBed2");
+			//m_movebed = NewGO<MoveBed>(0,"MoveBed2");
+			movebed2_long->SetPosition(objdata.position);
+			movebed2_long->SetScale(objdata.scale);
+			movebed2_long->SetProtPos(objdata.position);
+			movebed2_long->isLongFrag();
+			m_moveBed_zengoList.push_back(movebed2_long);
+			return true;
+		}
 		//オブジェクトねーーむ確認
 		if (objdata.EqualObjectName(L"Goal")) {
 			m_exit = NewGO<Exit>(0, "Exit");
 			m_exit->SetPosition(objdata.position);
 			m_exit->SetQrot(objdata.rotation);
 			m_exit->SetScale(objdata.scale);
+			return true;
+		}
+		//黒エネミー、黒ユニティ
+		if (objdata.EqualObjectName(L"BlackUnityChan")) {
+			m_enemy = NewGO<Enemy>(0, "Enemy");
+			m_enemy->SetPosition(objdata.position);
+			m_enemy->SetRotation(objdata.rotation);
 			return true;
 		}
 		return false;

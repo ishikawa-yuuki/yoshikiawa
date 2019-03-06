@@ -6,6 +6,7 @@
 #include "MoveBed.h"
 #include "MoveBed_zengo.h"
 #include "Fade.h"
+#include "Light_Object.h"
 
 Human::Human()
 {
@@ -22,6 +23,7 @@ bool Human::Start()
 	m_player = FindGO<Player>("Player");
 	m_game = FindGO<Game>("Game");
 	m_fade = FindGO<Fade>("Fade");
+	m_lightObject = FindGO<Light_Object>("LightObject");
 
 	m_animClip[enAnimationClip_idle].Load(L"animData/unityChan/idle.tka");
 	m_animClip[enAnimationClip_walk].Load(L"animData/unityChan/walk.tka");
@@ -66,6 +68,7 @@ void Human::Update()
 	Hanntei();
 	CVector3 Pos = m_position + m_Bedspeed;
 	isDead();
+	isClear();
 	m_charaCon.SetPosition(Pos);
 	m_skinModelRender->SetPosition(Pos);
 }
@@ -143,21 +146,23 @@ void Human::Turn()
 void Human::AnimeControll()//アニメーションを管理する関数、プレイヤーのスピードで変わる。
 {
 	if (!m_isDead) {
-		const float run_true = 100.0f*100.0f;
-		const float walk_true = 10.0f*10.0f;
-	//	m_movespeed.y = 0.0f;
-		if (m_position.y <= -200.0f) {
-			m_isDead = true;
+		if (!m_Clear_one) {
+			const float run_true = 100.0f*100.0f;
+			const float walk_true = 10.0f*10.0f;
+			//	m_movespeed.y = 0.0f;
+			if (m_position.y <= -200.0f) {
+				m_isDead = true;
+			}
+			else if (m_movespeed.LengthSq() > run_true) {
+				m_skinModelRender->PlayAnimation(enAnimationClip_run, 0.2);
+			}
+			else if (m_movespeed.LengthSq() > walk_true) {
+				m_skinModelRender->PlayAnimation(enAnimationClip_walk, 0.2);
+			}
+			else {
+				m_skinModelRender->PlayAnimation(enAnimationClip_idle, 0.2);
+			}
 		}
-		else if (m_movespeed.LengthSq() > run_true) {
-			m_skinModelRender->PlayAnimation(enAnimationClip_run, 0.2);
-		}
-		else if (m_movespeed.LengthSq() > walk_true) {
-			m_skinModelRender->PlayAnimation(enAnimationClip_walk, 0.2);
-		}
-		else {
-			m_skinModelRender->PlayAnimation(enAnimationClip_idle, 0.2);
-		}   
 	}
 }
 
@@ -240,4 +245,15 @@ void Human::Hanntei()
 			});
 			return true;
 		});
+}
+
+void Human::isClear()
+{
+	CVector3 diff = m_position - m_lightObject->GetPosition();
+	diff.y = 0.0f;
+	if (diff.LengthSq() < 200.0f*200.0f
+		&&!m_Clear_one) {
+		m_skinModelRender->PlayAnimation(enAnimationClip_clear,0.2f);
+		m_Clear_one = true;
+	}
 }

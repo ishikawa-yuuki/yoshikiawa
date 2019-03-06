@@ -12,9 +12,15 @@ public:
 	void InitPointLight();
 	void Dirlight();
 	void housenlight();
+	//ポジションをレベルで入れる。
 	void SetPosition(const CVector3& pos) 
 	{
 		m_position = pos;
+	}
+	//今のポジションの値を返す。
+	CVector3 GetPosition()const
+	{
+		return m_position;
 	}
 private:
 	prefab::CSkinModelRender* m_skinModelRender = nullptr;
