@@ -59,4 +59,5 @@ private:
 	CVector3 m_scale = CVector3::Zero;
 	//ˆÚ“®‚·‚é‹——£‚ª’·‚¢‚©”»’è
 	bool m_islong = false;
+	int m_timer;
 };

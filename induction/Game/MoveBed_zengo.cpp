@@ -20,12 +20,12 @@ bool MoveBed_zengo::Start()
 	m_StaticObject.CreateBox(
 		m_ppos,
 		CQuaternion::Identity,
-		{ 450.0f, 100.0f, 500.0f }
+		{ 430.0f, 80.0f, 300.0f }
 	);
 	m_GhostObject.CreateBox(
 		m_ppos,
 		CQuaternion::Identity,
-		{ 455.0f, 105.0f, 505.0f }
+		{ 435.0f, 85.0f, 305.0f }
 	);
 	return true;
 }
