@@ -33,15 +33,21 @@ void MoveBed_zengo::Update()
 {
 	if (!m_islong) {
 		m_lastFramepos = m_position;
-		if (m_position.z >= m_protpos.z) {
+		if (m_timer >= 60) {
+			m_position.z += m_moveSpeed.z;
+		}
+
+		if (m_position.z >= m_protpos.z +350) {
 			m_position.z = m_lastFramepos.z;
 			m_moveSpeed.z = -4.0f;
+			m_timer = 0;
 		}
-		else if (m_position.z <= m_protpos.z - 600) {
+		else if (m_position.z <= m_protpos.z - 950) {
 			m_position.z = m_lastFramepos.z;
 			m_moveSpeed.z = +4.0f;
+			m_timer = 0;
 		}
-		m_position.z += m_moveSpeed.z;
+		m_timer++;
 		m_ppos = m_position;//ボックス形状の調整
 		//m_ppos.x += 50;
 		m_ppos.y += 50;
@@ -52,15 +58,22 @@ void MoveBed_zengo::Update()
 	}
 	else if (m_islong) {
 		m_lastFramepos = m_position;
-		if (m_position.z >= m_protpos.z) {
+		if (m_timer >= 60) {
+			m_position.z += m_moveSpeed.z;
+		}
+
+		if (m_position.z >= m_protpos.z+500) {
 			m_position.z = m_lastFramepos.z;
 			m_moveSpeed.z = -4.0f;
+			m_timer = 0;
 		}
-		else if (m_position.z <= m_protpos.z - 1200) {
+		else if (m_position.z <= m_protpos.z - 1600) {
 			m_position.z = m_lastFramepos.z;
 			m_moveSpeed.z = +4.0f;
+			m_timer = 0;
 		}
-		m_position.z += m_moveSpeed.z;
+
+		m_timer++;
 		m_ppos = m_position;//ボックス形状の調整
 							//m_ppos.x += 50;
 		m_ppos.y += 50;

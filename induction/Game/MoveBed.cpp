@@ -20,12 +20,12 @@ bool MoveBed::Start()
 	m_StaticObject.CreateBox(
 		m_ppos,
 		CQuaternion::Identity,
-		{430.0f, 70.0f, 300.0f}
+		{430.0f, 80.0f, 300.0f}
 	);
 	m_GhostObject.CreateBox(
 		m_ppos,
 		CQuaternion::Identity,
-		{ 435.0f, 75.0f, 305.0f }
+		{ 435.0f, 85.0f, 305.0f }
 	);
 	return true;
 }
@@ -35,12 +35,12 @@ void MoveBed::Update()
 	if (m_timer >= 60) {
 		m_position.x += m_moveSpeed.x;
 	}
-	if (m_position.x <= m_protpos.x - 500) {
+	if (m_position.x <= m_protpos.x - 850) {
 		m_position.x = m_lastFramepos.x;
 		m_moveSpeed.x = 4.0f;
 		m_timer = 0;
 	}
-	else if(m_position.x >= m_protpos.x + 500 ){
+	else if(m_position.x >= m_protpos.x + 900 ){
 		m_position.x = m_lastFramepos.x;
 		m_moveSpeed.x = -4.0f;
 		m_timer = 0;
@@ -48,7 +48,7 @@ void MoveBed::Update()
 	m_timer++;
 	m_ppos = m_position;//ボックス形状の調整
 	//m_ppos.z += 100;
-	m_ppos.y += 70;
+	m_ppos.y += 15;
 	//m_ppos.x -= 50;
 	m_skin->SetPosition(m_position);
 	m_StaticObject.SetPositionAndRotation(m_ppos, CQuaternion::Identity);

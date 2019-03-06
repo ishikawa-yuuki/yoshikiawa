@@ -60,7 +60,7 @@ void Enemy::Move()
 	case State1:
 		timer++;
 		m_movespeed.x = MOVE_SPEED;
-		if (timer == 300) {
+		if (timer == 450) {
 			timer = 0;
 			m_movespeed = CVector3::Zero;
 			m_state = State2;
@@ -70,7 +70,7 @@ void Enemy::Move()
 	case State2:
 		timer++;
 		m_movespeed.z = MOVE_SPEED;
-		if (timer == 100) {
+		if (timer == 500) {
 			timer = 0;
 			m_movespeed = CVector3::Zero;
 			m_state = State3;
@@ -79,7 +79,7 @@ void Enemy::Move()
 	case State3:
 		timer++;
 		m_movespeed.x = -MOVE_SPEED;
-		if (timer == 300) {
+		if (timer == 450) {
 			timer = 0;
 			m_movespeed = CVector3::Zero;
 			m_state = State4;
@@ -88,7 +88,7 @@ void Enemy::Move()
 	case State4:
 		timer++;
 		m_movespeed.z = -MOVE_SPEED;
-		if (timer == 100) {
+		if (timer == 500) {
 			timer = 0;
 			m_movespeed = CVector3::Zero;
 			m_state = State1;
