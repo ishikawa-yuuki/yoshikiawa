@@ -7,6 +7,7 @@
 #include "MoveBed_zengo.h"
 #include "Fade.h"
 #include "Light_Object.h"
+#include "Stage_Select.h"
 
 Human::Human()
 {
@@ -77,55 +78,56 @@ void Human::Move()
 {
 	const int light_Yellow = 0;
 	const int light_Red = 1;
-	if (m_player->GetColor() == light_Yellow) {
-		//死なない時の普通の処理
-		if (!m_isDead) {
-			CVector3 diff = m_position - m_player->GetPosition();
-			//Yの数値は除外
-			diff.y = 0.0f;
-			if (diff.LengthSq() <= 105.0f * 105.0f) {//プレイヤーと近ければhumanは止まる
+	if (!m_Clear_one) {
+		if (m_player->GetColor() == light_Yellow) {
+			//死なない時の普通の処理
+			if (!m_isDead) {
+				CVector3 diff = m_position - m_player->GetPosition();
+				//Yの数値は除外
+				diff.y = 0.0f;
+				if (diff.LengthSq() <= 105.0f * 105.0f) {//プレイヤーと近ければhumanは止まる
+					m_movespeed = CVector3::Zero;
+				}
+				else {
+					auto humanspeed = 30.0f;
+					m_movespeed = m_player->GetPosition() - m_position;
+					m_movespeed.y = 0.0f;
+					m_movespeed.Normalize();
+
+					m_movespeed *= diff.LengthSq() / (400.0f * 400.0f) * 12.0f;
+					if (diff.LengthSq() >= 800.0f*800.0f) {//プレイヤーと離れすぎたときにだせるmovespeedの最高速
+						diff.y = 0.0f;
+						diff.Normalize();
+						diff *= -40.0f;//-だと近づく+なら遠のく
+						m_movespeed = diff;
+						m_movespeed = m_movespeed * humanspeed;// *GameTime().GetFrameDeltaTime();
+					}
+					else {//playerと離れすぎず近すぎないときの処理
+						m_movespeed = m_movespeed * humanspeed;// *GameTime().GetFrameDeltaTime();
+					}
+				}
+			}
+			else
+			{
+				//死んだときの処理
 				m_movespeed = CVector3::Zero;
 			}
-			else {
-				auto humanspeed = 30.0f;
-				m_movespeed = m_player->GetPosition() - m_position;
-				m_movespeed.y = 0.0f;
-				m_movespeed.Normalize();
-				
-				m_movespeed *= diff.LengthSq() / (400.0f * 400.0f) * 12.0f;
-				if (diff.LengthSq() >= 800.0f*800.0f) {//プレイヤーと離れすぎたときにだせるmovespeedの最高速
-					diff.y = 0.0f;
-					diff.Normalize();
-					diff*=-40.0f;//-だと近づく+なら遠のく
-					m_movespeed = diff;
-					m_movespeed = m_movespeed * humanspeed;// *GameTime().GetFrameDeltaTime();
-				}
-				else {//playerと離れすぎず近すぎないときの処理
-					m_movespeed = m_movespeed * humanspeed;// *GameTime().GetFrameDeltaTime();
-				}
-			}
 		}
-		else 
-		{
-			//死んだときの処理
+		else if (m_player->GetColor() == light_Red) {//赤色になった時の処理、とりあえず止まってる
 			m_movespeed = CVector3::Zero;
+			m_movespeed.y -= 10000.0f*GameTime().GetFrameDeltaTime();
 		}
-	}
-	else if (m_player->GetColor() == light_Red) {//赤色になった時の処理、とりあえず止まってる
-		m_movespeed = CVector3::Zero;
-		m_movespeed.y -= 10000.0f*GameTime().GetFrameDeltaTime();
-	}
 
-	if (m_charaCon.IsOnGround()) {
-		m_movespeed.y = 0.0f;
-	}
-	else {
-		m_movespeed.y -= 10000.0f*GameTime().GetFrameDeltaTime();
+		if (m_charaCon.IsOnGround()) {
+			m_movespeed.y = 0.0f;
+		}
+		else {
+			m_movespeed.y -= 10000.0f*GameTime().GetFrameDeltaTime();
+		}
 	}
 	//動く床と自分のスピードを足す。
 	CVector3 pos = m_movespeed + m_Bedspeed;
 	m_position = m_charaCon.Execute(pos, GameTime().GetFrameDeltaTime());
-	
 }
 
 void Human::Turn()
@@ -142,8 +144,9 @@ void Human::Turn()
 		m_skinModelRender->SetRotation(m_qrot);
 	}
 }
-
-void Human::AnimeControll()//アニメーションを管理する関数、プレイヤーのスピードで変わる。
+//アニメーションを管理する関数、プレイヤーのスピードで変わる。
+//クリアとゲームオーバーの時は機能しない。
+void Human::AnimeControll()
 {
 	if (!m_isDead) {
 		if (!m_Clear_one) {
@@ -179,24 +182,26 @@ void Human::isDead()
 {
 	if (!m_game->GetifPose()) {//!= true修正
 		//敵もギミックもないので今のところはボタン押すだけで死ぬスペランカーです。
-		if (!m_siboustop) {
-			if (Pad(0).IsTrigger(enButtonB)
-				||m_isDead) {
-				m_siboustop = true;
-				m_isDead = true; //これがtrueになれば死
-				m_game->GetDamage();//gameクラスにダメージ中であることを知らせている。死んでるけど・・・
-				m_skinModelRender->PlayAnimation(enAnimationClip_KneelDown, 0.2f);
+		if (!m_Clear_one) {//クリア状態でないなら下へ
+			if (!m_siboustop) {
+				if (Pad(0).IsTrigger(enButtonB)
+					|| m_isDead) {
+					m_siboustop = true;
+					m_isDead = true; //これがtrueになれば死
+					m_game->GetDamage();//gameクラスにダメージ中であることを知らせている。死んでるけど・・・
+					m_skinModelRender->PlayAnimation(enAnimationClip_KneelDown, 0.2f);
+				}
 			}
-		}
-		else {
-			//死亡時のアニメーションが終わったらGameOverクラスへ
-			if (m_skinModelRender->IsPlayingAnimation() == false
-				&& m_isGameOver != true
-				) {
-				//ここで暗転
-				m_isGameOver = true;
-				m_fade->StartFadeOut();
-				
+			else {
+				//死亡時のアニメーションが終わったらGameOverクラスへ
+				if (m_skinModelRender->IsPlayingAnimation() == false
+					&& m_isGameOver != true
+					) {
+					//ここで暗転
+					m_isGameOver = true;
+					m_fade->StartFadeOut();
+
+				}
 			}
 		}
 	}
@@ -209,6 +214,7 @@ void Human::isDead()
 		}
 	}
 }
+//動くオブジェクトの判定
 void Human::Hanntei()
 {
 	 m_Bedspeed = CVector3::Zero;
@@ -246,14 +252,34 @@ void Human::Hanntei()
 			return true;
 		});
 }
-
+//クリアしたかどうか。
 void Human::isClear()
 {
 	CVector3 diff = m_position - m_lightObject->GetPosition();
 	diff.y = 0.0f;
-	if (diff.LengthSq() < 200.0f*200.0f
-		&&!m_Clear_one) {
-		m_skinModelRender->PlayAnimation(enAnimationClip_clear,0.2f);
-		m_Clear_one = true;
+	if (m_skinModelRender->IsPlayingAnimation() == false && m_Clear_one) {
+		m_skinModelRender->PlayAnimation(enAnimationClip_run, 0.2f);
+		m_movespeed.z -= 6000.0f * GameTime().GetFrameDeltaTime();
+		
+	}
+	else {
+		if (diff.LengthSq() < 200.0f*200.0f
+			&& !m_Clear_one) {
+			m_skinModelRender->PlayAnimation(enAnimationClip_clear, 0.2f);
+			m_Clear_one = true;
+			m_movespeed = CVector3::Zero;
+		}
+	}
+	if (m_Clear_one) {
+		m_timer += 1 * GameTime().GetFrameDeltaTime();
+		//m_timerfragつける。
+		if (m_timer >= 6.0f) {
+			m_timer = 0.0f;
+			m_game->GameOwari();
+			NewGO<Stage_Select>(0,"Stage_Select");
+		}
+		else if (m_timer >= 3.0f) {
+			m_fade->StartFadeOut();
+		}
 	}
 }

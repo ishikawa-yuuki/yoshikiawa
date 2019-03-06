@@ -81,5 +81,7 @@ private:
 	bool m_gameover_one = false;
 	//ゲームクリアも一回だけ。
 	bool m_Clear_one = false;
+	//ゲームクリアの余韻用
+	float m_timer = 0;
 };
 
