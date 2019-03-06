@@ -56,3 +56,4 @@ void MoveBed_zengo::Update()
 	m_StaticObject.SetPositionAndRotation(m_ppos, CQuaternion::Identity);
 	m_GhostObject.SetPosition(m_ppos);
 }
+

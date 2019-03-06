@@ -8,11 +8,11 @@ FBXHeaderExtension:  {
 		Version: 1000
 		Year: 2019
 		Month: 3
-		Day: 2
-		Hour: 19
-		Minute: 26
-		Second: 47
-		Millisecond: 189
+		Day: 5
+		Hour: 21
+		Minute: 53
+		Second: 14
+		Millisecond: 47
 	}
 	Creator: "FBX SDK/FBX Plugins version 2018.1"
 	SceneInfo: "SceneInfo::GlobalInfo", "UserData" {
@@ -34,13 +34,13 @@ FBXHeaderExtension:  {
 			P: "Original|ApplicationVendor", "KString", "", "", "Autodesk"
 			P: "Original|ApplicationName", "KString", "", "", "3ds Max"
 			P: "Original|ApplicationVersion", "KString", "", "", "2018"
-			P: "Original|DateTime_GMT", "DateTime", "", "", "02/03/2019 10:26:47.188"
+			P: "Original|DateTime_GMT", "DateTime", "", "", "05/03/2019 12:53:14.045"
 			P: "Original|FileName", "KString", "", "", "C:\Users\GC1831\Desktop\git\yoshikiawa\induction\Game\Assets\modelData\MoveBed\MoveBed2.fbx"
 			P: "LastSaved", "Compound", "", ""
 			P: "LastSaved|ApplicationVendor", "KString", "", "", "Autodesk"
 			P: "LastSaved|ApplicationName", "KString", "", "", "3ds Max"
 			P: "LastSaved|ApplicationVersion", "KString", "", "", "2018"
-			P: "LastSaved|DateTime_GMT", "DateTime", "", "", "02/03/2019 10:26:47.188"
+			P: "LastSaved|DateTime_GMT", "DateTime", "", "", "05/03/2019 12:53:14.045"
 			P: "Original|ApplicationActiveProject", "KString", "", "", "C:\Users\GC1831\Documents\3dsMax"
 		}
 	}
@@ -76,7 +76,7 @@ GlobalSettings:  {
 
 Documents:  {
 	Count: 1
-	Document: 2867322068704, "", "Scene" {
+	Document: 1779051696192, "", "Scene" {
 		Properties70:  {
 			P: "SourceObject", "object", "", ""
 			P: "ActiveAnimStackName", "KString", "", "", ""
@@ -206,6 +206,19 @@ Definitions:  {
 			}
 		}
 	}
+	ObjectType: "Geometry" {
+		Count: 1
+		PropertyTemplate: "FbxMesh" {
+			Properties70:  {
+				P: "Color", "ColorRGB", "Color", "",0.8,0.8,0.8
+				P: "BBoxMin", "Vector3D", "Vector", "",0,0,0
+				P: "BBoxMax", "Vector3D", "Vector", "",0,0,0
+				P: "Primary Visibility", "bool", "", "",1
+				P: "Casts Shadows", "bool", "", "",1
+				P: "Receive Shadows", "bool", "", "",1
+			}
+		}
+	}
 	ObjectType: "Material" {
 		Count: 1
 		PropertyTemplate: "FbxSurfacePhong" {
@@ -258,19 +271,6 @@ Definitions:  {
 			}
 		}
 	}
-	ObjectType: "Geometry" {
-		Count: 1
-		PropertyTemplate: "FbxMesh" {
-			Properties70:  {
-				P: "Color", "ColorRGB", "Color", "",0.8,0.8,0.8
-				P: "BBoxMin", "Vector3D", "Vector", "",0,0,0
-				P: "BBoxMax", "Vector3D", "Vector", "",0,0,0
-				P: "Primary Visibility", "bool", "", "",1
-				P: "Casts Shadows", "bool", "", "",1
-				P: "Receive Shadows", "bool", "", "",1
-			}
-		}
-	}
 	ObjectType: "AnimationCurve" {
 		Count: 3
 	}
@@ -315,9 +315,9 @@ Definitions:  {
 ;------------------------------------------------------------------
 
 Objects:  {
-	Geometry: 2867406368480, "Geometry::", "Mesh" {
+	Geometry: 1779048343712, "Geometry::", "Mesh" {
 		Properties70:  {
-			P: "Color", "ColorRGB", "Color", "",0.882352941176471,0.341176470588235,0.56078431372549
+			P: "Color", "ColorRGB", "Color", "",0.882352941176471,0.337254901960784,0.556862745098039
 		}
 		Vertices: *24 {
 			a: -35,-25,0,35,-25,0,-35,25,0,35,25,0,-35,-25,20,35,-25,20,-35,25,20,35,25,20
@@ -411,19 +411,20 @@ Objects:  {
 			}
 		}
 	}
-	Model: 2867407457184, "Model::Box001", "Mesh" {
+	Model: 1779046990224, "Model::Box001", "Mesh" {
 		Version: 232
 		Properties70:  {
 			P: "InheritType", "enum", "", "",1
 			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
 			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",0,0,-9.85528564453125
 			P: "UDP3DSMAX", "KString", "", "U", "MapChannel:1 = UVChannel_1&cr;&lf;"
-			P: "MaxHandle", "int", "Integer", "UH",2
+			P: "MaxHandle", "int", "Integer", "UH",1
 		}
 		Shading: T
 		Culling: "CullingOff"
 	}
-	Material: 2867515734240, "Material::Material #26", "" {
+	Material: 1779052503808, "Material::Material #26", "" {
 		Version: 102
 		ShadingModel: "phong"
 		MultiLayer: 0
@@ -446,7 +447,7 @@ Objects:  {
 			P: "Reflectivity", "double", "Number", "",0
 		}
 	}
-	Video: 2867515745280, "Video::マップ #2", "Clip" {
+	Video: 1779052500448, "Video::マップ #2", "Clip" {
 		Type: "Clip"
 		Properties70:  {
 			P: "Path", "KString", "XRefUrl", "", "C:\Users\CG1801\Pictures\テクスチャ\いろいろ\stone42.jpg"
@@ -456,7 +457,7 @@ Objects:  {
 		Filename: "C:\Users\CG1801\Pictures\テクスチャ\いろいろ\stone42.jpg"
 		RelativeFilename: "..\..\..\..\..\..\..\..\..\CG1801\Pictures\テクスチャ\いろいろ\stone42.jpg"
 	}
-	Texture: 2867515728960, "Texture::マップ #2", "" {
+	Texture: 1779052499488, "Texture::マップ #2", "" {
 		Type: "TextureVideoClip"
 		Version: 202
 		TextureName: "Texture::マップ #2"
@@ -472,13 +473,13 @@ Objects:  {
 		Texture_Alpha_Source: "Alpha_Black"
 		Cropping: 0,0,0,0
 	}
-	AnimationStack: 2867570092320, "AnimStack::Take 001", "" {
+	AnimationStack: 1778825382272, "AnimStack::Take 001", "" {
 		Properties70:  {
 			P: "LocalStop", "KTime", "Time", "",153953860000
 			P: "ReferenceStop", "KTime", "Time", "",153953860000
 		}
 	}
-	AnimationCurve: 2867526672976, "AnimCurve::", "" {
+	AnimationCurve: 1779045183952, "AnimCurve::", "" {
 		Default: 0
 		KeyVer: 4009
 		KeyTime: *1 {
@@ -499,7 +500,7 @@ Objects:  {
 			a: 1
 		} 
 	}
-	AnimationCurve: 2867526670256, "AnimCurve::", "" {
+	AnimationCurve: 1778922374352, "AnimCurve::", "" {
 		Default: 0
 		KeyVer: 4009
 		KeyTime: *1 {
@@ -520,7 +521,7 @@ Objects:  {
 			a: 1
 		} 
 	}
-	AnimationCurve: 2867526671056, "AnimCurve::", "" {
+	AnimationCurve: 1779054304800, "AnimCurve::", "" {
 		Default: 0
 		KeyVer: 4009
 		KeyTime: *1 {
@@ -541,14 +542,14 @@ Objects:  {
 			a: 1
 		} 
 	}
-	AnimationCurveNode: 2867570085664, "AnimCurveNode::R", "" {
+	AnimationCurveNode: 1778825380400, "AnimCurveNode::R", "" {
 		Properties70:  {
 			P: "d|X", "Number", "", "A",0
 			P: "d|Y", "Number", "", "A",0
 			P: "d|Z", "Number", "", "A",0
 		}
 	}
-	AnimationLayer: 2867315366432, "AnimLayer::BaseLayer", "" {
+	AnimationLayer: 1779052334720, "AnimLayer::BaseLayer", "" {
 	}
 }
 
@@ -558,37 +559,37 @@ Objects:  {
 Connections:  {
 	
 	;Model::Box001, Model::RootNode
-	C: "OO",2867407457184,0
+	C: "OO",1779046990224,0
 	
 	;AnimLayer::BaseLayer, AnimStack::Take 001
-	C: "OO",2867315366432,2867570092320
+	C: "OO",1779052334720,1778825382272
 	
 	;AnimCurveNode::R, AnimLayer::BaseLayer
-	C: "OO",2867570085664,2867315366432
-	
-	;Material::Material #26, Model::Box001
-	C: "OO",2867515734240,2867407457184
+	C: "OO",1778825380400,1779052334720
 	
 	;Geometry::, Model::Box001
-	C: "OO",2867406368480,2867407457184
+	C: "OO",1779048343712,1779046990224
+	
+	;Material::Material #26, Model::Box001
+	C: "OO",1779052503808,1779046990224
 	
 	;AnimCurveNode::R, Model::Box001
-	C: "OP",2867570085664,2867407457184, "Lcl Rotation"
+	C: "OP",1778825380400,1779046990224, "Lcl Rotation"
 	
 	;Texture::マップ #2, Material::Material #26
-	C: "OP",2867515728960,2867515734240, "DiffuseColor"
+	C: "OP",1779052499488,1779052503808, "DiffuseColor"
 	
 	;Video::マップ #2, Texture::マップ #2
-	C: "OO",2867515745280,2867515728960
+	C: "OO",1779052500448,1779052499488
 	
 	;AnimCurve::, AnimCurveNode::R
-	C: "OP",2867526672976,2867570085664, "d|X"
+	C: "OP",1779045183952,1778825380400, "d|X"
 	
 	;AnimCurve::, AnimCurveNode::R
-	C: "OP",2867526670256,2867570085664, "d|Y"
+	C: "OP",1778922374352,1778825380400, "d|Y"
 	
 	;AnimCurve::, AnimCurveNode::R
-	C: "OP",2867526671056,2867570085664, "d|Z"
+	C: "OP",1779054304800,1778825380400, "d|Z"
 }
 ;Takes section
 ;----------------------------------------------------

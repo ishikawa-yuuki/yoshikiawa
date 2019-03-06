@@ -1766,6 +1766,7 @@
     <ClCompile Include="Credit.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyMoveLoop.cpp" />
+    <ClCompile Include="Exit.cpp" />
     <ClCompile Include="Fade.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameCamera.cpp" />
@@ -1811,6 +1812,7 @@
     <ClInclude Include="Credit.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyMoveLoop.h" />
+    <ClInclude Include="Exit.h" />
     <ClInclude Include="Fade.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameCamera.h" />
@@ -1834,6 +1836,8 @@
     <ResourceCompile Include="Game.rc" />
   </ItemGroup>
   <ItemGroup>
+    <MeshContentTask Include="Assets\modelData\BlackUnityChan.fbx" />
+    <MeshContentTask Include="Assets\modelData\Goal\Goal.fbx" />
     <MeshContentTask Include="Assets\modelData\LightObject\lanthanum.fbx" />
     <MeshContentTask Include="Assets\modelData\LightObject\mini_lanthanum.fbx" />
     <MeshContentTask Include="Assets\modelData\MoveBed\MoveBed1.fbx" />

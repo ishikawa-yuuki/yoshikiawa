@@ -14,6 +14,9 @@
     <Filter Include="Assets\sprite">
       <UniqueIdentifier>{a6ce300a-b532-440d-b914-b4661d3015ad}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Assets\modelData\StageMap">
+      <UniqueIdentifier>{b9ce4810-f6ad-4bfa-b733-a7e97502224c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -40,6 +43,7 @@
     <ClCompile Include="Path.cpp" />
     <ClCompile Include="Stage_Number.cpp" />
     <ClCompile Include="MoveBed_zengo.cpp" />
+    <ClCompile Include="Exit.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -68,6 +72,7 @@
     <ClInclude Include="Path.h" />
     <ClInclude Include="Stage_Number.h" />
     <ClInclude Include="MoveBed_zengo.h" />
+    <ClInclude Include="Exit.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc">
@@ -90,16 +95,22 @@
     <MeshContentTask Include="Assets\modelData\LightObject\lanthanum.fbx">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\StageMap\stage_test.fbx">
-      <Filter>Assets\modelData</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\StageMap\Stage1.fbx">
-      <Filter>Assets\modelData</Filter>
-    </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\MoveBed\MoveBed2.fbx">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\MoveBed\MoveBed1.fbx">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Goal\Goal.fbx">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\StageMap\stage_test.fbx">
+      <Filter>Assets\modelData\StageMap</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\StageMap\Stage1.fbx">
+      <Filter>Assets\modelData\StageMap</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\BlackUnityChan.fbx">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
   </ItemGroup>
