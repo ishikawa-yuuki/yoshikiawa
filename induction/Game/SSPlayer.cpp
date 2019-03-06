@@ -83,6 +83,7 @@ void SSPlayer::Move()
 void SSPlayer::MoveState()
 {
 	m_v = m_position - m_sspoint->m_position;
+	m_v.z = 0.0f;
 	if (m_v.LengthSq() <= 60.0f * 60.0f) {
 		m_moveSpeed = CVector3::Zero;
 		m_State = false;
