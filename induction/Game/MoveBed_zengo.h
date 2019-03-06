@@ -52,4 +52,5 @@ private:
 	CPhysicsGhostObject m_GhostObject;
 	//レベルデザイン用のスケールを足しました
 	CVector3 m_scale = CVector3::Zero;
+	int m_timer;
 };

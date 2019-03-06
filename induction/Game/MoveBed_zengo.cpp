@@ -20,31 +20,38 @@ bool MoveBed_zengo::Start()
 	m_StaticObject.CreateBox(
 		m_ppos,
 		CQuaternion::Identity,
-		{ 450.0f, 100.0f, 600.0f }
+		{ 430.0f, 80.0f, 300.0f }
 	);
 	m_GhostObject.CreateBox(
 		m_ppos,
 		CQuaternion::Identity,
-		{ 455.0f, 150.0f, 605.0f }
+		{ 435.0f, 85.0f, 305.0f }
 	);
 	return true;
 }
 void MoveBed_zengo::Update()
 {
+	
 	m_lastFramepos = m_position;
-	if (m_position.z >= m_protpos.z + 600) {
-		m_position.z = m_lastFramepos.z;
-		m_moveSpeed.z = -4.0f;
+	if (m_timer >= 60) {
+		m_position.z += m_moveSpeed.z;
 	}
-	else if (m_position.z <= m_protpos.z - 600) {
-		m_position.z = m_lastFramepos.z;
-		m_moveSpeed.z = +4.0f;
-	}
-	m_position.z += m_moveSpeed.z;
+		if (m_position.z >= m_protpos.z + 200) {
+			m_position.z = m_lastFramepos.z;
+			m_moveSpeed.z = -4.0f;
+			m_timer = 0;
+		}
+		else if (m_position.z <= m_protpos.z - 600) {
+			m_position.z = m_lastFramepos.z;
+			m_moveSpeed.z = +4.0f;
+			m_timer = 0;
+		}
+		
+		m_timer++;
 	m_ppos = m_position;//ボックス形状の調整
-	m_ppos.z += 100;
+	//m_ppos.z += 100;
 	m_ppos.y += 70;
-	m_ppos.x -= 50;
+	//m_ppos.x -= 50;
 	m_skin->SetPosition(m_position);
 	m_StaticObject.SetPositionAndRotation(m_ppos, CQuaternion::Identity);
 	m_GhostObject.SetPosition(m_ppos);
