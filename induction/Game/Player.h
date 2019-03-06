@@ -1,6 +1,7 @@
 #pragma once
 #include "tkEngine/graphics/effect/tkEffect.h"
 #include "tkEngine/character/tkCharacterController.h"
+#include "tkEngine/light/tkPointLight.h"
 class GameCamera;
 class Player : public IGameObject
 {
@@ -48,5 +49,6 @@ private:
 	prefab::CEffect* m_effect;
 	GameCamera* m_gamecamera = nullptr;
 	CCharacterController m_charaCon;
+	prefab::CPointLight* m_ptLight = nullptr;
 };
 

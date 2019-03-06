@@ -54,6 +54,7 @@ bool Human::Start()
 		30.0f,
 		m_position
 	);
+	m_skinModelRender->SetShadowCasterFlag(true);
 	//m_position.y = 150;
 	//m_skinModelRender->SetPosition(m_position);
 	return true;

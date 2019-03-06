@@ -3,6 +3,7 @@
 #include "SSPoint.h"
 #include "SSPlayer.h"
 #include "Stage_Number.h"
+#include "tkEngine/light/tkPointLight.h"
 
 SSPlayer::SSPlayer()
 {
@@ -21,6 +22,13 @@ bool SSPlayer::Start()
 	m_effect->Play(L"effect/hikari.efk");
 	m_effect->SetScale({ 30.0f,30.0f,30.0f });
 	m_sspoint = m_SS->m_ssPoint[0];
+	m_ptLight = NewGO<prefab::CPointLight>(0);
+	m_ptLight->SetColor({ 10.0f, 10.0f, 10.0f });
+	CVector3 attn = CVector3::Zero;
+	attn.x = 1000.0f;
+	attn.y = 5.0f;
+	m_ptLight->SetAttn(attn);
+
 	return true;
 }
 
@@ -34,7 +42,9 @@ void SSPlayer::Update()
 		Move();
 	}
 	m_position.y = 50;
+	m_position.z = -100;
 	m_effect->SetPosition(m_position);
+	m_ptLight->SetPosition(m_position);
 }
 
 void SSPlayer::Move()

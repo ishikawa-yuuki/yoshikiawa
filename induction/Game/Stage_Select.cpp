@@ -28,6 +28,10 @@ Stage_Select::~Stage_Select()
 
 bool Stage_Select::Start()
 {
+	//ŠÂ‹«Œõ‚ğ‚¨‚Ó‚Á‚Ó
+	LightManager().SetAmbientLight({ 0.1f, 0.1f, 0.1f });
+	//ƒV[ƒ“‚Ì–¾‚é‚³‚ğ—‚Æ‚·B
+	postEffect::Tonemap().SetLuminance(0.1f);
 	for (int i = 0; i < point; i++) {
 		m_ssPoint[i] = NewGO<SSPoint>(0, "SSPoint");
 		m_ssPoint[i]->m_position.x += i * 1200;

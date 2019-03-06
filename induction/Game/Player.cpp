@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Player.h"
 #include "GameCamera.h"
-
+#include "tkEngine/light/tkPointLight.h"
 Player::Player()
 {
 }
@@ -10,6 +10,7 @@ Player::Player()
 Player::~Player()
 {
 	DeleteGO(m_effect);
+	DeleteGO(m_ptLight);
 }
 
 bool Player::Start()
@@ -26,6 +27,12 @@ bool Player::Start()
 	m_charaCon.Execute(m_position);
 	m_charaCon.SetPosition(m_position);
 	m_effect->SetPosition(m_position);
+	m_ptLight = NewGO<prefab::CPointLight>(0);
+	m_ptLight->SetColor({ 1000.0f, 1000.0f, 1000.0f });
+	CVector3 attn;
+	attn.x = 1000.0f;
+	attn.y = 10.0f;
+	m_ptLight->SetAttn(attn);
 	
 	return true;
 }
@@ -38,6 +45,7 @@ void Player::Update()
 	Move();
 	m_effect->SetPosition(m_position);
 	m_charaCon.SetPosition(m_position);
+	m_ptLight->SetPosition(m_position);
 }
 
 void Player::Move()

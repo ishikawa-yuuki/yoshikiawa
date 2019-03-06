@@ -135,6 +135,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 
 	//ƒGƒ“ƒWƒ“‚ğ‰Šú‰»B
 	if (Engine().Init(initParam) == true) {
+		postEffect::Dof().Disable();
 		NewGO<Fade>(1, "Fade");
 		NewGO<Title>(0, nullptr);
 	

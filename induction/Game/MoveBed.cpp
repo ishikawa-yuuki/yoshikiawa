@@ -27,6 +27,7 @@ bool MoveBed::Start()
 		CQuaternion::Identity,
 		{ 435.0f, 85.0f, 305.0f }
 	);
+	m_skin->SetShadowReceiverFlag(true);
 	return true;
 }
 void MoveBed::Update()

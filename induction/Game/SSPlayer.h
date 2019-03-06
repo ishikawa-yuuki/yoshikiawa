@@ -1,4 +1,6 @@
 #pragma once
+#include "tkEngine/light/tkPointLight.h"
+
 class Stage_Select;
 class SSPoint;
 //ステージ選択専用
@@ -44,5 +46,6 @@ private:
 	CVector3 m_moveSpeed = CVector3::Zero;
 	CVector3 m_v = CVector3::Zero;
 	prefab::CEffect* m_effect;
+	prefab::CPointLight* m_ptLight = nullptr;
 };
 
