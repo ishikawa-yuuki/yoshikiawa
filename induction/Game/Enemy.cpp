@@ -19,8 +19,6 @@ bool Enemy::Start()
 
 	m_animClip[enAnimationClip_idle].Load(L"animData/unityChan/idle.tka");
 	m_animClip[enAnimationClip_walk].Load(L"animData/unityChan/walk.tka");
-	//アニメクリップをすべてロード、全部使う必要は特にないです。
-
 
 	for (int i = 0; i < enAnimationClip_num; i++) {
 		m_animClip[i].SetLoopFlag(true);
@@ -62,7 +60,6 @@ void Enemy::Move()
 		m_movespeed.x = MOVE_SPEED;
 		if (timer == 450) {
 			timer = 0;
-			m_movespeed = CVector3::Zero;
 			m_state = State2;
 		}
 	
@@ -72,7 +69,6 @@ void Enemy::Move()
 		m_movespeed.z = MOVE_SPEED;
 		if (timer == 500) {
 			timer = 0;
-			m_movespeed = CVector3::Zero;
 			m_state = State3;
 		}
 		break;
@@ -81,7 +77,6 @@ void Enemy::Move()
 		m_movespeed.x = -MOVE_SPEED;
 		if (timer == 450) {
 			timer = 0;
-			m_movespeed = CVector3::Zero;
 			m_state = State4;
 		}
 		break;
@@ -90,10 +85,12 @@ void Enemy::Move()
 		m_movespeed.z = -MOVE_SPEED;
 		if (timer == 500) {
 			timer = 0;
-			m_movespeed = CVector3::Zero;
 			m_state = State1;
 		}
 		break;
+	}
+	if (timer == 0) {
+		m_movespeed = CVector3::Zero;
 	}
     CVector3 pos = m_movespeed;
 	m_position = m_charaCon.Execute(pos, GameTime().GetFrameDeltaTime());
@@ -124,7 +121,7 @@ void Enemy::Update()
 	else {
 		m_skin->PlayAnimation(enAnimationClip_idle);
 	}
-	m_skin->SetPosition(m_position);
+	//m_skin->SetPosition(m_position);
 
 	auto mRot = CMatrix::Identity;
 	mRot.MakeRotationFromQuaternion(m_rotation);
