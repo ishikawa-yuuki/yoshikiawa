@@ -21,6 +21,8 @@ public:
 	void Update();
 	// プレイヤーの基本的な動き
 	void Move(); 
+	// プレイヤーがゲームを始める時の動き。
+	void GameStartMove();
 	//光の色変更、ラチェクラのクランクイメージ、
 	void Color_Change();
 	// プレイヤーの場所を返す関数。
@@ -28,7 +30,11 @@ public:
 	{ 
 		return m_position;
 	}
-
+	//プレイヤーの最初の移動が終わったかを返す関数。
+	bool GetStartMove()const
+	{
+		return m_StartMoveFin;
+	}
 	/*光の色を変えます*/
 	//光の色を返すぜ int型になった。。。
 	int GetColor(){
@@ -45,12 +51,15 @@ public:
 		return number;
 	}
 private:
-	CVector3 m_position = CVector3::Zero;
+	CVector3 m_position = { 0.0f,0.0f,500.0f };
 	CVector3 m_moveSpeed = CVector3::Zero;
 	prefab::CEffect* m_effect;
 	GameCamera* m_gamecamera = nullptr;
 	Human* m_human = nullptr;
 	CCharacterController m_charaCon;
 	prefab::CPointLight* m_ptLight = nullptr;
+
+	//最初のプレイヤーの挙動が終わったかどうか。
+	bool m_StartMoveFin = false;
 };
 

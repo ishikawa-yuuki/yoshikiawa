@@ -44,10 +44,29 @@ void Player::Update()
 	//プレイヤーの光の色を変えてHumanに簡単な指示を出せるような
 	//そんなプログラムを考えてます、、、、
 	Color_Change();
-	Move();
+	if (m_StartMoveFin) {
+		if (m_human->GetStartMove() == true) {
+			Move();
+		}
+	}
+	else {
+		GameStartMove();
+	}
+	//Move();
 	m_effect->SetPosition(m_position);
 	m_charaCon.SetPosition(m_position);
 	m_ptLight->SetPosition(m_position);
+}
+
+void Player::GameStartMove()
+{
+	m_moveSpeed.z = -500.0f;
+	if (m_position.z <= -500.0f) {
+		m_moveSpeed = CVector3::Zero;
+		m_StartMoveFin = true;
+	}
+	m_position += m_moveSpeed;
+	m_position = m_charaCon.Execute(m_moveSpeed, GameTime().GetFrameDeltaTime());
 }
 
 void Player::Move()

@@ -12,6 +12,9 @@ public:
 	~Human();
 	bool Start();
 	void Update();
+	//ゲーム最初に行う関数。
+	void GameStartMove();
+	//ゲーム中の普通の動きをするときの関数
 	void Move();
 	void Turn();
 	//プレイヤーのアニメの変更
@@ -25,10 +28,17 @@ public:
 
 	/*void PostRender(CRenderContext& rc);*/
 
+	//現在のポジションの値を返す関数。
 	const CVector3& GetPosition() const
 	{
 		return m_position;
 	}
+	//ゲーム初動が終わったかの関数。
+	bool GetStartMove()const
+	{
+		return m_StartMoveFin;
+	}
+
 	//死んだかどうかを返す関数
 	bool GetisDead()const 
 	{
@@ -57,7 +67,7 @@ private:
 	Game* m_game;
 	Fade* m_fade;
 	Light_Object* m_lightObject;
-	CVector3 m_position = CVector3::Zero;
+	CVector3 m_position = { 0.0f,0.0f,700.0f };
 	CVector3 m_movespeed = CVector3::Zero;
 	CVector3 m_Bedspeed = CVector3::Zero;
 	CQuaternion m_qrot = CQuaternion::Identity;
@@ -76,6 +86,8 @@ private:
 	CAnimationClip m_animClip[enAnimationClip_num];
 	//調べるためのフォント、何かに使うかも
 	CFont m_font;
+	//初動が終わったかを返す。
+	bool m_StartMoveFin = false;
 	//死んだかどうか
 	bool m_isDead = false;
 	//ゲームオーバーかどうか
