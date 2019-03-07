@@ -65,7 +65,15 @@ void Human::Update()
 	//Playerである光の信号を受け取ったら
 	//行動を変える関数を考えています、、、<-move()に書いてます。
 	AnimeControll();
-	Move();
+	if (m_player->GetStartMove() == true) {
+		if (!m_StartMoveFin) {
+			GameStartMove();
+		}
+		else {
+			Move();
+		}
+	}
+	//Move();
 	Turn();
 	Hanntei();
 	CVector3 Pos = m_position + m_Bedspeed;
@@ -73,6 +81,21 @@ void Human::Update()
 	isClear();
 	m_charaCon.SetPosition(Pos);
 	m_skinModelRender->SetPosition(Pos);
+}
+
+void Human::GameStartMove()
+{
+	CVector3 diff;
+	diff = m_player->GetPosition() - m_position;
+	diff.y = 0.0f;
+	if (diff.LengthSq() <105.0f * 105.0f) {
+		m_movespeed = CVector3::Zero;
+		m_StartMoveFin = true;
+	}
+	else {
+		m_movespeed.z = -400.0f * GameTime().GetFrameDeltaTime();
+		m_position += m_movespeed;
+	}
 }
 
 void Human::Move()

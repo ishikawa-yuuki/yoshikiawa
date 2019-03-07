@@ -37,46 +37,50 @@ bool GameCamera::Start()
 
 void GameCamera::Update()
 {
-	m_PlayerPos = m_player->GetPosition();
-	CVector3 stickR;
-	stickR.x = -Pad(0).GetRStickXF();	//アナログスティックのxの入力量を取得。
-	stickR.y = Pad(0).GetLStickYF();	//アナログスティックのxの入力量を取得。
-	stickR.z = 0.0f;
-	//右スティックの入力
-	//右スティック
-	m_sdegreexz = -stickR.x * 1.0f;
-	m_sdegreey = -stickR.y*1.0f;
+	if (m_human->GetisDead() == false) {
+		if (m_human->GetisClear() == false) {
+			m_PlayerPos = m_player->GetPosition();
+			CVector3 stickR;
+			stickR.x = -Pad(0).GetRStickXF();	//アナログスティックのxの入力量を取得。
+			stickR.y = Pad(0).GetLStickYF();	//アナログスティックのxの入力量を取得。
+			stickR.z = 0.0f;
+			//右スティックの入力
+			//右スティック
+			m_sdegreexz = -stickR.x * 1.0f;
+			m_sdegreey = -stickR.y*1.0f;
 
-	//回転度加算
-	m_degreey += m_sdegreey;
-	m_degreexz += m_sdegreexz;
-	//上下方向のカメラ移動を固定
-	m_degreey = 30.0f;
-	/*if (m_degreey >= 30.0f) {//cameraを上方向に動かすプログラム
-	m_degreey = 30.0f;         //ただしあまり強く上には動かない。
-	}
-	if (m_degreey <= 10.0f) {
-	m_degreey = 10.0f;
-	}*/
-	/*if (m_degreexz >= 70.0f) {
-	m_degreexz = 70.0f;
-	}
-	if (m_degreexz <= -70.0f) {
-	m_degreexz = -70.0f;
-	}*/
+			//回転度加算
+			m_degreey += m_sdegreey;
+			m_degreexz += m_sdegreexz;
+			//上下方向のカメラ移動を固定
+			m_degreey = 30.0f;
+			/*if (m_degreey >= 30.0f) {//cameraを上方向に動かすプログラム
+			m_degreey = 30.0f;         //ただしあまり強く上には動かない。
+			}
+			if (m_degreey <= 10.0f) {
+			m_degreey = 10.0f;
+			}*/
+			/*if (m_degreexz >= 70.0f) {
+			m_degreexz = 70.0f;
+			}
+			if (m_degreexz <= -70.0f) {
+			m_degreexz = -70.0f;
+			}*/
 
-	//角度をラジアン単位に直す
-	m_radianx = M_PI / 180 * m_degreexz;
-	m_radiany = M_PI / 180 * m_degreey;
-	Hutu();
-	//follow();
-	//m_target.z += 350.0f;
-	//視点z
-	MainCamera().SetTarget(m_target);
-	//座標
-	MainCamera().SetPosition(m_position);
-	//カメラの更新。
-	MainCamera().Update();
+			//角度をラジアン単位に直す
+			m_radianx = M_PI / 180 * m_degreexz;
+			m_radiany = M_PI / 180 * m_degreey;
+			Hutu();
+			//follow();
+			//m_target.z += 350.0f;
+			//視点z
+			MainCamera().SetTarget(m_target);
+			//座標
+			MainCamera().SetPosition(m_position);
+			//カメラの更新。
+			MainCamera().Update();
+		}
+	}
 }
 
 void GameCamera::Hutu()
