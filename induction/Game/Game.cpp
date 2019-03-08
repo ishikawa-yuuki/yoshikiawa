@@ -31,6 +31,9 @@ Game::~Game()
 	for (auto&moveBed_zengo : m_moveBed_zengoList) {
 		DeleteGO(moveBed_zengo);
 	}
+	for (auto&moveBed_zengo_long : m_moveBed_zengo2List) {
+		DeleteGO(moveBed_zengo_long);
+	}
 	DeleteGO(m_gamecamera);
 	DeleteGO(m_lightobject);
 }
@@ -84,7 +87,7 @@ bool Game::Start()
 			movebed2_long->SetScale(objdata.scale);
 			movebed2_long->SetProtPos(objdata.position);
 			movebed2_long->isLongFrag();
-			m_moveBed_zengoList.push_back(movebed2_long);
+			m_moveBed_zengo2List.push_back(movebed2_long);
 			return true;
 		}
 		//オブジェクトねーーむ確認

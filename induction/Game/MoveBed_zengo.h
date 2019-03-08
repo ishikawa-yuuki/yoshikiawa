@@ -8,7 +8,8 @@ public:
 	~MoveBed_zengo();
 	bool Start();
 	void Update();
-	
+
+	//こいつがバグの元かも
 	void SetProtPos(const CVector3& pos)
 	{
 		m_protpos = pos;
@@ -45,7 +46,7 @@ public:
 	}
 private:
 	prefab::CSkinModelRender* m_skin = nullptr;
-	CVector3 m_position = { 0.0f, 0.0f, 0.0f };
+	CVector3 m_position;
 	//ボックス形状専用
 	CVector3 m_ppos = m_position;
 	//初期位置
@@ -59,6 +60,6 @@ private:
 	CVector3 m_scale = CVector3::Zero;
 	//移動する距離が長いか判定
 	bool m_islong = false;
-	int m_timer;
+	int m_timer = 0;
 	const float MOVE_SPEED = 4.0f;
 };
