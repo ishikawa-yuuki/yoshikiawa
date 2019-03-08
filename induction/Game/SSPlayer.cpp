@@ -51,7 +51,7 @@ void SSPlayer::Move()
 {
 
 	
-	if (Pad(0).IsTrigger(enButtonRight)) {
+	if (Pad(0).GetLStickXF() > 0.5f){
 		m_State = true;
 		m_SelectOK = false;
 		switch (m_stage) {
@@ -65,7 +65,7 @@ void SSPlayer::Move()
 			break;
 		}
 	}
-	else if (Pad(0).IsTrigger(enButtonLeft)) {
+	else if (Pad(0).GetLStickXF() < -0.5f) {
 		m_State = true;
 		m_SelectOK = false;
 		switch (m_stage) {
