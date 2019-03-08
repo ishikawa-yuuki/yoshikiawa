@@ -39,12 +39,12 @@ void MoveBed_zengo::Update()
 
 		if (m_position.z >= m_protpos.z +350) {
 			m_position.z = m_lastFramepos.z;
-			m_moveSpeed.z = -4.0f;
+			m_moveSpeed.z = -MOVE_SPEED;
 			m_timer = 0;
 		}
 		else if (m_position.z <= m_protpos.z - 950) {
 			m_position.z = m_lastFramepos.z;
-			m_moveSpeed.z = 4.0f;
+			m_moveSpeed.z = MOVE_SPEED;
 			m_timer = 0;
 		}
 		m_timer++;
@@ -62,12 +62,12 @@ void MoveBed_zengo::Update()
 
 		if (m_position.z >= m_protpos.z+500) {
 			m_position.z = m_lastFramepos.z;
-			m_moveSpeed.z = -4.0f;
+			m_moveSpeed.z = -MOVE_SPEED;
 			m_timer = 0;
 		}
 		else if (m_position.z <= m_protpos.z - 1600) {
 			m_position.z = m_lastFramepos.z;
-			m_moveSpeed.z = 4.0f;
+			m_moveSpeed.z = MOVE_SPEED;
 			m_timer = 0;
 		}
 

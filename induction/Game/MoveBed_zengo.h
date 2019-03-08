@@ -45,7 +45,7 @@ public:
 	}
 private:
 	prefab::CSkinModelRender* m_skin = nullptr;
-	CVector3 m_position = { 0.0f, 0.0f, -900.0f };
+	CVector3 m_position = { 0.0f, 0.0f, 0.0f };
 	//ボックス形状専用
 	CVector3 m_ppos = m_position;
 	//初期位置
@@ -60,4 +60,5 @@ private:
 	//移動する距離が長いか判定
 	bool m_islong = false;
 	int m_timer;
+	const float MOVE_SPEED = 4.0f;
 };
