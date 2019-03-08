@@ -33,7 +33,7 @@ void MoveBed_zengo::Update()
 {
 	if (!m_islong) {
 		m_lastFramepos = m_position;
-		if (m_timer >= 60) {
+		if (m_timer > 60) {
 			m_position.z += m_moveSpeed.z;
 		}
 
@@ -68,9 +68,8 @@ void MoveBed_zengo::Update()
 		else if (m_position.z <= m_protpos.z - 1600) {
 			m_position.z = m_lastFramepos.z;
 			m_moveSpeed.z = 4.0f;
-			m_timer = 0;
+			//m_timer = 0;
 		}
-
 		m_timer++;
 		m_ppos = m_position;//ボックス形状の調整
 		m_ppos.y += 50;

@@ -74,5 +74,6 @@ private:
 	//‰Â•Ï’·”z—ñ
 	std::vector<MoveBed*> m_moveBedList;
 	std::vector<MoveBed_zengo*> m_moveBed_zengoList;
+	std::vector<MoveBed_zengo*> m_moveBed_zengo2List;
 };
 
