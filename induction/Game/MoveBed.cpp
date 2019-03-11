@@ -38,12 +38,12 @@ void MoveBed::Update()
 	}
 	if (m_position.x <= m_protpos.x - 850) {
 		m_position.x = m_lastFramepos.x;
-		m_moveSpeed.x = 4.0f;
+		m_moveSpeed.x = MOVE_SPEED;
 		m_timer = 0;
 	}
 	else if(m_position.x >= m_protpos.x + 900 ){
 		m_position.x = m_lastFramepos.x;
-		m_moveSpeed.x = -4.0f;
+		m_moveSpeed.x = -MOVE_SPEED;
 		m_timer = 0;
 	}
 	m_timer++;

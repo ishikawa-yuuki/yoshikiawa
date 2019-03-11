@@ -61,4 +61,5 @@ private:
 	//ˆÚ“®‚·‚é‹——£‚ª’·‚¢‚©”»’è
 	bool m_islong = false;
 	int m_timer = 0;
+	const float MOVE_SPEED = 4.0f;
 };
