@@ -93,9 +93,18 @@ void Human::GameStartMove()
 		m_StartMoveFin = true;
 	}
 	else {
-		m_movespeed.z = -400.0f * GameTime().GetFrameDeltaTime();
+		m_movespeed.z = -400.0f;
 		m_position += m_movespeed;
 	}
+
+	if (m_charaCon.IsOnGround()) {
+		m_movespeed.y = 0.0f;
+	}
+	else {
+		m_movespeed.y -= 10000.0f*GameTime().GetFrameDeltaTime();
+	}
+
+	m_position = m_charaCon.Execute(m_movespeed, GameTime().GetFrameDeltaTime());
 }
 
 void Human::Move()
