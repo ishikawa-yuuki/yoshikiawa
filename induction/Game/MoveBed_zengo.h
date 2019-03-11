@@ -24,6 +24,10 @@ public:
 	{
 		m_scale = scale;
 	}
+	//レベルで設定した回転を代入する。
+	void SetRot(const CQuaternion& rot) {
+		m_rotation = rot;
+	}
 	// プレイヤーの場所を返す関数。
 	CVector3 GetPosition() const
 	{
@@ -47,11 +51,10 @@ public:
 private:
 	prefab::CSkinModelRender* m_skin = nullptr;
 	CVector3 m_position;
-	//ボックス形状専用
-	CVector3 m_ppos = m_position;
 	//初期位置
 	CVector3 m_protpos = m_position;
 	CVector3 m_moveSpeed = { 0.0f, 0.0f, 2.0f };
+	CQuaternion m_rotation = CQuaternion::Identity;
 	//１フレーム前の位置
 	CVector3 m_lastFramepos = m_position;
 	CPhysicsStaticObject m_StaticObject;

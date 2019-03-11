@@ -36,8 +36,6 @@ public:
 private:
 	prefab::CSkinModelRender* m_skin = nullptr;
 	CVector3 m_position = { 0.0f, 0.0f, 0.0f };
-	//ボックス形状専用
-	CVector3 m_ppos = m_position;
 	//初期位置
 	CVector3 m_protpos = m_position;
 	CVector3 m_moveSpeed = { 2.0f, 0.0f, 0.0f };

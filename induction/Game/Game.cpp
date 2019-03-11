@@ -75,6 +75,7 @@ bool Game::Start()
 			//m_movebed = NewGO<MoveBed>(0,"MoveBed2");
 			movebed2->SetPosition(objdata.position);
 			movebed2->SetScale(objdata.scale);
+			movebed2->SetRot(objdata.rotation);
 			movebed2->SetProtPos(objdata.position);
 			m_moveBed_zengoList.push_back(movebed2);
 			return true;
@@ -85,6 +86,7 @@ bool Game::Start()
 			//m_movebed = NewGO<MoveBed>(0,"MoveBed2");
 			movebed2_long->SetPosition(objdata.position);
 			movebed2_long->SetScale(objdata.scale);
+			movebed2_long->SetRot(objdata.rotation);
 			movebed2_long->SetProtPos(objdata.position);
 			movebed2_long->isLongFrag();
 			m_moveBed_zengo2List.push_back(movebed2_long);
