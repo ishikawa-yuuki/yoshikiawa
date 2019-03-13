@@ -17,14 +17,15 @@ bool MoveBed_zengo::Start()
 	m_skin->Init(L"modelData/MoveBed/MoveBed2.cmo");
 	//m_skin->SetScale({ 20.0f,20.0f,20.0f });//思ったより小さかったので20倍
 	m_skin->SetScale(m_scale);//Gameクラスから大きさを渡されています
+	m_skin->SetRotation(m_rotation);
 	m_StaticObject.CreateBox(
-		m_ppos,
-		CQuaternion::Identity,
+		m_position,
+		m_rotation,
 		{ 430.0f, 80.0f, 300.0f }
 	);
 	m_GhostObject.CreateBox(
-		m_ppos,
-		CQuaternion::Identity,
+		m_position,
+		m_rotation,
 		{ 435.0f, 85.0f, 305.0f }
 	);
 	return true;
@@ -37,7 +38,7 @@ void MoveBed_zengo::Update()
 			m_position.z += m_moveSpeed.z;
 		}
 
-		if (m_position.z >= m_protpos.z +350) {
+		if (m_position.z >= m_protpos.z +450) {
 			m_position.z = m_lastFramepos.z;
 			m_moveSpeed.z = -MOVE_SPEED;
 			m_timer = 0;
@@ -48,11 +49,9 @@ void MoveBed_zengo::Update()
 			m_timer = 0;
 		}
 		m_timer++;
-		m_ppos = m_position;//ボックス形状の調整
-		m_ppos.y += 50;
 		m_skin->SetPosition(m_position);
-		m_StaticObject.SetPositionAndRotation(m_ppos, CQuaternion::Identity);
-		m_GhostObject.SetPosition(m_ppos);
+		m_StaticObject.SetPositionAndRotation(m_position, m_rotation);
+		m_GhostObject.SetPosition(m_position);
 	}
 	else if (m_islong) {
 		m_lastFramepos = m_position;
@@ -60,22 +59,20 @@ void MoveBed_zengo::Update()
 			m_position.z += m_moveSpeed.z;
 		}
 
-		if (m_position.z >= m_protpos.z+500) {
+		if (m_position.z >= m_protpos.z+450) {
 			m_position.z = m_lastFramepos.z;
 			m_moveSpeed.z = -MOVE_SPEED;
 			m_timer = 0;
 		}
-		else if (m_position.z <= m_protpos.z - 1600) {
+		else if (m_position.z <= m_protpos.z - 1550) {
 			m_position.z = m_lastFramepos.z;
 			m_moveSpeed.z = MOVE_SPEED;
 			m_timer = 0;
 		}
 		m_timer++;
-		m_ppos = m_position;//ボックス形状の調整
-		m_ppos.y += 50;
 		m_skin->SetPosition(m_position);
-		m_StaticObject.SetPositionAndRotation(m_ppos, CQuaternion::Identity);
-		m_GhostObject.SetPosition(m_ppos);
+		m_StaticObject.SetPositionAndRotation(m_position, m_rotation);
+		m_GhostObject.SetPosition(m_position);
 	}
 }
 
