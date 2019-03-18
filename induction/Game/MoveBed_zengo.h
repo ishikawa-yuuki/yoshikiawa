@@ -49,20 +49,21 @@ public:
 		return m_islong;
 	}
 private:
+	const float MOVE_SPEED = 4.0f*60.0f;
 	prefab::CSkinModelRender* m_skin = nullptr;
-	CVector3 m_position;
+	CVector3 m_position = {0.0f,0.0f,0.0f};
 	//初期位置
 	CVector3 m_protpos = m_position;
-	CVector3 m_moveSpeed = { 0.0f, 0.0f, 2.0f };
-	CQuaternion m_rotation = CQuaternion::Identity;
+	CVector3 m_moveSpeed = { 0.0f, 0.0f, MOVE_SPEED };
+	CQuaternion m_rotation = { 0.0f,0.0f,0.0f, 1.0f };
 	//１フレーム前の位置
-	CVector3 m_lastFramepos = m_position;
+	CVector3 m_lastFramepos = CVector3::Zero;
 	CPhysicsStaticObject m_StaticObject;
 	CPhysicsGhostObject m_GhostObject;
 	//レベルデザイン用のスケールを足しました
-	CVector3 m_scale = CVector3::Zero;
+	CVector3 m_scale = { 0.0f,0.0f,0.0f };
 	//移動する距離が長いか判定
 	bool m_islong = false;
-	int m_timer = 0;
-	const float MOVE_SPEED = 4.0f;
+	float m_timer = 0.0f;
+	
 };

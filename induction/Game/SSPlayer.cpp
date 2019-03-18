@@ -50,8 +50,8 @@ void SSPlayer::Update()
 void SSPlayer::Move()
 {
 
-	
-	if (Pad(0).GetLStickXF() > 0.5f){
+	const float pad_true = 0.5f;
+	if (Pad(0).GetLStickXF() > pad_true){
 		m_State = true;
 		m_SelectOK = false;
 		switch (m_stage) {
@@ -65,7 +65,7 @@ void SSPlayer::Move()
 			break;
 		}
 	}
-	else if (Pad(0).GetLStickXF() < -0.5f) {
+	else if (Pad(0).GetLStickXF() < -pad_true) {
 		m_State = true;
 		m_SelectOK = false;
 		switch (m_stage) {
@@ -82,13 +82,16 @@ void SSPlayer::Move()
 }
 void SSPlayer::MoveState()
 {
-	m_v = m_position - m_sspoint->m_position;
+	CVector3 m_v = m_position - m_sspoint->m_position;
 	m_v.z = 0.0f;
-	if (m_v.LengthSq() <= 60.0f * 60.0f) {
+	const float stop_true = 60.0f * 60.0f;
+	const float move_true = 250.0f * 250.0f;
+	const float div = m_v.LengthSq() / (350.0f * 350.0f) * 12.0;
+	if (m_v.LengthSq() <= stop_true) {
 		m_moveSpeed = CVector3::Zero;
 		m_State = false;
 	}
-    if (m_v.LengthSq() <= 250.0f * 250.0f) {
+    if (m_v.LengthSq() <= move_true) {
 			m_SelectOK = true;
 			
 	}
@@ -96,7 +99,7 @@ void SSPlayer::MoveState()
 			m_moveSpeed = m_sspoint->m_position - m_position;
 			m_moveSpeed.y = 0.0f;
 			m_moveSpeed.Normalize();
-			m_moveSpeed *= m_v.LengthSq() / (350.0f * 350.0f) * 12.0;
+			m_moveSpeed *= div;
 	}
 	m_position += m_moveSpeed;
 	

@@ -2,7 +2,6 @@
 class PathEdge {
 public:
 	CVector3 startPos;		//!<始点。
-	
 	CVector3 endPos;		//!<終点。
 	CVector3 direction;		//!<方向。
 	CVector3 directionXZ;	//!<XZ平面での方向。

@@ -32,22 +32,45 @@ bool MoveBed::Start()
 }
 void MoveBed::Update()
 {
-	m_lastFramepos = m_position;
-	if (m_timer >= 60) {
-		m_position.x += m_moveSpeed.x;
+	if (!m_sorry) {
+		m_lastFramepos = m_position;
+		if (m_timer >= 2.0f) {
+			m_position.x += m_moveSpeed.x*GameTime().GetFrameDeltaTime();
+		}
+		if (m_position.x <= m_protpos.x - 370) {
+			m_position.x = m_lastFramepos.x;
+			m_moveSpeed.x = MOVE_SPEED;
+			m_timer = 0;
+		}
+		else if (m_position.x >= m_protpos.x + 475) {
+			m_position.x = m_lastFramepos.x;
+			m_moveSpeed.x = -MOVE_SPEED;
+			m_timer = 0;
+		}
+		m_timer += GameTime().GetFrameDeltaTime();
+		m_skin->SetPosition(m_position);
+		m_StaticObject.SetPositionAndRotation(m_position, CQuaternion::Identity);
+		m_GhostObject.SetPosition(m_position);
 	}
-	if (m_position.x <= m_protpos.x - 850) {
-		m_position.x = m_lastFramepos.x;
-		m_moveSpeed.x = MOVE_SPEED;
-		m_timer = 0;
+	else if(m_sorry) 
+	{
+		m_lastFramepos = m_position;
+		if (m_timer >= 2.0f) {
+			m_position.x += m_moveSpeed.x*GameTime().GetFrameDeltaTime();
+		}
+		if (m_position.x <= m_protpos.x - 375) {
+			m_position.x = m_lastFramepos.x;
+			m_moveSpeed.x = MOVE_SPEED;
+			m_timer = 0;
+		}
+		else if (m_position.x >= m_protpos.x + 445) {
+			m_position.x = m_lastFramepos.x;
+			m_moveSpeed.x = -MOVE_SPEED;
+			m_timer = 0;
+		}
+		m_timer += GameTime().GetFrameDeltaTime();
+		m_skin->SetPosition(m_position);
+		m_StaticObject.SetPositionAndRotation(m_position, CQuaternion::Identity);
+		m_GhostObject.SetPosition(m_position);
 	}
-	else if(m_position.x >= m_protpos.x + 900 ){
-		m_position.x = m_lastFramepos.x;
-		m_moveSpeed.x = -MOVE_SPEED;
-		m_timer = 0;
-	}
-	m_timer++;
-	m_skin->SetPosition(m_position);
-	m_StaticObject.SetPositionAndRotation(m_position, CQuaternion::Identity);
-	m_GhostObject.SetPosition(m_position);
 }

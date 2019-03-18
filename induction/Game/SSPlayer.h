@@ -44,7 +44,6 @@ private:
 	SSPoint * m_sspoint = nullptr;
 	CVector3 m_position = CVector3::Zero;
 	CVector3 m_moveSpeed = CVector3::Zero;
-	CVector3 m_v = CVector3::Zero;
 	prefab::CEffect* m_effect;
 	prefab::CPointLight* m_ptLight = nullptr;
 };

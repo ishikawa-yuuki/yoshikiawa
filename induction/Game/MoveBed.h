@@ -33,19 +33,25 @@ public:
 	{
 		return &m_GhostObject;
 	}
+	bool SorryFrag() {
+		m_sorry = true;
+		return m_sorry;
+	}
 private:
+	const float MOVE_SPEED = 4.0f*60.0f;
 	prefab::CSkinModelRender* m_skin = nullptr;
 	CVector3 m_position = { 0.0f, 0.0f, 0.0f };
 	//初期位置
 	CVector3 m_protpos = m_position;
-	CVector3 m_moveSpeed = { 2.0f, 0.0f, 0.0f };
+	CVector3 m_moveSpeed = { MOVE_SPEED, 0.0f, 0.0f };
 	//１フレーム前の位置
 	CVector3 m_lastFramepos = m_position;
 	CPhysicsStaticObject m_StaticObject;
 	CPhysicsGhostObject m_GhostObject;
 	//レベルデザイン用のスケールを足しました
 	CVector3 m_scale = CVector3::Zero;
-	int m_timer = 0;
-	const float MOVE_SPEED = 4.0f;
+	bool m_sorry = false;
+	float m_timer = 0.0f;
+	
 };
 
