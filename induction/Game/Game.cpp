@@ -69,6 +69,15 @@ bool Game::Start()
 			m_moveBedList.push_back(movebed);
 			return true;
 		}
+		if (objdata.EqualObjectName(L"MoveBed1_sorry")) {
+			MoveBed* movebed_sorry = NewGO<MoveBed>(0, "MoveBed1");
+			//m_movebed = NewGO<MoveBed>(0, "MoveBed");
+			movebed_sorry->SetPosition(objdata.position);
+			movebed_sorry->SetScale(objdata.scale);
+			movebed_sorry->SorryFrag();
+			m_moveBedList.push_back(movebed_sorry);
+			return true;
+		}
 		//“®‚­°‚Í2í—Ş‚ ‚éAMoveBed2‚Í‘OŒãˆÚ“®‚·‚é‚à‚Ì
 		if (objdata.EqualObjectName(L"MoveBed2")) {
 			MoveBed_zengo* movebed2 = NewGO<MoveBed_zengo>(0, "MoveBed2");

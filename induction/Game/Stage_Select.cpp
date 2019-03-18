@@ -36,15 +36,14 @@ bool Stage_Select::Start()
 		m_ssPoint[i] = NewGO<SSPoint>(0, "SSPoint");
 		m_ssPoint[i]->m_position.x += i * 1200;
 	}
-	m_fade = FindGO<Fade>("Fade");
-	m_fade->StartFadeIn();
 	m_ssPlayer = NewGO<SSPlayer>(0, "SSPlayer");
 	m_ssHuman = NewGO<SSHuman>(0, "SSHuman");
 	m_ssGC = NewGO<SSGameCamera>(0, "SSGameCamera");
 	m_skin = NewGO<prefab::CSkinModelRender>(0);
     m_skin->Init(L"modelData/StageSelect/SS.cmo");//仮ステージ
 	m_skin->SetScale({ 2.0f,2.0f, 2.0f });//
-	
+	m_fade = FindGO<Fade>("Fade");
+	m_fade->StartFadeIn();
 	return true;
 }
 

@@ -32,44 +32,45 @@ bool MoveBed_zengo::Start()
 }
 void MoveBed_zengo::Update()
 {
+	
 	if (!m_islong) {
 		m_lastFramepos = m_position;
-		if (m_timer > 60) {
-			m_position.z += m_moveSpeed.z;
+		if (m_timer >= 2.0f) {
+			m_position.z += m_moveSpeed.z*GameTime().GetFrameDeltaTime();
 		}
 
-		if (m_position.z >= m_protpos.z +450) {
+		if (m_position.z > m_protpos.z +180) {
 			m_position.z = m_lastFramepos.z;
 			m_moveSpeed.z = -MOVE_SPEED;
 			m_timer = 0;
 		}
-		else if (m_position.z <= m_protpos.z - 950) {
+		else if (m_position.z < m_protpos.z - 310) {
 			m_position.z = m_lastFramepos.z;
 			m_moveSpeed.z = MOVE_SPEED;
 			m_timer = 0;
 		}
-		m_timer++;
+		m_timer += GameTime().GetFrameDeltaTime();
 		m_skin->SetPosition(m_position);
 		m_StaticObject.SetPositionAndRotation(m_position, m_rotation);
 		m_GhostObject.SetPosition(m_position);
 	}
 	else if (m_islong) {
 		m_lastFramepos = m_position;
-		if (m_timer >= 60) {
-			m_position.z += m_moveSpeed.z;
+		if (m_timer >= 1.5f) {
+			m_position.z += m_moveSpeed.z*GameTime().GetFrameDeltaTime();
 		}
 
-		if (m_position.z >= m_protpos.z+450) {
+		if (m_position.z >= m_protpos.z+400) {
 			m_position.z = m_lastFramepos.z;
 			m_moveSpeed.z = -MOVE_SPEED;
 			m_timer = 0;
 		}
-		else if (m_position.z <= m_protpos.z - 1550) {
+		else if (m_position.z <= m_protpos.z - 900) {
 			m_position.z = m_lastFramepos.z;
 			m_moveSpeed.z = MOVE_SPEED;
 			m_timer = 0;
 		}
-		m_timer++;
+		m_timer += GameTime().GetFrameDeltaTime();
 		m_skin->SetPosition(m_position);
 		m_StaticObject.SetPositionAndRotation(m_position, m_rotation);
 		m_GhostObject.SetPosition(m_position);

@@ -94,7 +94,7 @@ void Human::GameStartMove()
 	}
 	else {
 		m_movespeed.z = -400.0f;
-		m_position += m_movespeed;
+		//m_position += m_movespeed;
 	}
 
 	if (m_charaCon.IsOnGround()) {
