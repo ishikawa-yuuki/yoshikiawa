@@ -12,7 +12,7 @@ public:
 	void Turn();
 	//プレイヤーのアニメの変更
 	void AnimeControll();
-	void PostRender(CRenderContext& rc);
+	//void PostRender(CRenderContext& rc);
 	// プレイヤーの場所を返す関数。
 	CVector3 GetPosition() const { 
 		return m_position;

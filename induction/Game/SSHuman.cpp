@@ -87,11 +87,11 @@ void SSHuman::AnimeControll()
 	}
 }
 
-void SSHuman::PostRender(CRenderContext& renderContext) //何かを調べるためのポストレンダラ、今は移動スピード。
-{
-	m_font.Begin(renderContext);
-	wchar_t MoveSPeeed[100];
-	swprintf(MoveSPeeed, L"x%f,y%f,z%f", m_movespeed.x, m_movespeed.y, m_movespeed.z);
-	m_font.Draw(MoveSPeeed, { 0,0 });
-	m_font.End(renderContext);
-}
+//void SSHuman::PostRender(CRenderContext& renderContext) //何かを調べるためのポストレンダラ、今は移動スピード。
+//{
+//	m_font.Begin(renderContext);
+//	wchar_t MoveSPeeed[100];
+//	swprintf(MoveSPeeed, L"x%f,y%f,z%f", m_movespeed.x, m_movespeed.y, m_movespeed.z);
+//	m_font.Draw(MoveSPeeed, { 0,0 });
+//	m_font.End(renderContext);
+//}
