@@ -26,9 +26,10 @@ bool Player::Start()
 		20.0f,
 		m_position//0,100,0
 	);
-	m_charaCon.Execute(m_position);
-	m_charaCon.SetPosition(m_position);
-	m_effect->SetPosition(m_position);
+	//いらないと思う
+	//m_charaCon.Execute(m_position);
+	//m_charaCon.SetPosition(m_position);
+	//m_effect->SetPosition(m_position);
 	m_ptLight = NewGO<prefab::CPointLight>(0);
 	m_ptLight->SetColor({ 1000.0f, 1000.0f, 1000.0f });
 	CVector3 attn;
@@ -45,7 +46,7 @@ void Player::Update()
 	//そんなプログラムを考えてます、、、、
 	Color_Change();
 	if (m_StartMoveFin) {
-		if (m_human->GetStartMove() == true) {
+		if (m_human->GetStartMove()) {//== true
 			Move();
 		}
 	}
@@ -65,14 +66,15 @@ void Player::GameStartMove()
 		m_moveSpeed = CVector3::Zero;
 		m_StartMoveFin = true;
 	}
-	m_position += m_moveSpeed;
+	//いらないと思う
+	//m_position += m_moveSpeed;
 	m_position = m_charaCon.Execute(m_moveSpeed, GameTime().GetFrameDeltaTime());
 }
 
 void Player::Move()
 {
-	if (m_human->GetisDead() == false) {
-		if (m_human->GetisClear() == false) {
+	if (!m_human->GetisDead()) {// == false
+		if (!m_human->GetisClear() ) {//== false
 			//光の速度
 			const float pl_speed = 600.0f;
 			float L_Stick_X = Pad(0).GetLStickXF();

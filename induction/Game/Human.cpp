@@ -227,8 +227,8 @@ void Human::isDead()
 			}
 			else {
 				//死亡時のアニメーションが終わったらGameOverクラスへ
-				if (m_skinModelRender->IsPlayingAnimation() == false
-					&& m_isGameOver != true
+				if (!m_skinModelRender->IsPlayingAnimation() //== false
+					&& !m_isGameOver //!= true
 					) {
 					//ここで暗転
 					m_isGameOver = true;
@@ -254,15 +254,15 @@ void Human::Hanntei()
 		QueryGOs<MoveBed>("MoveBed1", [&](MoveBed* move) {
 			CPhysicsGhostObject* ghostObj = move->GetGhost();
 			PhysicsWorld().ContactTest(m_charaCon, [&](const btCollisionObject& contactObject) {
-				if (ghostObj->IsSelf(contactObject) == true) {
+				if (ghostObj->IsSelf(contactObject) ) {//== true
 					//このフレームのボックスの移動量を計算
 					CVector3 boxMoveValue;
 					boxMoveValue = move->GetPosition() - move->GetLastPos();
 					//ボックスの移動速度を求める
-					CVector3 boxMoveSpeed;
-					boxMoveSpeed = boxMoveValue;
+					//CVector3 boxMoveSpeed;
+					//boxMoveSpeed = boxMoveValue;
 						// GameTime().GetFrameDeltaTime();
-					m_Bedspeed += boxMoveSpeed;
+					m_Bedspeed += boxMoveValue; //boxMoveSpeed;
 				}
 			});
 			return true;
@@ -271,15 +271,15 @@ void Human::Hanntei()
 		QueryGOs<MoveBed_zengo>("MoveBed2", [&](MoveBed_zengo* move) {
 			CPhysicsGhostObject* ghostObj = move->GetGhost();
 			PhysicsWorld().ContactTest(m_charaCon, [&](const btCollisionObject& contactObject) {
-				if (ghostObj->IsSelf(contactObject) == true) {
+				if (ghostObj->IsSelf(contactObject) ) {//== true
 					//このフレームのボックスの移動量を計算
 					CVector3 boxMoveValue;
 					boxMoveValue = move->GetPosition() - move->GetLastPos();
 					//ボックスの移動速度を求める
-					CVector3 boxMoveSpeed;
-					boxMoveSpeed = boxMoveValue;
+					//CVector3 boxMoveSpeed;
+					//boxMoveSpeed = boxMoveValue;
 					// GameTime().GetFrameDeltaTime();
-					m_Bedspeed += boxMoveSpeed;
+					m_Bedspeed += boxMoveValue;//boxMoveSpeed;
 				}
 			});
 			return true;
@@ -290,7 +290,7 @@ void Human::isClear()
 {
 	CVector3 diff = m_position - m_lightObject->GetPosition();
 	diff.y = 0.0f;
-	if (m_skinModelRender->IsPlayingAnimation() == false && m_Clear_one) {
+	if (!m_skinModelRender->IsPlayingAnimation()  && m_Clear_one) {
 		m_skinModelRender->PlayAnimation(enAnimationClip_run, 0.2f);
 		m_movespeed.z -= 6000.0f * GameTime().GetFrameDeltaTime();
 		
