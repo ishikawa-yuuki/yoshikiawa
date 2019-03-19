@@ -8,6 +8,10 @@ public:
 	~MoveBed();
 	bool Start();
 	void Update();
+	void SetProtPos(const CVector3& pos)
+	{
+		m_protpos = pos;
+	}
 	//レベルで設置した所にm_positionを置く
 	void SetPosition(const CVector3& pos)
 	{
@@ -33,10 +37,6 @@ public:
 	{
 		return &m_GhostObject;
 	}
-	bool SorryFrag() {
-		m_sorry = true;
-		return m_sorry;
-	}
 private:
 	const float MOVE_SPEED = 4.0f*60.0f;
 	prefab::CSkinModelRender* m_skin = nullptr;
@@ -50,7 +50,6 @@ private:
 	CPhysicsGhostObject m_GhostObject;
 	//レベルデザイン用のスケールを足しました
 	CVector3 m_scale = CVector3::Zero;
-	bool m_sorry = false;
 	float m_timer = 0.0f;
 	
 };

@@ -39,12 +39,12 @@ void MoveBed_zengo::Update()
 			m_position.z += m_moveSpeed.z*GameTime().GetFrameDeltaTime();
 		}
 
-		if (m_position.z > m_protpos.z +180) {
+		if (m_position.z > m_protpos.z ) {
 			m_position.z = m_lastFramepos.z;
 			m_moveSpeed.z = -MOVE_SPEED;
 			m_timer = 0;
 		}
-		else if (m_position.z < m_protpos.z - 310) {
+		else if (m_position.z < m_protpos.z - 500) {
 			m_position.z = m_lastFramepos.z;
 			m_moveSpeed.z = MOVE_SPEED;
 			m_timer = 0;
@@ -60,12 +60,12 @@ void MoveBed_zengo::Update()
 			m_position.z += m_moveSpeed.z*GameTime().GetFrameDeltaTime();
 		}
 
-		if (m_position.z >= m_protpos.z+400) {
+		if (m_position.z > m_protpos.z) {
 			m_position.z = m_lastFramepos.z;
 			m_moveSpeed.z = -MOVE_SPEED;
 			m_timer = 0;
 		}
-		else if (m_position.z <= m_protpos.z - 900) {
+		else if (m_position.z < m_protpos.z -1020) {
 			m_position.z = m_lastFramepos.z;
 			m_moveSpeed.z = MOVE_SPEED;
 			m_timer = 0;
