@@ -44,6 +44,7 @@
     <ClCompile Include="Stage_Number.cpp" />
     <ClCompile Include="MoveBed_zengo.cpp" />
     <ClCompile Include="Exit.cpp" />
+    <ClCompile Include="MistEnemy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -73,6 +74,7 @@
     <ClInclude Include="Stage_Number.h" />
     <ClInclude Include="MoveBed_zengo.h" />
     <ClInclude Include="Exit.h" />
+    <ClInclude Include="MistEnemy.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc">

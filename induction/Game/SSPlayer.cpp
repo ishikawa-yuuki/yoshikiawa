@@ -13,6 +13,7 @@ SSPlayer::SSPlayer()
 SSPlayer::~SSPlayer()
 {
 	DeleteGO(m_effect);
+	DeleteGO(m_ptLight);
 }
 bool SSPlayer::Start()
 {

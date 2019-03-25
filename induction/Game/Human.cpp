@@ -1,11 +1,13 @@
 #include "stdafx.h"
 #include "Human.h"
 #include "Player.h"
+#include "MistEnemy.h"
 #include "Game.h"
 #include "GameOver.h"
 #include "MoveBed.h"
 #include "MoveBed_zengo.h"
 #include "Fade.h"
+#include "Exit.h"
 #include "Light_Object.h"
 #include "Stage_Select.h"
 
@@ -25,6 +27,8 @@ bool Human::Start()
 	m_game = FindGO<Game>("Game");
 	m_fade = FindGO<Fade>("Fade");
 	m_lightObject = FindGO<Light_Object>("LightObject");
+	m_mistenemy = FindGO<MistEnemy>("mist");
+	m_exit = FindGO<Exit>("Exit");
 
 	m_animClip[enAnimationClip_idle].Load(L"animData/unityChan/idle.tka");
 	m_animClip[enAnimationClip_walk].Load(L"animData/unityChan/walk.tka");
@@ -70,7 +74,15 @@ void Human::Update()
 			GameStartMove();
 		}
 		else {
-			Move();
+			if(m_lightObject->GetLightOn() == true) {
+				Light_Move();
+			}
+			else if(m_mistenemy->Getstate() == 2) {
+				TakingMove();
+			}
+			else {
+				Move();
+			}
 		}
 	}
 	//Move();
@@ -157,6 +169,101 @@ void Human::Move()
 		else {
 			m_movespeed.y -= 10000.0f*GameTime().GetFrameDeltaTime();
 		}
+	}
+	//動く床と自分のスピードを足す。
+	CVector3 pos = m_movespeed + m_Bedspeed;
+	m_position = m_charaCon.Execute(pos, GameTime().GetFrameDeltaTime());
+}
+
+void Human::TakingMove()
+{
+	if (!m_Clear_one) {
+			//死なない時の普通の処理
+			if (!m_isDead) {
+				CVector3 diff = m_position - m_mistenemy->GetPosition();
+				//Yの数値は除外
+				diff.y = 0.0f;
+				if (diff.LengthSq() <= 105.0f * 105.0f) {//プレイヤーと近ければhumanは止まる
+					m_movespeed = CVector3::Zero;
+				}
+				else {
+					auto humanspeed = 30.0f;
+					m_movespeed = m_mistenemy->GetPosition() - m_position;
+					m_movespeed.y = 0.0f;
+					m_movespeed.Normalize();
+
+					m_movespeed *= diff.LengthSq() / (400.0f * 400.0f) * 12.0f;
+					if (diff.LengthSq() >= 800.0f*800.0f) {//プレイヤーと離れすぎたときにだせるmovespeedの最高速
+						diff.y = 0.0f;
+						diff.Normalize();
+						diff *= -40.0f;//-だと近づく+なら遠のく
+						m_movespeed = diff;
+						m_movespeed = m_movespeed * humanspeed;// *GameTime().GetFrameDeltaTime();
+					}
+					else {//playerと離れすぎず近すぎないときの処理
+						m_movespeed = m_movespeed * humanspeed;// *GameTime().GetFrameDeltaTime();
+					}
+				}
+			}
+			else
+			{
+				//死んだときの処理
+				m_movespeed = CVector3::Zero;
+			}
+		}
+		if (m_charaCon.IsOnGround()) {
+			m_movespeed.y = 0.0f;
+		}
+		else {
+			m_movespeed.y -= 10000.0f*GameTime().GetFrameDeltaTime();
+		}
+	//動く床と自分のスピードを足す。
+	CVector3 pos = m_movespeed + m_Bedspeed;
+	m_position = m_charaCon.Execute(pos, GameTime().GetFrameDeltaTime());
+}
+
+void Human::Light_Move()
+{
+	if (!m_Clear_one) {
+		//死なない時の普通の処理
+		if (!m_isDead) {
+			
+			CVector3 diff = m_lightObject->GetPosition() - m_position;
+			//Yの数値は除外
+			diff.y = 0.0f;
+			if (diff.LengthSq() <= 105.0f * 105.0f) {//プレイヤーと近ければhumanは止まる
+				m_movespeed = CVector3::Zero;
+			}
+			else {
+				auto humanspeed = 30.0f;
+				m_movespeed = m_lightObject->GetPosition() - m_position;
+				m_movespeed.y = 0.0f;
+				m_movespeed.Normalize();
+
+				m_movespeed *= diff.LengthSq() / (400.0f * 400.0f) * 12.0f;
+				if (diff.LengthSq() >= 800.0f*800.0f) {//プレイヤーと離れすぎたときにだせるmovespeedの最高速
+					diff.y = 0.0f;
+					diff.Normalize();
+					diff *= -40.0f;//-だと近づく+なら遠のく
+					m_movespeed = diff;
+					m_movespeed = m_movespeed * humanspeed;// *GameTime().GetFrameDeltaTime();
+				}
+				else {//playerと離れすぎず近すぎないときの処理
+					m_movespeed = m_movespeed * humanspeed;// *GameTime().GetFrameDeltaTime();
+				}
+			}
+		}
+		else
+		{
+			//死んだときの処理
+			m_movespeed = CVector3::Zero;
+		}
+	}
+	if (m_charaCon.IsOnGround()) {
+		m_movespeed.y = 0.0f;
+	}
+	else {
+		m_movespeed.y -= 10000.0f*GameTime().GetFrameDeltaTime();
 	}
 	//動く床と自分のスピードを足す。
 	CVector3 pos = m_movespeed + m_Bedspeed;
@@ -288,7 +395,9 @@ void Human::Hanntei()
 //クリアしたかどうか。
 void Human::isClear()
 {
-	CVector3 diff = m_position - m_lightObject->GetPosition();
+	//m_lightObjectは中間ポイントになったので、ゴールのためのオブジェにはなりません。
+	//代わりに違うやつ使いまひょ。
+	CVector3 diff = m_position - m_exit->GetPosition();
 	diff.y = 0.0f;
 	if (m_skinModelRender->IsPlayingAnimation() == false && m_Clear_one) {
 		m_skinModelRender->PlayAnimation(enAnimationClip_run, 0.2f);

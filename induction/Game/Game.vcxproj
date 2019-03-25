@@ -1775,6 +1775,7 @@
     <ClCompile Include="Human.cpp" />
     <ClCompile Include="Light_Object.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MistEnemy.cpp" />
     <ClCompile Include="MoveBed.cpp" />
     <ClCompile Include="MoveBed_zengo.cpp" />
     <ClCompile Include="Path.cpp" />
@@ -1819,6 +1820,7 @@
     <ClInclude Include="GameOver.h" />
     <ClInclude Include="Help.h" />
     <ClInclude Include="Human.h" />
+    <ClInclude Include="MistEnemy.h" />
     <ClInclude Include="MoveBed.h" />
     <ClInclude Include="Light_Object.h" />
     <ClInclude Include="MoveBed_zengo.h" />

@@ -6,6 +6,7 @@ class Fade;
 class Human;
 class Player;
 class Enemy;
+class MistEnemy;
 class MoveBed;
 class MoveBed_zengo;
 class Light_Object;
@@ -45,6 +46,7 @@ private:
 	Human * m_human;
 	Player* m_player;
 	Enemy* m_enemy;
+	MistEnemy* m_mistenemy;
 	BackGround* m_background;
 	GameCamera * m_gamecamera;
 	Light_Object* m_lightobject;

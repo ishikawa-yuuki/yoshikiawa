@@ -5,6 +5,7 @@
 #include "Human.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "MistEnemy.h"
 #include "MoveBed.h"
 #include "MoveBed_zengo.h"
 #include "Title.h"
@@ -23,6 +24,7 @@ Game::~Game()
 	DeleteGO(m_player);
 	DeleteGO(m_human);
 	DeleteGO(m_enemy);
+	DeleteGO(m_mistenemy);
 	DeleteGO(m_background);
 	DeleteGO(m_exit);
 	for (auto&moveBed : m_moveBedList) {
@@ -48,7 +50,7 @@ bool Game::Start()
 	m_human = NewGO<Human>(0, "Human");
 	m_gamecamera = NewGO<GameCamera>(0, "GameCamera");
 	m_fade = FindGO<Fade>("Fade");
-
+	m_mistenemy = NewGO<MistEnemy>(0, "mist");//å„Ç≈levelÇ…ëgÇ›çûÇ›
 
 	m_level.Init(L"level/level_Stage1_sisaku.tkl", [&](LevelObjectData& objdata) {
 		if (objdata.EqualObjectName(L"Stage1")) {
