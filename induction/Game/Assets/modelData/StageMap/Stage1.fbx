@@ -8,11 +8,11 @@ FBXHeaderExtension:  {
 		Version: 1000
 		Year: 2019
 		Month: 3
-		Day: 18
+		Day: 19
 		Hour: 14
-		Minute: 14
-		Second: 38
-		Millisecond: 500
+		Minute: 47
+		Second: 13
+		Millisecond: 734
 	}
 	Creator: "FBX SDK/FBX Plugins version 2018.1"
 	SceneInfo: "SceneInfo::GlobalInfo", "UserData" {
@@ -28,21 +28,21 @@ FBXHeaderExtension:  {
 			Comment: ""
 		}
 		Properties70:  {
-			P: "DocumentUrl", "KString", "Url", "", "C:\Users\GC1831\Desktop\git\yoshikiawa\induction\Game\Assets\modelData\StageMap\Stage1.fbx"
-			P: "SrcDocumentUrl", "KString", "Url", "", "C:\Users\GC1831\Desktop\git\yoshikiawa\induction\Game\Assets\modelData\StageMap\Stage1.fbx"
+			P: "DocumentUrl", "KString", "Url", "", "C:\Users\CG1801\Desktop\git\yoshikiawa\induction\Game\Assets\modelData\StageMap\Stage1.fbx"
+			P: "SrcDocumentUrl", "KString", "Url", "", "C:\Users\CG1801\Desktop\git\yoshikiawa\induction\Game\Assets\modelData\StageMap\Stage1.fbx"
 			P: "Original", "Compound", "", ""
 			P: "Original|ApplicationVendor", "KString", "", "", "Autodesk"
 			P: "Original|ApplicationName", "KString", "", "", "3ds Max"
 			P: "Original|ApplicationVersion", "KString", "", "", "2018"
-			P: "Original|DateTime_GMT", "DateTime", "", "", "18/03/2019 05:14:38.497"
-			P: "Original|FileName", "KString", "", "", "C:\Users\GC1831\Desktop\git\yoshikiawa\induction\Game\Assets\modelData\StageMap\Stage1.fbx"
+			P: "Original|DateTime_GMT", "DateTime", "", "", "19/03/2019 05:47:13.731"
+			P: "Original|FileName", "KString", "", "", "C:\Users\CG1801\Desktop\git\yoshikiawa\induction\Game\Assets\modelData\StageMap\Stage1.fbx"
 			P: "LastSaved", "Compound", "", ""
 			P: "LastSaved|ApplicationVendor", "KString", "", "", "Autodesk"
 			P: "LastSaved|ApplicationName", "KString", "", "", "3ds Max"
 			P: "LastSaved|ApplicationVersion", "KString", "", "", "2018"
-			P: "LastSaved|DateTime_GMT", "DateTime", "", "", "18/03/2019 05:14:38.497"
-			P: "Original|ApplicationActiveProject", "KString", "", "", "C:\Users\GC1831\Documents\3dsMax"
-			P: "Original|ApplicationNativeFile", "KString", "", "", "C:\Users\GC1831\Documents\3dsMax\scenes\stage_edit3.max"
+			P: "LastSaved|DateTime_GMT", "DateTime", "", "", "19/03/2019 05:47:13.731"
+			P: "Original|ApplicationActiveProject", "KString", "", "", "C:\Users\CG1801\Documents\3dsMax"
+			P: "Original|ApplicationNativeFile", "KString", "", "", "C:\Users\CG1801\Downloads\stage_edit3.max"
 		}
 	}
 }
@@ -77,7 +77,7 @@ GlobalSettings:  {
 
 Documents:  {
 	Count: 1
-	Document: 2209329630896, "", "Scene" {
+	Document: 1952950412928, "", "Scene" {
 		Properties70:  {
 			P: "SourceObject", "object", "", ""
 			P: "ActiveAnimStackName", "KString", "", "", ""
@@ -305,7 +305,7 @@ Definitions:  {
 ;------------------------------------------------------------------
 
 Objects:  {
-	Geometry: 2209515020688, "Geometry::", "Mesh" {
+	Geometry: 1953208334800, "Geometry::", "Mesh" {
 		Properties70:  {
 			P: "Color", "ColorRGB", "Color", "",0.898039215686275,0.603921568627451,0.843137254901961
 		}
@@ -486,7 +486,7 @@ Objects:  {
 			}
 		}
 	}
-	Geometry: 2209515032112, "Geometry::", "Mesh" {
+	Geometry: 1953208328816, "Geometry::", "Mesh" {
 		Properties70:  {
 			P: "Color", "ColorRGB", "Color", "",0.898039215686275,0.603921568627451,0.843137254901961
 		}
@@ -582,7 +582,7 @@ Objects:  {
 			}
 		}
 	}
-	Geometry: 2209515048432, "Geometry::", "Mesh" {
+	Geometry: 1953208334256, "Geometry::", "Mesh" {
 		Properties70:  {
 			P: "Color", "ColorRGB", "Color", "",0.898039215686275,0.603921568627451,0.843137254901961
 		}
@@ -678,7 +678,7 @@ Objects:  {
 			}
 		}
 	}
-	Geometry: 2209515045168, "Geometry::", "Mesh" {
+	Geometry: 1953208329360, "Geometry::", "Mesh" {
 		Properties70:  {
 			P: "Color", "ColorRGB", "Color", "",0.341176470588235,0.882352941176471,0.56078431372549
 		}
@@ -1040,7 +1040,7 @@ Objects:  {
 			}
 		}
 	}
-	Geometry: 2209515040816, "Geometry::", "Mesh" {
+	Geometry: 1953208329904, "Geometry::", "Mesh" {
 		Properties70:  {
 			P: "Color", "ColorRGB", "Color", "",0.898039215686275,0.603921568627451,0.843137254901961
 		}
@@ -1136,7 +1136,7 @@ Objects:  {
 			}
 		}
 	}
-	Geometry: 2209515018512, "Geometry::", "Mesh" {
+	Geometry: 1953208332080, "Geometry::", "Mesh" {
 		Properties70:  {
 			P: "Color", "ColorRGB", "Color", "",0.882352941176471,0.56078431372549,0.341176470588235
 		}
@@ -1282,7 +1282,7 @@ Objects:  {
 			}
 		}
 	}
-	Geometry: 2209515025040, "Geometry::", "Mesh" {
+	Geometry: 1953208330448, "Geometry::", "Mesh" {
 		Properties70:  {
 			P: "Color", "ColorRGB", "Color", "",0.882352941176471,0.56078431372549,0.341176470588235
 		}
@@ -1392,20 +1392,20 @@ Objects:  {
 			}
 		}
 	}
-	Model: 2209552546720, "Model::Box004", "Mesh" {
+	Model: 1953207169824, "Model::Box004", "Mesh" {
 		Version: 232
 		Properties70:  {
 			P: "InheritType", "enum", "", "",1
 			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
 			P: "DefaultAttributeIndex", "int", "Integer", "",0
-			P: "Lcl Translation", "Lcl Translation", "", "A",-88.3248901367188,13000,-170
+			P: "Lcl Translation", "Lcl Translation", "", "A",-88.3248901367188,13055,-165
 			P: "Lcl Scaling", "Lcl Scaling", "", "A",1,1,0.272061616182327
 			P: "MaxHandle", "int", "Integer", "UH",13
 		}
 		Shading: T
 		Culling: "CullingOff"
 	}
-	Model: 2209552548912, "Model::Box006", "Mesh" {
+	Model: 1953207209280, "Model::Box006", "Mesh" {
 		Version: 232
 		Properties70:  {
 			P: "InheritType", "enum", "", "",1
@@ -1418,7 +1418,7 @@ Objects:  {
 		Shading: T
 		Culling: "CullingOff"
 	}
-	Model: 2209552555488, "Model::Box007", "Mesh" {
+	Model: 1953207207088, "Model::Box007", "Mesh" {
 		Version: 232
 		Properties70:  {
 			P: "InheritType", "enum", "", "",1
@@ -1431,7 +1431,7 @@ Objects:  {
 		Shading: T
 		Culling: "CullingOff"
 	}
-	Model: 2209552544528, "Model::Box008", "Mesh" {
+	Model: 1953207211472, "Model::Box008", "Mesh" {
 		Version: 232
 		Properties70:  {
 			P: "InheritType", "enum", "", "",1
@@ -1444,7 +1444,7 @@ Objects:  {
 		Shading: T
 		Culling: "CullingOff"
 	}
-	Model: 2209552542336, "Model::Box009", "Mesh" {
+	Model: 1953207213664, "Model::Box009", "Mesh" {
 		Version: 232
 		Properties70:  {
 			P: "InheritType", "enum", "", "",1
@@ -1457,7 +1457,7 @@ Objects:  {
 		Shading: T
 		Culling: "CullingOff"
 	}
-	Model: 2209552564256, "Model::Box003", "Mesh" {
+	Model: 1953207220240, "Model::Box003", "Mesh" {
 		Version: 232
 		Properties70:  {
 			P: "InheritType", "enum", "", "",1
@@ -1471,7 +1471,7 @@ Objects:  {
 		Shading: T
 		Culling: "CullingOff"
 	}
-	Model: 2209552562064, "Model::Box002", "Mesh" {
+	Model: 1953207215856, "Model::Box002", "Mesh" {
 		Version: 232
 		Properties70:  {
 			P: "InheritType", "enum", "", "",1
@@ -1485,7 +1485,7 @@ Objects:  {
 		Shading: T
 		Culling: "CullingOff"
 	}
-	Material: 2209562221968, "Material::01 - Default", "" {
+	Material: 1953014547952, "Material::01 - Default", "" {
 		Version: 102
 		ShadingModel: "phong"
 		MultiLayer: 0
@@ -1508,7 +1508,7 @@ Objects:  {
 			P: "Reflectivity", "double", "Number", "",0
 		}
 	}
-	Material: 2209562200368, "Material::02 - Default", "" {
+	Material: 1953014546032, "Material::02 - Default", "" {
 		Version: 102
 		ShadingModel: "phong"
 		MultiLayer: 0
@@ -1531,7 +1531,7 @@ Objects:  {
 			P: "Reflectivity", "double", "Number", "",0
 		}
 	}
-	Material: 2209562207088, "Material::03 - Default", "" {
+	Material: 1953014549872, "Material::03 - Default", "" {
 		Version: 102
 		ShadingModel: "phong"
 		MultiLayer: 0
@@ -1554,7 +1554,7 @@ Objects:  {
 			P: "Reflectivity", "double", "Number", "",0
 		}
 	}
-	Material: 2209562203248, "Material::05 - Default", "" {
+	Material: 1953014540752, "Material::05 - Default", "" {
 		Version: 102
 		ShadingModel: "phong"
 		MultiLayer: 0
@@ -1577,47 +1577,47 @@ Objects:  {
 			P: "Reflectivity", "double", "Number", "",0
 		}
 	}
-	Video: 2209562209008, "Video::マップ #1", "Clip" {
+	Video: 1953014553232, "Video::マップ #1", "Clip" {
 		Type: "Clip"
 		Properties70:  {
 			P: "Path", "KString", "XRefUrl", "", "C:\Users\GC1831\Documents\グラフィックス\V09\maps\greek_roman002.jpg"
-			P: "RelPath", "KString", "XRefUrl", "", "..\..\..\..\..\..\..\..\Documents\グラフィックス\V09\maps\greek_roman002.jpg"
+			P: "RelPath", "KString", "XRefUrl", "", "..\..\..\..\..\..\..\..\..\GC1831\Documents\グラフィックス\V09\maps\greek_roman002.jpg"
 		}
 		UseMipMap: 0
 		Filename: "C:\Users\GC1831\Documents\グラフィックス\V09\maps\greek_roman002.jpg"
-		RelativeFilename: "..\..\..\..\..\..\..\..\Documents\グラフィックス\V09\maps\greek_roman002.jpg"
+		RelativeFilename: "..\..\..\..\..\..\..\..\..\GC1831\Documents\グラフィックス\V09\maps\greek_roman002.jpg"
 	}
-	Video: 2209562206128, "Video::マップ #2", "Clip" {
+	Video: 1953014543632, "Video::マップ #2", "Clip" {
 		Type: "Clip"
 		Properties70:  {
-			P: "Path", "KString", "XRefUrl", "", "C:\Users\GC1831\Documents\グラフィックス\New_T_map\いろいろ\LIMESTN1.JPG"
-			P: "RelPath", "KString", "XRefUrl", "", "..\..\..\..\..\..\..\..\Documents\グラフィックス\New_T_map\いろいろ\LIMESTN1.JPG"
+			P: "Path", "KString", "XRefUrl", "", "C:\Users\CG1801\Downloads\TMap\いろいろ\LIMESTN1.JPG"
+			P: "RelPath", "KString", "XRefUrl", "", "..\..\..\..\..\..\..\..\Downloads\TMap\いろいろ\LIMESTN1.JPG"
 		}
 		UseMipMap: 0
-		Filename: "C:\Users\GC1831\Documents\グラフィックス\New_T_map\いろいろ\LIMESTN1.JPG"
-		RelativeFilename: "..\..\..\..\..\..\..\..\Documents\グラフィックス\New_T_map\いろいろ\LIMESTN1.JPG"
+		Filename: "C:\Users\CG1801\Downloads\TMap\いろいろ\LIMESTN1.JPG"
+		RelativeFilename: "..\..\..\..\..\..\..\..\Downloads\TMap\いろいろ\LIMESTN1.JPG"
 	}
-	Video: 2209562211888, "Video::マップ #3", "Clip" {
+	Video: 1953014538352, "Video::マップ #3", "Clip" {
 		Type: "Clip"
 		Properties70:  {
-			P: "Path", "KString", "XRefUrl", "", "C:\Users\GC1831\Documents\グラフィックス\New_T_map\いろいろ\LIMESTN1.JPG"
-			P: "RelPath", "KString", "XRefUrl", "", "..\..\..\..\..\..\..\..\Documents\グラフィックス\New_T_map\いろいろ\LIMESTN1.JPG"
+			P: "Path", "KString", "XRefUrl", "", "C:\Users\CG1801\Downloads\TMap\いろいろ\LIMESTN1.JPG"
+			P: "RelPath", "KString", "XRefUrl", "", "..\..\..\..\..\..\..\..\Downloads\TMap\いろいろ\LIMESTN1.JPG"
 		}
 		UseMipMap: 0
-		Filename: "C:\Users\GC1831\Documents\グラフィックス\New_T_map\いろいろ\LIMESTN1.JPG"
-		RelativeFilename: "..\..\..\..\..\..\..\..\Documents\グラフィックス\New_T_map\いろいろ\LIMESTN1.JPG"
+		Filename: "C:\Users\CG1801\Downloads\TMap\いろいろ\LIMESTN1.JPG"
+		RelativeFilename: "..\..\..\..\..\..\..\..\Downloads\TMap\いろいろ\LIMESTN1.JPG"
 	}
-	Video: 2209562201328, "Video::マップ #5", "Clip" {
+	Video: 1953014538832, "Video::マップ #5", "Clip" {
 		Type: "Clip"
 		Properties70:  {
 			P: "Path", "KString", "XRefUrl", "", "C:\Users\GC1831\Desktop\git\yoshikiawa\induction\Game\Assets\modelData\StageMap\egyptian006.jpg"
-			P: "RelPath", "KString", "XRefUrl", "", "egyptian006.jpg"
+			P: "RelPath", "KString", "XRefUrl", "", "..\..\..\..\..\..\..\..\..\GC1831\Desktop\git\yoshikiawa\induction\Game\Assets\modelData\StageMap\egyptian006.jpg"
 		}
 		UseMipMap: 0
 		Filename: "C:\Users\GC1831\Desktop\git\yoshikiawa\induction\Game\Assets\modelData\StageMap\egyptian006.jpg"
-		RelativeFilename: "egyptian006.jpg"
+		RelativeFilename: "..\..\..\..\..\..\..\..\..\GC1831\Desktop\git\yoshikiawa\induction\Game\Assets\modelData\StageMap\egyptian006.jpg"
 	}
-	Texture: 2209562199408, "Texture::マップ #1", "" {
+	Texture: 1953014539312, "Texture::マップ #1", "" {
 		Type: "TextureVideoClip"
 		Version: 202
 		TextureName: "Texture::マップ #1"
@@ -1629,13 +1629,13 @@ Objects:  {
 		}
 		Media: "Video::マップ #1"
 		FileName: "C:\Users\GC1831\Documents\グラフィックス\V09\maps\greek_roman002.jpg"
-		RelativeFilename: "..\..\..\..\..\..\..\..\Documents\グラフィックス\V09\maps\greek_roman002.jpg"
+		RelativeFilename: "..\..\..\..\..\..\..\..\..\GC1831\Documents\グラフィックス\V09\maps\greek_roman002.jpg"
 		ModelUVTranslation: 0,0
 		ModelUVScaling: 1,1
 		Texture_Alpha_Source: "None"
 		Cropping: 0,0,0,0
 	}
-	Texture: 2209562212848, "Texture::マップ #2", "" {
+	Texture: 1953014539792, "Texture::マップ #2", "" {
 		Type: "TextureVideoClip"
 		Version: 202
 		TextureName: "Texture::マップ #2"
@@ -1646,14 +1646,14 @@ Objects:  {
 			P: "UseMaterial", "bool", "", "",1
 		}
 		Media: "Video::マップ #2"
-		FileName: "C:\Users\GC1831\Documents\グラフィックス\New_T_map\いろいろ\LIMESTN1.JPG"
-		RelativeFilename: "..\..\..\..\..\..\..\..\Documents\グラフィックス\New_T_map\いろいろ\LIMESTN1.JPG"
+		FileName: "C:\Users\CG1801\Downloads\TMap\いろいろ\LIMESTN1.JPG"
+		RelativeFilename: "..\..\..\..\..\..\..\..\Downloads\TMap\いろいろ\LIMESTN1.JPG"
 		ModelUVTranslation: 0,0
 		ModelUVScaling: 1,1
 		Texture_Alpha_Source: "None"
 		Cropping: 0,0,0,0
 	}
-	Texture: 2209562198928, "Texture::マップ #3", "" {
+	Texture: 1953014551312, "Texture::マップ #3", "" {
 		Type: "TextureVideoClip"
 		Version: 202
 		TextureName: "Texture::マップ #3"
@@ -1664,14 +1664,14 @@ Objects:  {
 			P: "UseMaterial", "bool", "", "",1
 		}
 		Media: "Video::マップ #3"
-		FileName: "C:\Users\GC1831\Documents\グラフィックス\New_T_map\いろいろ\LIMESTN1.JPG"
-		RelativeFilename: "..\..\..\..\..\..\..\..\Documents\グラフィックス\New_T_map\いろいろ\LIMESTN1.JPG"
+		FileName: "C:\Users\CG1801\Downloads\TMap\いろいろ\LIMESTN1.JPG"
+		RelativeFilename: "..\..\..\..\..\..\..\..\Downloads\TMap\いろいろ\LIMESTN1.JPG"
 		ModelUVTranslation: 0,0
 		ModelUVScaling: 1,1
 		Texture_Alpha_Source: "None"
 		Cropping: 0,0,0,0
 	}
-	Texture: 2209562217648, "Texture::マップ #5", "" {
+	Texture: 1953014551792, "Texture::マップ #5", "" {
 		Type: "TextureVideoClip"
 		Version: 202
 		TextureName: "Texture::マップ #5"
@@ -1683,19 +1683,19 @@ Objects:  {
 		}
 		Media: "Video::マップ #5"
 		FileName: "C:\Users\GC1831\Desktop\git\yoshikiawa\induction\Game\Assets\modelData\StageMap\egyptian006.jpg"
-		RelativeFilename: "egyptian006.jpg"
+		RelativeFilename: "..\..\..\..\..\..\..\..\..\GC1831\Desktop\git\yoshikiawa\induction\Game\Assets\modelData\StageMap\egyptian006.jpg"
 		ModelUVTranslation: 0,0
 		ModelUVScaling: 1,1
 		Texture_Alpha_Source: "None"
 		Cropping: 0,0,0,0
 	}
-	AnimationStack: 2209514556016, "AnimStack::Take 001", "" {
+	AnimationStack: 1953207862432, "AnimStack::Take 001", "" {
 		Properties70:  {
 			P: "LocalStop", "KTime", "Time", "",153953860000
 			P: "ReferenceStop", "KTime", "Time", "",153953860000
 		}
 	}
-	AnimationLayer: 2209559638256, "AnimLayer::BaseLayer", "" {
+	AnimationLayer: 1953206456416, "AnimLayer::BaseLayer", "" {
 	}
 }
 
@@ -1705,106 +1705,106 @@ Objects:  {
 Connections:  {
 	
 	;Model::Box004, Model::RootNode
-	C: "OO",2209552546720,0
+	C: "OO",1953207169824,0
 	
 	;Model::Box006, Model::RootNode
-	C: "OO",2209552548912,0
+	C: "OO",1953207209280,0
 	
 	;Model::Box007, Model::RootNode
-	C: "OO",2209552555488,0
+	C: "OO",1953207207088,0
 	
 	;Model::Box008, Model::RootNode
-	C: "OO",2209552544528,0
+	C: "OO",1953207211472,0
 	
 	;Model::Box009, Model::RootNode
-	C: "OO",2209552542336,0
+	C: "OO",1953207213664,0
 	
 	;Model::Box003, Model::RootNode
-	C: "OO",2209552564256,0
+	C: "OO",1953207220240,0
 	
 	;Model::Box002, Model::RootNode
-	C: "OO",2209552562064,0
+	C: "OO",1953207215856,0
 	
 	;AnimLayer::BaseLayer, AnimStack::Take 001
-	C: "OO",2209559638256,2209514556016
+	C: "OO",1953206456416,1953207862432
 	
 	;Material::01 - Default, Model::Box004
-	C: "OO",2209562221968,2209552546720
+	C: "OO",1953014547952,1953207169824
 	
 	;Material::02 - Default, Model::Box004
-	C: "OO",2209562200368,2209552546720
+	C: "OO",1953014546032,1953207169824
 	
 	;Material::03 - Default, Model::Box004
-	C: "OO",2209562207088,2209552546720
+	C: "OO",1953014549872,1953207169824
 	
 	;Geometry::, Model::Box004
-	C: "OO",2209515020688,2209552546720
+	C: "OO",1953208334800,1953207169824
 	
 	;Material::01 - Default, Model::Box006
-	C: "OO",2209562221968,2209552548912
+	C: "OO",1953014547952,1953207209280
 	
 	;Geometry::, Model::Box006
-	C: "OO",2209515032112,2209552548912
+	C: "OO",1953208328816,1953207209280
 	
 	;Material::01 - Default, Model::Box007
-	C: "OO",2209562221968,2209552555488
+	C: "OO",1953014547952,1953207207088
 	
 	;Geometry::, Model::Box007
-	C: "OO",2209515048432,2209552555488
+	C: "OO",1953208334256,1953207207088
 	
 	;Geometry::, Model::Box008
-	C: "OO",2209515045168,2209552544528
+	C: "OO",1953208329360,1953207211472
 	
 	;Material::01 - Default, Model::Box008
-	C: "OO",2209562221968,2209552544528
+	C: "OO",1953014547952,1953207211472
 	
 	;Material::05 - Default, Model::Box009
-	C: "OO",2209562203248,2209552542336
+	C: "OO",1953014540752,1953207213664
 	
 	;Geometry::, Model::Box009
-	C: "OO",2209515040816,2209552542336
+	C: "OO",1953208329904,1953207213664
 	
 	;Material::02 - Default, Model::Box003
-	C: "OO",2209562200368,2209552564256
+	C: "OO",1953014546032,1953207220240
 	
 	;Material::01 - Default, Model::Box003
-	C: "OO",2209562221968,2209552564256
+	C: "OO",1953014547952,1953207220240
 	
 	;Geometry::, Model::Box003
-	C: "OO",2209515018512,2209552564256
+	C: "OO",1953208332080,1953207220240
 	
 	;Material::01 - Default, Model::Box002
-	C: "OO",2209562221968,2209552562064
+	C: "OO",1953014547952,1953207215856
 	
 	;Material::02 - Default, Model::Box002
-	C: "OO",2209562200368,2209552562064
+	C: "OO",1953014546032,1953207215856
 	
 	;Geometry::, Model::Box002
-	C: "OO",2209515025040,2209552562064
+	C: "OO",1953208330448,1953207215856
 	
 	;Texture::マップ #1, Material::01 - Default
-	C: "OP",2209562199408,2209562221968, "DiffuseColor"
+	C: "OP",1953014539312,1953014547952, "DiffuseColor"
 	
 	;Video::マップ #1, Texture::マップ #1
-	C: "OO",2209562209008,2209562199408
+	C: "OO",1953014553232,1953014539312
 	
 	;Texture::マップ #2, Material::02 - Default
-	C: "OP",2209562212848,2209562200368, "DiffuseColor"
+	C: "OP",1953014539792,1953014546032, "DiffuseColor"
 	
 	;Video::マップ #2, Texture::マップ #2
-	C: "OO",2209562206128,2209562212848
+	C: "OO",1953014543632,1953014539792
 	
 	;Texture::マップ #3, Material::03 - Default
-	C: "OP",2209562198928,2209562207088, "DiffuseColor"
+	C: "OP",1953014551312,1953014549872, "DiffuseColor"
 	
 	;Video::マップ #3, Texture::マップ #3
-	C: "OO",2209562211888,2209562198928
+	C: "OO",1953014538352,1953014551312
 	
 	;Texture::マップ #5, Material::05 - Default
-	C: "OP",2209562217648,2209562203248, "DiffuseColor"
+	C: "OP",1953014551792,1953014540752, "DiffuseColor"
 	
 	;Video::マップ #5, Texture::マップ #5
-	C: "OO",2209562201328,2209562217648
+	C: "OO",1953014538832,1953014551792
 }
 ;Takes section
 ;----------------------------------------------------
