@@ -108,5 +108,9 @@ private:
 	bool m_Clear_one = false;
 	//ゲームクリアの余韻用
 	float m_timer = 0;
+	//距離調べ
+	float m_nearLen = 10000.0f;
+	//一番近いライト検索
+	Light_Object* m_nearLight = nullptr;
 };
 

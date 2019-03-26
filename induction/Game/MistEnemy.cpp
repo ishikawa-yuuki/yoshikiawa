@@ -78,7 +78,7 @@ void MistEnemy::Atari()
 		diff_s *= 4.0f;
 		m_moveSpeed = diff_s;
 
-		if (diff_p.LengthSq() <= 100.0f*100.0f
+		if (diff_p.LengthSq() <= 130.0f*130.0f
 			|| m_escape_flag) {
 			m_state = enPlayer;
 			m_escape_flag = true;
@@ -89,10 +89,10 @@ void MistEnemy::Atari()
 	}
 	time++;
 	if (time <50) {
-		m_moveSpeed.y += 0.3f;
+		//m_moveSpeed.y += 0.3f;
 	}
 	else if (time<100) {
-		m_moveSpeed.y -= 0.3f;
+		//m_moveSpeed.y -= 0.3f;
 	}
 	else {
 		time = 0;

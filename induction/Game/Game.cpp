@@ -36,8 +36,10 @@ Game::~Game()
 	for (auto&moveBed_zengo_long : m_moveBed_zengo2List) {
 		DeleteGO(moveBed_zengo_long);
 	}
+	for (auto&m_lightobject : m_lightobjectList) {
+		DeleteGO(m_lightobject);
+	}
 	DeleteGO(m_gamecamera);
-	DeleteGO(m_lightobject);
 }
 
 bool Game::Start()
@@ -52,14 +54,15 @@ bool Game::Start()
 	m_fade = FindGO<Fade>("Fade");
 	m_mistenemy = NewGO<MistEnemy>(0, "mist");//å„Ç≈levelÇ…ëgÇ›çûÇ›
 
-	m_level.Init(L"level/level_Stage1_sisaku.tkl", [&](LevelObjectData& objdata) {
+	m_level.Init(L"level/kari.tkl", [&](LevelObjectData& objdata) {
 		if (objdata.EqualObjectName(L"Stage1")) {
 			m_background = NewGO<BackGround>(0, "BackGround");
 			return true;
 		}
 		if (objdata.EqualObjectName(L"lanthanum")) {
-			m_lightobject = NewGO<Light_Object>(0, "LightObject");
+			Light_Object* m_lightobject = NewGO<Light_Object>(0, "LightObject");
 			m_lightobject->SetPosition(objdata.position);//ééå±ÇµÇΩÇ¢Ç»ÇÁ{0,0,0}
+			m_lightobjectList.push_back(m_lightobject);
 			return true;
 		}
 		//ìÆÇ≠è∞ÇÕ2éÌóﬁÇ†ÇÈÅAMoveBedÇÕâ°à⁄ìÆÇ∑ÇÈÇ‡ÇÃ

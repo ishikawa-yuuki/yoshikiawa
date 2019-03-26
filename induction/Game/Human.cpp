@@ -23,10 +23,14 @@ Human::~Human()
 
 bool Human::Start()
 {
+	
 	m_player = FindGO<Player>("Player");
 	m_game = FindGO<Game>("Game");
 	m_fade = FindGO<Fade>("Fade");
-	m_lightObject = FindGO<Light_Object>("LightObject");
+	QueryGOs<Light_Object>("LightObject", [&](Light_Object* light) {
+		light = FindGO<Light_Object>("LightObject");
+		return true;
+	});
 	m_mistenemy = FindGO<MistEnemy>("mist");
 	m_exit = FindGO<Exit>("Exit");
 
@@ -74,15 +78,18 @@ void Human::Update()
 			GameStartMove();
 		}
 		else {
-			if(m_lightObject->GetLightOn() == true) {
-				Light_Move();
-			}
-			else if(m_mistenemy->Getstate() == 2) {
-				TakingMove();
-			}
-			else {
-				Move();
-			}
+			QueryGOs<Light_Object>("LightObject", [&](Light_Object* light) {
+				if (light->GetLightOn() == true) {
+					Light_Move();
+				}
+				else if (m_mistenemy->Getstate() == 2) {
+					TakingMove();
+				}
+				else {
+					Move();
+				}
+				return true;
+			});
 		}
 	}
 	//Move();
@@ -196,7 +203,7 @@ void Human::TakingMove()
 					if (diff.LengthSq() >= 800.0f*800.0f) {//プレイヤーと離れすぎたときにだせるmovespeedの最高速
 						diff.y = 0.0f;
 						diff.Normalize();
-						diff *= -40.0f;//-だと近づく+なら遠のく
+						diff *= -10.0f;//-だと近づく+なら遠のく
 						m_movespeed = diff;
 						m_movespeed = m_movespeed * humanspeed;// *GameTime().GetFrameDeltaTime();
 					}
@@ -227,31 +234,27 @@ void Human::Light_Move()
 	if (!m_Clear_one) {
 		//死なない時の普通の処理
 		if (!m_isDead) {
+			QueryGOs<Light_Object>("LightObject",[&](Light_Object* light) {
 			
-			CVector3 diff = m_lightObject->GetPosition() - m_position;
+			CVector3 diff = m_position - light->GetPosition();
+			if (diff.Length() > m_nearLen) {
+				m_nearLen = diff.Length();
+				m_nearLight = light;
+			}
 			//Yの数値は除外
-			diff.y = 0.0f;
+			//diff.y = 0.0f;
 			if (diff.LengthSq() <= 105.0f * 105.0f) {//プレイヤーと近ければhumanは止まる
 				m_movespeed = CVector3::Zero;
 			}
 			else {
-				auto humanspeed = 30.0f;
-				m_movespeed = m_lightObject->GetPosition() - m_position;
+				auto humanspeed = 300.0f;
+				m_movespeed = light->GetPosition() - m_position;
 				m_movespeed.y = 0.0f;
 				m_movespeed.Normalize();
-
-				m_movespeed *= diff.LengthSq() / (400.0f * 400.0f) * 12.0f;
-				if (diff.LengthSq() >= 800.0f*800.0f) {//プレイヤーと離れすぎたときにだせるmovespeedの最高速
-					diff.y = 0.0f;
-					diff.Normalize();
-					diff *= -40.0f;//-だと近づく+なら遠のく
-					m_movespeed = diff;
-					m_movespeed = m_movespeed * humanspeed;// *GameTime().GetFrameDeltaTime();
-				}
-				else {//playerと離れすぎず近すぎないときの処理
-					m_movespeed = m_movespeed * humanspeed;// *GameTime().GetFrameDeltaTime();
-				}
+				m_movespeed = m_movespeed * humanspeed;
 			}
+			return true;
+			});
 		}
 		else
 		{
@@ -405,7 +408,7 @@ void Human::isClear()
 		
 	}
 	else {
-		if (diff.LengthSq() < 200.0f*200.0f
+		if (diff.LengthSq() < 100.0f*100.0f
 			&& !m_Clear_one) {
 			m_skinModelRender->PlayAnimation(enAnimationClip_clear, 0.2f);
 			m_Clear_one = true;

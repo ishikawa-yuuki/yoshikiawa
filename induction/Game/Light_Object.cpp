@@ -49,7 +49,7 @@ void Light_Object::Update()
 
 	diff = m_player->GetPosition() - m_position;
 	if (!m_isLightOn) {
-		if (diff.LengthSq() < 1000.0f*1000.0f) {
+		if (diff.LengthSq() < 100.0f*100.0f) {
 			m_isLightOn = true;
 			housenlight();
 			//InitPointLight();

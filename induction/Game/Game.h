@@ -49,7 +49,6 @@ private:
 	MistEnemy* m_mistenemy;
 	BackGround* m_background;
 	GameCamera * m_gamecamera;
-	Light_Object* m_lightobject;
 	Exit* m_exit;
 
 	prefab::CSkinModelRender* m_goal = nullptr;
@@ -77,5 +76,6 @@ private:
 	std::vector<MoveBed*> m_moveBedList;
 	std::vector<MoveBed_zengo*> m_moveBed_zengoList;
 	std::vector<MoveBed_zengo*> m_moveBed_zengo2List;
+	std::vector<Light_Object*> m_lightobjectList;
 };
 
