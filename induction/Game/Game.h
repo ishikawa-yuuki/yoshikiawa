@@ -12,6 +12,8 @@ class Light_Object;
 class GameCamera;
 class BackGround;
 class Exit;
+class Poison;
+class Lever;
 class Game : public IGameObject
 {
 public:
@@ -49,6 +51,9 @@ private:
 	GameCamera * m_gamecamera;
 	Light_Object* m_lightobject;
 	Exit* m_exit;
+	///////////////////
+	Poison* m_poison;
+	Lever* m_lever;
 
 	prefab::CSkinModelRender* m_goal = nullptr;
 	prefab::CSpriteRender* m_sprite_Retire = nullptr;

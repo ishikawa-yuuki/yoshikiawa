@@ -5,6 +5,7 @@
 #include "GameOver.h"
 #include "MoveBed.h"
 #include "MoveBed_zengo.h"
+#include "Poison.h"
 #include "Fade.h"
 #include "Light_Object.h"
 #include "Stage_Select.h"
@@ -280,6 +281,15 @@ void Human::Hanntei()
 					//boxMoveSpeed = boxMoveValue;
 					// GameTime().GetFrameDeltaTime();
 					m_Bedspeed += boxMoveValue;//boxMoveSpeed;
+				}
+			});
+			return true;
+		});
+		QueryGOs<Poison>("Poison", [&](Poison* move) {
+			CPhysicsGhostObject* ghostObj = move->GetGhost();
+			PhysicsWorld().ContactTest(m_charaCon, [&](const btCollisionObject& contactObject) {
+				if (ghostObj->IsSelf(contactObject)) {//== true
+					isKill();
 				}
 			});
 			return true;

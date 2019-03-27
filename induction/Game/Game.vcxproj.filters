@@ -44,6 +44,8 @@
     <ClCompile Include="Stage_Number.cpp" />
     <ClCompile Include="MoveBed_zengo.cpp" />
     <ClCompile Include="Exit.cpp" />
+    <ClCompile Include="Poison.cpp" />
+    <ClCompile Include="Lever.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -73,6 +75,8 @@
     <ClInclude Include="Stage_Number.h" />
     <ClInclude Include="MoveBed_zengo.h" />
     <ClInclude Include="Exit.h" />
+    <ClInclude Include="Poison.h" />
+    <ClInclude Include="Lever.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc">
@@ -111,6 +115,12 @@
       <Filter>Assets\modelData\StageMap</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\BlackUnityChan.fbx">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Poison\huzitubo.fbx">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Lever\Lever.fbx">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
   </ItemGroup>
