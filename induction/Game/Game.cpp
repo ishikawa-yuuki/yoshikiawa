@@ -5,6 +5,7 @@
 #include "Human.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "MistEnemy.h"
 #include "MoveBed.h"
 #include "MoveBed_zengo.h"
 #include "Title.h"
@@ -26,6 +27,7 @@ Game::~Game()
 	DeleteGO(m_player);
 	DeleteGO(m_human);
 	DeleteGO(m_enemy);
+	DeleteGO(m_mistenemy);
 	DeleteGO(m_background);
 	DeleteGO(m_exit);
 	////////////////
@@ -41,8 +43,10 @@ Game::~Game()
 	for (auto&moveBed_zengo_long : m_moveBed_zengo2List) {
 		DeleteGO(moveBed_zengo_long);
 	}
+	for (auto&m_lightobject : m_lightobjectList) {
+		DeleteGO(m_lightobject);
+	}
 	DeleteGO(m_gamecamera);
-	DeleteGO(m_lightobject);
 }
 
 bool Game::Start()
@@ -55,18 +59,20 @@ bool Game::Start()
 	m_human = NewGO<Human>(0, "Human");
 	m_gamecamera = NewGO<GameCamera>(0, "GameCamera");
 	m_fade = FindGO<Fade>("Fade");
+	m_mistenemy = NewGO<MistEnemy>(0, "mist");//å„Ç≈levelÇ…ëgÇ›çûÇ›
 	/////////////////////////
 	m_poison = NewGO<Poison>(0, "Poison");
 	m_lever = NewGO<Lever>(0, "Lever");
 
-	m_level.Init(L"level/level_Stage1_sisaku.tkl", [&](LevelObjectData& objdata) {
+	m_level.Init(L"level/kari.tkl", [&](LevelObjectData& objdata) {
 		if (objdata.EqualObjectName(L"Stage1")) {
 			m_background = NewGO<BackGround>(0, "BackGround");
 			return true;
 		}
 		if (objdata.EqualObjectName(L"lanthanum")) {
-			m_lightobject = NewGO<Light_Object>(0, "LightObject");
+			Light_Object* m_lightobject = NewGO<Light_Object>(0, "LightObject");
 			m_lightobject->SetPosition(objdata.position);//ééå±ÇµÇΩÇ¢Ç»ÇÁ{0,0,0}
+			m_lightobjectList.push_back(m_lightobject);
 			return true;
 		}
 		//ìÆÇ≠è∞ÇÕ2éÌóﬁÇ†ÇÈÅAMoveBedÇÕâ°à⁄ìÆÇ∑ÇÈÇ‡ÇÃ

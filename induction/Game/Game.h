@@ -6,6 +6,7 @@ class Fade;
 class Human;
 class Player;
 class Enemy;
+class MistEnemy;
 class MoveBed;
 class MoveBed_zengo;
 class Light_Object;
@@ -47,9 +48,9 @@ private:
 	Human * m_human;
 	Player* m_player;
 	Enemy* m_enemy;
+	MistEnemy* m_mistenemy;
 	BackGround* m_background;
 	GameCamera * m_gamecamera;
-	Light_Object* m_lightobject;
 	Exit* m_exit;
 	///////////////////
 	Poison* m_poison;
@@ -80,5 +81,6 @@ private:
 	std::vector<MoveBed*> m_moveBedList;
 	std::vector<MoveBed_zengo*> m_moveBed_zengoList;
 	std::vector<MoveBed_zengo*> m_moveBed_zengo2List;
+	std::vector<Light_Object*> m_lightobjectList;
 };
 

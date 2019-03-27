@@ -4,7 +4,9 @@ class Player;
 class Game;
 class GameOver;
 class Fade;
+class MistEnemy;
 class Light_Object;
+class Exit;
 class Human : public IGameObject
 {
 public:
@@ -17,6 +19,10 @@ public:
 	//ゲーム中の普通の動きをするときの関数
 	void Move();
 	void Turn();
+	//Mistenemyに連れていかれているときの処理
+	void TakingMove();
+	//LightObjectを見つけたときの処理
+	void Light_Move();
 	//プレイヤーのアニメの変更
 	void AnimeControll();
 	//やったか！を判定する
@@ -64,8 +70,10 @@ private:
 	//スキンモデルレンダラー
 	prefab::CSkinModelRender* m_skinModelRender = nullptr;
 	Player* m_player;
+	MistEnemy* m_mistenemy;
 	Game* m_game;
 	Fade* m_fade;
+	Exit* m_exit;
 	Light_Object* m_lightObject;
 	CVector3 m_position = { 0.0f,0.0f,700.0f };
 	CVector3 m_movespeed = CVector3::Zero;
@@ -100,5 +108,9 @@ private:
 	bool m_Clear_one = false;
 	//ゲームクリアの余韻用
 	float m_timer = 0;
+	//距離調べ
+	float m_nearLen = 10000.0f;
+	//一番近いライト検索
+	Light_Object* m_nearLight = nullptr;
 };
 

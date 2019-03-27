@@ -49,7 +49,7 @@ void Light_Object::Update()
 
 	diff = m_player->GetPosition() - m_position;
 	if (!m_isLightOn) {
-		if (diff.LengthSq() < 500.0f*500.0f) {
+		if (diff.LengthSq() < 100.0f*100.0f) {
 			m_isLightOn = true;
 			housenlight();
 			//InitPointLight();
@@ -77,6 +77,7 @@ void Light_Object::InitPointLight()
 }
 
 void Light_Object::Dirlight()
+
 {
 	//ディレクションライト
 	//太陽光のようなライトでゲーム全体を包むような光を放つ

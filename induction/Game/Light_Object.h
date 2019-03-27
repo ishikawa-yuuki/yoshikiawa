@@ -22,6 +22,10 @@ public:
 	{
 		return m_position;
 	}
+	bool GetLightOn()const
+	{
+		return m_isLightOn;
+	}
 private:
 	prefab::CSkinModelRender* m_skinModelRender = nullptr;
 	//レベルデザインで設計するのでとりあえず仮

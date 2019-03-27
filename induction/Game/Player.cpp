@@ -20,7 +20,7 @@ bool Player::Start()
 	m_effect = NewGO<prefab::CEffect>(0);
 	m_effect->Play(L"effect/hikari.efk");
 	m_effect->SetScale({ 30.0f,30.0f,30.0f });
-	m_position.y = 100.0f;
+	m_position.y = 50.0f;
 	m_charaCon.Init(
 		20.0f,
 		20.0f,

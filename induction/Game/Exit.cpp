@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Exit.h"
-
+#include "Human.h"
 
 Exit::Exit()
 {
@@ -14,6 +14,8 @@ Exit::~Exit()
 
 bool Exit::Start()
 {
+	m_human = FindGO<Human>("Human");
+
 	m_skinModelRender = NewGO<prefab::CSkinModelRender>(0);
 	m_skinModelRender->Init(L"modelData/Goal/Goal.cmo");
 
@@ -25,5 +27,5 @@ bool Exit::Start()
 
 void Exit::Update()
 {
-	
+
 }

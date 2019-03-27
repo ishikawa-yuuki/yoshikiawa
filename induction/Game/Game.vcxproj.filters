@@ -44,6 +44,7 @@
     <ClCompile Include="Stage_Number.cpp" />
     <ClCompile Include="MoveBed_zengo.cpp" />
     <ClCompile Include="Exit.cpp" />
+    <ClCompile Include="MistEnemy.cpp" />
     <ClCompile Include="Poison.cpp" />
     <ClCompile Include="Lever.cpp" />
   </ItemGroup>
@@ -75,6 +76,7 @@
     <ClInclude Include="Stage_Number.h" />
     <ClInclude Include="MoveBed_zengo.h" />
     <ClInclude Include="Exit.h" />
+    <ClInclude Include="MistEnemy.h" />
     <ClInclude Include="Poison.h" />
     <ClInclude Include="Lever.h" />
   </ItemGroup>
