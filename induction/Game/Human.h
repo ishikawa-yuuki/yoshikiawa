@@ -112,5 +112,7 @@ private:
 	float m_nearLen = 10000.0f;
 	//ˆê”Ô‹ß‚¢ƒ‰ƒCƒgŒŸõ
 	Light_Object* m_nearLight = nullptr;
+	//suiltu
+	bool flag = false;
 };
 

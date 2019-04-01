@@ -49,7 +49,8 @@ void Light_Object::Update()
 
 	diff = m_player->GetPosition() - m_position;
 	if (!m_isLightOn) {
-		if (diff.LengthSq() < 100.0f*100.0f) {
+		if (m_player->GetColor() == 0
+			&&diff.LengthSq() < 100.0f*100.0f) {
 			m_isLightOn = true;
 			housenlight();
 			//InitPointLight();
@@ -58,6 +59,13 @@ void Light_Object::Update()
 			m_effect->Play(L"effect/spotlight.efk");
 			m_effect->SetScale({ 4.0f, 4.0f, 4.0f });
 			m_effect->SetPosition(m_position);
+		}
+	}
+	else {
+		if (m_player->GetColor() == 1
+			&& diff.LengthSq() < 100.0f*100.0f) {
+			m_isLightOn = false;
+			DeleteGO(m_effect);
 		}
 	}
 }

@@ -11,7 +11,7 @@ private:
     //‚±‚±‚¾‚¯private‚É‚µ‚Ä‚¢‚Ü‚·B
 	enum Color {
 		hikari_hutu,
-		hikari_red
+		hikari_black
 	};
 	Color m_color = hikari_hutu;
 public:
@@ -44,7 +44,7 @@ public:
 		case hikari_hutu:
 			number = 0;
 			break;
-		case hikari_red:
+		case hikari_black:
 			number = 1;
 			break;
 		}

@@ -27,10 +27,7 @@ bool Human::Start()
 	m_player = FindGO<Player>("Player");
 	m_game = FindGO<Game>("Game");
 	m_fade = FindGO<Fade>("Fade");
-	QueryGOs<Light_Object>("LightObject", [&](Light_Object* light) {
-		light = FindGO<Light_Object>("LightObject");
-		return true;
-	});
+	//m_lightObject = FindGO<Light_Object>("LightObject");
 	m_mistenemy = FindGO<MistEnemy>("mist");
 	m_exit = FindGO<Exit>("Exit");
 
@@ -80,13 +77,17 @@ void Human::Update()
 		else {
 			QueryGOs<Light_Object>("LightObject", [&](Light_Object* light) {
 				if (light->GetLightOn() == true) {
+					m_lightObject = light;
 					Light_Move();
+					return false;
 				}
 				else if (m_mistenemy->Getstate() == 2) {
 					TakingMove();
+					return false;
 				}
 				else {
 					Move();
+					return false;
 				}
 				return true;
 			});
@@ -150,7 +151,7 @@ void Human::Move()
 					if (diff.LengthSq() >= 800.0f*800.0f) {//プレイヤーと離れすぎたときにだせるmovespeedの最高速
 						diff.y = 0.0f;
 						diff.Normalize();
-						diff *= -40.0f;//-だと近づく+なら遠のく
+						diff *= -30.0f;//-だと近づく+なら遠のく
 						m_movespeed = diff;
 						m_movespeed = m_movespeed * humanspeed;// *GameTime().GetFrameDeltaTime();
 					}
@@ -234,12 +235,10 @@ void Human::Light_Move()
 	if (!m_Clear_one) {
 		//死なない時の普通の処理
 		if (!m_isDead) {
-			QueryGOs<Light_Object>("LightObject",[&](Light_Object* light) {
-			
-			CVector3 diff = m_position - light->GetPosition();
-			if (diff.Length() > m_nearLen) {
+			CVector3 diff = m_position - m_lightObject->GetPosition();
+			if (diff.Length() < m_nearLen) {
 				m_nearLen = diff.Length();
-				m_nearLight = light;
+				m_nearLight = m_lightObject;
 			}
 			//Yの数値は除外
 			//diff.y = 0.0f;
@@ -248,13 +247,11 @@ void Human::Light_Move()
 			}
 			else {
 				auto humanspeed = 300.0f;
-				m_movespeed = light->GetPosition() - m_position;
+				m_movespeed = m_nearLight->GetPosition() - m_position;
 				m_movespeed.y = 0.0f;
 				m_movespeed.Normalize();
 				m_movespeed = m_movespeed * humanspeed;
 			}
-			return true;
-			});
 		}
 		else
 		{

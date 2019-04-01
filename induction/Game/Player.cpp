@@ -104,7 +104,7 @@ void Player::Color_Change()
 	if (Pad(0).IsTrigger(enButtonUp)) {
 		switch (m_color) {
 		case hikari_hutu:
-			m_color = hikari_red;
+			m_color = hikari_black;
 			m_effect->Release();
 			m_effect->Play(L"effect/red_hikari.efk");
 			m_effect->SetScale({ 30.0f,30.0f,30.0f });
@@ -112,7 +112,7 @@ void Player::Color_Change()
 	}
 	else if (Pad(0).IsTrigger(enButtonDown)) {
 		switch (m_color){
-		case hikari_red:
+		case hikari_black:
 			m_color = hikari_hutu;
 			m_effect->Release();
 			m_effect->Play(L"effect/hikari.efk");
