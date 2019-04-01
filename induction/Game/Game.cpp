@@ -13,6 +13,9 @@
 #include "GameCamera.h"
 #include "BackGround.h"
 #include "Exit.h"
+/////////////////
+#include "Poison.h"
+#include "Lever.h"
 
 Game::Game()
 {
@@ -27,6 +30,10 @@ Game::~Game()
 	DeleteGO(m_mistenemy);
 	DeleteGO(m_background);
 	DeleteGO(m_exit);
+	////////////////
+	DeleteGO(m_poison);
+	DeleteGO(m_lever);
+
 	for (auto&moveBed : m_moveBedList) {
 		DeleteGO(moveBed);
 	}
@@ -53,6 +60,9 @@ bool Game::Start()
 	m_gamecamera = NewGO<GameCamera>(0, "GameCamera");
 	m_fade = FindGO<Fade>("Fade");
 	m_mistenemy = NewGO<MistEnemy>(0, "mist");//å„Ç≈levelÇ…ëgÇ›çûÇ›
+	/////////////////////////
+	m_poison = NewGO<Poison>(0, "Poison");
+	m_lever = NewGO<Lever>(0, "Lever");
 
 	m_level.Init(L"level/kari.tkl", [&](LevelObjectData& objdata) {
 		if (objdata.EqualObjectName(L"Stage1")) {

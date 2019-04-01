@@ -1773,6 +1773,7 @@
     <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="Help.cpp" />
     <ClCompile Include="Human.cpp" />
+    <ClCompile Include="Lever.cpp" />
     <ClCompile Include="Light_Object.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MistEnemy.cpp" />
@@ -1780,6 +1781,7 @@
     <ClCompile Include="MoveBed_zengo.cpp" />
     <ClCompile Include="Path.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Poison.cpp" />
     <ClCompile Include="SSGameCamera.cpp" />
     <ClCompile Include="SSHuman.cpp" />
     <ClCompile Include="SSPlayer.cpp" />
@@ -1821,11 +1823,13 @@
     <ClInclude Include="Help.h" />
     <ClInclude Include="Human.h" />
     <ClInclude Include="MistEnemy.h" />
+    <ClInclude Include="Lever.h" />
     <ClInclude Include="MoveBed.h" />
     <ClInclude Include="Light_Object.h" />
     <ClInclude Include="MoveBed_zengo.h" />
     <ClInclude Include="Path.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Poison.h" />
     <CLInclude Include="resource.h" />
     <ClInclude Include="SSGameCamera.h" />
     <ClInclude Include="SSHuman.h" />
@@ -1840,10 +1844,12 @@
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\BlackUnityChan.fbx" />
     <MeshContentTask Include="Assets\modelData\Goal\Goal.fbx" />
+    <MeshContentTask Include="Assets\modelData\Lever\Lever.fbx" />
     <MeshContentTask Include="Assets\modelData\LightObject\lanthanum.fbx" />
     <MeshContentTask Include="Assets\modelData\LightObject\mini_lanthanum.fbx" />
     <MeshContentTask Include="Assets\modelData\MoveBed\MoveBed1.fbx" />
     <MeshContentTask Include="Assets\modelData\MoveBed\MoveBed2.fbx" />
+    <MeshContentTask Include="Assets\modelData\Poison\huzitubo.fbx" />
     <MeshContentTask Include="Assets\modelData\StageMap\Stage1.fbx" />
     <MeshContentTask Include="Assets\modelData\StageMap\stage_test.fbx" />
     <MeshContentTask Include="Assets\modelData\StageSelect\SS.fbx" />
