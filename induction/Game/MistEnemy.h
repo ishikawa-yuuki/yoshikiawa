@@ -2,6 +2,8 @@
 #include "tkEngine/graphics/effect/tkEffect.h"
 class Player;
 class Human;
+class Light_Object;
+class Light_Object2;
 class MistEnemy : public IGameObject
 {
 public:
@@ -30,6 +32,8 @@ private:
 	CVector3 m_moveSpeed = CVector3::Zero;
 	Player* m_player;
 	Human* m_human;
+	Light_Object* m_lightObject;
+	Light_Object2* m_lightObject2;
 	bool m_escape_flag = false;
 	bool m_taking_flag = false;
 	int m_timer = 0;

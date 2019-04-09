@@ -10,6 +10,7 @@
 #include "MoveBed_zengo.h"
 #include "Title.h"
 #include "Light_Object.h"
+#include "Light_Object2.h"
 #include "GameCamera.h"
 #include "BackGround.h"
 #include "Exit.h"
@@ -43,8 +44,12 @@ Game::~Game()
 	for (auto&moveBed_zengo_long : m_moveBed_zengo2List) {
 		DeleteGO(moveBed_zengo_long);
 	}
+	//リストに載せなくてもいいかもしれません
 	for (auto&m_lightobject : m_lightobjectList) {
 		DeleteGO(m_lightobject);
+	}
+	for (auto&m_lightobject2 : m_lightobject2List) {
+		DeleteGO(m_lightobject2);
 	}
 	DeleteGO(m_gamecamera);
 }
@@ -69,14 +74,44 @@ bool Game::Start()
 			m_background = NewGO<BackGround>(0, "BackGround");
 			return true;
 		}
-		if (objdata.EqualObjectName(L"lanthanum")) {
-			Light_Object* m_lightobject = NewGO<Light_Object>(0, "LightObject");
-			m_lightobject->SetPosition(objdata.position);//試験したいなら{0,0,0}
-			m_lightobjectList.push_back(m_lightobject);
+		else if (objdata.ForwardMatchName(L"lanthanum")) {
+			int n = _wtoi(&objdata.name[9]);
+			//ここから下n個目のランタンごとにLight_Object"n"でクラスを作っている。
+			switch (n)
+			{
+			case 1:
+			{
+				Light_Object* m_lightobject = NewGO<Light_Object>(0, "LightObject");
+				m_lightobject->SetPosition(objdata.position);//試験したいなら{0,0,0}
+				m_lightobjectList.push_back(m_lightobject);
+			}
+			break;
+			case 2:
+			{
+				Light_Object2* m_lightobject2 = NewGO<Light_Object2>(0, "LightObject2");
+				m_lightobject2->SetPosition(objdata.position);//試験したいなら{0,0,0}
+				m_lightobject2List.push_back(m_lightobject2);
+			}
+			break;
+			//case 3:
+			//{
+			//	Light_Object* m_lightobject3 = NewGO<Light_Object>(0, "LightObject");
+			//	m_lightobject3->SetPosition(objdata.position);//試験したいなら{0,0,0}
+			//	m_lightobjectList.push_back(m_lightobject3);
+			//}
+			//break;
+			//case 4:
+			//{
+			//	Light_Object * m_lightobject4 = NewGO<Light_Object>(0, "LightObject");
+			//	m_lightobject4->SetPosition(objdata.position);//試験したいなら{0,0,0}
+			//	m_lightobjectList.push_back(m_lightobject4);
+			//}
+			//break;
+			}
 			return true;
 		}
 		//動く床は2種類ある、MoveBedは横移動するもの
-		if (objdata.EqualObjectName(L"MoveBed1")) {
+		else if (objdata.EqualObjectName(L"MoveBed1")) {
 			MoveBed* movebed = NewGO<MoveBed>(0,"MoveBed1");
 			//m_movebed = NewGO<MoveBed>(0, "MoveBed");
 			movebed->SetPosition(objdata.position);
@@ -86,7 +121,7 @@ bool Game::Start()
 			return true;
 		}
 		//動く床は2種類ある、MoveBed2は前後移動するもの
-		if (objdata.EqualObjectName(L"MoveBed2")) {
+		else if (objdata.EqualObjectName(L"MoveBed2")) {
 			MoveBed_zengo* movebed2 = NewGO<MoveBed_zengo>(0, "MoveBed2");
 			//m_movebed = NewGO<MoveBed>(0,"MoveBed2");
 			movebed2->SetPosition(objdata.position);
@@ -97,7 +132,7 @@ bool Game::Start()
 			return true;
 		}
 		//MoveBed2_longは移動距離が長くなる。
-		if (objdata.EqualObjectName(L"MoveBed2_long")) {
+		else if (objdata.EqualObjectName(L"MoveBed2_long")) {
 			MoveBed_zengo* movebed2_long = NewGO<MoveBed_zengo>(0, "MoveBed2");
 			//m_movebed = NewGO<MoveBed>(0,"MoveBed2");
 			movebed2_long->SetPosition(objdata.position);
@@ -109,7 +144,7 @@ bool Game::Start()
 			return true;
 		}
 		//オブジェクトねーーむ確認
-		if (objdata.EqualObjectName(L"Goal")) {
+		else if (objdata.EqualObjectName(L"Goal")) {
 			m_exit = NewGO<Exit>(0, "Exit");
 			m_exit->SetPosition(objdata.position);
 			m_exit->SetQrot(objdata.rotation);
@@ -117,7 +152,7 @@ bool Game::Start()
 			return true;
 		}
 		//黒エネミー、黒ユニティ
-		if (objdata.EqualObjectName(L"BlackUnityChan")) {
+		else if (objdata.EqualObjectName(L"BlackUnityChan")) {
 			m_enemy = NewGO<Enemy>(0, "Enemy");
 			m_enemy->SetPosition(objdata.position);
 			m_enemy->SetRotation(objdata.rotation);

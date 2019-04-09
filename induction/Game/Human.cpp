@@ -10,6 +10,7 @@
 #include "Fade.h"
 #include "Exit.h"
 #include "Light_Object.h"
+#include "Light_Object2.h"
 #include "Stage_Select.h"
 
 Human::Human()
@@ -28,7 +29,8 @@ bool Human::Start()
 	m_player = FindGO<Player>("Player");
 	m_game = FindGO<Game>("Game");
 	m_fade = FindGO<Fade>("Fade");
-	//m_lightObject = FindGO<Light_Object>("LightObject");
+	m_lightObject = FindGO<Light_Object>("LightObject");
+	m_lightObject2 = FindGO<Light_Object2>("LightObject2");
 	m_mistenemy = FindGO<MistEnemy>("mist");
 	m_exit = FindGO<Exit>("Exit");
 
@@ -76,22 +78,26 @@ void Human::Update()
 			GameStartMove();
 		}
 		else {
-			QueryGOs<Light_Object>("LightObject", [&](Light_Object* light) {
-				if (light->GetLightOn() == true) {
-					m_lightObject = light;
-					Light_Move();
-					return false;
+			/*QueryGOs<Light_Object>("LightObject", [&](Light_Object* light) {*/
+				//light->GetlightOn() == true;
+				if (m_lightObject->GetLightOn()) {
+					//m_lightObject = light;
+					lanpos(m_lightObject->GetPosition());
+					/*return false;*/
+				}
+				else if (m_lightObject2->GetLightOn()) {
+					lanpos(m_lightObject2->GetPosition());
 				}
 				else if (m_mistenemy->Getstate() == 2) {
 					TakingMove();
-					return false;
+					/*return false;*/
 				}
 				else {
 					Move();
-					return false;
+					/*return false;*/
 				}
-				return true;
-			});
+				/*return true;*/
+			/*});*/
 		}
 	}
 	//Move();
@@ -237,6 +243,13 @@ void Human::Light_Move()
 		//死なない時の普通の処理
 		if (!m_isDead) {
 			CVector3 diff = m_position - m_lightObject->GetPosition();
+			CVector3 diff2 = m_position - m_lightObject->GetPosition();
+
+			//どのランタンが一番近いか選手権。
+			if (diff.LengthSq() > diff2.LengthSq())
+			{
+				diff = diff2;
+			}
 			if (diff.Length() < m_nearLen) {
 				m_nearLen = diff.Length();
 				m_nearLight = m_lightObject;
@@ -415,7 +428,7 @@ void Human::isClear()
 		
 	}
 	else {
-		if (diff.LengthSq() < 100.0f*100.0f
+		if (diff.LengthSq() < 70.0f*70.0f
 			&& !m_Clear_one) {
 			m_skinModelRender->PlayAnimation(enAnimationClip_clear, 0.2f);
 			m_Clear_one = true;
@@ -434,4 +447,22 @@ void Human::isClear()
 			m_fade->StartFadeOut();
 		}
 	}
+}
+
+void Human::lanpos(CVector3 pos)
+{
+	CVector3 diff = pos - m_position;
+
+	if (diff.LengthSq() <= 105.0f * 105.0f) {//プレイヤーと近ければhumanは止まる
+		m_movespeed = CVector3::Zero;
+	}
+	else {
+		auto humanspeed = 300.0f;
+		m_movespeed = diff;
+		m_movespeed.y = 0.0f;
+		m_movespeed.Normalize();
+		m_movespeed = m_movespeed * humanspeed;
+	}
+	CVector3 tpos = m_movespeed + m_Bedspeed;
+	m_position = m_charaCon.Execute(tpos, GameTime().GetFrameDeltaTime());
 }

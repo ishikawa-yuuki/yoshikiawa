@@ -1775,6 +1775,7 @@
     <ClCompile Include="Human.cpp" />
     <ClCompile Include="Lever.cpp" />
     <ClCompile Include="Light_Object.cpp" />
+    <ClCompile Include="Light_Object2.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MistEnemy.cpp" />
     <ClCompile Include="MoveBed.cpp" />
@@ -1788,6 +1789,7 @@
     <ClCompile Include="SSPoint.cpp" />
     <ClCompile Include="Stage_Number.cpp" />
     <ClCompile Include="Stage_Select.cpp" />
+    <ClCompile Include="StarDust.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug_Middle|Win32'">Create</PrecompiledHeader>
@@ -1822,6 +1824,7 @@
     <ClInclude Include="GameOver.h" />
     <ClInclude Include="Help.h" />
     <ClInclude Include="Human.h" />
+    <ClInclude Include="Light_Object2.h" />
     <ClInclude Include="MistEnemy.h" />
     <ClInclude Include="Lever.h" />
     <ClInclude Include="MoveBed.h" />
@@ -1837,6 +1840,7 @@
     <ClInclude Include="SSPoint.h" />
     <ClInclude Include="Stage_Number.h" />
     <ClInclude Include="Stage_Select.h" />
+    <ClInclude Include="StarDust.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Title.h" />
     <ResourceCompile Include="Game.rc" />
