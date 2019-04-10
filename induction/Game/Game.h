@@ -10,6 +10,7 @@ class MistEnemy;
 class MoveBed;
 class MoveBed_zengo;
 class Light_Object;
+class Light_Object2;
 class GameCamera;
 class BackGround;
 class Exit;
@@ -72,14 +73,15 @@ private:
 	pose m_state = retire;
 	bool m_Gamesyuuryou = false;
 	bool m_damege = false;
-
 	//level
 	CLevel m_level;
+	int n = 1;
 	//‰Â•Ï’·”z—ñ
 	std::vector<MoveBed*> m_moveBedList;
 	std::vector<MoveBed_zengo*> m_moveBed_zengoList;
 	std::vector<MoveBed_zengo*> m_moveBed_zengo2List;
 	std::vector<Light_Object*> m_lightobjectList;
+	std::vector<Light_Object2*> m_lightobject2List;
 	std::vector<Lever*>m_leverList;
 	std::vector<Lever*>m_lever1List;
 	std::vector<Poison*>m_poisonList;

@@ -3,18 +3,18 @@
 
 class Player;
 class Human;
-class Light_Object : public IGameObject
+class Light_Object2 : public IGameObject
 {
 public:
-	Light_Object();
-	~Light_Object();
+	Light_Object2();
+	~Light_Object2();
 	bool Start();
 	void Update();
 	void InitPointLight();
 	void Dirlight();
 	void housenlight();
 	//ポジションをレベルで入れる。
-	void SetPosition(const CVector3& pos) 
+	void SetPosition(const CVector3& pos)
 	{
 		m_position = pos;
 	}
@@ -25,7 +25,7 @@ public:
 	}
 	bool GetLightOn()const
 	{
-		return m_isLightOn;
+		return m_isLightOn2;
 	}
 private:
 	prefab::CSkinModelRender* m_skinModelRender = nullptr;
@@ -33,11 +33,11 @@ private:
 	CVector3 m_position = { 0.0f,-70.0f,-3000.0f };
 	Player* m_player;
 	Human* m_human;
-	bool m_isLightOn = false;
+	bool m_isLightOn2 = false;
 	//ライト。
-	prefab::CDirectionLight* m_lig;			
+	prefab::CDirectionLight* m_lig;
 	//ライトの方向。
-	CVector3 m_lightDir;					
+	CVector3 m_lightDir;
 	prefab::CDirectionLight* m_directionLig = nullptr;
 	//housenlight()で使う。
 	CShaderResourceView m_normalMapSRV;

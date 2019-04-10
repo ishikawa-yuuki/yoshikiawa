@@ -48,6 +48,8 @@
     <ClCompile Include="Poison.cpp" />
     <ClCompile Include="Lever.cpp" />
     <ClCompile Include="Lightstand.cpp" />
+    <ClCompile Include="Light_Object2.cpp" />
+    <ClCompile Include="StarDust.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -81,6 +83,8 @@
     <ClInclude Include="Poison.h" />
     <ClInclude Include="Lever.h" />
     <ClInclude Include="Lightstand.h" />
+    <ClInclude Include="Light_Object2.h" />
+    <ClInclude Include="StarDust.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc">

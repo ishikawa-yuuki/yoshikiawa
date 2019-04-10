@@ -31,7 +31,7 @@ bool Player::Start()
 	//m_charaCon.SetPosition(m_position);
 	//m_effect->SetPosition(m_position);
 	m_ptLight = NewGO<prefab::CPointLight>(0);
-	m_ptLight->SetColor({ 1000.0f, 1000.0f, 1000.0f });
+	m_ptLight->SetColor({ 10.0f, 10.0f, 10.0f });//1000,1000,1000でLEDみたいな光が出る
 	CVector3 attn;
 	attn.x = 1000.0f;
 	attn.y = 10.0f;
@@ -101,22 +101,31 @@ void Player::Move()
 
 void Player::Color_Change()
 {
+	//停止ではなくブラックホールモードになりました。使用はまだ変わってませんが…
 	if (Pad(0).IsTrigger(enButtonUp)) {
 		switch (m_color) {
 		case hikari_hutu:
-			m_color = hikari_red;
+			m_color = hikari_black;
 			m_effect->Release();
-			m_effect->Play(L"effect/red_hikari.efk");
+			m_effect->Play(L"effect/blackhole.efk");
 			m_effect->SetScale({ 30.0f,30.0f,30.0f });
+			CVector3 attn;
+			attn.x = 200.0f;
+			attn.y = 10.0f;
+			m_ptLight->SetAttn(attn);
 		}
 	}
 	else if (Pad(0).IsTrigger(enButtonDown)) {
 		switch (m_color){
-		case hikari_red:
+		case hikari_black:
 			m_color = hikari_hutu;
 			m_effect->Release();
 			m_effect->Play(L"effect/hikari.efk");
 			m_effect->SetScale({ 30.0f,30.0f,30.0f });
+			CVector3 attn;
+			attn.x = 1000.0f;
+			attn.y = 10.0f;
+			m_ptLight->SetAttn(attn);
 		}
 	}
 }

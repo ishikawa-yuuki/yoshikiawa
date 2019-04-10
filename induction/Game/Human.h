@@ -6,6 +6,7 @@ class GameOver;
 class Fade;
 class MistEnemy;
 class Light_Object;
+class Light_Object2;
 class Exit;
 class Human : public IGameObject
 {
@@ -31,7 +32,8 @@ public:
 	void Hanntei();
 	//クリアかどうか
 	void isClear();
-
+	//ランタンとの距離を把握させる
+	void lanpos(CVector3 pos);
 	/*void PostRender(CRenderContext& rc);*/
 
 	//現在のポジションの値を返す関数。
@@ -59,6 +61,20 @@ public:
 	bool GetisGameOver()const {
 		return m_isGameOver;
 	}
+
+	//void isLantanon()
+	//{
+	//	if (!flag) {
+	//		flag = true;
+	//	}
+	//}
+	//void isLantanoff()
+	//{
+	//	if (flag) {
+	//		flag = false;
+	//	}
+	//}
+
 	//humanを倒すときの関数、enemyとかが使うと思います。
 	void isKill() 
 	{
@@ -75,6 +91,7 @@ private:
 	Fade* m_fade;
 	Exit* m_exit;
 	Light_Object* m_lightObject;
+	Light_Object2* m_lightObject2;
 	CVector3 m_position = { 0.0f,0.0f,700.0f };
 	CVector3 m_movespeed = CVector3::Zero;
 	CVector3 m_Bedspeed = CVector3::Zero;
@@ -114,5 +131,7 @@ private:
 	Light_Object* m_nearLight = nullptr;
 	//後で消す
 	float m_kari = 0.0;
+	//suiltu
+	bool flag = false;
 };
 

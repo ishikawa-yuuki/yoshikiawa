@@ -1,16 +1,16 @@
 #include "stdafx.h"
-#include "Light_Object.h"
+#include "Light_Object2.h"
 #include "Player.h"
 #include "Human.h"
 #include "tkEngine/light/tkDirectionLight.h"
 #include "tkEngine/light/tkPointLight.h"
 
-Light_Object::Light_Object()
+Light_Object2::Light_Object2()
 {
 }
 
 
-Light_Object::~Light_Object()
+Light_Object2::~Light_Object2()
 {
 	DeleteGO(m_skinModelRender);//Queryになるかも
 	if (m_effect != nullptr) {
@@ -26,7 +26,7 @@ Light_Object::~Light_Object()
 	}
 }
 
-bool Light_Object::Start()
+bool Light_Object2::Start()
 {
 	m_player = FindGO<Player>("Player");
 	m_human = FindGO<Human>("Human");
@@ -44,47 +44,42 @@ bool Light_Object::Start()
 	return true;
 }
 
-void Light_Object::Update()
+void Light_Object2::Update()
 {
 	CVector3 diff;
 
 	diff = m_player->GetPosition() - m_position;
 	diff.y = 0.0f;
-	if (!m_isLightOn) {
+	if (!m_isLightOn2) {
 		if (m_player->GetColor() == 0
-			&&diff.LengthSq() < 100.0f*100.0f) {
-			m_isLightOn = true;
+			&& diff.LengthSq() < 100.0f*100.0f) {
+			m_isLightOn2 = true;
+			//m_human->isLantanon();
+			housenlight();
+			//InitPointLight();
+			//Dirlight();使わない
 			m_effect = NewGO<prefab::CEffect>(0);
 			m_effect->Play(L"effect/spotlight.efk");
 			m_effect->SetScale({ 4.0f, 4.0f, 4.0f });
 			m_effect->SetPosition(m_position);
-			//m_human->isLantanon();
-			housenlight();
-			InitPointLight();
-			//Dirlight();使わない
 		}
 	}
 	else {
 		if (m_player->GetColor() == 1
 			&& diff.LengthSq() < 100.0f*100.0f) {
-			m_isLightOn = false;
+			m_isLightOn2 = false;
 			DeleteGO(m_effect);
-			//attnはメンバでもいいかも
-			CVector3 attn = CVector3::Zero;
-			attn.x = 10.0f;//光の影響範囲距離
-			attn.y = 10.0f;//光の減衰
-			m_ptLight->SetAttn(attn);
 		}
 	}
 }
 
-void Light_Object::InitPointLight()
+void Light_Object2::InitPointLight()
 {
 	m_ptLight = NewGO<prefab::CPointLight>(0);
-	CVector3 pointlightpos = m_position;
-	pointlightpos.y = 100.0f;
-	m_ptLight->SetPosition(pointlightpos);//位置決め
-	CVector3 color = { 50.0f,50.0f,25.0f,};
+	//m_position.y = 100.0f;
+	m_position.y += 1.0f;
+	m_ptLight->SetPosition(m_position);//位置決め
+	CVector3 color = { 10.0f,10.0f,0.0f, };
 	m_ptLight->SetColor(color);//色決め
 	CVector3 attn = CVector3::Zero;
 	attn.x = 2000.0f;//光の影響範囲距離
@@ -92,7 +87,7 @@ void Light_Object::InitPointLight()
 	m_ptLight->SetAttn(attn);//影響範囲と減衰の強さ
 }
 
-void Light_Object::Dirlight()
+void Light_Object2::Dirlight()
 
 {
 	//ディレクションライト
@@ -107,7 +102,7 @@ void Light_Object::Dirlight()
 
 }
 
-void Light_Object::housenlight()
+void Light_Object2::housenlight()
 {
 	//わからんけど画像を読み込んで
 	//その画像に色を足している感じがする。
