@@ -12,6 +12,7 @@ public:
 private:
 	prefab::CSpriteRender* m_spriteRender = nullptr;
 	prefab::CSpriteRender* m_arrow = nullptr;
+	prefab::CSoundSource* m_bgm = nullptr;
 	// ‹|‚Ì‰ŠúˆÊ’uAselect1‚Ì‰¡‚É‚ ‚éB
 	CVector3 m_arrowPos{ 250.0f,-80.0f,0.0f };
 	enum Select {

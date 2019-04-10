@@ -14,6 +14,7 @@ Title::~Title()
 {
 	DeleteGO(m_spriteRender);
 	DeleteGO(m_arrow);
+	DeleteGO(m_bgm);
 }
 
 bool Title::Start()
@@ -22,6 +23,9 @@ bool Title::Start()
 	m_spriteRender->Init(L"sprite/Title_induction.dds",1280.0f,720.0f);
 	m_arrow = NewGO<prefab::CSpriteRender>(0);
 	m_arrow->Init(L"sprite/arrow.dds", 32.0f, 32.0f);
+	m_bgm = NewGO<prefab::CSoundSource>(0);
+	m_bgm->Init(L"sound/kari.wav");
+	m_bgm->Play(true);
 	m_fade = FindGO<Fade>("Fade");
 	m_fade->StartFadeIn();
 	return true;
@@ -29,6 +33,7 @@ bool Title::Start()
 
 void Title::Update()
 {
+	
 	if (m_isWaitFadeout) {
 		if (!m_fade->IsFade()) {
 			if (m_select == select1) {
@@ -45,18 +50,18 @@ void Title::Update()
 			}
 		}
 	}
-	else {
-		if (Pad(0).IsTrigger(enButtonA)) {
-			m_isWaitFadeout = true;
-			m_fade->StartFadeOut();
-		}
 		Choice();
-	}
+	
 }
 void Title::Choice()
 {
+	prefab::CSoundSource* ss;
 	const float arrow_move = -100.0f;//‹|‚ÌˆÚ“®‹——£
 	if (Pad(0).IsTrigger(enButtonDown)) {
+		ss = NewGO<prefab::CSoundSource>(0);
+		ss->Init(L"sound/select.wav");
+		ss->SetVolume(0.5f);
+		ss->Play(false);
 		switch (m_select) {
 		case select1:
 			m_select = select2;
@@ -69,6 +74,10 @@ void Title::Choice()
 		}
 	}
 	else if (Pad(0).IsTrigger(enButtonUp)) {
+		ss = NewGO<prefab::CSoundSource>(0);
+		ss->Init(L"sound/select.wav");
+		ss->SetVolume(0.5f);
+		ss->Play(false);
 		switch (m_select) {
 		case select2:
 			m_select = select1;
@@ -80,5 +89,14 @@ void Title::Choice()
 			break;
 		}
 	}
+	else if (Pad(0).IsTrigger(enButtonA)) {
+		ss = NewGO<prefab::CSoundSource>(0);
+		ss->Init(L"sound/decision1.wav");
+		ss->SetVolume(0.5f);
+		ss->Play(false);
+		m_isWaitFadeout = true;
+		m_fade->StartFadeOut();
+	}
+	
 	m_arrow->SetPosition(m_arrowPos);
 }

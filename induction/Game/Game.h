@@ -15,6 +15,7 @@ class BackGround;
 class Exit;
 class Poison;
 class Lever;
+class Lightstand;
 class Game : public IGameObject
 {
 public:
@@ -52,9 +53,6 @@ private:
 	BackGround* m_background;
 	GameCamera * m_gamecamera;
 	Exit* m_exit;
-	///////////////////
-	Poison* m_poison;
-	Lever* m_lever;
 
 	prefab::CSkinModelRender* m_goal = nullptr;
 	prefab::CSpriteRender* m_sprite_Retire = nullptr;
@@ -82,5 +80,10 @@ private:
 	std::vector<MoveBed_zengo*> m_moveBed_zengoList;
 	std::vector<MoveBed_zengo*> m_moveBed_zengo2List;
 	std::vector<Light_Object*> m_lightobjectList;
+	std::vector<Lever*>m_leverList;
+	std::vector<Lever*>m_lever1List;
+	std::vector<Poison*>m_poisonList;
+	std::vector<Poison*>m_poison1List;
+	std::vector<Lightstand*>m_Lightstand1List;
 };
 
