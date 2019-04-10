@@ -2,7 +2,6 @@
 <!--DockPanel configuration file. Author: Weifen Luo, all rights reserved.-->
 <!--!!! AUTOMATICALLY GENERATED FILE. DO NOT MODIFY !!!-->
 <DockPanel FormatVersion="1.0" DockLeftPortion="0.25" DockRightPortion="0.382608711719513" DockTopPortion="0.25" DockBottomPortion="0.200000002980232" ActiveDocumentPane="0" ActivePane="4">
-<DockPanel FormatVersion="1.0" DockLeftPortion="0.25" DockRightPortion="0.382608711719513" DockTopPortion="0.25" DockBottomPortion="0.200000002980232" ActiveDocumentPane="0" ActivePane="1">
   <Contents Count="10">
     <Content ID="0" PersistString="Effekseer.GUI.DockViewer" AutoHidePortion="0.25" IsHidden="False" IsFloat="False" />
     <Content ID="1" PersistString="Effekseer.GUI.DockViewerController" AutoHidePortion="0.25" IsHidden="False" IsFloat="False" />
@@ -73,8 +72,6 @@
         <Pane ID="0" RefID="2" PrevPane="-1" Alignment="Bottom" Proportion="0.5" />
         <Pane ID="1" RefID="3" PrevPane="2" Alignment="Right" Proportion="0.65" />
         <Pane ID="2" RefID="4" PrevPane="3" Alignment="Right" Proportion="0.539942920207977" />
-        <Pane ID="1" RefID="3" PrevPane="2" Alignment="Right" Proportion="0.81058394908905" />
-        <Pane ID="2" RefID="4" PrevPane="3" Alignment="Right" Proportion="0.231957301497459" />
         <Pane ID="3" RefID="5" PrevPane="3" Alignment="Bottom" Proportion="0.5" />
         <Pane ID="4" RefID="6" PrevPane="5" Alignment="Bottom" Proportion="0.5" />
         <Pane ID="5" RefID="7" PrevPane="2" Alignment="Bottom" Proportion="0.75" />
