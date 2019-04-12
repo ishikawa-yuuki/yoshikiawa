@@ -134,5 +134,7 @@ private:
 	prefab::CPointLight* m_nearPointLight = nullptr;
 	//suiltu
 	bool flag = false;
+	//å„Ç≈è¡Ç∑
+	float m_kari = 0.0;
 };
 

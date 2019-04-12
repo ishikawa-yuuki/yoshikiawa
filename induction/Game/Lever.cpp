@@ -21,9 +21,6 @@ bool Lever::Start()
 	m_animClip[enAnimationClip_OFF].SetLoopFlag(false);
 	m_skin = NewGO<prefab::CSkinModelRender>(0);
 	m_skin->Init(L"modelData/Lever/Lever.cmo", m_animClip, enAnimationClip_num);
-	//m_position.y = -50;
-	m_position.z = -800;
-	//m_position.x = 200;
 	m_skin->SetPosition(m_position);
 	m_skin->PlayAnimation(enAnimationClip_ON, 0.2);
 	return true;
@@ -32,16 +29,46 @@ void Lever::Update()
 {
 	CVector3 diff = m_position - m_player->GetPosition();
 	diff.y = 0;
-	if (diff.LengthSq() <= 100.0f*100.0f&& m_timer >= 2.0f) {
-		if (m_State) {
-			m_skin->PlayAnimation(enAnimationClip_OFF, 0.2);
-			m_State = false;
+	switch (m_levernum) {
+	case Lever0:
+		if (diff.LengthSq() <= 100.0f*100.0f&& m_timer >= 2.0f) {
+			if (m_State[0]) {
+				m_skin->PlayAnimation(enAnimationClip_OFF, 0.2);
+				m_State[0] = false;
+			}
+			else {
+				m_skin->PlayAnimation(enAnimationClip_ON, 0.2);
+				m_State[0] = true;
+			}
+			m_timer = 0;
 		}
-		else {
-			m_skin->PlayAnimation(enAnimationClip_ON, 0.2);
-			m_State = true;
+		m_timer += GameTime().GetFrameDeltaTime();
+		break;
+	case Lever1:
+		if (diff.LengthSq() <= 100.0f*100.0f&& m_timer >= 2.0f) {
+			if (m_State[1]) {
+				m_skin->PlayAnimation(enAnimationClip_OFF, 0.2);
+				m_State[1] = false;
+			}
+			else {
+				m_skin->PlayAnimation(enAnimationClip_ON, 0.2);
+				m_State[1] = true ;
+			}
+			m_timer = 0;
 		}
-		m_timer = 0;
-	 }
-	m_timer += GameTime().GetFrameDeltaTime();
+		m_timer += GameTime().GetFrameDeltaTime();
+		break;
+	};
+	
+}
+void Lever::SetLeverNumber(const int num)
+{
+	switch (num) {
+	case 0:
+		m_levernum = Lever0;
+		break;
+	case 1:
+		m_levernum = Lever1;
+		break;
+	}
 }
