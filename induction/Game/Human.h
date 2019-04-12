@@ -82,6 +82,10 @@ public:
 			m_isDead = true;
 		}
 	}
+	prefab::CPointLight* GetNearPointLight() const
+	{
+		return m_nearPointLight;
+	}
 private:
 	//スキンモデルレンダラー
 	prefab::CSkinModelRender* m_skinModelRender = nullptr;
@@ -90,8 +94,7 @@ private:
 	Game* m_game;
 	Fade* m_fade;
 	Exit* m_exit;
-	Light_Object* m_lightObject;
-	Light_Object2* m_lightObject2;
+	//Light_Object2* m_lightObject2;
 	CVector3 m_position = { 0.0f,0.0f,700.0f };
 	CVector3 m_movespeed = CVector3::Zero;
 	CVector3 m_Bedspeed = CVector3::Zero;
@@ -128,7 +131,7 @@ private:
 	//距離調べ
 	float m_nearLen = 10000.0f;
 	//一番近いライト検索
-	Light_Object* m_nearLight = nullptr;
+	prefab::CPointLight* m_nearPointLight = nullptr;
 	//suiltu
 	bool flag = false;
 };

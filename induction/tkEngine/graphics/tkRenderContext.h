@@ -132,14 +132,40 @@ namespace tkEngine {
 		}
 		/*!
 		* @brief	レンダリングターゲットビューを設定。
+		*@param[in]	renderTarget	バインドするレンダリングターゲット。
+		*/
+		void OMSetRenderTarget(CRenderTarget& renderTarget)
+		{
+			CRenderTarget* renderTargets[] = {
+				&renderTarget
+			};
+			OMSetRenderTargets(1, renderTargets);
+		}
+		void OMSetRenderTarget(ID3D11RenderTargetView* renderTarget, ID3D11DepthStencilView* depthStencliView)
+		{
+			ID3D11RenderTargetView* renderTargets[] = {
+				renderTarget
+			};
+			OMSetRenderTargets(1, renderTargets, depthStencliView);
+		}
+		/*!
+		* @brief	レンダリングターゲットビューを設定。
 		* @details
 		*  ID3D11DeviceContext::OMSetRenderTargetsと同じ。
 		*@param[in]	NumViews		バインドするレンダリングターゲットの数。
 		*@param[in]	renderTarget	バインドするレンダリングターゲットの配列へのポインタ。
 		*/
+		
 		void OMSetRenderTargets(unsigned int NumViews, CRenderTarget* renderTarget[]);
 		void OMSetRenderTargets(unsigned int NumViews, ID3D11RenderTargetView *const *ppRenderTargetViews, ID3D11DepthStencilView *pDepthStencilView)
 		{
+			ZeroMemory(m_renderTargetViews, sizeof(m_renderTargetViews));
+			ZeroMemory(m_rowRenderTargetViews, sizeof(m_renderTargetViews));
+			m_rowDepthStencilView = nullptr;
+
+			memcpy(m_rowRenderTargetViews, ppRenderTargetViews, sizeof(CRenderTarget*) * NumViews);
+			m_rowDepthStencilView = pDepthStencilView;
+
 			m_pD3DDeviceContext->OMSetRenderTargets(NumViews, ppRenderTargetViews, pDepthStencilView);
 			m_numRenderTargetView = NumViews;
 		}
@@ -193,11 +219,18 @@ namespace tkEngine {
 		*/
 		void ClearRenderTargetView(unsigned int rtNo, float* clearColor, bool isClearDepthStencil = true)
 		{
-			if (rtNo < m_numRenderTargetView
-				&& m_renderTargetViews != nullptr) {
-				m_pD3DDeviceContext->ClearRenderTargetView(m_renderTargetViews[rtNo]->GetRenderTargetView(), clearColor);
-				if (m_renderTargetViews[0]->GetDepthStencilView() != nullptr && isClearDepthStencil) {
-					m_pD3DDeviceContext->ClearDepthStencilView(m_renderTargetViews[0]->GetDepthStencilView(), D3D11_CLEAR_DEPTH, 1.0f, 0);
+			if (rtNo < m_numRenderTargetView){
+				if (m_renderTargetViews[rtNo] != nullptr) {
+					m_pD3DDeviceContext->ClearRenderTargetView(m_renderTargetViews[rtNo]->GetRenderTargetView(), clearColor);
+					if (m_renderTargetViews[0]->GetDepthStencilView() != nullptr && isClearDepthStencil) {
+						m_pD3DDeviceContext->ClearDepthStencilView(m_renderTargetViews[0]->GetDepthStencilView(), D3D11_CLEAR_DEPTH, 1.0f, 0);
+					}
+				}
+				else if (m_rowRenderTargetViews[rtNo] != nullptr) {
+					m_pD3DDeviceContext->ClearRenderTargetView(m_rowRenderTargetViews[rtNo], clearColor);
+					if (m_rowDepthStencilView != nullptr && isClearDepthStencil) {
+						m_pD3DDeviceContext->ClearDepthStencilView(m_rowDepthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
+					}
 				}
 			}
 		}
@@ -547,6 +580,8 @@ namespace tkEngine {
 		ID3D11DeviceContext*			m_pD3DDeviceContext = nullptr;			//!<描画コマンドを積んでいくコンテキスト。
 		D3D11_VIEWPORT 					m_viewport;								//!<ビューポート。
 		CRenderTarget*					m_renderTargetViews[MRT_MAX] = { nullptr };
+		ID3D11RenderTargetView*			m_rowRenderTargetViews[MRT_MAX] = { nullptr };
+		ID3D11DepthStencilView*			m_rowDepthStencilView = nullptr;
 		unsigned int 					m_numRenderTargetView = 0;		//!<レンダリングターゲットビューの数。
 		EnRenderStep					m_renderStep = enRenderStep_LightCulling;	//!<レンダリングステップ。
 	};

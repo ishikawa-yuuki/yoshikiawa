@@ -27,6 +27,7 @@ bool BackGround::Start()
 		m_physicsStaticObject.CreateMesh(m_position, CQuaternion::Identity, CVector3::One, m_skinModelRender);
 		break;
 	}
+	m_skinModelRender->SetShadowReceiverFlag(true);
 	DeleteGO(m_stagenum);
 	return true;
 }

@@ -1,5 +1,6 @@
 #pragma once
 #include "tkEngine/graphics/effect/tkEffect.h"
+#include "tkEngine/light/tkPointLight.h"
 
 class Player;
 class Human;
@@ -26,6 +27,14 @@ public:
 	bool GetLightOn()const
 	{
 		return m_isLightOn;
+	}
+	CVector4 GetPointLightAttn() const
+	{
+		return m_ptLight->GetAttn();
+	}
+	prefab::CPointLight* GetPointLight() const
+	{
+		return m_ptLight;
 	}
 private:
 	prefab::CSkinModelRender* m_skinModelRender = nullptr;

@@ -10,9 +10,18 @@
 #include "Fade.h"
 #include "Exit.h"
 #include "Light_Object.h"
-#include "Light_Object2.h"
+//#include "Light_Object2.h"
 #include "Stage_Select.h"
 
+
+//ライトの強さを計算する。
+float CalcLightPower(CVector3 charaPos, CVector3 lightPos, CVector4 attn)
+{
+	float len = (charaPos - lightPos).Length();
+	float lightRate = len / attn.x;
+	float lightPower = std::max<float>(1.0 - lightRate * lightRate, 0.0f);
+	return pow(lightPower, attn.y);
+}
 Human::Human()
 {
 }
@@ -25,12 +34,11 @@ Human::~Human()
 
 bool Human::Start()
 {
-	
+
 	m_player = FindGO<Player>("Player");
 	m_game = FindGO<Game>("Game");
 	m_fade = FindGO<Fade>("Fade");
-	m_lightObject = FindGO<Light_Object>("LightObject");
-	m_lightObject2 = FindGO<Light_Object2>("LightObject2");
+	
 	m_mistenemy = FindGO<MistEnemy>("mist");
 	m_exit = FindGO<Exit>("Exit");
 
@@ -56,7 +64,7 @@ bool Human::Start()
 	//trueにしたら問題がある奴だけfalseに直した。
 	
 	m_skinModelRender = NewGO<prefab::CSkinModelRender>(0);
-	m_skinModelRender->Init(L"modelData/unityChan.cmo",m_animClip,enAnimationClip_num,enFbxUpAxisY);
+	m_skinModelRender->Init(L"modelData/UnityChan.cmo",m_animClip,enAnimationClip_num,enFbxUpAxisY);
 	m_charaCon.Init(
 		20.0f,
 		30.0f,
@@ -80,23 +88,23 @@ void Human::Update()
 		else {
 			/*QueryGOs<Light_Object>("LightObject", [&](Light_Object* light) {*/
 				//light->GetlightOn() == true;
-				if (m_lightObject->GetLightOn()) {
-					//m_lightObject = light;
-					lanpos(m_lightObject->GetPosition());
-					/*return false;*/
-				}
-				else if (m_lightObject2->GetLightOn()) {
-					lanpos(m_lightObject2->GetPosition());
-				}
-				else if (m_mistenemy->Getstate() == 2) {
-					TakingMove();
-					/*return false;*/
-				}
-				else {
-					Move();
-					/*return false;*/
-				}
-				/*return true;*/
+			//ランタンの数分、GetLightOn()関数を調べて、
+			//その中にGetLightOnがtrueになっているランタンがあればm_nearlightに代入。
+			
+			Light_Move();
+			//Move();
+			//TakingMove();
+
+			//if (m_mistenemy->Getstate() == 2
+			//	&&m_nearLight == nullptr) {
+			//	
+			//	/*return false;*/
+			//}
+			//else if(m_nearLight == nullptr){
+			//	
+			//	/*return false;*/
+			//}
+			//	/*return true;*/
 			/*});*/
 		}
 	}
@@ -136,7 +144,7 @@ void Human::GameStartMove()
 
 void Human::Move()
 {
-	const int light_Yellow = 0;
+	/*const int light_Yellow = 0;
 	const int light_Red = 1;
 	if (!m_Clear_one) {
 		if (m_player->GetColor() == light_Yellow) {
@@ -187,7 +195,7 @@ void Human::Move()
 	}
 	//動く床と自分のスピードを足す。
 	CVector3 pos = m_movespeed + m_Bedspeed;
-	m_position = m_charaCon.Execute(pos, GameTime().GetFrameDeltaTime());
+	m_position = m_charaCon.Execute(pos, GameTime().GetFrameDeltaTime());*/
 }
 
 void Human::TakingMove()
@@ -242,29 +250,51 @@ void Human::Light_Move()
 	if (!m_Clear_one) {
 		//死なない時の普通の処理
 		if (!m_isDead) {
-			CVector3 diff = m_position - m_lightObject->GetPosition();
-			CVector3 diff2 = m_position - m_lightObject->GetPosition();
+			
+			m_nearLen = 100000.0f;
+			int nearLightNo = -1;
+			m_nearPointLight = nullptr;
+			Game* game = FindGO<Game>("Game");
+			const auto& lightList = game->GetLightObjectList();
+			float ligPowerMax = 0.0f;
+			//一番光の強さが強いライトをランタンから調べる。
+			for (int i = 0; i < lightList.size(); i++) {
+				if (lightList[i]->GetLightOn()) {
+					float ligPower = CalcLightPower(
+						m_position, 
+						lightList[i]->GetPosition(), 
+						lightList[i]->GetPointLightAttn()
+					);
 
-			//どのランタンが一番近いか選手権。
-			if (diff.LengthSq() > diff2.LengthSq())
-			{
-				diff = diff2;
+					//どのランタンの光が一番影響を与えているか調べる。
+					if (ligPowerMax < ligPower) {
+						ligPowerMax = ligPower;	
+						m_nearPointLight = lightList[i]->GetPointLight();
+					}
+				}
 			}
-			if (diff.Length() < m_nearLen) {
-				m_nearLen = diff.Length();
-				m_nearLight = m_lightObject;
+			//次は星
+			float ligPower = CalcLightPower(m_position, m_player->GetPosition(), m_player->GetPointLightAttn());
+			if (ligPower > ligPowerMax) {
+				m_nearPointLight = m_player->GetPointLight();
 			}
-			//Yの数値は除外
-			//diff.y = 0.0f;
-			if (diff.LengthSq() <= 105.0f * 105.0f) {//プレイヤーと近ければhumanは止まる
-				m_movespeed = CVector3::Zero;
+			//光が届いているライトがあったら、そこについていく。
+			if (m_nearPointLight != nullptr) {
+				auto humanspeed = 300.0f;
+				m_movespeed = m_nearPointLight->GetPosition() - m_position;
+				auto len = m_movespeed.Length();
+				if (len > 200.0f) {
+					m_movespeed.y = 0.0f;
+					m_movespeed.Normalize();
+					m_movespeed = m_movespeed * humanspeed;
+				}
+				else {
+					m_movespeed = CVector3::Zero;
+				}
 			}
 			else {
-				auto humanspeed = 300.0f;
-				m_movespeed = m_nearLight->GetPosition() - m_position;
-				m_movespeed.y = 0.0f;
-				m_movespeed.Normalize();
-				m_movespeed = m_movespeed * humanspeed;
+
+				m_movespeed = CVector3::Zero;
 			}
 		}
 		else

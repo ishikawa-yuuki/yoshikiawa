@@ -43,6 +43,10 @@ public:
 		m_damege = true;
 		return m_damege;
 	}
+	const std::vector<Light_Object*>& GetLightObjectList()
+	{
+		return m_lightobjectList;
+	}
 private:
 	/*ƒ|ƒCƒ“ƒ^ŒQ*/
 	Fade * m_fade = nullptr;
@@ -83,6 +87,5 @@ private:
 	std::vector<MoveBed_zengo*> m_moveBed_zengoList;
 	std::vector<MoveBed_zengo*> m_moveBed_zengo2List;
 	std::vector<Light_Object*> m_lightobjectList;
-	std::vector<Light_Object2*> m_lightobject2List;
 };
 

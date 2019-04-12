@@ -4,6 +4,7 @@
 #include "tkEngine/light/tkPointLight.h"
 class GameCamera;
 class Human;
+class StarDust;
 class Player : public IGameObject
 {
 private:
@@ -50,12 +51,21 @@ public:
 		}
 		return number;
 	}
+	CVector4 GetPointLightAttn() const
+	{
+		return m_ptLight->GetAttn();
+	}
+	prefab::CPointLight* GetPointLight() const
+	{
+		return m_ptLight;
+	}
 private:
 	CVector3 m_position = { 0.0f,0.0f,500.0f };
 	CVector3 m_moveSpeed = CVector3::Zero;
 	prefab::CEffect* m_effect;
 	GameCamera* m_gamecamera = nullptr;
 	Human* m_human = nullptr;
+	StarDust* m_stardust = nullptr;
 	CCharacterController m_charaCon;
 	prefab::CPointLight* m_ptLight = nullptr;
 

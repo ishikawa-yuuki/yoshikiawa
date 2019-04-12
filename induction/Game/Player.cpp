@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "GameCamera.h"
 #include "Human.h"
+#include "StarDust.h"
 #include "tkEngine/light/tkPointLight.h"
 Player::Player()
 {
@@ -12,11 +13,13 @@ Player::~Player()
 {
 	DeleteGO(m_effect);
 	DeleteGO(m_ptLight);
+	DeleteGO(m_stardust);
 }
 
 bool Player::Start()
 {
 	m_human = FindGO<Human>("Human");
+	//m_stardust = NewGO<StarDust>(0,"StarDust");
 	m_effect = NewGO<prefab::CEffect>(0);
 	m_effect->Play(L"effect/hikari.efk");
 	m_effect->SetScale({ 30.0f,30.0f,30.0f });
@@ -36,6 +39,8 @@ bool Player::Start()
 	attn.x = 1000.0f;
 	attn.y = 10.0f;
 	m_ptLight->SetAttn(attn);
+	
+	
 	
 	return true;
 }
@@ -110,7 +115,7 @@ void Player::Color_Change()
 			m_effect->Play(L"effect/blackhole.efk");
 			m_effect->SetScale({ 30.0f,30.0f,30.0f });
 			CVector3 attn;
-			attn.x = 200.0f;
+			attn.x = 100.0f;
 			attn.y = 10.0f;
 			m_ptLight->SetAttn(attn);
 		}

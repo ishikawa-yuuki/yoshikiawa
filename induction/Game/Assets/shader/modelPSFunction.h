@@ -58,6 +58,21 @@ float4 PBR(
 	) ;
 
 	//ポイントライトを計算。
+	if (shadow < 1.0f) {
+		finalColor += CalcPointLightInner(
+			albedo,
+			worldPos,
+			screenPos,
+			normal,
+			tangent,
+			biNormal,
+			toEyeDir,
+			toEyeReflection,
+			roughness,
+			specPow
+		) * (1.0f - shadow);
+	}
+
 	finalColor += CalcPointLightInner(
 		albedo,
 		worldPos,

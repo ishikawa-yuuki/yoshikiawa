@@ -31,7 +31,10 @@ namespace tkEngine{
 			*					yが大きくなると、減衰が強くなります。1.0で線形の減衰率になります。zは未使用。
 			*/
 			void SetAttn(const CVector3& attn);
-			
+			CVector4 GetAttn() const
+			{
+				return light.attn;
+			}
 			/*!
 			*@brief 生データの取得。
 			*/

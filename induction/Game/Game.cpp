@@ -48,7 +48,7 @@ Game::~Game()
 	for (auto&m_lightobject : m_lightobjectList) {
 		DeleteGO(m_lightobject);
 	}
-	for (auto&m_lightobject2 : m_lightobject2List) {
+	for (auto&m_lightobject2 : m_lightobjectList) {
 		DeleteGO(m_lightobject2);
 	}
 	DeleteGO(m_gamecamera);
@@ -56,6 +56,7 @@ Game::~Game()
 
 bool Game::Start()
 {
+	shadow::DirectionShadowMap().Disable();
 	//環境光をおふっふ
 	LightManager().SetAmbientLight({ 0.1f, 0.1f, 0.1f });
 	//シーンの明るさを落とす。
@@ -74,40 +75,11 @@ bool Game::Start()
 			m_background = NewGO<BackGround>(0, "BackGround");
 			return true;
 		}
-		else if (objdata.ForwardMatchName(L"lanthanum")) {
-			int n = _wtoi(&objdata.name[9]);
-			//ここから下n個目のランタンごとにLight_Object"n"でクラスを作っている。
-			switch (n)
-			{
-			case 1:
-			{
-				Light_Object* m_lightobject = NewGO<Light_Object>(0, "LightObject");
-				m_lightobject->SetPosition(objdata.position);//試験したいなら{0,0,0}
-				m_lightobjectList.push_back(m_lightobject);
-			}
-			break;
-			case 2:
-			{
-				Light_Object2* m_lightobject2 = NewGO<Light_Object2>(0, "LightObject2");
-				m_lightobject2->SetPosition(objdata.position);//試験したいなら{0,0,0}
-				m_lightobject2List.push_back(m_lightobject2);
-			}
-			break;
-			//case 3:
-			//{
-			//	Light_Object* m_lightobject3 = NewGO<Light_Object>(0, "LightObject");
-			//	m_lightobject3->SetPosition(objdata.position);//試験したいなら{0,0,0}
-			//	m_lightobjectList.push_back(m_lightobject3);
-			//}
-			//break;
-			//case 4:
-			//{
-			//	Light_Object * m_lightobject4 = NewGO<Light_Object>(0, "LightObject");
-			//	m_lightobject4->SetPosition(objdata.position);//試験したいなら{0,0,0}
-			//	m_lightobjectList.push_back(m_lightobject4);
-			//}
-			//break;
-			}
+		else if (objdata.ForwardMatchName(L"lanthanum")) {	
+			Light_Object* m_lightobject = NewGO<Light_Object>(0, "LightObject");
+			m_lightobject->SetPosition(objdata.position);//試験したいなら{0,0,0}
+			m_lightobjectList.push_back(m_lightobject);
+		
 			return true;
 		}
 		//動く床は2種類ある、MoveBedは横移動するもの
@@ -161,6 +133,10 @@ bool Game::Start()
 		return false;
 	});
 	m_fade->StartFadeIn();
+
+	//全方位シャドウを有効にする
+	shadow::OminiDirectionShadowMap().Enable();
+
 	return true;
 }
 
@@ -178,6 +154,19 @@ void Game::Update()
 	if (m_Gamesyuuryou != false) {
 		m_Gamesyuuryou = false;
 		DeleteGO(this);
+	}
+
+	m_human = FindGO<Human>("Human");
+	auto nearPointLig = m_human->GetNearPointLight();
+	if (nearPointLig == nullptr) {
+		//ヒューマンが向かっていっているライトがないときは
+		nearPointLig = m_player->GetPointLight();
+	}
+	if (nearPointLig != nullptr) {
+		shadow::OminiDirectionShadowMap().SetLightPosition(nearPointLig->GetPosition());
+		shadow::OminiDirectionShadowMap().SetDistanceAffectedByLight(nearPointLig->GetAttn().x);
+		shadow::OminiDirectionShadowMap().SetShadowBias(0.002f);
+		shadow::OminiDirectionShadowMap().SetNearClip(10.0f);
 	}
 }
 

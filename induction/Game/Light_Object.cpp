@@ -59,7 +59,7 @@ void Light_Object::Update()
 			m_effect->SetScale({ 4.0f, 4.0f, 4.0f });
 			m_effect->SetPosition(m_position);
 			//m_human->isLantanon();
-			housenlight();
+		//	housenlight();
 			InitPointLight();
 			//Dirlight();使わない
 		}
@@ -68,7 +68,10 @@ void Light_Object::Update()
 		if (m_player->GetColor() == 1
 			&& diff.LengthSq() < 100.0f*100.0f) {
 			m_isLightOn = false;
-			DeleteGO(m_effect);
+			if (m_effect != nullptr) {
+				DeleteGO(m_effect);
+				m_effect = nullptr;
+			}
 			//attnはメンバでもいいかも
 			CVector3 attn = CVector3::Zero;
 			attn.x = 10.0f;//光の影響範囲距離
@@ -84,7 +87,7 @@ void Light_Object::InitPointLight()
 	CVector3 pointlightpos = m_position;
 	pointlightpos.y = 100.0f;
 	m_ptLight->SetPosition(pointlightpos);//位置決め
-	CVector3 color = { 50.0f,50.0f,25.0f,};
+	CVector3 color = { 2000.0f,2000.0f,2500.0f,};
 	m_ptLight->SetColor(color);//色決め
 	CVector3 attn = CVector3::Zero;
 	attn.x = 2000.0f;//光の影響範囲距離
@@ -113,6 +116,7 @@ void Light_Object::housenlight()
 	//その画像に色を足している感じがする。
 	//SRVはシェーダーリソースビューの略　スペキュラは鏡面反射光の事
 
+	//多分バグの元
 	int materialID = 1;
 	//マテリアルIDを設定
 	m_skinModelRender->FindMaterial([&](auto material) {
