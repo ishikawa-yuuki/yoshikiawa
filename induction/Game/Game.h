@@ -44,6 +44,10 @@ public:
 		m_damege = true;
 		return m_damege;
 	}
+	//レバーのオン、オフ
+	const std::vector<Lever*>&GetLeverList() {
+		return m_leverList;
+	}
 private:
 	/*ポインタ群*/
 	Fade * m_fade = nullptr;
@@ -83,9 +87,7 @@ private:
 	std::vector<Light_Object*> m_lightobjectList;
 	std::vector<Light_Object2*> m_lightobject2List;
 	std::vector<Lever*>m_leverList;
-	std::vector<Lever*>m_lever1List;
 	std::vector<Poison*>m_poisonList;
-	std::vector<Poison*>m_poison1List;
 	std::vector<Lightstand*>m_Lightstand1List;
 };
 

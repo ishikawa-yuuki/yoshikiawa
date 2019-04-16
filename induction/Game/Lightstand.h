@@ -12,7 +12,7 @@ public:
 	}
 private:
 	prefab::CSkinModelRender* m_skin = nullptr;
-	prefab::CEffect* m_effect;
+	prefab::CEffect*  m_effect = nullptr;
 	CVector3 m_position = CVector3::Zero;
 	CPhysicsStaticObject m_StaticObject;
 	float m_timer = 0.0f;

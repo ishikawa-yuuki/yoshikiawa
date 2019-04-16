@@ -51,7 +51,7 @@ void Stage_Select::Update()
 {
 	if (m_isWaitFadeout) {
 		if (!m_fade->IsFade()) {
-		    if(m_Tile == true) {
+		    if(m_Tile) {
 			  NewGO<Title>(0, "Title");
 			  DeleteGO(this);
 		     }

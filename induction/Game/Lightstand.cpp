@@ -27,12 +27,11 @@ bool Lightstand::Start()
 void Lightstand::Update()
 {
 	if (m_timer >= 0.5f) {
-		m_effect = NewGO<prefab::CEffect>(0);
-		m_effect->Play(L"effect/Fire.efk");
-		m_effect->SetPosition(m_position);
-		m_timer = 0;
+		prefab::CEffect*  effect = NewGO<prefab::CEffect>(0);
+	    effect->Play(L"effect/Fire.efk");
+		effect->SetPosition(m_position);
+		m_timer = 0.0f;
 	}
 	m_timer += GameTime().GetFrameDeltaTime();
-	
 }
 	

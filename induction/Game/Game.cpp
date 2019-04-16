@@ -45,17 +45,15 @@ Game::~Game()
 	for (auto&m_lightobject : m_lightobjectList) {
 		DeleteGO(m_lightobject);
 	}
+	//
+	for (auto&m_lightobject2 : m_lightobject2List) {
+		DeleteGO(m_lightobject2);
+	}
 	for (auto&m_lever : m_leverList) {
 		DeleteGO(m_lever);
 	}
-	for (auto&m_lever1 : m_lever1List) {
-		DeleteGO(m_lever1);
-	}
 	for (auto&m_poison :m_poisonList) {
 		DeleteGO(m_poison);
-	}
-	for (auto&m_poison1: m_poison1List) {
-		DeleteGO(m_poison1);
 	}
 	for (auto&m_Lightstand : m_Lightstand1List) {
 		DeleteGO(m_Lightstand);
@@ -164,43 +162,32 @@ bool Game::Start()
 			m_enemy->SetRotation(objdata.rotation);
 			return true;
 		}
-		if (objdata.EqualObjectName(L"Lever_00")) {
-			Lever*m_lever = NewGO<Lever>(0, "Lever");
+		else if (objdata.ForwardMatchName(L"Lever")) {
+			int n = _wtoi(&objdata.name[5]);
+			Lever*m_lever = NewGO<Lever>(n,"Lever");
 			m_lever->SetPosition(objdata.position);
 			m_lever->SetRotation(objdata.rotation);
-			m_lever->SetLeverNumber(0);
+			//m_lever->SetLeverNumber(n);
 			m_leverList.push_back(m_lever);
+			
 			return true;
 		}
-		if (objdata.EqualObjectName(L"Lever_01")) {
-			Lever*m_lever1 = NewGO<Lever>(0, "Lever1");
-			m_lever1->SetPosition(objdata.position);
-			m_lever1->SetRotation(objdata.rotation);
-			m_lever1->SetLeverNumber(1);
-			m_lever1List.push_back(m_lever1);
+		else if (objdata.ForwardMatchName(L"huzitubo")) {
+				int n = _wtoi(&objdata.name[8]);
+				Poison*m_poison = NewGO<Poison>(0, "Poison");
+				m_poison->SetPosition(objdata.position);
+				m_poison->SetPoisonNumber(n);
+				m_poisonList.push_back(m_poison);
+			
+			
 			return true;
 		}
-		if (objdata.EqualObjectName(L"huzitubo_00")) {
-			Poison*m_poison = NewGO<Poison>(0, "Poison");
-			m_poison->SetPosition(objdata.position);
-			m_poison->SetPoisonNumber(0);
-			m_poisonList.push_back(m_poison);
-			return true;
-		}
-		if (objdata.EqualObjectName(L"huzitubo_01")) {
-			Poison*m_poison1 = NewGO<Poison>(0, "Poison");
-			m_poison1->SetPosition(objdata.position);
-			m_poison1->SetPoisonNumber(1);
-			m_poison1List.push_back(m_poison1);
-			return true;
-		}
-		if (objdata.EqualObjectName(L"Lightstand01")) {
+		else if (objdata.EqualObjectName(L"Lightstand01")) {
 			Lightstand* m_Lightstand = NewGO<Lightstand>(0, "Lightstand");
 			m_Lightstand->SetPosition(objdata.position);
 			m_Lightstand1List.push_back(m_Lightstand);
 			return true;
 		}
-
 		return false;
 	});
 	m_fade->StartFadeIn();
@@ -218,7 +205,7 @@ void Game::Update()
 	else {
 			Pose();
 	}
-	if (m_Gamesyuuryou != false) {
+	if (m_Gamesyuuryou) {
 		m_Gamesyuuryou = false;
 		DeleteGO(this);
 	}
