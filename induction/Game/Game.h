@@ -44,6 +44,10 @@ public:
 		m_damege = true;
 		return m_damege;
 	}
+	const std::vector<Light_Object*>& GetLightObjectList()
+	{
+		return m_lightobjectList;
+	}
 	//レバーのオン、オフ
 	const std::vector<Lever*>&GetLeverList() {
 		return m_leverList;

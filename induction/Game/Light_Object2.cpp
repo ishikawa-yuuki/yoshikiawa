@@ -18,6 +18,7 @@ Light_Object2::~Light_Object2()
 	}
 
 	if (m_ptLight != nullptr) {
+
 		DeleteGO(m_ptLight);
 	}
 
@@ -55,8 +56,8 @@ void Light_Object2::Update()
 			&& diff.LengthSq() < 100.0f*100.0f) {
 			m_isLightOn2 = true;
 			//m_human->isLantanon();
-			housenlight();
-			//InitPointLight();
+			//housenlight();
+			InitPointLight();
 			//Dirlight();g‚í‚È‚¢
 			m_effect = NewGO<prefab::CEffect>(0);
 			m_effect->Play(L"effect/spotlight.efk");
@@ -79,7 +80,7 @@ void Light_Object2::InitPointLight()
 	//m_position.y = 100.0f;
 	m_position.y += 1.0f;
 	m_ptLight->SetPosition(m_position);//ˆÊ’uŒˆ‚ß
-	CVector3 color = { 10.0f,10.0f,0.0f, };
+	CVector3 color = { 50.0f,50.0f,25.0f, };
 	m_ptLight->SetColor(color);//FŒˆ‚ß
 	CVector3 attn = CVector3::Zero;
 	attn.x = 2000.0f;//Œõ‚Ì‰e‹¿”ÍˆÍ‹——£

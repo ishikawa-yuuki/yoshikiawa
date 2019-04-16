@@ -4,6 +4,7 @@
 #include "Human.h"
 #include "Light_Object.h"
 #include "Light_Object2.h"
+#include "Game.h"
 
 MistEnemy::MistEnemy()
 {
@@ -19,9 +20,7 @@ bool MistEnemy::Start()
 {
 	m_player = FindGO<Player>("Player");
 	m_human = FindGO<Human>("Human");
-	m_lightObject = FindGO<Light_Object>("LightObject");
-	m_lightObject2 = FindGO<Light_Object2>("LightObject2");
-
+	
 	m_startpos = m_position;
 	m_effect = NewGO<prefab::CEffect>(0);
 	m_effect->Play(L"effect/kuromoya.efk");
@@ -42,49 +41,43 @@ void MistEnemy::Atari()
 	CVector3 diff_p = m_player->GetPosition() - m_position; //diff_pはプレイヤーとの距離
 	CVector3 diff_h = m_human->GetPosition() - m_position;  //diff_hは人との距離
 	CVector3 diff_s = m_startpos - m_position;              //diff_sはスタート地点との距離
-	CVector3 diff_l = m_lightObject->GetPosition() - m_position;//diff_lはランタンとの距離
-	CVector3 diff_l2 = m_lightObject2->GetPosition() - m_position;//上記、番号が変わっただけ
-
+	
 	diff_p.y = 0.0f;
 	diff_h.y = 0.0f;
 	diff_s.y = 0.0f;
-	diff_l.y = 0.0f;
-	diff_l2.y = 0.0f;
 
 	if (m_state == enNormal) {
-		if(diff_l.LengthSq() <= 250.0f*250.0f
-			&&m_lightObject->GetLightOn() == true){
-			m_state = enPlayer;
-			m_escape_flag = true;
-			if (m_taking_flag) {
-				m_taking_flag = false;
+		auto game = FindGO<Game>("Game");
+		const auto& lightList = game->GetLightObjectList();
+		for (int i = 0; i < lightList.size(); i++) {
+			CVector3 diff_l = lightList[i]->GetPosition() - m_position;//diff_lはランタンとの距離
+
+			if (diff_l.LengthSq() <= 250.0f*250.0f
+				&& lightList[i]->GetLightOn() == true) {
+				m_state = enPlayer;
+				m_escape_flag = true;
+				if (m_taking_flag) {
+					m_taking_flag = false;
+				}
 			}
-		}
-		else if (diff_l2.LengthSq() <= 150.0f*150.0f
-			&&m_lightObject2->GetLightOn()) {
-			m_state = enPlayer;
-			m_escape_flag = true;
-			if (m_taking_flag) {
-				m_taking_flag = false;
+			else if (diff_p.LengthSq() <= 120.0f*120.0f
+				|| m_escape_flag) {
+				m_state = enPlayer;
+				m_escape_flag = true;
+				if (m_taking_flag) {
+					m_taking_flag = false;
+				}
 			}
-		}
-		else if (diff_p.LengthSq() <= 100.0f*100.0f
-			|| m_escape_flag) {
-			m_state = enPlayer;
-			m_escape_flag = true;
-			if (m_taking_flag) {
-				m_taking_flag = false;
+			else if (diff_h.LengthSq() <= 100.0f*100.0f
+				&& !m_escape_flag) {
+				m_state = enHuman;
+				m_taking_flag = true;
 			}
-		}
-		else if (diff_h.LengthSq() <= 100.0f*100.0f
-			&&!m_escape_flag) {
-			m_state = enHuman;
-			m_taking_flag = true;
-		}
-		else {
-			diff_h.Normalize();
-			diff_h *= 5.0f;
-			m_moveSpeed = diff_h;
+			else {
+				diff_h.Normalize();
+				diff_h *= 5.0f;
+				m_moveSpeed = diff_h;
+			}
 		}
 	}
 	else if(m_state == enPlayer) {

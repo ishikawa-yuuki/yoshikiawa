@@ -2,6 +2,7 @@
 <!--DockPanel configuration file. Author: Weifen Luo, all rights reserved.-->
 <!--!!! AUTOMATICALLY GENERATED FILE. DO NOT MODIFY !!!-->
 <DockPanel FormatVersion="1.0" DockLeftPortion="0.13017725944519" DockRightPortion="0.860401511192322" DockTopPortion="0.25" DockBottomPortion="0.200000002980232" ActiveDocumentPane="0" ActivePane="-1">
+<DockPanel FormatVersion="1.0" DockLeftPortion="0.25" DockRightPortion="0.382608711719513" DockTopPortion="0.25" DockBottomPortion="0.200000002980232" ActiveDocumentPane="0" ActivePane="0">
   <Contents Count="10">
     <Content ID="0" PersistString="Effekseer.GUI.DockViewer" AutoHidePortion="0.25" IsHidden="False" IsFloat="False" />
     <Content ID="1" PersistString="Effekseer.GUI.DockViewerController" AutoHidePortion="0.25" IsHidden="False" IsFloat="False" />

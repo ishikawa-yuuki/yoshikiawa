@@ -59,6 +59,8 @@ namespace {
 		initParam.graphicsConfing.shadowRenderConfig.depthOffset[2] = 0.002f;
 		initParam.graphicsConfing.shadowRenderConfig.softShadowLevel = EnSoftShadowQualityLevel::eSSSS_PCF;
 
+		initParam.graphicsConfing.ominiShadowRenderConfig.isEnable = true;
+		
 		//アンチ
 		initParam.graphicsConfing.aaConfig.isEnable = false;
 		//Bloom
@@ -93,6 +95,8 @@ namespace {
 		initParam.graphicsConfing.shadowRenderConfig.depthOffset[1] = 0.001f;
 		initParam.graphicsConfing.shadowRenderConfig.depthOffset[2] = 0.002f;
 		initParam.graphicsConfing.shadowRenderConfig.softShadowLevel = EnSoftShadowQualityLevel::eSSSS_PCF;
+
+		initParam.graphicsConfing.ominiShadowRenderConfig.isEnable = true;
 
 		//アンチ
 		initParam.graphicsConfing.aaConfig.isEnable = true;
@@ -130,9 +134,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	SetTkEngineConfigForHighSpec(initParam);
 	
 #endif
-	GraphicsEngine().GetShadowMap().SetFar(1000.0f);
-	GraphicsEngine().GetShadowMap().SetNear(50.0f);
-
+	
 	//エンジンを初期化。
 	if (Engine().Init(initParam) == true) {
 		postEffect::Dof().Disable();
