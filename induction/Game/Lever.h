@@ -3,13 +3,8 @@ class Player;
 class Lever: public IGameObject
 {
 private:
-	enum LeverNumber {
-		Lever0,
-		Lever1,
-	};
-	LeverNumber m_levernum = Lever0;
 	//ONかOFFかtrueはONの状態
-	bool m_State[2] = { true ,true};
+	bool m_State = true;
 public:
 	Lever();
 	~Lever();
@@ -22,25 +17,17 @@ public:
 		m_rot = rot;
 	}
 	//Leverの状態trueならONの状態
-	bool IsStateLever(const int state) 
+	bool IsStateLever()const
 	{
-		return m_State[state];
-	}
-	void SetLeverNumber(const int num);
-	int  GetLeverNum() const{
-		return m_levernum ;
+		return m_State;
 	}
 private:
+	//
+	int n = 0;
 	prefab::CSkinModelRender* m_skin = nullptr;
 	Player*m_player;
 	CVector3 m_position = CVector3::Zero;
 	CQuaternion m_rot = CQuaternion::Identity;
-	/*enum LeverState{
-		ON,
-		OFF
-	};*/
-	
-	//LeverState m_leverState= OFF;
 	enum LeverAnimationClip {
 		enAnimationClip_OFF,
 		enAnimationClip_ON,
@@ -48,7 +35,6 @@ private:
 	};
 	//アニメーションクリップ詰め合わせ
 	CAnimationClip m_animClip[enAnimationClip_num];
-	
 	float m_timer = 0.0f;
 };
 

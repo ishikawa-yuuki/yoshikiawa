@@ -26,7 +26,7 @@ private:
 	};
 
 	Enstate m_state = enNormal;
-	prefab::CEffect* m_effect;
+	prefab::CEffect* m_effect = nullptr;
 	CVector3 m_position = CVector3::Zero;
 	CVector3 m_startpos = CVector3::Zero;
 	CVector3 m_moveSpeed = CVector3::Zero;

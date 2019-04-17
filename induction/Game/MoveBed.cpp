@@ -39,12 +39,12 @@ void MoveBed::Update()
 		if (m_position.x < m_protpos.x ) {
 			m_position.x = m_lastFramepos.x;
 			m_moveSpeed.x = MOVE_SPEED;
-			m_timer = 0;
+			m_timer = 0.0f;
 		}
 		else if (m_position.x > m_protpos.x + 870) {
 			m_position.x = m_lastFramepos.x;
 			m_moveSpeed.x = -MOVE_SPEED;
-			m_timer = 0;
+			m_timer = 0.0f;
 		}
 		m_timer += GameTime().GetFrameDeltaTime();
 		m_skin->SetPosition(m_position);

@@ -12,7 +12,7 @@ public:
 	bool Start();
 	void Update();
 	static const int point = 3;
-	SSPoint* m_ssPoint[point] = { nullptr };
+	SSPoint* m_ssPoint[point] = { nullptr, nullptr, nullptr };
 private:
 	prefab::CSkinModelRender* m_skin = nullptr;
 	//true‚È‚ç‰æ–Ê‚ğØ‚è‘Ö‚¦‚éB

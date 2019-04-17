@@ -79,6 +79,7 @@ void GameCamera::Update()
 			MainCamera().SetPosition(m_position);
 			//カメラの更新。
 			MainCamera().Update();
+			
 		}
 	}
 }

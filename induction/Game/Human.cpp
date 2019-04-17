@@ -336,12 +336,12 @@ void Human::AnimeControll()
 			}
 			else if (m_movespeed.LengthSq() > walk_true) {
 				m_skinModelRender->PlayAnimation(enAnimationClip_walk, 0.2);
-				ss = NewGO<prefab::CSoundSource>(0);
 				if (m_kari >= 0.5) {
+					ss = NewGO<prefab::CSoundSource>(0);
 					ss->Init(L"sound/walk.wav");
 					ss->SetVolume(0.5f);
 					ss->Play(false);
-					m_kari = 0;
+					m_kari = 0.0f;
 				}
 			}
 			else {
