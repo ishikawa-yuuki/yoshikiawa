@@ -70,7 +70,7 @@ bool Game::Start()
 	//ŠÂ‹«Œõ‚ğ‚¨‚Ó‚Á‚Ó
 	LightManager().SetAmbientLight({ 0.1f, 0.1f, 0.1f });
 	//ƒV[ƒ“‚Ì–¾‚é‚³‚ğ—‚Æ‚·B
-	postEffect::Tonemap().SetLuminance(0.03f);
+	postEffect::Tonemap().SetLuminance(0.01f);
 	m_player = NewGO<Player>(0, "Player");
 	m_human = NewGO<Human>(0, "Human");
 	m_gamecamera = NewGO<GameCamera>(0, "GameCamera");
