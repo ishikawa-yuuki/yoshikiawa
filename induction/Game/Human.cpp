@@ -71,15 +71,11 @@ bool Human::Start()
 		m_position
 	);
 	m_skinModelRender->SetShadowCasterFlag(true);
-	//m_position.y = 150;
-	//m_skinModelRender->SetPosition(m_position);
 	return true;
 }
 
 void Human::Update()
 {
-	//Playerである光の信号を受け取ったら
-	//行動を変える関数を考えています、、、<-move()に書いてます。
 	AnimeControll();
 	if (m_player->GetStartMove() == true) {
 		if (!m_StartMoveFin) {
@@ -92,23 +88,8 @@ void Human::Update()
 			//その中にGetLightOnがtrueになっているランタンがあればm_nearlightに代入。
 			
 			Light_Move();
-			//Move();
-			//TakingMove();
-
-			//if (m_mistenemy->Getstate() == 2
-			//	&&m_nearLight == nullptr) {
-			//	
-			//	/*return false;*/
-			//}
-			//else if(m_nearLight == nullptr){
-			//	
-			//	/*return false;*/
-			//}
-			//	/*return true;*/
-			/*});*/
 		}
 	}
-	//Move();
 	Turn();
 	Hanntei();
 	CVector3 Pos = m_position + m_Bedspeed;

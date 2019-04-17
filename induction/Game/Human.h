@@ -62,19 +62,6 @@ public:
 		return m_isGameOver;
 	}
 
-	//void isLantanon()
-	//{
-	//	if (!flag) {
-	//		flag = true;
-	//	}
-	//}
-	//void isLantanoff()
-	//{
-	//	if (flag) {
-	//		flag = false;
-	//	}
-	//}
-
 	//humanを倒すときの関数、enemyとかが使うと思います。
 	void isKill() 
 	{
