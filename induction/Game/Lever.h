@@ -16,18 +16,20 @@ public:
 	void SetRotation(const CQuaternion& rot) {
 		m_rot = rot;
 	}
+	void SetScale(const CVector3& scale) {
+		m_scale = scale;
+	}
 	//LeverÇÃèÛë‘trueÇ»ÇÁONÇÃèÛë‘
 	bool IsStateLever()const
 	{
 		return m_State;
 	}
 private:
-	//
-	int n = 0;
 	prefab::CSkinModelRender* m_skin = nullptr;
 	Player*m_player;
 	CVector3 m_position = CVector3::Zero;
 	CQuaternion m_rot = CQuaternion::Identity;
+	CVector3 m_scale = CVector3::Zero;
 	enum LeverAnimationClip {
 		enAnimationClip_OFF,
 		enAnimationClip_ON,

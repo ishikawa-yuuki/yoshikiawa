@@ -54,42 +54,43 @@ void Enemy::SearchPlayer()
 }
 void Enemy::Move()
 {
+	m_timer += GameTime().GetFrameDeltaTime();
 	switch(m_state) {
 	case State1:
-		timer++;
+		
 		m_movespeed.x = MOVE_SPEED;
-		if (timer == 450) {
-			timer = 0;
+		if (m_timer == 450) {
+			m_timer = 0;
 			m_state = State2;
 		}
 	
 		break;
 	case State2:
-		timer++;
+		
 		m_movespeed.z = MOVE_SPEED;
-		if (timer == 500) {
-			timer = 0;
+		if (m_timer == 500) {
+			m_timer = 0;
 			m_state = State3;
 		}
 		break;
 	case State3:
-		timer++;
+		
 		m_movespeed.x = -MOVE_SPEED;
-		if (timer == 450) {
-			timer = 0;
+		if (m_timer == 450) {
+			m_timer = 0;
 			m_state = State4;
 		}
 		break;
 	case State4:
-		timer++;
+		
 		m_movespeed.z = -MOVE_SPEED;
-		if (timer == 500) {
-			timer = 0;
+		if (m_timer == 500) {
+			m_timer = 0;
 			m_state = State1;
 		}
 		break;
 	}
-	if (timer == 0) {
+	if (m_timer == 0) {
 		m_movespeed = CVector3::Zero;
 	}
     CVector3 pos = m_movespeed;

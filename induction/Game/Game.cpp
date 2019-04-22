@@ -138,28 +138,34 @@ bool Game::Start()
 			return true;
 		}
 		else if (objdata.ForwardMatchName(L"Lever")) {
-			int n = _wtoi(&objdata.name[5]);
+			int num = _wtoi(&objdata.name[5]);
 			Lever*m_lever = NewGO<Lever>(n,"Lever");
 			m_lever->SetPosition(objdata.position);
 			m_lever->SetRotation(objdata.rotation);
-			//m_lever->SetLeverNumber(n);
+			m_lever->SetScale(objdata.scale);
+			//m_lever->SetLeverNumber(num);
 			m_leverList.push_back(m_lever);
 			
 			return true;
 		}
 		else if (objdata.ForwardMatchName(L"huzitubo")) {
-				int n = _wtoi(&objdata.name[8]);
+				int num = _wtoi(&objdata.name[8]);
 				Poison*m_poison = NewGO<Poison>(0, "Poison");
 				m_poison->SetPosition(objdata.position);
-				m_poison->SetPoisonNumber(n);
+				m_poison->SetPoisonNumber(num);
 				m_poisonList.push_back(m_poison);
 			
 			
 			return true;
 		}
-		else if (objdata.EqualObjectName(L"Lightstand01")) {
+		else if (objdata.ForwardMatchName(L"Lightstand")) {
+			int num = _wtoi(&objdata.name[10]);
 			Lightstand* m_Lightstand = NewGO<Lightstand>(0, "Lightstand");
+			m_Lightstand->SetNum(num);
 			m_Lightstand->SetPosition(objdata.position);
+			m_Lightstand->SetRotation(objdata.rotation);
+			m_Lightstand->SetScale(objdata.scale);
+			
 			m_Lightstand1List.push_back(m_Lightstand);
 			return true;
 		}

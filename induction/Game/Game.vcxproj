@@ -182,7 +182,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_Low|X64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -1860,6 +1860,8 @@
     <MeshContentTask Include="Assets\modelData\StageMap\Stage1.fbx" />
     <MeshContentTask Include="Assets\modelData\StageMap\stage_test.fbx" />
     <MeshContentTask Include="Assets\modelData\StageObject\Lightstand01.fbx" />
+    <MeshContentTask Include="Assets\modelData\StageObject\Lightstand02.fbx" />
+    <MeshContentTask Include="Assets\modelData\StageObject\Torches.fbx" />
     <MeshContentTask Include="Assets\modelData\StageSelect\SS.fbx" />
     <MeshContentTask Include="Assets\modelData\StageSelect\StagePoint.fbx" />
     <MeshContentTask Include="Assets\modelData\unityChan.fbx" />

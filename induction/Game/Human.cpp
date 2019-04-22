@@ -314,7 +314,7 @@ void Human::Turn()
 void Human::AnimeControll()
 {
 	m_kari += GameTime().GetFrameDeltaTime();
-	prefab::CSoundSource* ss;
+	//prefab::CSoundSource* ss;
 	if (!m_isDead) {
 		if (!m_Clear_one) {
 			const float run_true = 100.0f*100.0f;
@@ -326,7 +326,7 @@ void Human::AnimeControll()
 			else if (m_movespeed.LengthSq() > run_true) {
 				m_skinModelRender->PlayAnimation(enAnimationClip_run, 0.2);
 				if (m_kari >= 0.4) {
-					ss = NewGO<prefab::CSoundSource>(0);
+					prefab::CSoundSource*ss = NewGO<prefab::CSoundSource>(0);
 					ss->Init(L"sound/run.wav");
 					ss->SetVolume(0.5f);
 					ss->Play(false);
@@ -337,7 +337,7 @@ void Human::AnimeControll()
 			else if (m_movespeed.LengthSq() > walk_true) {
 				m_skinModelRender->PlayAnimation(enAnimationClip_walk, 0.2);
 				if (m_kari >= 0.5) {
-					ss = NewGO<prefab::CSoundSource>(0);
+					prefab::CSoundSource*ss = NewGO<prefab::CSoundSource>(0);
 					ss->Init(L"sound/walk.wav");
 					ss->SetVolume(0.5f);
 					ss->Play(false);
