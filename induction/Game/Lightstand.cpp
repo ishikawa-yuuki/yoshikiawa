@@ -33,13 +33,13 @@ bool Lightstand::Start()
 		m_skin->SetPosition(m_position);
 		m_skin->SetRotation(m_rot);
 		m_skin->SetScale(m_scale);
-		m_StaticObject.CreateBox(
+		/*m_StaticObject.CreateBox(
 			m_position,
 			CQuaternion::Identity,
 			{ 100.0f, 500.0f, 100.0f }
-		);
+		);*/
 		m_position.y += 50;
-		m_position.x += 30;
+		//m_position.x += 30;
 	}
 	else if(num == 2){
 		m_skin = NewGO<prefab::CSkinModelRender>(0);
@@ -47,12 +47,18 @@ bool Lightstand::Start()
 		m_skin->SetPosition(m_position);
 		m_skin->SetRotation(m_rot);
 		m_skin->SetScale(m_scale);
-		m_StaticObject.CreateBox(
+		/*m_StaticObject.CreateBox(
 			m_position,
 			CQuaternion::Identity,
 			{ 100.0f, 500.0f, 100.0f }
-		);
+		);*/
 	}
+	m_pointLight = NewGO<prefab::CPointLight>(0);
+	m_pointLight->SetColor({10.0,10.0,10.0});
+	CVector3 Attn;
+	Attn.x = 1000.0f;
+	Attn.y = 10.0f;
+	m_pointLight->SetAttn(Attn);
 	
 	return true;
 }
@@ -64,6 +70,7 @@ void Lightstand::Update()
 		effect->SetPosition(m_position);
 		m_timer = 0.0f;
 	}
+	m_pointLight->SetPosition(m_position);
 	m_timer += GameTime().GetFrameDeltaTime();
 }
 	

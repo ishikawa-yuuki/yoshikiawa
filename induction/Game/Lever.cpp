@@ -24,6 +24,7 @@ bool Lever::Start()
 	m_skin->SetPosition(m_position);
 	m_skin->SetRotation(m_rot);
 	m_skin->SetScale(m_scale);
+	m_skin->SetEmissionColor({0.7f,0.7f,0.7f});
 	m_skin->PlayAnimation(enAnimationClip_ON, 0.2);
 	return true;
 }

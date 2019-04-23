@@ -1,5 +1,6 @@
 #pragma once
 #include "tkEngine/physics/tkPhysicsStaticObject.h"
+#include "tkEngine/light/tkPointLight.h"
 class Lightstand : public IGameObject
 {
 public:
@@ -23,6 +24,7 @@ private:
 	int num = 0;
 	prefab::CSkinModelRender* m_skin = nullptr;
 	prefab::CEffect*  m_effect = nullptr;
+	prefab::CPointLight* m_pointLight = nullptr;
 	CVector3 m_position = CVector3::Zero;
 	CQuaternion m_rot = CQuaternion::Identity;
 	CVector3 m_scale = CVector3::Zero;
