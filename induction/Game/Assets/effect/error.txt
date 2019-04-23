@@ -1,0 +1,8 @@
+System.ArgumentException: The XML file format is invalid.
+   場所 WeifenLuo.WinFormsUI.Docking.DockPanel.Persistor.LoadFromXml(DockPanel dockPanel, Stream stream, DeserializeDockContent deserializeContent, Boolean closeStream)
+   場所 WeifenLuo.WinFormsUI.Docking.DockPanel.Persistor.LoadFromXml(DockPanel dockPanel, String fileName, DeserializeDockContent deserializeContent)
+   場所 WeifenLuo.WinFormsUI.Docking.DockPanel.LoadFromXml(String fileName, DeserializeDockContent deserializeContent)
+   場所 Effekseer.GUI.GUIManager.LoadConfig()
+   場所 Effekseer.GUI.GUIManager.Initialize()
+   場所 Effekseer.Program.Exec(Boolean gui, String input, String output, String export, Single magnification)
+   場所 Effekseer.Program.Main(String[] args)

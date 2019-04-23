@@ -23,6 +23,7 @@ bool Lever::Start()
 	m_skin->Init(L"modelData/Lever/Lever.cmo", m_animClip, enAnimationClip_num);
 	m_skin->SetPosition(m_position);
 	m_skin->SetRotation(m_rot);
+	m_skin->SetScale(m_scale);
 	m_skin->PlayAnimation(enAnimationClip_ON, 0.2);
 	return true;
 }
@@ -30,7 +31,7 @@ void Lever::Update()
 {
 	CVector3 diff = m_position - m_player->GetPosition();
 	diff.y = 0;
-		if (diff.LengthSq() <= 100.0f*100.0f&& m_timer >= 2.0f) {
+		if (diff.LengthSq() <= 100.0f*100.0f&& m_timer >= 2.0f&&m_player->GetColor() ==0|| m_timer >= 12.0f&& !m_State) {
 			if (m_State) {
 				m_skin->PlayAnimation(enAnimationClip_OFF, 0.2);
 				m_State = false;

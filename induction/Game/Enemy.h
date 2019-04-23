@@ -63,7 +63,7 @@ private:
 		State3,
 		State4
 	};
-	int timer =0;
+	int m_timer =0;
 	prefab::CSkinModelRender* m_skin = nullptr;
 	CVector3 m_position = CVector3::Zero;//{-200.0f, 0.0f, 500.0f};
 	CVector3 m_movespeed = CVector3::Zero;
