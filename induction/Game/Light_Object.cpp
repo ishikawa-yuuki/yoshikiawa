@@ -32,6 +32,7 @@ bool Light_Object::Start()
 	m_human = FindGO<Human>("Human");
 	m_skinModelRender = NewGO<prefab::CSkinModelRender>(0);
 	m_skinModelRender->Init(L"modelData/LightObject/lanthanum.cmo");
+	m_skinModelRender->SetShadowCasterFlag(true);
 	m_skinModelRender->SetScale({ 2.0f,2.0f,2.0f });
 	m_skinModelRender->SetPosition(m_position);
 

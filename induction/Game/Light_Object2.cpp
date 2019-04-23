@@ -35,6 +35,7 @@ bool Light_Object2::Start()
 	m_skinModelRender->Init(L"modelData/LightObject/lanthanum.cmo");
 	m_skinModelRender->SetScale({ 2.0f,2.0f,2.0f });
 	m_skinModelRender->SetPosition(m_position);
+	m_skinModelRender->SetShadowCasterFlag(true);
 
 	//法線マップをロード。
 	//今は使えなさそう。消しても問題ではない

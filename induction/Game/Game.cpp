@@ -82,6 +82,7 @@ bool Game::Start()
 			m_background = NewGO<BackGround>(0, "BackGround");
 			return true;
 		}
+		//•’Ê‚Ìƒ‰ƒ“ƒ^ƒ“
 		else if (objdata.ForwardMatchName(L"lanthanum")) {	
 			Light_Object* m_lightobject = NewGO<Light_Object>(0, "LightObject");
 			m_lightobject->SetPosition(objdata.position);//Œ±‚µ‚½‚¢‚È‚ç{0,0,0}

@@ -46,8 +46,8 @@ void GameCamera::Update()
 			stickR.z = 0.0f;
 			//右スティックの入力
 			//右スティック
-			m_sdegreexz = -stickR.x * 1.0f;
-			m_sdegreey = -stickR.y*1.0f;
+			m_sdegreexz = -stickR.x * 1.5f;
+			m_sdegreey = -stickR.y*1.5f;
 
 			//回転度加算
 			m_degreey += m_sdegreey;

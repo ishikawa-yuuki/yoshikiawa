@@ -134,7 +134,7 @@
     <MeshContentTask Include="Assets\modelData\StageObject\Lightstand01.fbx">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\Human.fbx">
+    <MeshContentTask Include="Assets\modelData\Human\Human.fbx">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
   </ItemGroup>

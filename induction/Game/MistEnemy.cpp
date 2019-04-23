@@ -31,13 +31,13 @@ bool MistEnemy::Start()
 void MistEnemy::Update()
 {
 	Atari();
-	m_position += m_moveSpeed;
+	m_position += m_moveSpeed * GameTime().GetFrameDeltaTime();
 	m_effect->SetPosition(m_position);
 }
 
 void MistEnemy::Atari()
 {
-	//何か当たった時の処理。行動のトリガーに引っかかってない時の処理もここに書いてあります
+	//何か当たった時の処理。行動もここ。
 	CVector3 diff_p = m_player->GetPosition() - m_position; //diff_pはプレイヤーとの距離
 	CVector3 diff_h = m_human->GetPosition() - m_position;  //diff_hは人との距離
 	CVector3 diff_s = m_startpos - m_position;              //diff_sはスタート地点との距離
@@ -45,22 +45,70 @@ void MistEnemy::Atari()
 	diff_p.y = 0.0f;
 	diff_h.y = 0.0f;
 	diff_s.y = 0.0f;
+	if (!m_human->GetisDead()) {
+		if (m_state == enNormal) {
+			auto game = FindGO<Game>("Game");
+			const auto& lightList = game->GetLightObjectList();
+			for (int i = 0; i < lightList.size(); i++) {
+				CVector3 diff_l = lightList[i]->GetPosition() - m_position;//diff_lはランタンとの距離
 
-	if (m_state == enNormal) {
-		auto game = FindGO<Game>("Game");
-		const auto& lightList = game->GetLightObjectList();
-		for (int i = 0; i < lightList.size(); i++) {
-			CVector3 diff_l = lightList[i]->GetPosition() - m_position;//diff_lはランタンとの距離
-
-			if (diff_l.LengthSq() <= 250.0f*250.0f
-				&& lightList[i]->GetLightOn() == true) {
-				m_state = enPlayer;
-				m_escape_flag = true;
-				if (m_taking_flag) {
-					m_taking_flag = false;
+				if (diff_l.LengthSq() <= 250.0f * 250.0f
+					&& lightList[i]->GetLightOn() == true) {
+					m_state = enPlayer;
+					m_escape_flag = true;
+					if (m_taking_flag) {
+						m_taking_flag = false;
+					}
+				
+				}
+				else if (diff_p.LengthSq() <= 120.0f * 120.0f
+					&&!m_player->GetColor()
+					|| m_escape_flag) {
+					m_state = enPlayer;
+					m_escape_flag = true;
+					if (m_taking_flag) {
+						m_taking_flag = false;
+					}
+				}
+				else if (diff_h.LengthSq() <= 120.0f * 120.0f
+					&& !m_escape_flag) {
+					m_state = enHuman;
+					m_taking_flag = true;
+				}
+				else if (m_human->GetismistEnemy()) {
+					CVector3 dif = diff_h;
+					dif.Normalize();
+					dif *= 1200.0f;
+					m_moveSpeed = dif;
+					//m_taking_flag = false;
+				}
+				else {
+					m_moveSpeed = CVector3::Zero;
 				}
 			}
-			else if (diff_p.LengthSq() <= 120.0f*120.0f
+		}
+		else if (m_state == enPlayer) {
+			diff_p.Normalize();
+			diff_p *= -900.0f;
+			m_moveSpeed = diff_p;
+			m_timer++;
+			if (m_timer >= 400) {
+				m_timer = 0;
+				m_escape_flag = false;
+				m_state = enNormal;
+			}
+			if (Deathtimer != 0) {
+				Deathtimer = 0;
+			}
+		}
+		else if (m_state == enHuman) {
+			diff_s.Normalize();
+			diff_s *= 300.0f;
+			m_moveSpeed = diff_s;
+			Deathtimer += 60 * GameTime().GetFrameDeltaTime();
+
+			if (diff_p.LengthSq() <= 130.0f * 130.0f
+				&&!m_player->GetColor()
 				|| m_escape_flag) {
 				m_state = enPlayer;
 				m_escape_flag = true;
@@ -68,52 +116,17 @@ void MistEnemy::Atari()
 					m_taking_flag = false;
 				}
 			}
-			else if (diff_h.LengthSq() <= 100.0f*100.0f
-				&& !m_escape_flag) {
-				m_state = enHuman;
-				m_taking_flag = true;
-			}
-			else {
-				diff_h.Normalize();
-				diff_h *= 5.0f;
-				m_moveSpeed = diff_h;
-			}
-		}
-	}
-	else if(m_state == enPlayer) {
-		diff_p.Normalize();
-		diff_p *= -15.0f;
-		m_moveSpeed = diff_p;
-		m_timer++;
 
-		if (m_timer >= 400) {
-			m_timer = 0;
-			m_escape_flag = false;
-			m_state = enNormal;
-		}
-	}
-	else if (m_state == enHuman) {
-		diff_s.Normalize();
-		diff_s *= 4.0f;
-		m_moveSpeed = diff_s;
-
-		if (diff_p.LengthSq() <= 130.0f*130.0f
-			|| m_escape_flag) {
-			m_state = enPlayer;
-			m_escape_flag = true;
-			if (m_taking_flag) {
-				m_taking_flag = false;
+			if (Deathtimer > 300) {
+				Deathtimer = 0;
+				m_human->isKill();
 			}
 		}
 	}
-	time++;
-	if (time <50) {
-		//m_moveSpeed.y += 0.3f;
-	}
-	else if (time<100) {
-		//m_moveSpeed.y -= 0.3f;
-	}
-	else {
-		time = 0;
+	else
+	{
+		//humanが死んだときの処理。
+		m_state = enNormal;
+		m_moveSpeed = CVector3::Zero;
 	}
 }

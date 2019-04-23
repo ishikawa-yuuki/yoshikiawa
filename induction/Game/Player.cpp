@@ -34,7 +34,7 @@ bool Player::Start()
 	//m_charaCon.SetPosition(m_position);
 	//m_effect->SetPosition(m_position);
 	m_ptLight = NewGO<prefab::CPointLight>(0);
-	m_ptLight->SetColor({ 10.0f, 10.0f, 10.0f });//1000,1000,1000‚ÅLED‚Ý‚½‚¢‚ÈŒõ‚ªo‚é
+	m_ptLight->SetColor({ 1000.0f, 1000.0f, 1000.0f });//1000,1000,1000‚ÅLED‚Ý‚½‚¢‚ÈŒõ‚ªo‚é
 	CVector3 attn;
 	attn.x = 1000.0f;
 	attn.y = 10.0f;
@@ -62,6 +62,9 @@ void Player::Update()
 	m_effect->SetPosition(m_position);
 	m_charaCon.SetPosition(m_position);
 	m_ptLight->SetPosition(m_position);
+	
+	//static CVector3 attn = { 1000.0f , 10.0f, 1.0f};
+	//m_ptLight->SetAttn(attn);
 }
 
 void Player::GameStartMove()
@@ -117,6 +120,7 @@ void Player::Color_Change()
 			CVector3 attn;
 			attn.x = 100.0f;
 			attn.y = 10.0f;
+			attn.z = 1.0f;
 			m_ptLight->SetAttn(attn);
 		}
 	}
@@ -130,6 +134,7 @@ void Player::Color_Change()
 			CVector3 attn;
 			attn.x = 1000.0f;
 			attn.y = 10.0f;
+			attn.z = 1.0f;
 			m_ptLight->SetAttn(attn);
 		}
 	}

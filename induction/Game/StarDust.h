@@ -11,5 +11,6 @@ public:
 private:
 	prefab::CEffect* m_effect;
 	Player* m_player;
+	int m_timer = 0;
 };
 

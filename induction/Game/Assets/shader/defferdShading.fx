@@ -81,6 +81,6 @@ float4 PSMain( PSDefferdInput In ) : SV_Target0
 	);
 	
 	//©ŒÈ”­Œõ‚ğ‰ÁZB
-	finalColor.xyz +=emissionColorTexture.Sample( Sampler, In.uv).xyz;
+	finalColor.xyz += albedo.xyz * emissionColorTexture.Sample( Sampler, In.uv).xyz;
 	return finalColor;
 }

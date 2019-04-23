@@ -39,7 +39,7 @@ public:
 	/*光の色を変えます*/
 	//光の色を返すぜ int型になった。。。
 	int GetColor(){
-		int number = 0;
+		int number;
 		switch (m_color)
 		{
 		case hikari_hutu:

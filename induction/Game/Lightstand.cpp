@@ -16,6 +16,7 @@ bool Lightstand::Start()
 	m_skin = NewGO<prefab::CSkinModelRender>(0);
 	m_skin->Init(L"modelData/StageObject/Lightstand01.cmo");
 	m_skin->SetPosition(m_position);
+	m_skin->SetShadowCasterFlag(true);
 	m_StaticObject.CreateBox(
 		m_position,
 		CQuaternion::Identity,
