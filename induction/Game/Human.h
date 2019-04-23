@@ -61,7 +61,10 @@ public:
 	bool GetisGameOver()const {
 		return m_isGameOver;
 	}
-
+	//mistenemyが行動を変えるためのスイッチ関数
+	bool GetismistEnemy()const {
+		return mistflag;
+	}
 	//humanを倒すときの関数、enemyとかが使うと思います。
 	void isKill() 
 	{
@@ -89,10 +92,8 @@ private:
 	CCharacterController m_charaCon;
 	enum HumanAnimationClip {
 		enAnimationClip_idle,
-		enAnimationClip_walk,
+	//	enAnimationClip_walk,
 		enAnimationClip_run,
-		enAnimationClip_jump,
-		enAnimationClip_damage,
 		enAnimationClip_clear,
 		enAnimationClip_KneelDown,
 		enAnimationClip_num
@@ -119,8 +120,8 @@ private:
 	float m_nearLen = 10000.0f;
 	//一番近いライト検索
 	prefab::CPointLight* m_nearPointLight = nullptr;
-	//suiltu
-	bool flag = false;
+	//mistenemyが近寄るフラグ
+	bool mistflag = false;
 	//後で消す
 	float m_kari = 0.0;
 };

@@ -46,8 +46,8 @@ Game::~Game()
 		DeleteGO(m_lightobject);
 	}
 	//
-	for (auto&m_lightobject2 : m_lightobject2List) {
-		DeleteGO(m_lightobject2);
+	for (auto&m_onlightobject : m_onlightObjectList) {
+		DeleteGO(m_onlightobject);
 	}
 	for (auto&m_lever : m_leverList) {
 		DeleteGO(m_lever);
@@ -58,9 +58,9 @@ Game::~Game()
 	for (auto&m_Lightstand : m_Lightstand1List) {
 		DeleteGO(m_Lightstand);
 	}
-	for (auto&m_lightobject2 : m_lightobjectList) {
-		DeleteGO(m_lightobject2);
-	}
+	//for (auto&m_lightobject2 : m_lightobjectList) {
+	//	DeleteGO(m_lightobject2);
+	//}
 	DeleteGO(m_gamecamera);
 }
 
@@ -82,11 +82,20 @@ bool Game::Start()
 			m_background = NewGO<BackGround>(0, "BackGround");
 			return true;
 		}
-		else if (objdata.ForwardMatchName(L"lanthanum")) {	
+		//offƒ‰ƒ“ƒ^ƒ“
+		else if (objdata.ForwardMatchName(L"lanthanum1")) {	
 			Light_Object* m_lightobject = NewGO<Light_Object>(0, "LightObject");
 			m_lightobject->SetPosition(objdata.position);//Œ±‚µ‚½‚¢‚È‚ç{0,0,0}
 			m_lightobjectList.push_back(m_lightobject);
 		
+			return true;
+		}
+		//onƒ‰ƒ“ƒ^ƒ“
+		else if (objdata.EqualObjectName(L"lanthanum2")) {
+			Light_Object* m_onlightObject = NewGO<Light_Object>(0, "OnLightObject");
+			m_onlightObject->SetPosition(objdata.position);
+			m_onlightObject->SetLight();
+			m_onlightObjectList.push_back(m_onlightObject);
 			return true;
 		}
 		//“®‚­°‚Í2í—Ş‚ ‚éAMoveBed‚Í‰¡ˆÚ“®‚·‚é‚à‚Ì

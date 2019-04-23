@@ -10,7 +10,6 @@
 #include "Fade.h"
 #include "Exit.h"
 #include "Light_Object.h"
-//#include "Light_Object2.h"
 #include "Stage_Select.h"
 
 
@@ -42,13 +41,13 @@ bool Human::Start()
 	m_mistenemy = FindGO<MistEnemy>("mist");
 	m_exit = FindGO<Exit>("Exit");
 
-	m_animClip[enAnimationClip_idle].Load(L"animData/unityChan/idle.tka");
-	m_animClip[enAnimationClip_walk].Load(L"animData/unityChan/walk.tka");
-	m_animClip[enAnimationClip_run].Load(L"animData/unityChan/run.tka");
-	m_animClip[enAnimationClip_jump].Load(L"animData/unityChan/jump.tka");
-	m_animClip[enAnimationClip_damage].Load(L"animData/unityChan/damage.tka");
-	m_animClip[enAnimationClip_KneelDown].Load(L"animData/unityChan/KneelDown.tka");
-	m_animClip[enAnimationClip_clear].Load(L"animData/unityChan/clear.tka");
+	m_animClip[enAnimationClip_idle].Load(L"animData/Human/idle.tka");
+	//m_animClip[enAnimationClip_walk].Load(L"animData/unityChan/walk.tka");
+	m_animClip[enAnimationClip_run].Load(L"animData/Human/run.tka");
+	//m_animClip[enAnimationClip_jump].Load(L"animData/unityChan/jump.tka");
+	//m_animClip[enAnimationClip_damage].Load(L"animData/unityChan/damage.tka");
+	m_animClip[enAnimationClip_KneelDown].Load(L"animData/Human/KneelDown.tka");
+	m_animClip[enAnimationClip_clear].Load(L"animData/Human/clear.tka");
 	//アニメクリップをすべてロード、全部使う必要は特にないです。
 
 
@@ -57,20 +56,21 @@ bool Human::Start()
 	}
 	//for文でとりあえずロードした奴らすべてLoopFlagをtrueにした。
 
-	m_animClip[enAnimationClip_jump].SetLoopFlag(false);
+	//m_animClip[enAnimationClip_jump].SetLoopFlag(false);
 	m_animClip[enAnimationClip_KneelDown].SetLoopFlag(false);
-	m_animClip[enAnimationClip_damage].SetLoopFlag(false);
+	//m_animClip[enAnimationClip_damage].SetLoopFlag(false);
 	m_animClip[enAnimationClip_clear].SetLoopFlag(false);
 	//trueにしたら問題がある奴だけfalseに直した。
 	
 	m_skinModelRender = NewGO<prefab::CSkinModelRender>(0);
-	m_skinModelRender->Init(L"modelData/UnityChan.cmo",m_animClip,enAnimationClip_num,enFbxUpAxisY);
+	m_skinModelRender->Init(L"modelData/Human/Human.cmo",m_animClip,enAnimationClip_num,enFbxUpAxisZ);
 	m_charaCon.Init(
 		20.0f,
 		30.0f,
 		m_position
 	);
 	m_skinModelRender->SetShadowCasterFlag(true);
+	m_skinModelRender->SetEmissionColor({3.3f, 3.3f, 3.3f});
 	return true;
 }
 
@@ -81,22 +81,26 @@ void Human::Update()
 		if (!m_StartMoveFin) {
 			GameStartMove();
 		}
-		else {
-			/*QueryGOs<Light_Object>("LightObject", [&](Light_Object* light) {*/
-				//light->GetlightOn() == true;
-			//ランタンの数分、GetLightOn()関数を調べて、
-			//その中にGetLightOnがtrueになっているランタンがあればm_nearlightに代入。
-			
-			Light_Move();
+		else if (m_mistenemy->Getstate() == 2)
+		{
+			TakingMove();
 		}
+		else
+		{
+				/*QueryGOs<Light_Object>("LightObject", [&](Light_Object* light) {*/
+					//light->GetlightOn() == true;
+				//ランタンの数分、GetLightOn()関数を調べて、
+				//その中にGetLightOnがtrueになっているランタンがあればm_nearlightに代入。
+				Light_Move();
+		}
+		Turn();
+		Hanntei();
+		CVector3 Pos = m_position + m_Bedspeed;
+		isDead();
+		isClear();
+		m_charaCon.SetPosition(Pos);
+		m_skinModelRender->SetPosition(Pos);
 	}
-	Turn();
-	Hanntei();
-	CVector3 Pos = m_position + m_Bedspeed;
-	isDead();
-	isClear();
-	m_charaCon.SetPosition(Pos);
-	m_skinModelRender->SetPosition(Pos);
 }
 
 void Human::GameStartMove()
@@ -185,8 +189,10 @@ void Human::TakingMove()
 			//死なない時の普通の処理
 			if (!m_isDead) {
 				CVector3 diff = m_position - m_mistenemy->GetPosition();
+				CVector3 diff_p = m_position - m_player->GetPosition();
 				//Yの数値は除外
 				diff.y = 0.0f;
+				diff_p.y = 0.0f;
 				if (diff.LengthSq() <= 105.0f * 105.0f) {//プレイヤーと近ければhumanは止まる
 					m_movespeed = CVector3::Zero;
 				}
@@ -261,6 +267,9 @@ void Human::Light_Move()
 			}
 			//光が届いているライトがあったら、そこについていく。
 			if (m_nearPointLight != nullptr) {
+				if (mistflag) {
+					mistflag = false;
+				}
 				auto humanspeed = 300.0f;
 				m_movespeed = m_nearPointLight->GetPosition() - m_position;
 				auto len = m_movespeed.Length();
@@ -274,8 +283,8 @@ void Human::Light_Move()
 				}
 			}
 			else {
-
 				m_movespeed = CVector3::Zero;
+				mistflag = true;
 			}
 		}
 		else
@@ -334,7 +343,7 @@ void Human::AnimeControll()
 				}
 				
 			}
-			else if (m_movespeed.LengthSq() > walk_true) {
+		/*	else if (m_movespeed.LengthSq() > walk_true) {
 				m_skinModelRender->PlayAnimation(enAnimationClip_walk, 0.2);
 				if (m_kari >= 0.5) {
 					prefab::CSoundSource*ss = NewGO<prefab::CSoundSource>(0);
@@ -342,8 +351,8 @@ void Human::AnimeControll()
 					ss->SetVolume(0.5f);
 					ss->Play(false);
 					m_kari = 0.0f;
-				}
-			}
+				}*/
+			//}
 			else {
 				m_skinModelRender->PlayAnimation(enAnimationClip_idle, 0.2);
 			}

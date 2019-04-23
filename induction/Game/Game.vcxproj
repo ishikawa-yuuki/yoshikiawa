@@ -200,7 +200,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Preview_Low|X64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -1850,7 +1850,7 @@
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\BlackUnityChan.fbx" />
     <MeshContentTask Include="Assets\modelData\Goal\Goal.fbx" />
-    <MeshContentTask Include="Assets\modelData\Human.fbx" />
+    <MeshContentTask Include="Assets\modelData\Human\Human.fbx" />
     <MeshContentTask Include="Assets\modelData\Lever\Lever.fbx" />
     <MeshContentTask Include="Assets\modelData\LightObject\lanthanum.fbx" />
     <MeshContentTask Include="Assets\modelData\LightObject\mini_lanthanum.fbx" />

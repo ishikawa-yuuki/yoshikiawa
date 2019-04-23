@@ -32,9 +32,20 @@ bool Light_Object::Start()
 	m_human = FindGO<Human>("Human");
 	m_skinModelRender = NewGO<prefab::CSkinModelRender>(0);
 	m_skinModelRender->Init(L"modelData/LightObject/lanthanum.cmo");
+	m_skinModelRender->SetShadowCasterFlag(true);
 	m_skinModelRender->SetScale({ 2.0f,2.0f,2.0f });
 	m_skinModelRender->SetPosition(m_position);
 
+	if (m_isLightOn) {
+		m_effect = NewGO<prefab::CEffect>(0);
+		m_effect->Play(L"effect/spotlight.efk");
+		m_effect->SetScale({ 4.0f, 4.0f, 4.0f });
+		m_effect->SetPosition(m_position);
+		//m_human->isLantanon();
+	//	housenlight();
+		InitPointLight();
+		//Dirlight();使わない
+	}
 	//法線マップをロード。
 	//今は使えなさそう。消しても問題ではない
 	//m_normalMapSRV.CreateFromDDSTextureFromFile(L"modelData/LightObject/glass05_N.dds");
@@ -52,7 +63,8 @@ void Light_Object::Update()
 	diff.y = 0.0f;
 	if (!m_isLightOn) {
 		if (m_player->GetColor() == 0
-			&&diff.LengthSq() < 100.0f*100.0f) {
+			&&diff.LengthSq() < 100.0f*100.0f
+			||m_isLightOn) {
 			m_isLightOn = true;
 			m_effect = NewGO<prefab::CEffect>(0);
 			m_effect->Play(L"effect/spotlight.efk");

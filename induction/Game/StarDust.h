@@ -11,5 +11,7 @@ public:
 private:
 	prefab::CEffect* m_effect;
 	Player* m_player;
+	int m_timer = 0;
+	CQuaternion m_rotation = CQuaternion::Identity;
 };
 

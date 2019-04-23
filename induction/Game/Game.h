@@ -89,7 +89,7 @@ private:
 	std::vector<MoveBed_zengo*> m_moveBed_zengoList;
 	std::vector<MoveBed_zengo*> m_moveBed_zengo2List;
 	std::vector<Light_Object*> m_lightobjectList;
-	std::vector<Light_Object2*> m_lightobject2List;
+	std::vector<Light_Object*> m_onlightObjectList;
 	std::vector<Lever*>m_leverList;
 	std::vector<Poison*>m_poisonList;
 	std::vector<Lightstand*>m_Lightstand1List;
