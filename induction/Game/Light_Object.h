@@ -19,6 +19,12 @@ public:
 	{
 		m_position = pos;
 	}
+	//これが呼ばれたら初期状態のライトはonになる
+	bool SetLight()
+	{
+		m_isLightOn = true;
+		return m_isLightOn;
+	}
 	//今のポジションの値を返す。
 	CVector3 GetPosition()const
 	{
@@ -42,6 +48,7 @@ private:
 	CVector3 m_position = { 0.0f,-70.0f,-3000.0f };
 	Player* m_player;
 	Human* m_human;
+	//ライトがオンなのかどうか
 	bool m_isLightOn = false;
 	//ライト。
 	prefab::CDirectionLight* m_lig;			
