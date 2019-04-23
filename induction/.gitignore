@@ -1,7 +1,5 @@
 .vs/
 x64/
-*.cmo
-*.dds
 *.lib
 *.obj
 *.cso

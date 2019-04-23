@@ -148,11 +148,23 @@
     <ImageContentTask Include="Assets\sprite\dummy.png">
       <Filter>Assets\sprite</Filter>
     </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\Title_induction.png" />
-    <ImageContentTask Include="Assets\sprite\stage_select.png" />
-    <ImageContentTask Include="Assets\sprite\arrow.png" />
-    <ImageContentTask Include="Assets\sprite\fade.png" />
-    <ImageContentTask Include="Assets\sprite\BacktoGame.png" />
-    <ImageContentTask Include="Assets\sprite\retire.png" />
+    <ImageContentTask Include="Assets\sprite\BacktoGame.png">
+      <Filter>Assets\sprite</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\fade.png">
+      <Filter>Assets\sprite</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\retire.png">
+      <Filter>Assets\sprite</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\stage_select.png">
+      <Filter>Assets\sprite</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\Title_induction.png">
+      <Filter>Assets\sprite</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\arrow.png">
+      <Filter>Assets\sprite</Filter>
+    </ImageContentTask>
   </ItemGroup>
 </Project>

@@ -76,7 +76,7 @@ bool Game::Start()
 	m_gamecamera = NewGO<GameCamera>(0, "GameCamera");
 	m_fade = FindGO<Fade>("Fade");
 	m_mistenemy = NewGO<MistEnemy>(0, "mist");//å„Ç≈levelÇ…ëgÇ›çûÇ›
-
+	
 	m_level.Init(L"level/kari_yuuki.tkl", [&](LevelObjectData& objdata) {
 		if (objdata.EqualObjectName(L"Stage1")) {
 			m_background = NewGO<BackGround>(0, "BackGround");
