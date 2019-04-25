@@ -27,12 +27,13 @@ private:
 	//îºåaÅ`
 	const float m_r = 200.0f;
 
-	CVector3 m_position;
+	CVector3 m_position = CVector3::Zero;
 	Player* m_player;
 	Human* m_human;
 	CSpringCamera m_springCamera;
+	float m_refreshTimer = 2.0f;
 	//Ç±Ç¡ÇøÇ™íçéãì_Ç≈Ç∑ÅB
-	CVector3 m_target;
+	CVector3 m_target = CVector3::Zero;
 	CVector3 m_ToPos = { 0.0f,450.0f,0.0f };
 };
 

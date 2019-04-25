@@ -25,7 +25,6 @@ public:
 private:
 	int num = 0;
 	prefab::CSkinModelRender* m_skin = nullptr;
-	prefab::CEffect*  m_effect = nullptr;
 	prefab::CSoundSource* m_sound = nullptr;
 	prefab::CPointLight* m_pointLight = nullptr;
 	CVector3 m_position = CVector3::Zero;

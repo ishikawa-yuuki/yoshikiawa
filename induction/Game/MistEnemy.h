@@ -30,6 +30,7 @@ private:
 
 	Enstate m_state = enNormal;
 	prefab::CEffect* m_effect = nullptr;
+	prefab::CSoundSource* m_sound  =nullptr;
 	CVector3 m_position = { 9999.0f,0.0f,9999.0f };
 	CVector3 m_startpos = CVector3::Zero;
 	CVector3 m_moveSpeed = CVector3::Zero;

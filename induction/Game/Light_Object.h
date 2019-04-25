@@ -51,7 +51,7 @@ private:
 	//ライトがオンなのかどうか
 	bool m_isLightOn = false;
 	//ライト。
-	prefab::CDirectionLight* m_lig;			
+	prefab::CDirectionLight* m_lig = nullptr;
 	//ライトの方向。
 	CVector3 m_lightDir;					
 	prefab::CDirectionLight* m_directionLig = nullptr;

@@ -54,12 +54,12 @@ void MoveBed::Update()
 {
 		m_lastFramepos = m_position;
 		if (m_timer >= 2.0f) {
-			prefab::CSoundSource* m_sound = NewGO<prefab::CSoundSource>(0);
-			m_sound->Init(L"sound/movebed.wav");
-			m_sound->SetPosition(m_position);
+			prefab::CSoundSource* sound = NewGO<prefab::CSoundSource>(0);
+			sound->Init(L"sound/movebed.wav");
+			sound->SetPosition(m_position);
 			Range();
-			m_sound->SetVolume(m_volume);
-			m_sound->Play(false);
+			sound->SetVolume(m_volume);
+			sound->Play(false);
 			m_position.x += m_moveSpeed.x*GameTime().GetFrameDeltaTime();
 		}
 		if (m_position.x < m_protpos.x ) {

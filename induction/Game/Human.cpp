@@ -241,8 +241,8 @@ void Human::Light_Move()
 			m_nearLen = 100000.0f;
 			int nearLightNo = -1;
 			m_nearPointLight = nullptr;
-			Game* game = FindGO<Game>("Game");
-			const auto& lightList = game->GetLightObjectList();
+			/*Game* game = FindGO<Game>("Game");*/
+			const auto& lightList = m_game->GetLightObjectList();
 			float ligPowerMax = 0.0f;
 			//一番光の強さが強いライトをランタンから調べる。
 			for (int i = 0; i < lightList.size(); i++) {

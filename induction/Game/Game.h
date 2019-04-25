@@ -63,7 +63,7 @@ private:
 	GameCamera * m_gamecamera;
 	Exit* m_exit;
 
-	prefab::CSkinModelRender* m_goal = nullptr;
+	/*prefab::CSkinModelRender* m_goal = nullptr;*/
 	prefab::CSpriteRender* m_sprite_Retire = nullptr;
 	prefab::CSpriteRender* m_sprite_toGame = nullptr;
 	prefab::CSpriteRender* m_sprite_arrow = nullptr;

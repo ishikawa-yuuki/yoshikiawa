@@ -50,9 +50,9 @@ Game::~Game()
 	for (auto&m_poison :m_poisonList) {
 		DeleteGO(m_poison);
 	}
-	/*for (auto&m_Lightstand : m_Lightstand1List) {
+	for (auto&m_Lightstand : m_Lightstand1List) {
 		DeleteGO(m_Lightstand);
-	}*/
+	}
 	//for (auto&m_lightobject2 : m_lightobjectList) {
 	//	DeleteGO(m_lightobject2);
 	//}
@@ -199,7 +199,7 @@ void Game::Update()
 		DeleteGO(this);
 	}
 
-	m_human = FindGO<Human>("Human");
+	//m_human = FindGO<Human>("Human");
 	auto nearPointLig = m_human->GetNearPointLight();
 	if (nearPointLig == nullptr) {
 		//ヒューマンが向かっていっているライトがないときは

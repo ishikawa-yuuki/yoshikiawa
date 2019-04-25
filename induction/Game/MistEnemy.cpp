@@ -14,6 +14,7 @@ MistEnemy::MistEnemy()
 MistEnemy::~MistEnemy()
 {
 	DeleteGO(m_effect);
+	DeleteGO(m_sound);
 }
 
 bool MistEnemy::Start()
@@ -25,11 +26,23 @@ bool MistEnemy::Start()
 	m_effect = NewGO<prefab::CEffect>(0);
 	m_effect->Play(L"effect/kuromoya.efk");
 	m_effect->SetScale({ 40.0f, 40.0f, 40.0f });
+	m_sound = NewGO<prefab::CSoundSource>(0);
+	m_sound->Init(L"sound/MistEnemy.wav");
+	/*m_sound->SetPosition(m_position);*/
+	/*m_sound->SetVolume(m_volume);*/
+	m_sound->Play(true);
 	return true;
 }
 
 void MistEnemy::Update()
 {
+	//音m_moyaがtrueなら音が出る
+	if (m_moya) {
+		m_sound->SetVolume(1.0f);
+	}
+	else {
+		m_sound->SetVolume(0.0f);
+	}
 	Atari();
 	m_position += m_moveSpeed * GameTime().GetFrameDeltaTime();
 	m_effect->SetPosition(m_position);
@@ -37,6 +50,7 @@ void MistEnemy::Update()
 
 void MistEnemy::Atari()
 {
+	
 	//何か当たった時の処理。行動もここ。
 	CVector3 diff_p = m_player->GetPosition() - m_position; //diff_pはプレイヤーとの距離
 	CVector3 diff_h = m_human->GetPosition() - m_position;  //diff_hは人との距離
