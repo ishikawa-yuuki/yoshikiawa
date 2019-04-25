@@ -13,7 +13,7 @@ Player::~Player()
 {
 	DeleteGO(m_effect);
 	DeleteGO(m_ptLight);
-	DeleteGO(m_stardust);
+	//DeleteGO(m_stardust);
 	DeleteGO(m_skin);
 }
 

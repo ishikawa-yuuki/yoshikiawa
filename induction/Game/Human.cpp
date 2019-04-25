@@ -259,6 +259,9 @@ void Human::Light_Move()
 						m_nearPointLight = lightList[i]->GetPointLight();
 					}
 				}
+				else {
+					mistflag = true;
+				}
 			}
 			//ŽŸ‚Í¯
 			float ligPower = CalcLightPower(m_position, m_player->GetPosition(), m_player->GetPointLightAttn());

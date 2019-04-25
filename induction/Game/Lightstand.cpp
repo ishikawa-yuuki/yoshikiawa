@@ -11,6 +11,7 @@ Lightstand::~Lightstand()
 {
 	DeleteGO(m_skin);
 	DeleteGO(m_sound);
+	DeleteGO(m_pointLight);
 }
 
 bool Lightstand::Start()

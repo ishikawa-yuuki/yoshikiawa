@@ -41,13 +41,8 @@ Game::~Game()
 	for (auto&moveBed_zengo_long : m_moveBed_zengo2List) {
 		DeleteGO(moveBed_zengo_long);
 	}
-	//ÉäÉXÉgÇ…ç⁄ÇπÇ»Ç≠ÇƒÇ‡Ç¢Ç¢Ç©Ç‡ÇµÇÍÇ‹ÇπÇÒ
 	for (auto&m_lightobject : m_lightobjectList) {
 		DeleteGO(m_lightobject);
-	}
-	//
-	for (auto&m_onlightobject : m_onlightObjectList) {
-		DeleteGO(m_onlightobject);
 	}
 	for (auto&m_lever : m_leverList) {
 		DeleteGO(m_lever);
@@ -55,9 +50,9 @@ Game::~Game()
 	for (auto&m_poison :m_poisonList) {
 		DeleteGO(m_poison);
 	}
-	for (auto&m_Lightstand : m_Lightstand1List) {
+	/*for (auto&m_Lightstand : m_Lightstand1List) {
 		DeleteGO(m_Lightstand);
-	}
+	}*/
 	//for (auto&m_lightobject2 : m_lightobjectList) {
 	//	DeleteGO(m_lightobject2);
 	//}
@@ -95,7 +90,7 @@ bool Game::Start()
 			Light_Object* m_onlightObject = NewGO<Light_Object>(0, "OnLightObject");
 			m_onlightObject->SetPosition(objdata.position);
 			m_onlightObject->SetLight();
-			m_onlightObjectList.push_back(m_onlightObject);
+			m_lightobjectList.push_back(m_onlightObject);
 			return true;
 		}
 		//ìÆÇ≠è∞ÇÕ2éÌóﬁÇ†ÇÈÅAMoveBedÇÕâ°à⁄ìÆÇ∑ÇÈÇ‡ÇÃ

@@ -41,6 +41,7 @@ void MistEnemy::Atari()
 	CVector3 diff_p = m_player->GetPosition() - m_position; //diff_pはプレイヤーとの距離
 	CVector3 diff_h = m_human->GetPosition() - m_position;  //diff_hは人との距離
 	CVector3 diff_s = m_startpos - m_position;              //diff_sはスタート地点との距離
+	CVector3 diff_ph = m_human->GetPosition() - m_player->GetPosition(); //プレイヤーとヒトの距離
 	
 	diff_p.y = 0.0f;
 	diff_h.y = 0.0f;
@@ -51,15 +52,21 @@ void MistEnemy::Atari()
 			const auto& lightList = game->GetLightObjectList();
 			for (int i = 0; i < lightList.size(); i++) {
 				CVector3 diff_l = lightList[i]->GetPosition() - m_position;//diff_lはランタンとの距離
-
-				if (diff_l.LengthSq() <= 250.0f * 250.0f
-					&& lightList[i]->GetLightOn() == true) {
+				
+				if (diff_l.LengthSq() <= 500.0f * 500.0f
+					&& lightList[i]->GetLightOn() == true
+					||m_escape_flag) {
 					m_state = enPlayer;
 					m_escape_flag = true;
 					if (m_taking_flag) {
 						m_taking_flag = false;
 					}
-				
+					if (!iltutai) {
+						prefab::CEffect* effect = NewGO<prefab::CEffect>(0);
+						effect->Play(L"effect/kuromoya_kieru.efk");
+						effect->SetPosition(m_position);
+						iltutai = true;
+					}
 				}
 				else if (diff_p.LengthSq() <= 120.0f * 120.0f
 					&&!m_player->GetColor()
@@ -69,6 +76,12 @@ void MistEnemy::Atari()
 					if (m_taking_flag) {
 						m_taking_flag = false;
 					}
+					if (!iltutai) {
+						prefab::CEffect* effect = NewGO<prefab::CEffect>(0);
+						effect->Play(L"effect/kuromoya_kieru.efk");
+						effect->SetPosition(m_position);
+						iltutai = true;
+					}
 				}
 				else if (diff_h.LengthSq() <= 120.0f * 120.0f
 					&& !m_escape_flag) {
@@ -76,23 +89,37 @@ void MistEnemy::Atari()
 					m_taking_flag = true;
 				}
 				else if (m_human->GetismistEnemy()) {
-					CVector3 dif = diff_h;
-					dif.Normalize();
-					dif *= 1200.0f;
-					m_moveSpeed = dif;
-					//m_taking_flag = false;
+					if (!m_moya) {
+						CVector3 pos = m_human->GetPosition();
+						pos.Normalize();
+						pos *= 400.0f;
+						m_position = pos + m_human->GetPosition();
+						m_position.y = 100.0f;
+						m_moya = true;
+					}
+					else {
+						//diff_hを直接いじってはいけないのでdifh制作
+						CVector3 difh = diff_h;
+						difh.Normalize();
+						difh *= 120.0f;
+						m_moveSpeed = difh;
+						m_taking_flag = false;
+					}
 				}
 				else {
-					m_moveSpeed = CVector3::Zero;
+					CVector3 difh = diff_h;
+					difh.Normalize();
+					difh *= 120.0f;
+					m_moveSpeed = difh;
 				}
+
 			}
 		}
 		else if (m_state == enPlayer) {
-			diff_p.Normalize();
-			diff_p *= -900.0f;
-			m_moveSpeed = diff_p;
+			m_position = m_startpos;
 			m_timer++;
 			if (m_timer >= 400) {
+				iltutai = false;
 				m_timer = 0;
 				m_escape_flag = false;
 				m_state = enNormal;
@@ -100,18 +127,31 @@ void MistEnemy::Atari()
 			if (Deathtimer != 0) {
 				Deathtimer = 0;
 			}
+			if (m_moya) {
+				m_moya = false;
+			}
 		}
 		else if (m_state == enHuman) {
-			diff_s.Normalize();
-			diff_s *= 300.0f;
-			m_moveSpeed = diff_s;
-			Deathtimer += 60 * GameTime().GetFrameDeltaTime();
+			//diff_pの数値を直接いじってはいけないのでdifpを作成。
+			CVector3 difp = diff_p;
+			difp.Normalize();
+			difp *= -300.0f;
+			m_moveSpeed = difp;
+			Deathtimer += 50 * GameTime().GetFrameDeltaTime();
 
-			if (diff_p.LengthSq() <= 130.0f * 130.0f
+			//捕まった状態の時は光とヒトの距離で計算します。
+			//MisteEnemyが壁に入ったらどうしようもないので…
+			if (diff_ph.LengthSq() <= 150.0f * 150.0f
 				&&!m_player->GetColor()
 				|| m_escape_flag) {
 				m_state = enPlayer;
 				m_escape_flag = true;
+				if (!iltutai) {
+					prefab::CEffect* effect = NewGO<prefab::CEffect>(0);
+					effect->Play(L"effect/kuromoya_kieru.efk");
+					effect->SetPosition(m_position);
+					iltutai = true;
+				}
 				if (m_taking_flag) {
 					m_taking_flag = false;
 				}
