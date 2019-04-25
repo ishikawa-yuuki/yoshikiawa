@@ -30,16 +30,23 @@ private:
 
 	Enstate m_state = enNormal;
 	prefab::CEffect* m_effect = nullptr;
-	CVector3 m_position = CVector3::Zero;
+	CVector3 m_position = { 9999.0f,0.0f,9999.0f };
 	CVector3 m_startpos = CVector3::Zero;
 	CVector3 m_moveSpeed = CVector3::Zero;
+	CVector3 m_kirokuvector;
 	Player* m_player;
 	Human* m_human;
 	//プレイヤーから逃げるフラグ
 	bool m_escape_flag = false;
-	//連行フラグ
+	//人を連れていくフラグ
 	bool m_taking_flag = false;
 	int m_timer = 0;
 	int Deathtimer = 0;
+	//最初だけ記録する
+	bool m_kiroku = false;
+	//もやが出るためのスイッチ
+	bool m_moya = false;
+	//effectが消える時のスイッチ
+	bool iltutai = false;
 };
 
