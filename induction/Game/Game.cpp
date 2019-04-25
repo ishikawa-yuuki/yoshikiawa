@@ -10,7 +10,6 @@
 #include "MoveBed_zengo.h"
 #include "Title.h"
 #include "Light_Object.h"
-#include "Light_Object2.h"
 #include "GameCamera.h"
 #include "BackGround.h"
 #include "Exit.h"

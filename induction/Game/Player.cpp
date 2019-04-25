@@ -25,6 +25,7 @@ bool Player::Start()
 	m_skin->Init(L"modelData/siro.cmo");
 	m_skin->SetEmissionColor({50.0f, 50.0f, 20.0f});
 	m_effect = NewGO<prefab::CEffect>(0);
+	m_effect->Play(L"effect/blackhole.efk");
 	/*m_effect->Play(L"effect/hikari.efk");
 	m_effect->SetScale({ 30.0f,30.0f,30.0f });*/
 	m_position.y = 50.0f;
@@ -63,7 +64,7 @@ void Player::Update()
 		GameStartMove();
 	}
 	//Move();
-	//m_effect->SetPosition(m_position);
+	m_effect->SetPosition(m_position);
 	m_skin->SetPosition(m_position);
 	m_charaCon.SetPosition(m_position);
 	m_ptLight->SetPosition(m_position);
@@ -120,9 +121,10 @@ void Player::Color_Change()
 		case hikari_hutu:
 			m_color = hikari_black;
 			/*m_effect = NewGO<prefab::CEffect>(0);*/
-			//m_effect->Release();
+			m_effect->Release();
 			m_effect->Play(L"effect/blackhole.efk");
-			m_effect->SetScale({ 30.0f,30.0f,30.0f });
+			m_effect->SetScale({ 100.0f,100.0f,100.0f });
+			m_skin->SetEmissionColor({ 0.5f, 0.5f, 0.2f });
 			CVector3 attn;
 			attn.x = 100.0f;
 			attn.y = 10.0f;
@@ -135,9 +137,10 @@ void Player::Color_Change()
 		switch (m_color){
 		case hikari_black:
 			m_color = hikari_hutu;
-			/*m_effect->Release();
+			m_effect->Release();
 			m_effect->Play(L"effect/hikari.efk");
-			m_effect->SetScale({ 30.0f,30.0f,30.0f });*/
+			m_effect->SetScale({ 0.0f,0.0f,0.0f });
+			m_skin->SetEmissionColor({ 50.0f, 50.0f, 20.0f });
 			CVector3 attn;
 			attn.x = 1000.0f;
 			attn.y = 10.0f;

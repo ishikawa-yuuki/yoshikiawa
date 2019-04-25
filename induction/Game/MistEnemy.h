@@ -40,13 +40,18 @@ private:
 	bool m_escape_flag = false;
 	//人を連れていくフラグ
 	bool m_taking_flag = false;
-	int m_timer = 0;
-	int Deathtimer = 0;
+	//クールタイマー,休憩時間
+	int m_cool_timer = 0;
+	//ぶちころタイマー、一定数値以上で死ぬ
+	int m_Deathtimer = 0;
+	//あんまりうろうろしないようにするタイマー
+	int m_kaerutimer = 0;
 	//最初だけ記録する
 	bool m_kiroku = false;
 	//もやが出るためのスイッチ
 	bool m_moya = false;
 	//effectが消える時のスイッチ
 	bool iltutai = false;
+
 };
 
