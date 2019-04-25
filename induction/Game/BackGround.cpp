@@ -19,6 +19,7 @@ bool BackGround::Start()
 	PhysicsWorld().SetDebugDrawMode(btIDebugDraw::DBG_DrawWireframe);
 	m_skinModelRender = NewGO<prefab::CSkinModelRender>(0);
 
+	
 	switch (m_stagenum->GetStageNumber())
 	{
 	case 1:
@@ -28,6 +29,12 @@ bool BackGround::Start()
 		m_physicsStaticObject.CreateMesh(m_position, CQuaternion::Identity, CVector3::One, m_skinModelRender);
 		break;
 	}
+	//反射テクスチャをロードする。
+	m_refTexture.CreateFromDDSTextureFromFile(L"sprite/ref.dds");
+
+	m_skinModelRender->FindMaterial([&](CModelEffect * mat) {
+		mat->SetSpecularMap(m_refTexture.GetBody());
+		});
 	m_skinModelRender->SetShadowReceiverFlag(true);
 	DeleteGO(m_stagenum);
 	return true;

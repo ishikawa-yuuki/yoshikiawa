@@ -24,6 +24,8 @@ public:
 	void TakingMove();
 	//LightObjectを見つけたときの処理
 	void Light_Move();
+	//足の音の大きさ
+	void Range();
 	//プレイヤーのアニメの変更
 	void AnimeControll();
 	//やったか！を判定する
@@ -124,5 +126,7 @@ private:
 	bool mistflag = false;
 	//後で消す
 	float m_kari = 0.0;
+	//足の音
+	float m_volume = 0;
 };
 

@@ -1,6 +1,7 @@
 #pragma once
 #include "tkEngine/physics/tkPhysicsStaticObject.h"
 #include "tkEngine/physics/tkPhysicsGhostObject.h"
+class Player;
 class MoveBed_zengo : public IGameObject
 {
 public:
@@ -8,7 +9,7 @@ public:
 	~MoveBed_zengo();
 	bool Start();
 	void Update();
-
+	void Range();
 	//‚±‚¢‚Â‚ªƒoƒO‚ÌŒ³‚©‚à
 	void SetProtPos(const CVector3& pos)
 	{
@@ -65,5 +66,7 @@ private:
 	//ˆÚ“®‚·‚é‹——£‚ª’·‚¢‚©”»’è
 	bool m_islong = false;
 	float m_timer = 0.0f;
+	float m_volume = 0.0f;
+	Player* m_player = nullptr;
 	
 };

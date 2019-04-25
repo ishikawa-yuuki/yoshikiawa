@@ -14,15 +14,19 @@ Player::~Player()
 	DeleteGO(m_effect);
 	DeleteGO(m_ptLight);
 	DeleteGO(m_stardust);
+	DeleteGO(m_skin);
 }
 
 bool Player::Start()
 {
 	m_human = FindGO<Human>("Human");
 	//m_stardust = NewGO<StarDust>(0,"StarDust");
+	m_skin = NewGO<prefab::CSkinModelRender>(0);
+	m_skin->Init(L"modelData/siro.cmo");
+	m_skin->SetEmissionColor({50.0f, 50.0f, 20.0f});
 	m_effect = NewGO<prefab::CEffect>(0);
-	m_effect->Play(L"effect/hikari.efk");
-	m_effect->SetScale({ 30.0f,30.0f,30.0f });
+	/*m_effect->Play(L"effect/hikari.efk");
+	m_effect->SetScale({ 30.0f,30.0f,30.0f });*/
 	m_position.y = 50.0f;
 	m_charaCon.Init(
 		20.0f,
@@ -59,7 +63,8 @@ void Player::Update()
 		GameStartMove();
 	}
 	//Move();
-	m_effect->SetPosition(m_position);
+	//m_effect->SetPosition(m_position);
+	m_skin->SetPosition(m_position);
 	m_charaCon.SetPosition(m_position);
 	m_ptLight->SetPosition(m_position);
 	
@@ -114,7 +119,8 @@ void Player::Color_Change()
 		switch (m_color) {
 		case hikari_hutu:
 			m_color = hikari_black;
-			m_effect->Release();
+			/*m_effect = NewGO<prefab::CEffect>(0);*/
+			//m_effect->Release();
 			m_effect->Play(L"effect/blackhole.efk");
 			m_effect->SetScale({ 30.0f,30.0f,30.0f });
 			CVector3 attn;
@@ -122,15 +128,16 @@ void Player::Color_Change()
 			attn.y = 10.0f;
 			attn.z = 1.0f;
 			m_ptLight->SetAttn(attn);
+			/*m_effect->SetPosition(m_position);*/
 		}
 	}
 	else if (Pad(0).IsTrigger(enButtonDown)) {
 		switch (m_color){
 		case hikari_black:
 			m_color = hikari_hutu;
-			m_effect->Release();
+			/*m_effect->Release();
 			m_effect->Play(L"effect/hikari.efk");
-			m_effect->SetScale({ 30.0f,30.0f,30.0f });
+			m_effect->SetScale({ 30.0f,30.0f,30.0f });*/
 			CVector3 attn;
 			attn.x = 1000.0f;
 			attn.y = 10.0f;
