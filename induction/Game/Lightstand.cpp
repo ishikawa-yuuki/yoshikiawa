@@ -74,7 +74,7 @@ void Lightstand::Range()
 	const float range = 800.0f * 800.0f;
 	CVector3 diff = m_position - m_player->GetPosition();
 	if (diff.LengthSq() < range) {
-		m_volume = 1.0f;
+		m_volume = 0.5f;
 	}
 	else if (diff.LengthSq() < range * 1.5) {
 		m_volume = 0.25f;
