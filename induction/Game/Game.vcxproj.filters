@@ -48,7 +48,6 @@
     <ClCompile Include="Poison.cpp" />
     <ClCompile Include="Lever.cpp" />
     <ClCompile Include="Lightstand.cpp" />
-    <ClCompile Include="Light_Object2.cpp" />
     <ClCompile Include="StarDust.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -83,7 +82,6 @@
     <ClInclude Include="Poison.h" />
     <ClInclude Include="Lever.h" />
     <ClInclude Include="Lightstand.h" />
-    <ClInclude Include="Light_Object2.h" />
     <ClInclude Include="StarDust.h" />
   </ItemGroup>
   <ItemGroup>
@@ -143,9 +141,6 @@
     <MeshContentTask Include="Assets\modelData\StageObject\Lightstand02.fbx">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\siro.fbx">
-      <Filter>Assets\modelData</Filter>
-    </MeshContentTask>
   </ItemGroup>
   <ItemGroup>
     <ImageContentTask Include="Assets\sprite\dummy.png">
@@ -167,9 +162,6 @@
       <Filter>Assets\sprite</Filter>
     </ImageContentTask>
     <ImageContentTask Include="Assets\sprite\arrow.png">
-      <Filter>Assets\sprite</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\ref.png">
       <Filter>Assets\sprite</Filter>
     </ImageContentTask>
   </ItemGroup>

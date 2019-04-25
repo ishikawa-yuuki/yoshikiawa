@@ -10,7 +10,6 @@
 #include "MoveBed_zengo.h"
 #include "Title.h"
 #include "Light_Object.h"
-#include "Light_Object2.h"
 #include "GameCamera.h"
 #include "BackGround.h"
 #include "Exit.h"
@@ -50,9 +49,9 @@ Game::~Game()
 	for (auto&m_poison :m_poisonList) {
 		DeleteGO(m_poison);
 	}
-	/*for (auto&m_Lightstand : m_Lightstand1List) {
+	for (auto&m_Lightstand : m_Lightstand1List) {
 		DeleteGO(m_Lightstand);
-	}*/
+	}
 	//for (auto&m_lightobject2 : m_lightobjectList) {
 	//	DeleteGO(m_lightobject2);
 	//}

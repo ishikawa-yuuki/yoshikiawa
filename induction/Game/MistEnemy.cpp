@@ -3,7 +3,6 @@
 #include "Player.h"
 #include "Human.h"
 #include "Light_Object.h"
-#include "Light_Object2.h"
 #include "Game.h"
 
 MistEnemy::MistEnemy()
@@ -111,21 +110,34 @@ void MistEnemy::Atari()
 					difh.Normalize();
 					difh *= 120.0f;
 					m_moveSpeed = difh;
+					if (m_moya) {
+						m_kaerutimer++;
+					}
+					if (m_kaerutimer > 200) {
+						m_state = enPlayer;
+						m_kaerutimer = 0;
+						if (!iltutai) {
+							prefab::CEffect* effect = NewGO<prefab::CEffect>(0);
+							effect->Play(L"effect/kuromoya_kieru.efk");
+							effect->SetPosition(m_position);
+							iltutai = true;
+						}
+					}
 				}
 
 			}
 		}
 		else if (m_state == enPlayer) {
 			m_position = m_startpos;
-			m_timer++;
-			if (m_timer >= 400) {
+			m_cool_timer++;
+			if (m_cool_timer >= 400) {
 				iltutai = false;
-				m_timer = 0;
+				m_cool_timer = 0;
 				m_escape_flag = false;
 				m_state = enNormal;
 			}
-			if (Deathtimer != 0) {
-				Deathtimer = 0;
+			if (m_Deathtimer != 0) {
+				m_Deathtimer = 0;
 			}
 			if (m_moya) {
 				m_moya = false;
@@ -137,7 +149,7 @@ void MistEnemy::Atari()
 			difp.Normalize();
 			difp *= -300.0f;
 			m_moveSpeed = difp;
-			Deathtimer += 50 * GameTime().GetFrameDeltaTime();
+			m_Deathtimer += 50 * GameTime().GetFrameDeltaTime();
 
 			//•ß‚Ü‚Á‚½ó‘Ô‚ÌŽž‚ÍŒõ‚Æƒqƒg‚Ì‹——£‚ÅŒvŽZ‚µ‚Ü‚·B
 			//MisteEnemy‚ª•Ç‚É“ü‚Á‚½‚ç‚Ç‚¤‚µ‚æ‚¤‚à‚È‚¢‚Ì‚Åc
@@ -157,8 +169,8 @@ void MistEnemy::Atari()
 				}
 			}
 
-			if (Deathtimer > 300) {
-				Deathtimer = 0;
+			if (m_Deathtimer > 300) {
+				m_Deathtimer = 0;
 				m_human->isKill();
 			}
 		}
