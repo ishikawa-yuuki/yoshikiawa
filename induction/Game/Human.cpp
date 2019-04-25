@@ -321,6 +321,20 @@ void Human::Turn()
 		m_skinModelRender->SetRotation(m_qrot);
 	}
 }
+void Human::Range()
+{
+	const float range = 800.0f * 800.0f;
+	CVector3 diff = m_position - m_player->GetPosition();
+	if (diff.LengthSq() < range) {
+		m_volume = 0.5f;
+	}
+	else if (diff.LengthSq() < range * 1.5) {
+		m_volume = 0.3f;
+	}
+	else if (diff.LengthSq() < range * 3) {
+		m_volume = 0.15f;
+	}
+}
 //アニメーションを管理する関数、プレイヤーのスピードで変わる。
 //クリアとゲームオーバーの時は機能しない。
 void Human::AnimeControll()
@@ -340,7 +354,8 @@ void Human::AnimeControll()
 				if (m_kari >= 0.4) {
 					prefab::CSoundSource*ss = NewGO<prefab::CSoundSource>(0);
 					ss->Init(L"sound/run.wav");
-					ss->SetVolume(0.5f);
+					Range();
+					ss->SetVolume(m_volume);
 					ss->Play(false);
 					m_kari = 0;
 				}

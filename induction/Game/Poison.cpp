@@ -27,8 +27,11 @@ void Poison::Range()
 	if (diff.LengthSq() < range) {
 		m_volume =0.1f;
 	}
-	else if(diff.LengthSq() < range*2){
-		m_volume = 0.05f;
+	else if(diff.LengthSq() < range * 1.5){
+		m_volume = 0.07f;
+	}
+	else if(diff.LengthSq() < range*3){
+		m_volume = 0.04f;
 	}
 	else {
 		m_volume = 0.0f;

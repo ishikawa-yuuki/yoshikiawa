@@ -13,4 +13,5 @@ private:
 	prefab::CSkinModelRender* m_skinModelRender = nullptr;
 	CVector3 m_position = CVector3::Zero;
 	Stage_Number* m_stagenum = nullptr;
+	CShaderResourceView m_refTexture; //反射マップ。
 };

@@ -63,6 +63,7 @@ private:
 	CVector3 m_position = { 0.0f,0.0f,500.0f };
 	CVector3 m_moveSpeed = CVector3::Zero;
 	prefab::CEffect* m_effect;
+	prefab::CSkinModelRender* m_skin = nullptr;
 	GameCamera* m_gamecamera = nullptr;
 	Human* m_human = nullptr;
 	StarDust* m_stardust = nullptr;

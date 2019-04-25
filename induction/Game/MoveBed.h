@@ -1,6 +1,7 @@
 #pragma once
 #include "tkEngine/physics/tkPhysicsStaticObject.h"
 #include "tkEngine/physics/tkPhysicsGhostObject.h"
+class Player;
 class MoveBed : public IGameObject
 {
 public:
@@ -8,6 +9,7 @@ public:
 	~MoveBed();
 	bool Start();
 	void Update();
+	void Range();
 	void SetProtPos(const CVector3& pos)
 	{
 		m_protpos = pos;
@@ -51,6 +53,7 @@ private:
 	//レベルデザイン用のスケールを足しました
 	CVector3 m_scale = CVector3::Zero;
 	float m_timer = 0.0f;
-	
+	float m_volume = 0.0f;
+	Player* m_player;
 };
 
