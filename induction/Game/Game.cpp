@@ -149,7 +149,7 @@ bool Game::Start()
 			m_lever->SetPosition(objdata.position);
 			m_lever->SetRotation(objdata.rotation);
 			m_lever->SetScale(objdata.scale);
-			//m_lever->SetLeverNumber(num);
+			m_lever->SetLeverTime(num);
 			m_leverList.push_back(m_lever);
 			
 			return true;

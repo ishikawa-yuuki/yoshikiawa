@@ -24,6 +24,9 @@ public:
 	{
 		return m_State;
 	}
+	void SetLeverTime(const int& num) {
+		m_num = num;
+	};
 private:
 	prefab::CSkinModelRender* m_skin = nullptr;
 	Player*m_player;
@@ -38,5 +41,8 @@ private:
 	//アニメーションクリップ詰め合わせ
 	CAnimationClip m_animClip[enAnimationClip_num];
 	float m_timer = 0.0f;
+   //制限
+	int m_num = 0;
+	float m_time = 0.0f;
 };
 
