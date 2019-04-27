@@ -38,6 +38,7 @@ bool Light_Object::Start()
 	m_skinModelRender->SetShadowCasterFlag(true);
 	m_skinModelRender->SetScale({ 2.0f,2.0f,2.0f });
 	m_skinModelRender->SetPosition(m_position);
+	m_skinModelRender->SetScale(m_scale);
 
 	if (m_isLightOn) {
 		m_effect = NewGO<prefab::CEffect>(0);
@@ -84,16 +85,14 @@ void Light_Object::Update()
 			&& diff.LengthSq() < 150.0f*150.0f) {
 			//attn‚Íƒƒ“ƒo‚Å‚à‚¢‚¢‚©‚à
 			attn.x = attn.x - 30.0f;
-			if (attn.x < 0.0f) {
-				attn.x = 0.0f;//Œõ‚Ì‰e‹¿”ÍˆÍ‹——£
-				attn.y = 0.0f;//Œõ‚ÌŒ¸Š
-			}
-			else if (attn.x < 300.0f) {
-				m_isLightOn = false;
+			if (attn.x < 300.0f) {
 				if (m_effect != nullptr) {
 					DeleteGO(m_effect);
 					m_effect = nullptr;
 				}
+				attn.x = 0.0f;//Œõ‚Ì‰e‹¿”ÍˆÍ‹——£
+				attn.y = 10.0f;//Œõ‚ÌŒ¸Š
+				m_isLightOn = false;
 			}
 			m_ptLight->SetAttn(attn);
 		}
@@ -109,9 +108,16 @@ void Light_Object::InitPointLight()
 	CVector3 color = { 2000.0f,2000.0f,2500.0f,};
 	m_ptLight->SetColor(color);//FŒˆ‚ß
 	
-	attn.x = 2000.0f;//Œõ‚Ì‰e‹¿”ÍˆÍ‹——£
-	attn.y = 10.0f;//Œõ‚ÌŒ¸Š
-	m_ptLight->SetAttn(attn);//‰e‹¿”ÍˆÍ‚ÆŒ¸Š‚Ì‹­‚³
+	if (m_biglight) {
+		attn.x = 5000.0f;
+		attn.y = 10.0f;
+		m_ptLight->SetAttn(attn);
+	}
+	else {
+		attn.x = 2000.0f;//Œõ‚Ì‰e‹¿”ÍˆÍ‹——£
+		attn.y = 10.0f;//Œõ‚ÌŒ¸Š
+		m_ptLight->SetAttn(attn);//‰e‹¿”ÍˆÍ‚ÆŒ¸Š‚Ì‹­‚³
+	}
 }
 
 void Light_Object::Dirlight()
