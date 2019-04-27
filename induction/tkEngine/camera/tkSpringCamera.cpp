@@ -148,7 +148,7 @@ namespace tkEngine {
 			//シーンの切り替わり時など、一気にカメラを変更する必要があるときに使用してください。
 			m_camera->SetTarget(m_target);
 			m_camera->SetPosition(m_position);
-			m_isRefresh = false;
+			
 		}
 		else {
 			m_dampingRate = CalcSpringScalar(m_dampingRate, m_targetDampingRate, m_dampingRateVel);
@@ -164,7 +164,7 @@ namespace tkEngine {
 	void CSpringCamera::Update()
 	{
 		UpdateSpringCamera();
-		if (m_isEnableCollisionSolver) {
+		if (m_isEnableCollisionSolver && !m_isRefresh){
 			CVector3 result;
 			m_cameraCollisionSolver.Execute(
 				result,
@@ -174,5 +174,6 @@ namespace tkEngine {
 			m_camera->SetPosition(result);
 		}
 		UpdateCamera();
+		m_isRefresh = false;
 	}
 }

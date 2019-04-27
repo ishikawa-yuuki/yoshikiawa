@@ -18,6 +18,7 @@ bool Poison::Start()
 	m_skin->Init(L"modelData/Poison/huzitubo.cmo");
 	m_skin->SetPosition(m_position);
 	m_player = FindGO<Player>("Player");
+	m_game = FindGO<Game>("Game");
 	return true;
 }
 void Poison::Range() 
@@ -39,8 +40,7 @@ void Poison::Range()
 }
 void Poison::Update()
 {
-	Game* game = FindGO<Game>("Game");
-	const auto& leverList = game->GetLeverList();
+	const auto& leverList = m_game->GetLeverList();
 		if (leverList[n]->IsStateLever()) {
 			if (m_timer >= 0.5f) {
 				prefab::CEffect* effect = NewGO<prefab::CEffect>(0);

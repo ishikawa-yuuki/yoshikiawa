@@ -1,6 +1,7 @@
 #pragma once
 #include "tkEngine/physics/tkPhysicsGhostObject.h"
 class Player;
+class Game;
 class Poison : public IGameObject
 {
 public:
@@ -25,6 +26,7 @@ private:
 	prefab::CSkinModelRender* m_skin = nullptr;
 	Lever* m_lever ;
 	Player* m_player;
+	Game* m_game;
 	CVector3 m_position = CVector3::Zero;
 	CVector3 m_scale = CVector3::Zero;
 	CPhysicsGhostObject m_GhostObject;

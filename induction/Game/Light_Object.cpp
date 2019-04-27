@@ -24,6 +24,9 @@ Light_Object::~Light_Object()
 	if (m_directionLig != nullptr) {
 		DeleteGO(m_directionLig);
 	}
+	if (m_lig != nullptr) {
+		DeleteGO(m_lig);
+	}
 }
 
 bool Light_Object::Start()

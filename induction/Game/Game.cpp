@@ -201,7 +201,7 @@ void Game::Update()
 		DeleteGO(this);
 	}
 
-	m_human = FindGO<Human>("Human");
+	//m_human = FindGO<Human>("Human");
 	auto nearPointLig = m_human->GetNearPointLight();
 	if (nearPointLig == nullptr) {
 		//ヒューマンが向かっていっているライトがないときは
