@@ -72,7 +72,7 @@ bool Game::Start()
 	m_fade = FindGO<Fade>("Fade");
 	m_mistenemy = NewGO<MistEnemy>(0, "mist");//Œã‚Ålfevel‚É0‘g‚İ‚İ
 	m_sky = NewGO<prefab::CSky>(0, "Sky");
-	m_sky->SetScale({ 10000.0f,10000.0f,10000.0f });
+	m_sky->SetScale({ 5000.0f,5000.0f,5000.0f });
 	m_sky->SetEmissionColor({ 0.05f, 0.05f, 0.05f });
 	m_level.Init(L"level/kari_yuuki.tkl", [&](LevelObjectData& objdata) {
 		if (objdata.EqualObjectName(L"Stage1")) {
@@ -201,6 +201,7 @@ void Game::Update()
 		DeleteGO(this);
 	}
 
+	m_sky->SetPosition(m_player->GetPosition());
 	//m_human = FindGO<Human>("Human");
 	auto nearPointLig = m_human->GetNearPointLight();
 	if (nearPointLig == nullptr) {
