@@ -117,9 +117,6 @@
     <MeshContentTask Include="Assets\modelData\StageMap\stage_test.fbx">
       <Filter>Assets\modelData\StageMap</Filter>
     </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\StageMap\Stage1.fbx">
-      <Filter>Assets\modelData\StageMap</Filter>
-    </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\BlackUnityChan.fbx">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
@@ -140,6 +137,9 @@
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\StageObject\Lightstand02.fbx">
       <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\StageMap\Stage1.fbx">
+      <Filter>Assets\modelData\StageMap</Filter>
     </MeshContentTask>
   </ItemGroup>
   <ItemGroup>

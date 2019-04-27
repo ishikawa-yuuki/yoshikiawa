@@ -105,16 +105,19 @@ void Light_Object::InitPointLight()
 	CVector3 pointlightpos = m_position;
 	pointlightpos.y = 100.0f;
 	m_ptLight->SetPosition(pointlightpos);//位置決め
-	CVector3 color = { 2000.0f,2000.0f,2500.0f,};
-	m_ptLight->SetColor(color);//色決め
+	
 	
 	if (m_biglight) {
-		attn.x = 5000.0f;
+		CVector3 color = { 20000.0f,20000.0f,25000.0f, };
+		m_ptLight->SetColor(color);//色決め
+		attn.x = 1000.0f;
 		attn.y = 10.0f;
 		m_ptLight->SetAttn(attn);
 	}
 	else {
-		attn.x = 2000.0f;//光の影響範囲距離
+		CVector3 color = { 2000.0f,2000.0f,2500.0f, };
+		m_ptLight->SetColor(color);//色決め
+		attn.x = 1000.0f;//光の影響範囲距離
 		attn.y = 10.0f;//光の減衰
 		m_ptLight->SetAttn(attn);//影響範囲と減衰の強さ
 	}
