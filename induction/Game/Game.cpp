@@ -95,6 +95,16 @@ bool Game::Start()
 			m_lightobjectList.push_back(m_onlightObject);
 			return true;
 		}
+		//‘å‚«‚¢ƒ‰ƒ“ƒ^ƒ“
+		else if (objdata.EqualObjectName(L"Big_lanthanum")) {
+			Light_Object* m_biglightObject = NewGO<Light_Object>(0, "Big_LightObject");
+			m_biglightObject->SetPosition(objdata.position);
+			m_biglightObject->SetScale(objdata.scale);
+			m_biglightObject->SetLight();
+			m_biglightObject->Biglight();
+			m_lightobjectList.push_back(m_biglightObject);
+			return true;
+		}
 		//“®‚­°‚Í2í—Ş‚ ‚éAMoveBed‚Í‰¡ˆÚ“®‚·‚é‚à‚Ì
 		else if (objdata.EqualObjectName(L"MoveBed1")) {
 			MoveBed* movebed = NewGO<MoveBed>(0,"MoveBed1");

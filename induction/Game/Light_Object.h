@@ -19,6 +19,16 @@ public:
 	{
 		m_position = pos;
 	}
+	//スケールをレベルで入れる。
+	void SetScale(const CVector3& scale)
+	{
+		m_scale = scale;
+	}
+	bool Biglight()
+	{
+		m_biglight = true;
+		return  m_biglight;
+	}
 	//これが呼ばれたら初期状態のライトはonになる
 	bool SetLight()
 	{
@@ -46,10 +56,12 @@ private:
 	prefab::CSkinModelRender* m_skinModelRender = nullptr;
 	//レベルデザインで設計するのでとりあえず仮
 	CVector3 m_position = { 0.0f,-70.0f,-3000.0f };
+	CVector3 m_scale = CVector3::One;
 	Player* m_player;
 	Human* m_human;
 	//ライトがオンなのかどうか
 	bool m_isLightOn = false;
+	bool m_biglight = false;
 	//ライト。
 	prefab::CDirectionLight* m_lig = nullptr;
 	//ライトの方向。

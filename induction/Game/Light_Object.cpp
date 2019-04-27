@@ -38,6 +38,7 @@ bool Light_Object::Start()
 	m_skinModelRender->SetShadowCasterFlag(true);
 	m_skinModelRender->SetScale({ 2.0f,2.0f,2.0f });
 	m_skinModelRender->SetPosition(m_position);
+	m_skinModelRender->SetScale(m_scale);
 
 	if (m_isLightOn) {
 		m_effect = NewGO<prefab::CEffect>(0);
@@ -107,9 +108,16 @@ void Light_Object::InitPointLight()
 	CVector3 color = { 2000.0f,2000.0f,2500.0f,};
 	m_ptLight->SetColor(color);//FŒˆ‚ß
 	
-	attn.x = 2000.0f;//Œõ‚Ì‰e‹¿”ÍˆÍ‹——£
-	attn.y = 10.0f;//Œõ‚ÌŒ¸Š
-	m_ptLight->SetAttn(attn);//‰e‹¿”ÍˆÍ‚ÆŒ¸Š‚Ì‹­‚³
+	if (m_biglight) {
+		attn.x = 5000.0f;
+		attn.y = 10.0f;
+		m_ptLight->SetAttn(attn);
+	}
+	else {
+		attn.x = 2000.0f;//Œõ‚Ì‰e‹¿”ÍˆÍ‹——£
+		attn.y = 10.0f;//Œõ‚ÌŒ¸Š
+		m_ptLight->SetAttn(attn);//‰e‹¿”ÍˆÍ‚ÆŒ¸Š‚Ì‹­‚³
+	}
 }
 
 void Light_Object::Dirlight()
