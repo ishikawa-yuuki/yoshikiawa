@@ -57,7 +57,7 @@ private:
 	Fade * m_fade = nullptr;
 	Human * m_human;
 	Player* m_player;
-	Enemy* m_enemy;
+	/*Enemy* m_enemy;*/
 	MistEnemy* m_mistenemy;
 	BackGround* m_background;
 	GameCamera * m_gamecamera;

@@ -26,7 +26,7 @@ Game::~Game()
 {
 	DeleteGO(m_player);
 	DeleteGO(m_human);
-	DeleteGO(m_enemy);
+	/*DeleteGO(m_enemy);*/
 	DeleteGO(m_mistenemy);
 	DeleteGO(m_background);
 	DeleteGO(m_exit);
@@ -137,12 +137,12 @@ bool Game::Start()
 			return true;
 		}
 		//黒エネミー、黒ユニティ
-		else if (objdata.EqualObjectName(L"BlackUnityChan")) {
+		/*else if (objdata.EqualObjectName(L"BlackUnityChan")) {
 			m_enemy = NewGO<Enemy>(0, "Enemy");
 			m_enemy->SetPosition(objdata.position);
 			m_enemy->SetRotation(objdata.rotation);
 			return true;
-		}
+		}*/
 		else if (objdata.ForwardMatchName(L"Lever")) {
 			int num = _wtoi(&objdata.name[5]);
 			Lever*m_lever = NewGO<Lever>(n,"Lever");
