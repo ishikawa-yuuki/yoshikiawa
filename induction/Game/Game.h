@@ -92,5 +92,6 @@ private:
 	std::vector<Lever*>m_leverList;
 	std::vector<Poison*>m_poisonList;
 	std::vector<Lightstand*>m_Lightstand1List;
+	prefab::CSky* m_sky = nullptr;
 };
 

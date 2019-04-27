@@ -32,6 +32,7 @@ void MistEnemy::Update()
 	Atari();
 	m_position += m_moveSpeed * GameTime().GetFrameDeltaTime();
 	m_effect->SetPosition(m_position);
+
 }
 
 void MistEnemy::Atari()

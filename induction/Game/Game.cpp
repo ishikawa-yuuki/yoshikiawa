@@ -30,6 +30,7 @@ Game::~Game()
 	DeleteGO(m_mistenemy);
 	DeleteGO(m_background);
 	DeleteGO(m_exit);
+	DeleteGO(m_sky);
 
 	for (auto&moveBed : m_moveBedList) {
 		DeleteGO(moveBed);
@@ -69,8 +70,10 @@ bool Game::Start()
 	m_human = NewGO<Human>(0, "Human");
 	m_gamecamera = NewGO<GameCamera>(0, "GameCamera");
 	m_fade = FindGO<Fade>("Fade");
-	m_mistenemy = NewGO<MistEnemy>(0, "mist");//å„Ç≈levelÇ…ëgÇ›çûÇ›
-	
+	m_mistenemy = NewGO<MistEnemy>(0, "mist");//å„Ç≈lfevelÇ…0ëgÇ›çûÇ›
+	m_sky = NewGO<prefab::CSky>(0, "Sky");
+	m_sky->SetScale({ 10000.0f,10000.0f,10000.0f });
+	m_sky->SetEmissionColor({ 0.05f, 0.05f, 0.05f });
 	m_level.Init(L"level/kari_yuuki.tkl", [&](LevelObjectData& objdata) {
 		if (objdata.EqualObjectName(L"Stage1")) {
 			m_background = NewGO<BackGround>(0, "BackGround");

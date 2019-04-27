@@ -106,19 +106,18 @@
                       </Location>
                     </Inner_Fixed>
                     <OuterColor_Fixed>
-                      <R>0</R>
-                      <G>0</G>
-                      <B>0</B>
+                      <R>34</R>
+                      <G>13</G>
+                      <B>31</B>
                     </OuterColor_Fixed>
                     <CenterColor_Fixed>
-                      <R>64</R>
-                      <G>0</G>
-                      <B>128</B>
+                      <G>111</G>
+                      <B>2</B>
                     </CenterColor_Fixed>
                     <InnerColor_Fixed>
-                      <R>35</R>
-                      <G>35</G>
-                      <B>35</B>
+                      <R>26</R>
+                      <G>11</G>
+                      <B>26</B>
                     </InnerColor_Fixed>
                   </Ring>
                 </DrawingValues>

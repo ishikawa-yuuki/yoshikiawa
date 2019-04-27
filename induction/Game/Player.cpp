@@ -40,10 +40,8 @@ bool Player::Start()
 	//m_effect->SetPosition(m_position);
 	m_ptLight = NewGO<prefab::CPointLight>(0);
 	m_ptLight->SetColor({ 1000.0f, 1000.0f, 1000.0f });//1000,1000,1000でLEDみたいな光が出る
-	CVector3 attn;
-	attn.x = 1000.0f;
-	attn.y = 10.0f;
-	m_ptLight->SetAttn(attn);
+	
+	m_ptLight->SetAttn(m_pointLigDefaultAttn);
 	
 	
 	
@@ -55,13 +53,36 @@ void Player::Update()
 	//プレイヤーの光の色を変えてHumanに簡単な指示を出せるような
 	//そんなプログラムを考えてます、、、、
 	Color_Change();
-	if (m_StartMoveFin) {
-		if (m_human->GetStartMove()) {//== true
-			Move();
+
+
+	if (m_color == hikari_explosion) {
+		const float explosionTime = 2.0f;
+		m_explosionTimer += GameTime().GetFrameDeltaTime();
+		static const CVector3 endAttn = { 100.0f, 10.0f, 1.0f };
+		if (m_explosionTimer > explosionTime) {
+			//爆発終わり。
+			m_effect = NewGO<prefab::CEffect>(0);
+			m_effect->Release();
+			m_effect->Play(L"effect/blackhole_otamesi.efk");
+			m_effect->SetScale({ 100.0f,100.0f,100.0f });
+			m_skin->SetEmissionColor({ 0.5f, 0.5f, 0.2f });
+			m_explosionTimer = explosionTime;
+			m_color = hikari_black;
 		}
+		float t = 1.0f - (m_explosionTimer / explosionTime);
+		CVector3 attn;
+		attn.Lerp(pow(t, 10.0f), endAttn, m_pointLigDefaultAttn);
+		m_ptLight->SetAttn(attn);
 	}
 	else {
-		GameStartMove();
+		if (m_StartMoveFin) {
+			if (m_human->GetStartMove()) {//== true
+				Move();
+			}
+		}
+		else {
+			GameStartMove();
+		}
 	}
 	//Move();
 	m_effect->SetPosition(m_position);
@@ -119,19 +140,26 @@ void Player::Color_Change()
 	if (Pad(0).IsTrigger(enButtonUp)) {
 		switch (m_color) {
 		case hikari_hutu:
-			m_color = hikari_black;
-			/*m_effect = NewGO<prefab::CEffect>(0);*/
-			m_effect->Release();
-			m_effect->Play(L"effect/blackhole.efk");
-			m_effect->SetScale({ 100.0f,100.0f,100.0f });
-			m_skin->SetEmissionColor({ 0.5f, 0.5f, 0.2f });
-			CVector3 attn;
-			attn.x = 100.0f;
-			attn.y = 10.0f;
-			attn.z = 1.0f;
-			m_ptLight->SetAttn(attn);
-			/*m_effect->SetPosition(m_position);*/
+			m_explosionTimer = 0.0f;
+			m_color = hikari_explosion;
+#if 0
+			///*m_effect = NewGO<prefab::CEffect>(0);*/
+			//m_effect->Release();
+			//m_effect->Play(L"effect/blackhole.efk");
+			//m_effect->SetScale({ 100.0f,100.0f,100.0f });
+			//m_skin->SetEmissionColor({ 0.5f, 0.5f, 0.2f });
+			//CVector3 attn;
+			//attn.x = 100.0f;
+			//attn.y = 10.0f;
+			//attn.z = 1.0f;
+			//m_ptLight->SetAttn(attn);
+			///*m_effect->SetPosition(m_position);*/
+		case hikari_explosion:
+#endif
+
 		}
+		
+
 	}
 	else if (Pad(0).IsTrigger(enButtonDown)) {
 		switch (m_color){

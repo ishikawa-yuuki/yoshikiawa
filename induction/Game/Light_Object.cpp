@@ -78,16 +78,20 @@ void Light_Object::Update()
 	}
 	else {
 		if (m_player->GetColor() == 1
-			&& diff.LengthSq() < 100.0f*100.0f) {
-			m_isLightOn = false;
-			if (m_effect != nullptr) {
-				DeleteGO(m_effect);
-				m_effect = nullptr;
-			}
+			&& diff.LengthSq() < 150.0f*150.0f) {
 			//attn‚Íƒƒ“ƒo‚Å‚à‚¢‚¢‚©‚à
-			CVector3 attn = CVector3::Zero;
-			attn.x = 10.0f;//Œõ‚Ì‰e‹¿”ÍˆÍ‹——£
-			attn.y = 10.0f;//Œõ‚ÌŒ¸Š
+			attn.x = attn.x - 30.0f;
+			if (attn.x < 0.0f) {
+				attn.x = 0.0f;//Œõ‚Ì‰e‹¿”ÍˆÍ‹——£
+				attn.y = 0.0f;//Œõ‚ÌŒ¸Š
+			}
+			else if (attn.x < 300.0f) {
+				m_isLightOn = false;
+				if (m_effect != nullptr) {
+					DeleteGO(m_effect);
+					m_effect = nullptr;
+				}
+			}
 			m_ptLight->SetAttn(attn);
 		}
 	}
@@ -101,7 +105,7 @@ void Light_Object::InitPointLight()
 	m_ptLight->SetPosition(pointlightpos);//ˆÊ’uŒˆ‚ß
 	CVector3 color = { 2000.0f,2000.0f,2500.0f,};
 	m_ptLight->SetColor(color);//FŒˆ‚ß
-	CVector3 attn = CVector3::Zero;
+	
 	attn.x = 2000.0f;//Œõ‚Ì‰e‹¿”ÍˆÍ‹——£
 	attn.y = 10.0f;//Œõ‚ÌŒ¸Š
 	m_ptLight->SetAttn(attn);//‰e‹¿”ÍˆÍ‚ÆŒ¸Š‚Ì‹­‚³

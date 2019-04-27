@@ -12,7 +12,8 @@ private:
     //ここだけprivateにしています。
 	enum Color {
 		hikari_hutu,
-		hikari_black
+		hikari_black,
+		hikari_explosion
 	};
 	Color m_color = hikari_hutu;
 public:
@@ -69,7 +70,9 @@ private:
 	StarDust* m_stardust = nullptr;
 	CCharacterController m_charaCon;
 	prefab::CPointLight* m_ptLight = nullptr;
+	CVector3 m_pointLigDefaultAttn = {1000.0f, 10.0f, 0.0f};
 
+	float m_explosionTimer = 0;
 	//最初のプレイヤーの挙動が終わったかどうか。
 	bool m_StartMoveFin = false;
 };

@@ -64,5 +64,7 @@ private:
 	prefab::CEffect* m_effect = nullptr;
 	//ポイントライトを生成
 	prefab::CPointLight* m_ptLight = nullptr;
+	//ライトの光の増減、減衰率を操作。
+	CVector3 attn = CVector3::Zero;
 };
 
