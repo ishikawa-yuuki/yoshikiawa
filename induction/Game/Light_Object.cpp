@@ -84,16 +84,14 @@ void Light_Object::Update()
 			&& diff.LengthSq() < 150.0f*150.0f) {
 			//attn‚Íƒƒ“ƒo‚Å‚à‚¢‚¢‚©‚à
 			attn.x = attn.x - 30.0f;
-			if (attn.x < 0.0f) {
-				attn.x = 0.0f;//Œõ‚Ì‰e‹¿”ÍˆÍ‹——£
-				attn.y = 0.0f;//Œõ‚ÌŒ¸Š
-			}
-			else if (attn.x < 300.0f) {
-				m_isLightOn = false;
+			if (attn.x < 300.0f) {
 				if (m_effect != nullptr) {
 					DeleteGO(m_effect);
 					m_effect = nullptr;
 				}
+				attn.x = 0.0f;//Œõ‚Ì‰e‹¿”ÍˆÍ‹——£
+				attn.y = 10.0f;//Œõ‚ÌŒ¸Š
+				m_isLightOn = false;
 			}
 			m_ptLight->SetAttn(attn);
 		}
