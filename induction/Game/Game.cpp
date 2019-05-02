@@ -4,7 +4,7 @@
 #include "Fade.h"
 #include "Human.h"
 #include "Player.h"
-#include "Enemy.h"
+//#include "Enemy.h"
 #include "MistEnemy.h"
 #include "MoveBed.h"
 #include "MoveBed_zengo.h"
@@ -16,6 +16,7 @@
 #include "Poison.h"
 #include "Lever.h"
 #include "Lightstand.h"
+#include "Stage_Number.h"
 
 Game::Game()
 {
@@ -31,28 +32,40 @@ Game::~Game()
 	DeleteGO(m_background);
 	DeleteGO(m_exit);
 	DeleteGO(m_sky);
-
-	for (auto&moveBed : m_moveBedList) {
-		DeleteGO(moveBed);
+	switch (m_Stagenum->GetStageNumber()) {
+	case 1:
+		for (auto& moveBed : m_moveBedList) {
+			DeleteGO(moveBed);
+		}
+		for (auto& moveBed_zengo : m_moveBed_zengoList) {
+			DeleteGO(moveBed_zengo);
+		}
+		for (auto& moveBed_zengo_long : m_moveBed_zengo2List) {
+			DeleteGO(moveBed_zengo_long);
+		}
+		for (auto& m_lightobject : m_lightobjectList) {
+			DeleteGO(m_lightobject);
+		}
+		for (auto& m_lever : m_leverList) {
+			DeleteGO(m_lever);
+		}
+		for (auto& m_poison : m_poisonList) {
+			DeleteGO(m_poison);
+		}
+		for (auto& m_Lightstand : m_Lightstand1List) {
+			DeleteGO(m_Lightstand);
+		}
+		break;
+	case 2:
+		for (auto& m_poison : m_poisonList) {
+			DeleteGO(m_poison);
+		}
+		for (auto& m_Lightstand : m_Lightstand1List) {
+			DeleteGO(m_Lightstand);
+		}
+		break;
 	}
-	for (auto&moveBed_zengo : m_moveBed_zengoList) {
-		DeleteGO(moveBed_zengo);
-	}
-	for (auto&moveBed_zengo_long : m_moveBed_zengo2List) {
-		DeleteGO(moveBed_zengo_long);
-	}
-	for (auto&m_lightobject : m_lightobjectList) {
-		DeleteGO(m_lightobject);
-	}
-	for (auto&m_lever : m_leverList) {
-		DeleteGO(m_lever);
-	}
-	for (auto&m_poison :m_poisonList) {
-		DeleteGO(m_poison);
-	}
-	for (auto&m_Lightstand : m_Lightstand1List) {
-		DeleteGO(m_Lightstand);
-	}
+	
 	//for (auto&m_lightobject2 : m_lightobjectList) {
 	//	DeleteGO(m_lightobject2);
 	//}
@@ -61,132 +74,30 @@ Game::~Game()
 
 bool Game::Start()
 {
+	m_Stagenum = FindGO<Stage_Number>("Stage_Number");
 	shadow::DirectionShadowMap().Disable();
 	//環境光をおふっふ
 	LightManager().SetAmbientLight({ 0.1f, 0.1f, 0.1f });
 	//シーンの明るさを落とす。
 	postEffect::Tonemap().SetLuminance(0.01f);
-	m_player = NewGO<Player>(0, "Player");
+	
 	m_human = NewGO<Human>(0, "Human");
+	m_player = NewGO<Player>(0, "Player");
 	m_gamecamera = NewGO<GameCamera>(0, "GameCamera");
 	m_fade = FindGO<Fade>("Fade");
 	m_mistenemy = NewGO<MistEnemy>(0, "mist");//後でlfevelに0組み込み
 	m_sky = NewGO<prefab::CSky>(0, "Sky");
 	m_sky->SetScale({ 5000.0f,5000.0f,5000.0f });
 	m_sky->SetEmissionColor({ 0.05f, 0.05f, 0.05f });
-	m_level.Init(L"level/level_Stage01.tkl", [&](LevelObjectData& objdata) {
-		if (objdata.EqualObjectName(L"Stage1")) {
-			m_background = NewGO<BackGround>(0, "BackGround");
-			return true;
-		}
-		//offランタン
-		else if (objdata.ForwardMatchName(L"lanthanum1")) {	
-			Light_Object* m_lightobject = NewGO<Light_Object>(0, "LightObject");
-			m_lightobject->SetPosition(objdata.position);//試験したいなら{0,0,0}
-			m_lightobjectList.push_back(m_lightobject);
-		
-			return true;
-		}
-		//onランタン
-		else if (objdata.EqualObjectName(L"lanthanum2")) {
-			Light_Object* m_onlightObject = NewGO<Light_Object>(0, "OnLightObject");
-			m_onlightObject->SetPosition(objdata.position);
-			m_onlightObject->SetLight();
-			m_lightobjectList.push_back(m_onlightObject);
-			return true;
-		}
-		//大きいランタン
-		else if (objdata.EqualObjectName(L"Big_lanthanum")) {
-			Light_Object* m_biglightObject = NewGO<Light_Object>(0, "Big_LightObject");
-			m_biglightObject->SetPosition(objdata.position);
-			m_biglightObject->SetScale(objdata.scale);
-			m_biglightObject->SetLight();
-			m_biglightObject->Biglight();
-			m_lightobjectList.push_back(m_biglightObject);
-			return true;
-		}
-		//動く床は2種類ある、MoveBedは横移動するもの
-		else if (objdata.EqualObjectName(L"MoveBed1")) {
-			MoveBed* movebed = NewGO<MoveBed>(0,"MoveBed1");
-			//m_movebed = NewGO<MoveBed>(0, "MoveBed");
-			movebed->SetPosition(objdata.position);
-			movebed->SetScale(objdata.scale);
-			movebed->SetProtPos(objdata.position);
-			m_moveBedList.push_back(movebed);
-			return true;
-		}
-		//動く床は2種類ある、MoveBed2は前後移動するもの
-		else if (objdata.EqualObjectName(L"MoveBed2")) {
-			MoveBed_zengo* movebed2 = NewGO<MoveBed_zengo>(0, "MoveBed2");
-			//m_movebed = NewGO<MoveBed>(0,"MoveBed2");
-			movebed2->SetPosition(objdata.position);
-			movebed2->SetScale(objdata.scale);
-			movebed2->SetRot(objdata.rotation);
-			movebed2->SetProtPos(objdata.position);
-			m_moveBed_zengoList.push_back(movebed2);
-			return true;
-		}
-		//MoveBed2_longは移動距離が長くなる。
-		else if (objdata.EqualObjectName(L"MoveBed2_long")) {
-			MoveBed_zengo* movebed2_long = NewGO<MoveBed_zengo>(0, "MoveBed2");
-			//m_movebed = NewGO<MoveBed>(0,"MoveBed2");
-			movebed2_long->SetPosition(objdata.position);
-			movebed2_long->SetScale(objdata.scale);
-			movebed2_long->SetRot(objdata.rotation);
-			movebed2_long->SetProtPos(objdata.position);
-			movebed2_long->isLongFrag();
-			m_moveBed_zengo2List.push_back(movebed2_long);
-			return true;
-		}
-		//オブジェクトねーーむ確認
-		else if (objdata.EqualObjectName(L"Goal")) {
-			m_exit = NewGO<Exit>(0, "Exit");
-			m_exit->SetPosition(objdata.position);
-			m_exit->SetQrot(objdata.rotation);
-			m_exit->SetScale(objdata.scale);
-			return true;
-		}
-		//黒エネミー、黒ユニティ
-		/*else if (objdata.EqualObjectName(L"BlackUnityChan")) {
-			m_enemy = NewGO<Enemy>(0, "Enemy");
-			m_enemy->SetPosition(objdata.position);
-			m_enemy->SetRotation(objdata.rotation);
-			return true;
-		}*/
-		else if (objdata.ForwardMatchName(L"Lever")) {
-			int num = _wtoi(&objdata.name[5]);
-			Lever*m_lever = NewGO<Lever>(n,"Lever");
-			m_lever->SetPosition(objdata.position);
-			m_lever->SetRotation(objdata.rotation);
-			m_lever->SetScale(objdata.scale);
-			m_lever->SetLeverTime(num);
-			m_leverList.push_back(m_lever);
-			
-			return true;
-		}
-		else if (objdata.ForwardMatchName(L"huzitubo")) {
-				int num = _wtoi(&objdata.name[8]);
-				Poison*m_poison = NewGO<Poison>(0, "Poison");
-				m_poison->SetPosition(objdata.position);
-				m_poison->SetPoisonNumber(num);
-				m_poisonList.push_back(m_poison);
-			
-			
-			return true;
-		}
-		else if (objdata.ForwardMatchName(L"Lightstand")) {
-			int num = _wtoi(&objdata.name[10]);
-			Lightstand* m_Lightstand = NewGO<Lightstand>(0, "Lightstand");
-			m_Lightstand->SetNum(num);
-			m_Lightstand->SetPosition(objdata.position);
-			m_Lightstand->SetRotation(objdata.rotation);
-			m_Lightstand->SetScale(objdata.scale);
-			
-			m_Lightstand1List.push_back(m_Lightstand);
-			return true;
-		}
-		return false;
-	});
+	switch (m_Stagenum->GetStageNumber()) {
+	case 1:
+		Stage1();
+		break;
+	case 2:
+		Stage2();
+		break;
+	}
+
 	m_fade->StartFadeIn();
 
 	//全方位シャドウを有効にする
@@ -289,4 +200,161 @@ void Game::Pose()
 		}
 		m_sprite_arrow->SetPosition(m_arrowpos);
 	}
+}
+void Game::Stage1()
+{
+	
+	m_level.Init(L"level/level_Stage01.tkl", [&](LevelObjectData & objdata) {
+		if (objdata.EqualObjectName(L"Stage1")) {
+			m_background = NewGO<BackGround>(0, "BackGround");
+			return true;
+		}
+		//offランタン
+		else if (objdata.ForwardMatchName(L"lanthanum1")) {
+			Light_Object* m_lightobject = NewGO<Light_Object>(0, "LightObject");
+			m_lightobject->SetPosition(objdata.position);//試験したいなら{0,0,0}
+			m_lightobjectList.push_back(m_lightobject);
+
+			return true;
+		}
+		//onランタン
+		else if (objdata.EqualObjectName(L"lanthanum2")) {
+			Light_Object* m_onlightObject = NewGO<Light_Object>(0, "OnLightObject");
+			m_onlightObject->SetPosition(objdata.position);
+			m_onlightObject->SetLight();
+			m_lightobjectList.push_back(m_onlightObject);
+			return true;
+		}
+		//大きいランタン
+		else if (objdata.EqualObjectName(L"Big_lanthanum")) {
+			Light_Object* m_biglightObject = NewGO<Light_Object>(0, "Big_LightObject");
+			m_biglightObject->SetPosition(objdata.position);
+			m_biglightObject->SetScale(objdata.scale);
+			m_biglightObject->SetLight();
+			m_biglightObject->Biglight();
+			m_lightobjectList.push_back(m_biglightObject);
+			return true;
+		}
+		//動く床は2種類ある、MoveBedは横移動するもの
+		else if (objdata.EqualObjectName(L"MoveBed1")) {
+			MoveBed* movebed = NewGO<MoveBed>(0, "MoveBed1");
+			//m_movebed = NewGO<MoveBed>(0, "MoveBed");
+			movebed->SetPosition(objdata.position);
+			movebed->SetScale(objdata.scale);
+			movebed->SetProtPos(objdata.position);
+			m_moveBedList.push_back(movebed);
+			return true;
+		}
+		//動く床は2種類ある、MoveBed2は前後移動するもの
+		else if (objdata.EqualObjectName(L"MoveBed2")) {
+			MoveBed_zengo* movebed2 = NewGO<MoveBed_zengo>(0, "MoveBed2");
+			//m_movebed = NewGO<MoveBed>(0,"MoveBed2");
+			movebed2->SetPosition(objdata.position);
+			movebed2->SetScale(objdata.scale);
+			movebed2->SetRot(objdata.rotation);
+			movebed2->SetProtPos(objdata.position);
+			m_moveBed_zengoList.push_back(movebed2);
+			return true;
+		}
+		//MoveBed2_longは移動距離が長くなる。
+		else if (objdata.EqualObjectName(L"MoveBed2_long")) {
+			MoveBed_zengo* movebed2_long = NewGO<MoveBed_zengo>(0, "MoveBed2");
+			//m_movebed = NewGO<MoveBed>(0,"MoveBed2");
+			movebed2_long->SetPosition(objdata.position);
+			movebed2_long->SetScale(objdata.scale);
+			movebed2_long->SetRot(objdata.rotation);
+			movebed2_long->SetProtPos(objdata.position);
+			movebed2_long->isLongFrag();
+			m_moveBed_zengo2List.push_back(movebed2_long);
+			return true;
+		}
+		//オブジェクトねーーむ確認
+		else if (objdata.EqualObjectName(L"Goal")) {
+			m_exit = NewGO<Exit>(0, "Exit");
+			m_exit->SetPosition(objdata.position);
+			m_exit->SetQrot(objdata.rotation);
+			m_exit->SetScale(objdata.scale);
+			return true;
+		}
+		//黒エネミー、黒ユニティ
+		/*else if (objdata.EqualObjectName(L"BlackUnityChan")) {
+			m_enemy = NewGO<Enemy>(0, "Enemy");
+			m_enemy->SetPosition(objdata.position);
+			m_enemy->SetRotation(objdata.rotation);
+			return true;
+		}*/
+		else if (objdata.ForwardMatchName(L"Lever")) {
+			int num = _wtoi(&objdata.name[5]);
+			Lever* m_lever = NewGO<Lever>(n, "Lever");
+			m_lever->SetPosition(objdata.position);
+			m_lever->SetRotation(objdata.rotation);
+			m_lever->SetScale(objdata.scale);
+			m_lever->SetLeverTime(num);
+			m_leverList.push_back(m_lever);
+
+			return true;
+		}
+		else if (objdata.ForwardMatchName(L"huzitubo")) {
+			int num = _wtoi(&objdata.name[8]);
+			Poison* m_poison = NewGO<Poison>(0, "Poison");
+			m_poison->SetPosition(objdata.position);
+			m_poison->SetPoisonNumber(num);
+			m_poisonList.push_back(m_poison);
+
+
+			return true;
+		}
+		else if (objdata.ForwardMatchName(L"Lightstand")) {
+			int num = _wtoi(&objdata.name[10]);
+			Lightstand* m_Lightstand = NewGO<Lightstand>(0, "Lightstand");
+			m_Lightstand->SetNum(num);
+			m_Lightstand->SetPosition(objdata.position);
+			m_Lightstand->SetRotation(objdata.rotation);
+			m_Lightstand->SetScale(objdata.scale);
+
+			m_Lightstand1List.push_back(m_Lightstand);
+			return true;
+		}
+		return false;
+		});
+}
+void Game::Stage2()
+{
+	m_level.Init(L"level/level_Stage02.tkl", [&](LevelObjectData & objdata) {
+		if (objdata.EqualObjectName(L"Stage2")) {
+			m_background = NewGO<BackGround>(0, "BackGround");
+			m_background->SetPosition(objdata.position);
+			return true;
+		}
+		//オブジェクトねーーむ確認
+		else if (objdata.EqualObjectName(L"Goal")) {
+			m_exit = NewGO<Exit>(0, "Exit");
+			m_exit->SetPosition(objdata.position);
+			m_exit->SetQrot(objdata.rotation);
+			m_exit->SetScale(objdata.scale);
+			return true;
+		}
+		else if (objdata.ForwardMatchName(L"huzitubo")) {
+			int num = _wtoi(&objdata.name[8]);
+			Poison* m_poison = NewGO<Poison>(0, "Poison");
+			m_poison->SetPosition(objdata.position);
+			m_poison->SetPoisonNumber(num);
+			m_poisonList.push_back(m_poison);
+
+
+			return true;
+		}
+		else if (objdata.ForwardMatchName(L"Lightstand")) {
+			int num = _wtoi(&objdata.name[10]);
+			Lightstand* m_Lightstand = NewGO<Lightstand>(0, "Lightstand");
+			m_Lightstand->SetNum(num);
+			m_Lightstand->SetPosition(objdata.position);
+			m_Lightstand->SetRotation(objdata.rotation);
+			m_Lightstand->SetScale(objdata.scale);
+
+			m_Lightstand1List.push_back(m_Lightstand);
+			return true;
+		}
+		return false;
+	});
 }

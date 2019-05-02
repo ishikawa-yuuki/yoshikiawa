@@ -5,7 +5,7 @@
 class Fade;
 class Human;
 class Player;
-class Enemy;
+//class Enemy;
 class MistEnemy;
 class MoveBed;
 class MoveBed_zengo;
@@ -17,6 +17,7 @@ class Exit;
 class Poison;
 class Lever;
 class Lightstand;
+class Stage_Number;
 class Game : public IGameObject
 {
 public:
@@ -25,6 +26,8 @@ public:
 	bool Start();
 	void Update();
 	void Pose();
+	void Stage1();
+	void Stage2();
 	//ここから下の関数はごり押しです・・・なんかいい書き方がある気がする・・・
 
 	//ゲームクラスを消したいときに使う関数、基本GameOverクラスから呼ばれる
@@ -52,6 +55,9 @@ public:
 	const std::vector<Lever*>&GetLeverList() {
 		return m_leverList;
 	}
+	const std::vector<Poison*>& GetPoisonList() {
+		return m_poisonList;
+	}
 private:
 	/*ポインタ群*/
 	Fade * m_fade = nullptr;
@@ -62,6 +68,7 @@ private:
 	BackGround* m_background;
 	GameCamera * m_gamecamera;
 	Exit* m_exit;
+	Stage_Number* m_Stagenum;
 
 	/*prefab::CSkinModelRender* m_goal = nullptr;*/
 	prefab::CSpriteRender* m_sprite_Retire = nullptr;

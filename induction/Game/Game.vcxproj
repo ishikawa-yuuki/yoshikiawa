@@ -1948,6 +1948,9 @@
     <MeshContentTask Include="Assets\modelData\StageMap\Stage1.fbx">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Middle|x64'">true</ExcludedFromBuild>
     </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\StageMap\Stage2.fbx">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Middle|x64'">true</ExcludedFromBuild>
+    </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\StageMap\stage_test.fbx">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Middle|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>

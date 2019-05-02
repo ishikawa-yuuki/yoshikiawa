@@ -62,14 +62,15 @@ void Stage_Select::Update()
 					 DeleteGO(this);
 					 break;
 				 case 2:
+					 NewGO<Game>(0, "Game");
+					 DeleteGO(this);
+					 
+					 break;
+				 case 3:
 					 NewGO<Title>(0, "Title");
 					 Stage_Number* stagenum;
 					 stagenum = FindGO<Stage_Number>("Stage_Number");
 					 stagenum->IsTitle();
-					 DeleteGO(this);
-					 break;
-				 case 3:
-					 NewGO<Game>(0, "Game");
 					 DeleteGO(this);
 					 break;
 				 }

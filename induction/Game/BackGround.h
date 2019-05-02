@@ -8,6 +8,10 @@ public:
 	~BackGround();
 	bool Start();
 	void Update();
+	void SetPosition(const CVector3& pos)
+	{
+		m_position = pos;
+	}
 private:
 	CPhysicsStaticObject m_physicsStaticObject;
 	prefab::CSkinModelRender* m_skinModelRender = nullptr;

@@ -9,7 +9,7 @@ public:
 	bool Start();
 	void Update();
 private:
-	prefab::CEffect* m_effect;
+	prefab::CEffect* m_effect = nullptr;
 	Player* m_player;
 	int m_timer = 0;
 	CQuaternion m_rotation = CQuaternion::Identity;
