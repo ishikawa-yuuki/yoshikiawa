@@ -37,7 +37,7 @@ bool Player::Start()
 	//‚¢‚ç‚È‚¢‚Æv‚¤
 	//m_charaCon.Execute(m_position);
 	//m_charaCon.SetPosition(m_position);
-	//m_effect->SetPosition(m_position);
+	m_effect->SetPosition(m_position);
 	m_ptLight = NewGO<prefab::CPointLight>(0);
 	m_ptLight->SetColor({ 1000.0f, 1000.0f, 1000.0f });//1000,1000,1000‚ÅLED‚İ‚½‚¢‚ÈŒõ‚ªo‚é
 	
