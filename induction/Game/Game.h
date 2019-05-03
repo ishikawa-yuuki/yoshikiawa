@@ -7,6 +7,7 @@ class Human;
 class Player;
 //class Enemy;
 class MistEnemy;
+class Hill;
 class MoveBed;
 class MoveBed_zengo;
 class Light_Object;
@@ -96,6 +97,7 @@ private:
 	std::vector<MoveBed_zengo*> m_moveBed_zengoList;
 	std::vector<MoveBed_zengo*> m_moveBed_zengo2List;
 	std::vector<Light_Object*> m_lightobjectList;
+	std::vector<Hill*> m_hillList;
 	std::vector<Lever*>m_leverList;
 	std::vector<Poison*>m_poisonList;
 	std::vector<Lightstand*>m_Lightstand1List;

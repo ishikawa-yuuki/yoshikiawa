@@ -6,6 +6,7 @@
 #include "Player.h"
 //#include "Enemy.h"
 #include "MistEnemy.h"
+#include "Hill.h"
 #include "MoveBed.h"
 #include "MoveBed_zengo.h"
 #include "Title.h"
@@ -81,6 +82,9 @@ bool Game::Start()
 	//シーンの明るさを落とす。
 	postEffect::Tonemap().SetLuminance(0.01f);
 	
+	//試験的なコード。今はレベルに対応していないのでここに書きます。
+	NewGO<Hill>(0, "Hill");
+
 	m_human = NewGO<Human>(0, "Human");
 	m_player = NewGO<Player>(0, "Player");
 	m_gamecamera = NewGO<GameCamera>(0, "GameCamera");

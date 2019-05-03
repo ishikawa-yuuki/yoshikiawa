@@ -49,6 +49,7 @@
     <ClCompile Include="Lever.cpp" />
     <ClCompile Include="Lightstand.cpp" />
     <ClCompile Include="StarDust.cpp" />
+    <ClCompile Include="Hill.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -83,6 +84,7 @@
     <ClInclude Include="Lever.h" />
     <ClInclude Include="Lightstand.h" />
     <ClInclude Include="StarDust.h" />
+    <ClInclude Include="Hill.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc">
@@ -143,6 +145,9 @@
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\StageMap\Stage2.fbx">
       <Filter>Assets\modelData\StageMap</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Hill\Hill.fbx">
+      <Filter>Assets\modelData</Filter>
     </MeshContentTask>
   </ItemGroup>
   <ItemGroup>
