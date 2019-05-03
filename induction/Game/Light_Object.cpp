@@ -44,7 +44,10 @@ bool Light_Object::Start()
 		m_effect = NewGO<prefab::CEffect>(0);
 		m_effect->Play(L"effect/spotlight.efk");
 		m_effect->SetScale({ 4.0f, 4.0f, 4.0f });
-		m_effect->SetPosition(m_position);
+		CVector3 m_effectPos = m_position;
+		m_effectPos.y = m_position.y - 150.0f;
+		m_effect->SetPosition(m_effectPos);
+		
 		//m_human->isLantanon();
 	//	housenlight();
 		InitPointLight();
