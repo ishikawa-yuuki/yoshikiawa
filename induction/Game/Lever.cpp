@@ -25,20 +25,46 @@ bool Lever::Start()
 	m_skin->SetRotation(m_rot);
 	m_skin->SetScale(m_scale);
 	m_skin->SetEmissionColor({0.7f,0.7f,0.7f});
-	m_skin->PlayAnimation(enAnimationClip_ON, 0.2);
+	if (m_num == 9|| m_num == 8) {
+		m_skin->PlayAnimation(enAnimationClip_OFF, 0.2);
+		m_State = false;
+	}
+	else {
+		m_skin->PlayAnimation(enAnimationClip_ON, 0.2);
+	}
+	
 	return true;
 }
 void Lever::Update()
 {
+	//制限時間（短め）
 	if (m_num == 0) {
 		m_time = 12.0f;
 	}
+	//制限時間（長め）
 	else {
 		m_time = 20.0f;
 	}
 	CVector3 diff = m_position - m_player->GetPosition();
 	diff.y = 0;
-		if (diff.LengthSq() <= 100.0f*100.0f&& m_timer >= 2.0f&&m_player->GetColor() ==0|| m_timer >= m_time&& !m_State) {
+	//制限時間なしver
+	if (m_num == 9 || m_num == 8) {
+		CVector3 diff = m_position - m_player->GetPosition();
+		diff.y = 0;
+		if (diff.LengthSq() <= 100.0f * 100.0f && m_timer >= 2.0f && m_player->GetColor() == 0 ) {
+			if (m_State) {
+				m_skin->PlayAnimation(enAnimationClip_OFF, 0.2);
+				m_State = false;
+			}
+			else {
+				m_skin->PlayAnimation(enAnimationClip_ON, 0.2);
+				m_State = true;
+			}
+			m_timer = 0.0f;
+		}
+		m_timer += GameTime().GetFrameDeltaTime();
+	}
+	else if (diff.LengthSq() <= 100.0f*100.0f&& m_timer >= 2.0f&&m_player->GetColor() ==0|| m_timer >= m_time&& !m_State) {
 			if (m_State) {
 				m_skin->PlayAnimation(enAnimationClip_OFF, 0.2);
 				m_State = false;

@@ -2,6 +2,7 @@
 #include "tkEngine/physics/tkPhysicsStaticObject.h"
 #include "tkEngine/light/tkPointLight.h"
 class Player;
+class Game;
 class Lightstand : public IGameObject
 {
 public:
@@ -22,7 +23,15 @@ public:
 	void SetNum(const int& n) {
 		num = n;
 	}
+	void SetLeverNum(const int& n) {
+		Levernum = n;
+	}
+	void LightLever() {
+		m_State = true;
+	}
 private:
+	//Leverの番号を教える。
+	int Levernum = 0;
 	int num = 0;
 	prefab::CSkinModelRender* m_skin = nullptr;
 	prefab::CSoundSource* m_sound = nullptr;
@@ -33,6 +42,9 @@ private:
 	CPhysicsStaticObject m_StaticObject;
 	float m_timer = 0.0f;
 	float m_volume = 0.0f;
+	//Leverのオンオフで判断
+	bool m_State = false;
 	Player* m_player;
+	Game* m_game;
 };
 

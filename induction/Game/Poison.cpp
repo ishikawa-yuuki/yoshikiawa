@@ -69,6 +69,7 @@ void Poison::Update()
 			m_GhostObject.Release();
 		}
 		break;
+	//Stage2‚Ì“®‚«
 	case 2:
 		m_time += GameTime().GetFrameDeltaTime();
 		if (m_time >= 20.0f) {

@@ -17,7 +17,8 @@
 #include "Lever.h"
 #include "Lightstand.h"
 #include "Stage_Number.h"
-
+#include "Door.h"
+#include "Stone.h"
 Game::Game()
 {
 }
@@ -32,6 +33,7 @@ Game::~Game()
 	DeleteGO(m_background);
 	DeleteGO(m_exit);
 	DeleteGO(m_sky);
+	DeleteGO(m_gamecamera);
 	switch (m_Stagenum->GetStageNumber()) {
 	case 1:
 		for (auto& moveBed : m_moveBedList) {
@@ -60,16 +62,19 @@ Game::~Game()
 		for (auto& m_poison : m_poisonList) {
 			DeleteGO(m_poison);
 		}
+		for (auto& m_lever : m_leverList) {
+			DeleteGO(m_lever);
+		}
 		for (auto& m_Lightstand : m_Lightstand1List) {
 			DeleteGO(m_Lightstand);
 		}
+		for (auto& m_stone : m_StoneList) {
+			DeleteGO(m_stone);
+		}
+		DeleteGO(m_door);
 		break;
 	}
 	
-	//for (auto&m_lightobject2 : m_lightobjectList) {
-	//	DeleteGO(m_lightobject2);
-	//}
-	DeleteGO(m_gamecamera);
 }
 
 bool Game::Start()
@@ -344,15 +349,49 @@ void Game::Stage2()
 
 			return true;
 		}
+		else if (objdata.ForwardMatchName(L"Lever")) {
+			int num = _wtoi(&objdata.name[5]);
+			Lever* m_lever = NewGO<Lever>(n, "Lever");
+			m_lever->SetPosition(objdata.position);
+			m_lever->SetRotation(objdata.rotation);
+			m_lever->SetScale(objdata.scale);
+			m_lever->SetLeverTime(num);
+			m_leverList.push_back(m_lever);
+
+			return true;
+		}
 		else if (objdata.ForwardMatchName(L"Lightstand")) {
+			//Lightstandの種類
 			int num = _wtoi(&objdata.name[10]);
+			//Lightstandを手動でオンオフにする。
+			int lever = _wtoi(&objdata.name[11]);
+			
 			Lightstand* m_Lightstand = NewGO<Lightstand>(0, "Lightstand");
-			m_Lightstand->SetNum(num);
+			//???numを使ってできない。
+			m_Lightstand->SetNum(1);
+			if (lever ==0||lever == 1) {
+				m_Lightstand->LightLever();
+				m_Lightstand->SetLeverNum(lever);
+			}
 			m_Lightstand->SetPosition(objdata.position);
 			m_Lightstand->SetRotation(objdata.rotation);
 			m_Lightstand->SetScale(objdata.scale);
 
 			m_Lightstand1List.push_back(m_Lightstand);
+			return true;
+		}
+		else if (objdata.EqualObjectName(L"Stone")) {
+			Stone*m_stone = NewGO<Stone>(0, "Stone");
+			m_stone->SetScale(objdata.scale);
+			m_stone->SetRot(objdata.rotation);
+			m_stone->SetPosition(objdata.position);
+			m_StoneList.push_back(m_stone);
+			return true;
+		}
+		else if (objdata.EqualObjectName(L"Door")) {
+			m_door = NewGO<Door>(0, "Door");
+			m_door->SetPosition(objdata.position);
+			m_door->SetScale(objdata.scale);
 			return true;
 		}
 		return false;
