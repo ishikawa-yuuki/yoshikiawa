@@ -50,6 +50,8 @@
     <ClCompile Include="Lightstand.cpp" />
     <ClCompile Include="StarDust.cpp" />
     <ClCompile Include="Hill.cpp" />
+    <ClCompile Include="Door.cpp" />
+    <ClCompile Include="Stone.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -85,6 +87,8 @@
     <ClInclude Include="Lightstand.h" />
     <ClInclude Include="StarDust.h" />
     <ClInclude Include="Hill.h" />
+    <ClInclude Include="Door.h" />
+    <ClInclude Include="Stone.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc">
@@ -147,6 +151,12 @@
       <Filter>Assets\modelData\StageMap</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Hill\Hill.fbx">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Door\Door.fbx">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Stone\Stone.fbx">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
   </ItemGroup>
