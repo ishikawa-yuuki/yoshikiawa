@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "Lightstand.h"
 #include "Player.h"
-
+#include "Lever.h"
+#include "Game.h"
 Lightstand::Lightstand()
 {
 }
@@ -16,6 +17,7 @@ Lightstand::~Lightstand()
 
 bool Lightstand::Start()
 {
+	m_game = FindGO<Game>("Game");
 	m_player = FindGO<Player>("Player");
 	if (num == 0) {
 		m_skin = NewGO<prefab::CSkinModelRender>(0);
@@ -41,7 +43,7 @@ bool Lightstand::Start()
 			CQuaternion::Identity,
 			{ 100.0f, 500.0f, 100.0f }
 		);*/
-		m_position.y += 50;
+		m_position.y += 45;
 		//m_position.x += 30;
 	}
 	else if(num == 2){
@@ -89,15 +91,33 @@ void Lightstand::Range()
 }
 void Lightstand::Update()
 {
-	if (m_timer >= 0.5f) {
-		prefab::CEffect*  effect = NewGO<prefab::CEffect>(0);
-	    effect->Play(L"effect/Fire.efk");
-		effect->SetPosition(m_position);
-		m_timer = 0.0f;
+	const auto& leverList = m_game->GetLeverList();
+	if (m_State) {
+		if (leverList[Levernum]->IsStateLever()) {
+			if (m_timer >= 0.5f) {
+				prefab::CEffect* effect = NewGO<prefab::CEffect>(0);
+				effect->Play(L"effect/Fire.efk");
+				effect->SetPosition(m_position);
+				m_timer = 0.0f;
+			}
+			Range();
+			m_sound->SetVolume(m_volume);
+			m_pointLight->SetPosition(m_position);
+			m_timer += GameTime().GetFrameDeltaTime();
+		}
 	}
-	Range();
-	m_sound->SetVolume(m_volume);
-	m_pointLight->SetPosition(m_position);
-	m_timer += GameTime().GetFrameDeltaTime();
+	else {
+		if (m_timer >= 0.5f) {
+			prefab::CEffect* effect = NewGO<prefab::CEffect>(0);
+			effect->Play(L"effect/Fire.efk");
+			effect->SetPosition(m_position);
+			m_timer = 0.0f;
+		}
+		Range();
+		m_sound->SetVolume(m_volume);
+		m_pointLight->SetPosition(m_position);
+		m_timer += GameTime().GetFrameDeltaTime();
+	
+	}
 }
 	
