@@ -24,6 +24,10 @@ public:
 	{
 		m_scale = scale;
 	}
+	//ローテーションをレベルに入れる。
+	void SetRotation(const CQuaternion& rot) {
+		m_rot = rot;
+	}
 	bool Biglight()
 	{
 		m_biglight = true;
@@ -57,6 +61,7 @@ private:
 	//レベルデザインで設計するのでとりあえず仮
 	CVector3 m_position = { 0.0f,-70.0f,-3000.0f };
 	CVector3 m_scale = CVector3::One;
+	CQuaternion m_rot = CQuaternion::Identity;
 	Player* m_player;
 	Human* m_human;
 	//ライトがオンなのかどうか
