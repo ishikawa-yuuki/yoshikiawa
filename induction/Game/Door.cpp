@@ -25,7 +25,7 @@ bool Door::Start()
 	m_StaticObject.CreateBox(
 		m_position,
 		CQuaternion::Identity,
-		{ 800.0f, 1000.0f, 100.0f }
+		{ 800.0f, 1000.0f, 80.0f }
 	); 
 	return true;
 }
