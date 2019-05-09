@@ -51,18 +51,11 @@ void Lever::Update()
 	if (m_num == 9 || m_num == 8) {
 		CVector3 diff = m_position - m_player->GetPosition();
 		diff.y = 0;
-		if (diff.LengthSq() <= 100.0f * 100.0f && m_timer >= 2.0f && m_player->GetColor() == 0 ) {
-			if (m_State) {
-				m_skin->PlayAnimation(enAnimationClip_OFF, 0.2);
-				m_State = false;
-			}
-			else {
+		if (diff.LengthSq() <= 100.0f * 100.0f  && m_player->GetColor() == 0 ) {
+			//ˆê‰ñ‚«‚è‚ÌƒŒƒo[
 				m_skin->PlayAnimation(enAnimationClip_ON, 0.2);
 				m_State = true;
-			}
-			m_timer = 0.0f;
 		}
-		m_timer += GameTime().GetFrameDeltaTime();
 	}
 	else if (diff.LengthSq() <= 100.0f*100.0f&& m_timer >= 2.0f&&m_player->GetColor() ==0|| m_timer >= m_time&& !m_State) {
 			if (m_State) {

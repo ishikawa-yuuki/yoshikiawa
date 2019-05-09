@@ -384,11 +384,15 @@ void Game::Stage2()
 			m_Lightstand1List.push_back(m_Lightstand);
 			return true;
 		}
-		else if (objdata.EqualObjectName(L"Stone")) {
+		else if (objdata.ForwardMatchName(L"Stone")) {
+			int num = _wtoi(&objdata.name[5]);
 			Stone*m_stone = NewGO<Stone>(0, "Stone");
+			m_stone->SetStoneNumber(num);
 			m_stone->SetScale(objdata.scale);
 			m_stone->SetRot(objdata.rotation);
 			m_stone->SetPosition(objdata.position);
+			m_stone->SetProtPosition(objdata.position);
+			
 			m_StoneList.push_back(m_stone);
 			return true;
 		}

@@ -13,14 +13,15 @@ Door::~Door()
 }
 bool Door::Start()
 {
-	//モデル表示できないtksファイルもおかしい
 	m_animClip[enAnimationClip_OPEN].Load(L"animData/Door/open.tka");
 	m_animClip[enAnimationClip_OPEN].SetLoopFlag(false);
+	m_animClip[enAnimationClip_STOP].Load(L"animData/Door/stop.tka");
+	m_animClip[enAnimationClip_STOP].SetLoopFlag(false);
 	m_game = FindGO<Game>("Game");
 	m_skin = NewGO<prefab::CSkinModelRender>(0);
 	m_skin->Init(L"modelData/Door/Door.cmo", m_animClip, enAnimationClip_num);
 	m_skin->SetPosition(m_position);
-	m_skin->SetScale(m_scale);
+	m_skin->SetScale(m_scale); 
 	m_StaticObject.CreateBox(
 		m_position,
 		CQuaternion::Identity,
