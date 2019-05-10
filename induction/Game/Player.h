@@ -5,6 +5,7 @@
 class GameCamera;
 class Human;
 class StarDust;
+class Title;
 class Player : public IGameObject
 {
 private:
@@ -60,6 +61,11 @@ public:
 	{
 		return m_ptLight;
 	}
+	//座標を設定
+	void SetPosition(const CVector3& pos)
+	{
+		m_position = pos;
+	}
 private:
 	CVector3 m_position = { 0.0f,0.0f,500.0f };
 	CVector3 m_moveSpeed = CVector3::Zero;
@@ -75,5 +81,6 @@ private:
 	float m_explosionTimer = 0;
 	//最初のプレイヤーの挙動が終わったかどうか。
 	bool m_StartMoveFin = false;
+	Title* m_title = nullptr;
 };
 

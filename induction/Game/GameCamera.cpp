@@ -4,7 +4,8 @@
 #include "Human.h"
 #define _USE_MATH_DEFINES //M_PI(円周率)を呼び出し
 #include <math.h>
-
+#include "Title.h"
+#include "TitleGround.h"
 GameCamera::GameCamera()
 {
 }
@@ -31,7 +32,11 @@ bool GameCamera::Start()
 		true,
 		5.0f
 	);
-	
+	m_title = FindGO<Title>("Title");
+	m_titleground = FindGO<TitleGround>("TitleGround");
+	if (m_title != nullptr) {
+		m_degreexz = 165.0f;
+	}
 	return true;
 }
 
@@ -39,21 +44,27 @@ void GameCamera::Update()
 {
 	if (m_human->GetisDead() == false) {
 		if (m_human->GetisClear() == false) {
-			m_PlayerPos = m_player->GetPosition();
-			CVector3 stickR;
-			stickR.x = -Pad(0).GetRStickXF();	//アナログスティックのxの入力量を取得。
-			stickR.y = Pad(0).GetLStickYF();	//アナログスティックのxの入力量を取得。
-			stickR.z = 0.0f;
-			//右スティックの入力
-			//右スティック
-			m_sdegreexz = -stickR.x * 1.5f;
-			m_sdegreey = -stickR.y*1.5f;
-
+			if (m_title != nullptr) {
+				m_PlayerPos = m_human->GetPosition();
+				m_degreey = 25.0f;
+			}
+			else {
+				m_PlayerPos = m_player->GetPosition();
+				CVector3 stickR;
+				stickR.x = -Pad(0).GetRStickXF();	//アナログスティックのxの入力量を取得。
+				stickR.y = Pad(0).GetLStickYF();	//アナログスティックのxの入力量を取得。
+				stickR.z = 0.0f;
+				//右スティックの入力
+				//右スティック
+				m_sdegreexz = -stickR.x * 1.5f;
+				//m_sdegreey = -stickR.y * 1.5f;
+			}
+		
 			//回転度加算
 			m_degreey += m_sdegreey;
 			m_degreexz += m_sdegreexz;
 			//上下方向のカメラ移動を固定
-			m_degreey = 30.0f;
+			//m_degreey = 30.0f;
 			/*if (m_degreey >= 30.0f) {//cameraを上方向に動かすプログラム
 			m_degreey = 30.0f;         //ただしあまり強く上には動かない。
 			}
@@ -87,8 +98,18 @@ void GameCamera::Update()
 void GameCamera::Hutu()
 {
 	m_target = { 0.0f,0.0f,0.0f };
-	m_target.y += 20.0f;
-	m_target += m_player->GetPosition();
+	if (m_title != nullptr) {
+		m_target.y += 150.0f;
+	}
+	else {
+		m_target.y += 20.0f;
+	}
+	if (m_title != nullptr) {
+		m_target += m_human->GetPosition();
+	}
+	else {
+		m_target += m_player->GetPosition();
+	}
 	//注視点を計算する。
 	//target.y += 200.0f;
 	//Y軸周りに回転させる。

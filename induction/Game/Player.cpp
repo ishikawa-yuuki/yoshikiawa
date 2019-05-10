@@ -4,6 +4,7 @@
 #include "Human.h"
 #include "StarDust.h"
 #include "tkEngine/light/tkPointLight.h"
+#include "Title.h"
 Player::Player()
 {
 }
@@ -24,6 +25,7 @@ bool Player::Start()
 	m_skin = NewGO<prefab::CSkinModelRender>(0);
 	m_skin->Init(L"modelData/siro.cmo");
 	m_skin->SetEmissionColor({50.0f, 50.0f, 20.0f});
+	m_skin->SetScale(CVector3::One * 0.1f);
 	m_effect = NewGO<prefab::CEffect>(0);
 	m_effect->Play(L"effect/blackhole.efk");
 	/*m_effect->Play(L"effect/hikari.efk");
@@ -44,12 +46,17 @@ bool Player::Start()
 	m_ptLight->SetAttn(m_pointLigDefaultAttn);
 	
 	
-	
+	m_title = FindGO<Title>("Title");
 	return true;
 }
 
 void Player::Update()
 {
+	if (m_title != nullptr) {
+		m_effect->SetPosition(m_position);
+		m_skin->SetPosition(m_position);
+		return;
+	}
 	//プレイヤーの光の色を変えてHumanに簡単な指示を出せるような
 	//そんなプログラムを考えてます、、、、
 	Color_Change();

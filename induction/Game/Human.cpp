@@ -11,7 +11,7 @@
 #include "Exit.h"
 #include "Light_Object.h"
 #include "Stage_Select.h"
-
+#include "Title.h"
 
 //ライトの強さを計算する。
 float CalcLightPower(CVector3 charaPos, CVector3 lightPos, CVector4 attn)
@@ -70,13 +70,21 @@ bool Human::Start()
 		30.0f,
 		m_position
 	);
+
 	m_skinModelRender->SetShadowCasterFlag(true);
 	m_skinModelRender->SetEmissionColor({3.3f, 3.3f, 3.3f});
+	m_skinModelRender->SetPosition(m_position);
+	m_title = FindGO<Title>("Title");
 	return true;
 }
 
 void Human::Update()
 {
+	if (m_title != nullptr) {
+		m_skinModelRender->PlayAnimation(enAnimationClip_run, 0.2);
+		m_skinModelRender->SetRotation(m_qrot);
+		return;
+	}
 	AnimeControll();
 	if (m_player->GetStartMove() == true) {
 		if (!m_StartMoveFin) {

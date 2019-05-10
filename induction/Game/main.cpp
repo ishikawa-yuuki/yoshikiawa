@@ -139,7 +139,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	if (Engine().Init(initParam) == true) {
 		postEffect::Dof().Disable();
 		NewGO<Fade>(1, "Fade");
-		NewGO<Title>(0, nullptr);
+		NewGO<Title>(0, "Title");
 	
 		//ゲームループを実行。
 		Engine().RunGameLoop();

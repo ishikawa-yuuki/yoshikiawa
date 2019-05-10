@@ -17,13 +17,18 @@
     <Filter Include="Assets\modelData\StageMap">
       <UniqueIdentifier>{b9ce4810-f6ad-4bfa-b733-a7e97502224c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Title">
+      <UniqueIdentifier>{5f2c9c31-07ea-4dd2-95b7-2d8734479554}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\sprite\title">
+      <UniqueIdentifier>{d6ecaaf7-a31c-48f3-8cfb-ada0d6aa0e61}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Human.cpp" />
-    <ClCompile Include="Title.cpp" />
     <ClCompile Include="Stage_Select.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Fade.cpp" />
@@ -52,6 +57,12 @@
     <ClCompile Include="Hill.cpp" />
     <ClCompile Include="Door.cpp" />
     <ClCompile Include="Stone.cpp" />
+    <ClCompile Include="TitleGround.cpp">
+      <Filter>Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Title.cpp">
+      <Filter>Title</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -60,7 +71,6 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Human.h" />
-    <ClInclude Include="Title.h" />
     <ClInclude Include="Stage_Select.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Fade.h" />
@@ -89,6 +99,12 @@
     <ClInclude Include="Hill.h" />
     <ClInclude Include="Door.h" />
     <ClInclude Include="Stone.h" />
+    <ClInclude Include="TitleGround.h">
+      <Filter>Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Title.h">
+      <Filter>Title</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc">
@@ -159,6 +175,15 @@
     <MeshContentTask Include="Assets\modelData\Stone\Stone.fbx">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\TitleGround\titleground.FBX">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\TitleGround\titleground_doukutsu.FBX">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\siro.fbx">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
   </ItemGroup>
   <ItemGroup>
     <ImageContentTask Include="Assets\sprite\dummy.png">
@@ -182,5 +207,25 @@
     <ImageContentTask Include="Assets\sprite\arrow.png">
       <Filter>Assets\sprite</Filter>
     </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\title\title.png">
+      <Filter>Assets\sprite</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\title\title2.png">
+      <Filter>Assets\sprite\title</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\title\credit.png">
+      <Filter>Assets\sprite\title</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\title\manual.png">
+      <Filter>Assets\sprite\title</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\title\start.png">
+      <Filter>Assets\sprite\title</Filter>
+    </ImageContentTask>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\sprite\title\waku.png">
+      <Filter>Assets\sprite</Filter>
+    </Image>
   </ItemGroup>
 </Project>
