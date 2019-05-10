@@ -126,11 +126,11 @@ void MistEnemy::Atari()
 					difh *= 120.0f;
 					m_moveSpeed = difh;
 					if (m_moya) {
-						m_kaerutimer++;
+						m_kaerutimer--;
 					}
-					if (m_kaerutimer > 200) {
+					if (m_kaerutimer < 0) {
 						m_state = enPlayer;
-						m_kaerutimer = 0;
+						m_kaerutimer = Random().GetRandInt() % 500 + 200;
 						if (!iltutai) {
 							prefab::CEffect* effect = NewGO<prefab::CEffect>(0);
 							effect->Play(L"effect/kuromoya_kieru.efk");

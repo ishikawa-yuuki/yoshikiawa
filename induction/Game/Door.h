@@ -21,6 +21,7 @@ private:
 	CVector3 m_position = CVector3::Zero;
 	CVector3 m_scale = CVector3::Zero;
 	enum DoorAnimationClip {
+		enAnimationClip_STOP,
 		enAnimationClip_OPEN,
 		enAnimationClip_num
 	};

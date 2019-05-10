@@ -222,6 +222,8 @@ void Game::Stage1()
 		else if (objdata.ForwardMatchName(L"lanthanum1")) {
 			Light_Object* m_lightobject = NewGO<Light_Object>(0, "LightObject");
 			m_lightobject->SetPosition(objdata.position);//ŽŽŒ±‚µ‚½‚¢‚È‚ç{0,0,0}
+			m_lightobject->SetScale(objdata.scale);
+			m_lightobject->SetRotation(objdata.rotation);
 			m_lightobjectList.push_back(m_lightobject);
 
 			return true;
@@ -230,6 +232,8 @@ void Game::Stage1()
 		else if (objdata.EqualObjectName(L"lanthanum2")) {
 			Light_Object* m_onlightObject = NewGO<Light_Object>(0, "OnLightObject");
 			m_onlightObject->SetPosition(objdata.position);
+			m_onlightObject->SetScale(objdata.scale);
+			m_onlightObject->SetRotation(objdata.rotation);
 			m_onlightObject->SetLight();
 			m_lightobjectList.push_back(m_onlightObject);
 			return true;
@@ -239,6 +243,7 @@ void Game::Stage1()
 			Light_Object* m_biglightObject = NewGO<Light_Object>(0, "Big_LightObject");
 			m_biglightObject->SetPosition(objdata.position);
 			m_biglightObject->SetScale(objdata.scale);
+			m_biglightObject->SetRotation(objdata.rotation);
 			m_biglightObject->SetLight();
 			m_biglightObject->Biglight();
 			m_lightobjectList.push_back(m_biglightObject);
@@ -384,11 +389,15 @@ void Game::Stage2()
 			m_Lightstand1List.push_back(m_Lightstand);
 			return true;
 		}
-		else if (objdata.EqualObjectName(L"Stone")) {
+		else if (objdata.ForwardMatchName(L"Stone")) {
+			int num = _wtoi(&objdata.name[5]);
 			Stone*m_stone = NewGO<Stone>(0, "Stone");
+			m_stone->SetStoneNumber(num);
 			m_stone->SetScale(objdata.scale);
 			m_stone->SetRot(objdata.rotation);
 			m_stone->SetPosition(objdata.position);
+			m_stone->SetProtPosition(objdata.position);
+			
 			m_StoneList.push_back(m_stone);
 			return true;
 		}

@@ -39,6 +39,7 @@ bool Light_Object::Start()
 	m_skinModelRender->SetScale({ 2.0f,2.0f,2.0f });
 	m_skinModelRender->SetPosition(m_position);
 	m_skinModelRender->SetScale(m_scale);
+	m_skinModelRender->SetRotation(m_rot);
 
 	if (m_isLightOn) {
 		m_effect = NewGO<prefab::CEffect>(0);

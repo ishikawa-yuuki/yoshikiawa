@@ -45,7 +45,7 @@ private:
 	//ぶちころタイマー、一定数値以上で死ぬ
 	int m_Deathtimer = 0;
 	//あんまりうろうろしないようにするタイマー
-	int m_kaerutimer = 0;
+	int m_kaerutimer = 200;
 	//最初だけ記録する
 	bool m_kiroku = false;
 	//もやが出るためのスイッチ
