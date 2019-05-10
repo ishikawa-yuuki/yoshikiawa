@@ -140,5 +140,7 @@ private:
 	//足の音
 	float m_volume = 0;
 	Title* m_title = nullptr;
+	//m_enemy用タイマー
+	int m_enemytimer = 200;
 };
 
