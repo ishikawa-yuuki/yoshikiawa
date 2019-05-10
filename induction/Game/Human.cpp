@@ -396,6 +396,12 @@ void Human::isDead()
 			if (!m_siboustop) {
 				if (Pad(0).IsTrigger(enButtonB)
 					|| m_isDead) {
+					//叫び声
+					prefab::CSoundSource* sound = nullptr;
+					sound = NewGO<prefab::CSoundSource>(0);
+					sound->Init(L"sound/woman.wav");
+					sound->SetVolume(0.05f);
+					sound->Play(false);
 					m_siboustop = true;
 					m_isDead = true; //これがtrueになれば死
 					m_game->GetDamage();//gameクラスにダメージ中であることを知らせている。死んでるけど・・・

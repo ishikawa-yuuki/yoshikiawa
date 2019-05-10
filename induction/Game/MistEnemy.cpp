@@ -28,7 +28,7 @@ bool MistEnemy::Start()
 	m_sound = NewGO<prefab::CSoundSource>(0);
 	m_sound->Init(L"sound/MistEnemy.wav");
 	/*m_sound->SetPosition(m_position);*/
-	/*m_sound->SetVolume(m_volume);*/
+	m_sound->SetVolume(0.0f);
 	m_sound->Play(true);
 	return true;
 }
