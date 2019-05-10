@@ -128,5 +128,7 @@ private:
 	float m_kari = 0.0;
 	//足の音
 	float m_volume = 0;
+	//m_enemy用タイマー
+	int m_enemytimer = 200;
 };
 

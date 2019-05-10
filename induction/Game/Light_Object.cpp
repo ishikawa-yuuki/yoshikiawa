@@ -84,9 +84,9 @@ void Light_Object::Update()
 			//Dirlight();Žg‚í‚È‚¢
 		}
 	}
-	else {
+	else{
 		if (m_player->GetColor() == 1
-			&& diff.LengthSq() < 150.0f*150.0f) {
+			&& diff.LengthSq() < 450.0f * 450.0f) {
 			//attn‚Íƒƒ“ƒo‚Å‚à‚¢‚¢‚©‚à
 			attn.x = attn.x - 30.0f;
 			if (attn.x < 300.0f) {
@@ -114,8 +114,8 @@ void Light_Object::InitPointLight()
 	if (m_biglight) {
 		CVector3 color = { 20000.0f,20000.0f,25000.0f, };
 		m_ptLight->SetColor(color);//FŒˆ‚ß
-		attn.x = 1000.0f;
-		attn.y = 10.0f;
+		attn.x = 1200.0f;
+		attn.y = 2.0f;
 		m_ptLight->SetAttn(attn);
 	}
 	else {

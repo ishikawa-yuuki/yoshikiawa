@@ -70,10 +70,15 @@ private:
 	StarDust* m_stardust = nullptr;
 	CCharacterController m_charaCon;
 	prefab::CPointLight* m_ptLight = nullptr;
-	CVector3 m_pointLigDefaultAttn = {1000.0f, 10.0f, 0.0f};
-
+	//通常状態の光の力。初期化用
+	const CVector3 m_pointLigDefaultAttn = {1000.0f, 10.0f, 0.0f};
+	//変動する光の力。常用
+	CVector3 m_attn = { 1000.0f,10.0f,0.0f };
 	float m_explosionTimer = 0;
 	//最初のプレイヤーの挙動が終わったかどうか。
 	bool m_StartMoveFin = false;
+
+	//ブラックホールになる時に光があふれる感じを調整するための変数
+	float m_ahureru = 0;
 };
 

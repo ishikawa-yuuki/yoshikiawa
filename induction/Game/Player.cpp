@@ -54,13 +54,14 @@ void Player::Update()
 	//そんなプログラムを考えてます、、、、
 	Color_Change();
 
-
 	if (m_color == hikari_explosion) {
 		const float explosionTime = 2.0f;
 		m_explosionTimer += GameTime().GetFrameDeltaTime();
-		static const CVector3 endAttn = { 100.0f, 10.0f, 1.0f };
+		m_ahureru -= 3.0f;
+		CVector3 endAttn = { 1000.0f + m_ahureru, 10.0f, 1.0f };
 		if (m_explosionTimer > explosionTime) {
 			//爆発終わり。
+			endAttn = { 1000.0f + m_ahureru, 10.0f, 1.0f };
 			m_effect = NewGO<prefab::CEffect>(0);
 			m_effect->Release();
 			m_effect->Play(L"effect/blackhole_otamesi.efk");
@@ -68,13 +69,21 @@ void Player::Update()
 			m_skin->SetEmissionColor({ 0.5f, 0.5f, 0.2f });
 			m_explosionTimer = explosionTime;
 			m_color = hikari_black;
+			m_ahureru = 0.0f;
 		}
 		float t = 1.0f - (m_explosionTimer / explosionTime);
-		CVector3 attn;
-		attn.Lerp(pow(t, 10.0f), endAttn, m_pointLigDefaultAttn);
-		m_ptLight->SetAttn(attn);
+		m_attn.Lerp(pow(t, 10.0f), endAttn, m_pointLigDefaultAttn);
+		m_ptLight->SetAttn(m_attn);
 	}
 	else {
+		if (m_color == hikari_black) {
+			if(m_attn.x < 100.0f){
+				m_attn.x = 100.0f;
+			}
+			else {
+				m_attn.x -= 80.0f;
+			}
+		}
 		if (m_StartMoveFin) {
 			if (m_human->GetStartMove()) {//== true
 				Move();
@@ -91,7 +100,7 @@ void Player::Update()
 	m_ptLight->SetPosition(m_position);
 	
 	//static CVector3 attn = { 1000.0f , 10.0f, 1.0f};
-	//m_ptLight->SetAttn(attn);
+	m_ptLight->SetAttn(m_attn);
 }
 
 void Player::GameStartMove()
@@ -169,11 +178,8 @@ void Player::Color_Change()
 			m_effect->Play(L"effect/hikari.efk");
 			m_effect->SetScale({ 0.0f,0.0f,0.0f });
 			m_skin->SetEmissionColor({ 50.0f, 50.0f, 20.0f });
-			CVector3 attn;
-			attn.x = 1000.0f;
-			attn.y = 10.0f;
-			attn.z = 1.0f;
-			m_ptLight->SetAttn(attn);
+			m_attn = m_pointLigDefaultAttn;
+			m_ptLight->SetAttn(m_attn);
 		}
 	}
 }
