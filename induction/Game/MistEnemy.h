@@ -48,7 +48,7 @@ private:
 	int m_kaerutimer = 200;
 	//最初だけ記録する
 	bool m_kiroku = false;
-	//もやが出るためのスイッチ
+	//もやが出たときに行動が変わるスイッチ
 	bool m_moya = false;
 	//effectが消える時のスイッチ
 	bool iltutai = false;

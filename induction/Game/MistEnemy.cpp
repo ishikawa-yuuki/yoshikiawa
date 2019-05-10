@@ -144,10 +144,8 @@ void MistEnemy::Atari()
 		}
 		else if (m_state == enPlayer) {
 			m_position = m_startpos;
-			m_cool_timer++;
-			if (m_cool_timer >= 400) {
+			if (m_human->GetismistEnemy()) {
 				iltutai = false;
-				m_cool_timer = 0;
 				m_escape_flag = false;
 				m_state = enNormal;
 			}

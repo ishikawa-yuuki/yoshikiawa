@@ -78,7 +78,7 @@ bool Human::Start()
 void Human::Update()
 {
 	AnimeControll();
-	if (m_player->GetStartMove() == true) {
+	//if (m_player->GetStartMove() == true) {
 		if (!m_StartMoveFin) {
 			GameStartMove();
 		}
@@ -101,7 +101,7 @@ void Human::Update()
 		isClear();
 		m_charaCon.SetPosition(Pos);
 		m_skinModelRender->SetPosition(Pos);
-	}
+	//}
 }
 
 void Human::GameStartMove()
@@ -240,7 +240,7 @@ void Human::Light_Move()
 		if (!m_isDead) {
 			
 			m_nearLen = 100000.0f;
-			int nearLightNo = -1;
+			//int nearLightNo = -1;
 			m_nearPointLight = nullptr;
 			/*Game* game = FindGO<Game>("Game");*/
 			const auto& lightList = m_game->GetLightObjectList();
@@ -259,9 +259,6 @@ void Human::Light_Move()
 						ligPowerMax = ligPower;	
 						m_nearPointLight = lightList[i]->GetPointLight();
 					}
-				}
-				else {
-					mistflag = true;
 				}
 			}
 			//次は星
@@ -288,7 +285,14 @@ void Human::Light_Move()
 			}
 			else {
 				m_movespeed = CVector3::Zero;
-				mistflag = true;
+				//ミストエネミーを呼ぶもの
+				if (!mistflag) {
+					m_enemytimer--;
+				}
+				if (m_enemytimer < 0) {
+					mistflag = true;
+					m_enemytimer = Random().GetRandInt() % 500 + 200;
+				}
 			}
 		}
 		else
@@ -487,7 +491,6 @@ void Human::isClear()
 	if (!m_skinModelRender->IsPlayingAnimation()  && m_Clear_one) {
 		m_skinModelRender->PlayAnimation(enAnimationClip_run, 0.2f);
 		m_movespeed.z -= 6000.0f * GameTime().GetFrameDeltaTime();
-		
 	}
 	else {
 		if (diff.LengthSq() < 70.0f*70.0f
