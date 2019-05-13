@@ -1762,7 +1762,9 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BackGround.cpp" />
+    <ClCompile Include="BackGround.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Low|x64'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Credit.cpp" />
     <ClCompile Include="Door.cpp" />
     <ClCompile Include="Enemy.cpp" />
@@ -1771,6 +1773,7 @@
     <ClCompile Include="Fade.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameCamera.cpp" />
+    <ClCompile Include="GameData.cpp" />
     <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="Help.cpp" />
     <ClCompile Include="Hill.cpp" />
@@ -1784,12 +1787,13 @@
     <ClCompile Include="MoveBed_zengo.cpp" />
     <ClCompile Include="Path.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Poison.cpp" />
+    <ClCompile Include="Poison.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Low|x64'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="SSGameCamera.cpp" />
     <ClCompile Include="SSHuman.cpp" />
     <ClCompile Include="SSPlayer.cpp" />
     <ClCompile Include="SSPoint.cpp" />
-    <ClCompile Include="Stage_Number.cpp" />
     <ClCompile Include="Stage_Select.cpp" />
     <ClCompile Include="StarDust.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -1817,7 +1821,9 @@
     <ClCompile Include="TitleGround.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BackGround.h" />
+    <ClInclude Include="BackGround.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Low|x64'">false</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Credit.h" />
     <ClInclude Include="Door.h" />
     <ClInclude Include="Enemy.h" />
@@ -1826,6 +1832,7 @@
     <ClInclude Include="Fade.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameCamera.h" />
+    <ClInclude Include="GameData.h" />
     <ClInclude Include="GameOver.h" />
     <ClInclude Include="Help.h" />
     <ClInclude Include="Hill.h" />
@@ -1838,13 +1845,14 @@
     <ClInclude Include="MoveBed_zengo.h" />
     <ClInclude Include="Path.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="Poison.h" />
+    <ClInclude Include="Poison.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Low|x64'">false</ExcludedFromBuild>
+    </ClInclude>
     <CLInclude Include="resource.h" />
     <ClInclude Include="SSGameCamera.h" />
     <ClInclude Include="SSHuman.h" />
     <ClInclude Include="SSPlayer.h" />
     <ClInclude Include="SSPoint.h" />
-    <ClInclude Include="Stage_Number.h" />
     <ClInclude Include="Stage_Select.h" />
     <ClInclude Include="StarDust.h" />
     <ClInclude Include="stdafx.h" />
@@ -2142,6 +2150,12 @@
   </ItemGroup>
   <ItemGroup>
     <ImageContentTask Include="Assets\sprite\title\pressstart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Assets\sprite\starsky.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Assets\sprite\sky.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

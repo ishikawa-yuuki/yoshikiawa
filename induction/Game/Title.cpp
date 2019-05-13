@@ -28,6 +28,7 @@ Title::~Title()
 		DeleteGO(menu);
 	}
 	DeleteGO(m_pressstart);
+	DeleteGO(m_sky);
 }
 
 bool Title::Start()
@@ -73,8 +74,8 @@ bool Title::Start()
 		});
 	//m_human = NewGO<Human>(0, "Human");
 	//m_human->SetPosition(CVector3(200.0f,0.0f,200.0f));
-	m_player = NewGO<Player>(0, "Player");
-	m_player->SetPosition(CVector3::Zero);
+	//m_player = NewGO<Player>(0, "Player");
+	//m_player->SetPosition(CVector3::Zero);
 	m_gamecamera = NewGO<GameCamera>(0, "GameCamera");
 	m_titleground = NewGO<TitleGround>(0, "TitleGround");
 	shadow::DirectionShadowMap().Disable();
@@ -84,17 +85,20 @@ bool Title::Start()
 	shadow::OminiDirectionShadowMap().Enable();
 	//シーンの明るさを落とす。
 	postEffect::Tonemap().SetLuminance(0.2f);
-	m_ptLight = NewGO<prefab::CPointLight>(0);
-	CVector3 pointlightpos = m_human->GetPosition();
-	pointlightpos.y += 100.0f;
-	m_ptLight->SetPosition(pointlightpos);//位置決め
-	CVector3 color = { 3.0f,3.0f,3.0f };
-	m_ptLight->SetColor(color);//色決め
-	attn.x = 700.0f;
-	attn.y = 5.0f;
-	m_ptLight->SetAttn(attn);
+	//m_ptLight = NewGO<prefab::CPointLight>(0);
+	//CVector3 pointlightpos = m_human->GetPosition();
+	//pointlightpos.y += 100.0f;
+	//m_ptLight->SetPosition(pointlightpos);//位置決め
+	//CVector3 color = { 0.01f,0.01f,0.01f };
+	//m_ptLight->SetColor(color);//色決め
+	//attn.x = 700.0f;
+	//attn.y = 5.0f;
+	//m_ptLight->SetAttn(attn);
 	m_fade = FindGO<Fade>("Fade");
 	m_fade->StartFadeIn();
+	m_sky = NewGO<prefab::CSky>(0, "Sky");
+	//m_sky->SetSkyCubeMapFilePath(L"sprite/sky.dds");
+	m_sky->SetPosition({ 0.0f,-1000.0f,0.0f });
 	return true;
 }
 

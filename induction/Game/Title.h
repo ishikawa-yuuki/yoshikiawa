@@ -85,5 +85,6 @@ private:
 	CVector3 m_point = CVector3::Zero;
 	bool m_isstop = false;
 	float m_timer = 0.0f, m_time = 1.0f,m_time2 = 5.4;
+	prefab::CSky* m_sky = nullptr;
 };
 
