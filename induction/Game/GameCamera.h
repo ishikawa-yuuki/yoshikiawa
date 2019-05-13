@@ -40,5 +40,6 @@ private:
 	Title* m_title = nullptr;
 	TitleGround* m_titleground = nullptr;
 	float m_degree = 0.0f;
+	CVector3 m_titletarget;
 };
 

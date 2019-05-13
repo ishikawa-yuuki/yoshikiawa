@@ -1794,6 +1794,7 @@
     <ClCompile Include="SSHuman.cpp" />
     <ClCompile Include="SSPlayer.cpp" />
     <ClCompile Include="SSPoint.cpp" />
+    <ClCompile Include="Stage_Number.cpp" />
     <ClCompile Include="Stage_Select.cpp" />
     <ClCompile Include="StarDust.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -1853,6 +1854,7 @@
     <ClInclude Include="SSHuman.h" />
     <ClInclude Include="SSPlayer.h" />
     <ClInclude Include="SSPoint.h" />
+    <ClInclude Include="Stage_Number.h" />
     <ClInclude Include="Stage_Select.h" />
     <ClInclude Include="StarDust.h" />
     <ClInclude Include="stdafx.h" />
@@ -2065,6 +2067,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Preview|x64'">true</ExcludedFromBuild>
     </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\TitleGround\human_title.FBX" />
     <MeshContentTask Include="Assets\modelData\TitleGround\titleground.FBX" />
     <MeshContentTask Include="Assets\modelData\TitleGround\titleground_doukutsu.FBX" />
     <MeshContentTask Include="Assets\modelData\unityChan.fbx">

@@ -76,6 +76,7 @@
     <ClCompile Include="SSGameCamera.cpp">
       <Filter>StageSelect</Filter>
     </ClCompile>
+    <ClCompile Include="Stage_Number.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -128,6 +129,7 @@
     <ClInclude Include="SSGameCamera.h">
       <Filter>StageSelect</Filter>
     </ClInclude>
+    <ClInclude Include="Stage_Number.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc">
@@ -205,6 +207,9 @@
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\siro.fbx">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\TitleGround\human_title.FBX">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
   </ItemGroup>

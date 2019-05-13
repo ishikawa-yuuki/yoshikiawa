@@ -60,9 +60,10 @@ bool Title::Start()
 		}
 		//offランタン
 		else if (objdata.EqualObjectName(L"Human")) {
-			m_human = NewGO<Human>(0, "Human");
+		/*	m_human = NewGO<Human>(0, "Human");
 			m_human->SetPosition(objdata.position);
-			m_human->SetRotation(objdata.rotation);
+			m_human->SetRotation(objdata.rotation);*/
+			m_camerataragetpos = objdata.position;
 			return true;
 		}
 		//offランタン
@@ -72,12 +73,13 @@ bool Title::Start()
 		}
 		return false;
 		});
-	//m_human = NewGO<Human>(0, "Human");
-	//m_human->SetPosition(CVector3(200.0f,0.0f,200.0f));
+	m_titleground = NewGO<TitleGround>(0, "TitleGround");
+	m_human = NewGO<Human>(0, "Human");
+	m_human->SetPosition(CVector3(00.0f,0.0f,00.0f));
 	//m_player = NewGO<Player>(0, "Player");
 	//m_player->SetPosition(CVector3::Zero);
 	m_gamecamera = NewGO<GameCamera>(0, "GameCamera");
-	m_titleground = NewGO<TitleGround>(0, "TitleGround");
+
 	shadow::DirectionShadowMap().Disable();
 	//環境光をおふっふ
 	LightManager().SetAmbientLight({ 0.05f, 0.05f, 0.05f });
@@ -96,9 +98,9 @@ bool Title::Start()
 	//m_ptLight->SetAttn(attn);
 	m_fade = FindGO<Fade>("Fade");
 	m_fade->StartFadeIn();
-	m_sky = NewGO<prefab::CSky>(0, "Sky");
-	//m_sky->SetSkyCubeMapFilePath(L"sprite/sky.dds");
-	m_sky->SetPosition({ 0.0f,-1000.0f,0.0f });
+	//m_sky = NewGO<prefab::CSky>(0, "Sky");
+	////m_sky->SetSkyCubeMapFilePath(L"sprite/sky.dds");
+	//m_sky->SetPosition({ 0.0f,-1000.0f,0.0f });
 	return true;
 }
 
@@ -149,13 +151,13 @@ void Title::GameStart()
 		//α値を0まで下げる
 		if (m_alphatitle > 0.0001f) {
 			m_alphatitle -= GameTime().GetFrameDeltaTime();
-			//α値が0まで下がる(タイトルが表示されてない)場合、
-			//メニュー画面に移行
-			if (m_alphatitle < 0.0f) {
-				m_alphatitle = 0.0f;
-				m_alphastart = 0.0f;
-				m_state = enState_SelectMenu;
-			}
+		}
+		//α値が0まで下がる(タイトルが表示されてない)場合、
+		//メニュー画面に移行
+		if (m_alphatitle < 0.0f) {
+			m_alphatitle = 0.0f;
+			m_alphastart = 0.0f;
+			m_state = enState_SelectMenu;
 		}
 	}
 	else {
@@ -182,19 +184,20 @@ void Title::SelectMenu()
 	if (m_ispressAbutton) {
 		if (m_alphamenu > 0.0001f) {
 			m_alphamenu -= GameTime().GetFrameDeltaTime();
-			if (m_alphamenu <= 0.0f) {
-				m_alphamenu = 0.0f;
-				if (m_select == enState_StageSelect) {
-					m_state = enState_TransStageSelect;
-					m_istransstageselect = true;
-				}
-				else {
-					m_state = enState_TransScene;
-					m_isWaitFadeout = true;
-					m_fade->StartFadeOut();
-				}
+		}
+		if (m_alphamenu <= 0.0f) {
+			m_alphamenu = 0.0f;
+			if (m_select == enState_StageSelect) {
+				m_state = enState_TransStageSelect;
+				m_istransstageselect = true;
+			}
+			else {
+				m_state = enState_TransScene;
+				m_isWaitFadeout = true;
+				m_fade->StartFadeOut();
 			}
 		}
+		
 	}
 	else {
 		if (m_alphamenu < 1.0f) {
@@ -283,12 +286,13 @@ void Title::TransStageSelect()
 	}
 	else {
 		m_timer += GameTime().GetFrameDeltaTime();
-		if (m_timer >= m_time) {
-			m_isstop = true;
-		}
 		if (m_timer >= m_time2) {
 			m_isWaitFadeout = true;
 			m_fade->StartFadeOut();
 		}
+		else if (m_timer >= m_time) {
+			m_isstop = true;
+		}
+		
 	}
 }

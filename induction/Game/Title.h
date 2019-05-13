@@ -24,6 +24,11 @@ public:
 	{
 		return m_isstop;
 	}
+	//カメラの注視点を取得
+	CVector3 GetCameraTarget()
+	{
+		return m_camerataragetpos;
+	}
 private:
 	void GameStart();
 	void SelectMenu();
@@ -84,7 +89,8 @@ private:
 	//ステージセレクト画面に移行
 	CVector3 m_point = CVector3::Zero;
 	bool m_isstop = false;
-	float m_timer = 0.0f, m_time = 1.0f,m_time2 = 5.4;
+	float m_timer = 0.0f, m_time = 4.6f,m_time2 = 5.2;
 	prefab::CSky* m_sky = nullptr;
+	CVector3 m_camerataragetpos = CVector3::Zero;
 };
 

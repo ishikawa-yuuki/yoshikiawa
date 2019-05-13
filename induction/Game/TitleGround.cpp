@@ -42,4 +42,13 @@ void TitleGround::Update()
 			m_skinModelRender2->SetRotation(m_rotation2);
 		}
 	}
+	else {
+	/*	m_degree += m_cutdegree * GameTime().GetFrameDeltaTime();
+		m_rotation.SetRotationDeg(CVector3::AxisX, m_degree);
+		m_skinModelRender->SetRotation(m_rotation);
+		m_skinModelRender2->SetActiveFlag(true);
+		m_degree2 += m_cutdegree * GameTime().GetFrameDeltaTime();
+		m_rotation2.SetRotationDeg(CVector3::AxisX, m_degree2);
+		m_skinModelRender2->SetRotation(m_rotation2);*/
+	}
 }

@@ -40,3 +40,4 @@ void Stage_Number::Update()
 		DeleteGO(this);
 	}
 }
+

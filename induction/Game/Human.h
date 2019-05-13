@@ -9,6 +9,7 @@ class Light_Object;
 class Light_Object2;
 class Exit;
 class Title;
+class TitleGround;
 class Human : public IGameObject
 {
 public:
@@ -142,5 +143,8 @@ private:
 	Title* m_title = nullptr;
 	//m_enemy用タイマー
 	int m_enemytimer = 200;
+	TitleGround* m_titleground = nullptr;
+	const float m_speed = 0.3f;
+	float m_degree = 0.0f;
 };
 
