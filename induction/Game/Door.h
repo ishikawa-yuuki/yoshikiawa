@@ -20,6 +20,7 @@ private:
 	CPhysicsStaticObject m_StaticObject;
 	CVector3 m_position = CVector3::Zero;
 	CVector3 m_scale = CVector3::Zero;
+	float m_timer = 0.0f;
 	enum DoorAnimationClip {
 		enAnimationClip_STOP,
 		enAnimationClip_OPEN,

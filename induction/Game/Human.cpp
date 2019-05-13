@@ -7,6 +7,7 @@
 #include "MoveBed.h"
 #include "MoveBed_zengo.h"
 #include "Poison.h"
+#include "Stone.h"
 #include "Fade.h"
 #include "Exit.h"
 #include "Light_Object.h"
@@ -410,6 +411,12 @@ void Human::isDead()
 			if (!m_siboustop) {
 				if (Pad(0).IsTrigger(enButtonB)
 					|| m_isDead) {
+					//叫び声
+					prefab::CSoundSource* sound = nullptr;
+					sound = NewGO<prefab::CSoundSource>(0);
+					sound->Init(L"sound/woman.wav");
+					sound->SetVolume(0.05f);
+					sound->Play(false);
 					m_siboustop = true;
 					m_isDead = true; //これがtrueになれば死
 					m_game->GetDamage();//gameクラスにダメージ中であることを知らせている。死んでるけど・・・
@@ -478,6 +485,15 @@ void Human::Hanntei()
 		QueryGOs<Poison>("Poison", [&](Poison* move) {
 			CPhysicsGhostObject* ghostObj = move->GetGhost();
 			PhysicsWorld().ContactTest(m_charaCon, [&](const btCollisionObject& contactObject) {
+				if (ghostObj->IsSelf(contactObject)) {//== true
+					isKill();
+				}
+			});
+			return true;
+		});
+		QueryGOs<Stone>("Stone", [&](Stone * move) {
+			CPhysicsGhostObject* ghostObj = move->GetGhost();
+			PhysicsWorld().ContactTest(m_charaCon, [&](const btCollisionObject & contactObject) {
 				if (ghostObj->IsSelf(contactObject)) {//== true
 					isKill();
 				}

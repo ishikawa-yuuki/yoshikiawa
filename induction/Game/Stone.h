@@ -1,6 +1,7 @@
 #pragma once
 #include "tkEngine/physics/tkPhysicsGhostObject.h"
 #include "tkEngine/character/tkCharacterController.h"
+class Player;
 class Stone :public IGameObject
 {
 public:
@@ -8,6 +9,7 @@ public:
 	~Stone();
 	bool Start();
 	void Update();
+	void Range();
 	void SetPosition(CVector3 const& pos) {
 		m_position = pos;
 	}
@@ -32,6 +34,7 @@ private:
 	CPhysicsGhostObject m_GhostObject;
 	CCharacterController m_charaCon;
 	prefab::CSkinModelRender* m_skin = nullptr;
+	prefab::CSoundSource* m_sound = nullptr;
 	CVector3 m_position = CVector3::Zero;
 	CVector3 m_skinposition = CVector3::Zero;
 	CVector3 m_protposition = CVector3::Zero;
@@ -39,12 +42,17 @@ private:
 	CVector3 m_scale = CVector3::Zero;
 	CVector3 m_axis = CVector3::Zero;
 	CQuaternion m_rot = CQuaternion::Identity;
-	const float MOVE_SPEED = 8.0f * 60.0f;
-	const float ANGLE_SEED = 4.0f;
+	const float MOVE_SPEED = 11.5f * 60.0f;
+	const float MOVE_SPEED_HIGH = 13.0f * 60.0f;
+	const float ANGLE_SEED = 6.0f;
 	float m_timer = 0;
 	//ä‚ÇÃì]Ç™ÇÈå¸Ç´ÇåàÇﬂÇÈÅB
 	int m_num = 0;
 	//ä‚ÇÃâÒì]
 	float m_angle = 0.0f;
+	//ä‚ÇÃâπ
+	float m_volume;
+	Player* m_player;
+	
 };
 

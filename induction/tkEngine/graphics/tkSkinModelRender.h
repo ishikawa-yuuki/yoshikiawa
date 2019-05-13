@@ -99,6 +99,7 @@ namespace prefab{
 		*/
 		bool IsPlayingAnimation() const
 		{
+
 			return m_animation.IsPlaying();
 		}
 		/*!

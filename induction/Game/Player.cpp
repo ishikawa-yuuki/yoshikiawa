@@ -62,12 +62,20 @@ void Player::Update()
 	Color_Change();
 
 	if (m_color == hikari_explosion) {
+		if (m_explosionTimer == 0.0f) {
+			
+			//sound->SetVolume();
+		}
 		const float explosionTime = 2.0f;
 		m_explosionTimer += GameTime().GetFrameDeltaTime();
 		m_ahureru -= 3.0f;
 		CVector3 endAttn = { 1000.0f + m_ahureru, 10.0f, 1.0f };
 		if (m_explosionTimer > explosionTime) {
 			//爆発終わり。
+			prefab::CSoundSource* sound = nullptr;
+			sound = NewGO<prefab::CSoundSource>(0);
+			sound->Init(L"sound/BlackHoleStart.wav");
+			sound->Play(false);
 			endAttn = { 1000.0f + m_ahureru, 10.0f, 1.0f };
 			m_effect = NewGO<prefab::CEffect>(0);
 			m_effect->Release();
@@ -84,6 +92,8 @@ void Player::Update()
 	}
 	else {
 		if (m_color == hikari_black) {
+			
+			
 			if(m_attn.x < 100.0f){
 				m_attn.x = 100.0f;
 			}
@@ -152,12 +162,16 @@ void Player::Move()
 
 void Player::Color_Change()
 {
+	
 	//停止ではなくブラックホールモードになりました。使用はまだ変わってませんが…
 	if (Pad(0).IsTrigger(enButtonUp)) {
 		switch (m_color) {
 		case hikari_hutu:
 			m_explosionTimer = 0.0f;
 			m_color = hikari_explosion;
+			m_sound = NewGO<prefab::CSoundSource>(0);
+			m_sound->Init(L"sound/BlackHoleUpdate.wav");
+			m_sound->Play(true);
 #if 0
 			///*m_effect = NewGO<prefab::CEffect>(0);*/
 			//m_effect->Release();
@@ -187,6 +201,7 @@ void Player::Color_Change()
 			m_skin->SetEmissionColor({ 50.0f, 50.0f, 20.0f });
 			m_attn = m_pointLigDefaultAttn;
 			m_ptLight->SetAttn(m_attn);
+			m_sound->Release();
 		}
 	}
 }
