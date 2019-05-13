@@ -61,7 +61,7 @@ bool Lightstand::Start()
 	m_sound = NewGO<prefab::CSoundSource>(0);
 	m_sound->Init(L"sound/Fire.wav");
 	m_sound->SetPosition(m_position);
-	/*m_sound->SetVolume(m_volume);*/
+	m_sound->SetVolume(m_volume);
 	m_sound->Play(true);
 	m_pointLight = NewGO<prefab::CPointLight>(0);
 	m_pointLight->SetColor({10.0,10.0,10.0});
