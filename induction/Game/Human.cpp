@@ -7,6 +7,7 @@
 #include "MoveBed.h"
 #include "MoveBed_zengo.h"
 #include "Poison.h"
+#include "Stone.h"
 #include "Fade.h"
 #include "Exit.h"
 #include "Light_Object.h"
@@ -474,6 +475,15 @@ void Human::Hanntei()
 		QueryGOs<Poison>("Poison", [&](Poison* move) {
 			CPhysicsGhostObject* ghostObj = move->GetGhost();
 			PhysicsWorld().ContactTest(m_charaCon, [&](const btCollisionObject& contactObject) {
+				if (ghostObj->IsSelf(contactObject)) {//== true
+					isKill();
+				}
+			});
+			return true;
+		});
+		QueryGOs<Stone>("Stone", [&](Stone * move) {
+			CPhysicsGhostObject* ghostObj = move->GetGhost();
+			PhysicsWorld().ContactTest(m_charaCon, [&](const btCollisionObject & contactObject) {
 				if (ghostObj->IsSelf(contactObject)) {//== true
 					isKill();
 				}

@@ -10,6 +10,7 @@ public:
 	~Lever();
 	bool Start();
 	void Update();
+	void Range();
 	void SetPosition( const CVector3& pos) {
 		m_position = pos;
 	}
@@ -44,5 +45,6 @@ private:
    //êßå¿
 	int m_num = 0;
 	float m_time = 0.0f;
+	float m_volume = 0;
 };
 

@@ -80,5 +80,7 @@ private:
 
 	//ブラックホールになる時に光があふれる感じを調整するための変数
 	float m_ahureru = 0;
+
+	prefab::CSoundSource* m_sound = nullptr;
 };
 

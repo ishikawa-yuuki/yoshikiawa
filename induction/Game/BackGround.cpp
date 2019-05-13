@@ -34,12 +34,12 @@ bool BackGround::Start()
 		//CVector3 scale = { 20.0f,20.0f,20.0f };
 		//m_skinModelRender->SetScale(scale);//思ったより小さかったので20倍
 		m_physicsStaticObject.CreateMesh(m_position, CQuaternion::Identity, CVector3::One, m_skinModelRender);
-		m_skinModelRender->SetPosition(m_position);
+		//m_skinModelRender->SetPosition(m_position);
 		break;
 	}
 	if (m_stagenum->GetStageNumber() <= 3) {
 		m_sound->Init(L"sound/wind.wav");
-		m_sound->SetVolume(0.3f);
+		m_sound->SetVolume(0.1f);
 		m_sound->Play(true);
 	}
 	//反射テクスチャをロードする。

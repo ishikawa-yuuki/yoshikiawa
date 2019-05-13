@@ -72,15 +72,16 @@ void Poison::Update()
 	//Stage2‚Ì“®‚«
 	case 2:
 		m_time += GameTime().GetFrameDeltaTime();
-		if (m_time >= 20.0f) {
-			m_time = 0;
-		}
+		
+		
 		switch (n) {
 		case 0:
-			if (m_time >= 5.0f) {
-				m_GhostObject.Release();
+			if ( m_time >= 4.0f&& m_time <= 13.0f) {
+				if (m_time >= 5.0f) {
+					m_GhostObject.Release();
+				}
 			}
-			else if (m_time >= 0) {
+			else if (m_time >= 0 || m_time >= 14.0f) {
 				if (m_timer >= 0.5f) {
 					prefab::CEffect* effect = NewGO<prefab::CEffect>(0);
 					effect->Play(L"effect/Poison_01.efk");
@@ -105,10 +106,12 @@ void Poison::Update()
 
 			break;
 		case 1:
-			if (m_time >= 10.0f) {
-				m_GhostObject.Release();
+			if (m_time >= 9.0f) {
+				if (m_time >= 10.0f) {
+					m_GhostObject.Release();
+				}
 			}
-			else if (m_time >= 5.0f) {
+			else if (m_time >= 4.0f) {
 				if (m_timer >= 0.5f) {
 					prefab::CEffect* effect = NewGO<prefab::CEffect>(0);
 					effect->Play(L"effect/Poison_01.efk");
@@ -130,11 +133,13 @@ void Poison::Update()
 			}
 			break;
 		case 2:
-			if (m_time >= 15.0f) 
+			if (m_time >= 14.0f) 
 			{
-				m_GhostObject.Release();
+				if (m_time >= 15.0f) {
+					m_GhostObject.Release();
+				}
 			}
-			else if (m_time >= 10.0f) {
+			else if (m_time >= 9.0f) {
 				if (m_timer >= 0.5f) {
 					prefab::CEffect* effect = NewGO<prefab::CEffect>(0);
 					effect->Play(L"effect/Poison_01.efk");
@@ -155,6 +160,9 @@ void Poison::Update()
 				);
 			}
 			break;
+		}
+		if (m_time >= 15.0f) {
+			m_time = 0;
 		}
 		break;
 	}

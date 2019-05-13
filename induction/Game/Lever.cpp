@@ -35,10 +35,23 @@ bool Lever::Start()
 	
 	return true;
 }
+void Lever::Range()
+{
+	const float range = 800.0f * 800.0f;
+	CVector3 diff = m_position - m_player->GetPosition();
+	if (diff.LengthSq() < range) {
+		m_volume = 0.5f;
+	}
+	else if (diff.LengthSq() < range * 1.5) {
+		m_volume = 0.25f;
+	}
+	else {
+		m_volume = 0.0f;
+	}
+}
 void Lever::Update()
 {
 	prefab::CSoundSource* sound = nullptr;
-	const float a = 0.5f;
 	//§ŒÀŽžŠÔi’Z‚ßj
 	if (m_num == 0) {
 		m_time = 12.0f;
@@ -59,7 +72,8 @@ void Lever::Update()
 				sound = NewGO<prefab::CSoundSource>(0);
 				sound->Init(L"sound/Lever_kari.wav");
 				sound->Play(false);
-				sound->SetVolume(a);
+				Range();
+				sound->SetVolume(m_volume);
 			}
 			m_skin->PlayAnimation(enAnimationClip_ON, 0.2);
 			m_State = true;
@@ -73,7 +87,8 @@ void Lever::Update()
 				sound = NewGO<prefab::CSoundSource>(0);
 				sound->Init(L"sound/Lever_kari.wav");
 				sound->Play(false);
-				sound->SetVolume(a);
+				Range();
+				sound->SetVolume(m_volume);
 			}
 			else {
 				m_skin->PlayAnimation(enAnimationClip_ON, 0.2);
@@ -81,7 +96,8 @@ void Lever::Update()
 				sound = NewGO<prefab::CSoundSource>(0);
 				sound->Init(L"sound/Lever_kari.wav");
 				sound->Play(false);
-				sound->SetVolume(a);
+				Range();
+				sound->SetVolume(m_volume);
 			}
 			m_timer = 0.0f;
 		}
