@@ -207,12 +207,6 @@
     <ImageContentTask Include="Assets\sprite\arrow.png">
       <Filter>Assets\sprite</Filter>
     </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\title\title.png">
-      <Filter>Assets\sprite</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\title\title2.png">
-      <Filter>Assets\sprite\title</Filter>
-    </ImageContentTask>
     <ImageContentTask Include="Assets\sprite\title\credit.png">
       <Filter>Assets\sprite\title</Filter>
     </ImageContentTask>
@@ -222,10 +216,12 @@
     <ImageContentTask Include="Assets\sprite\title\start.png">
       <Filter>Assets\sprite\title</Filter>
     </ImageContentTask>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="Assets\sprite\title\waku.png">
-      <Filter>Assets\sprite</Filter>
-    </Image>
+    <ImageContentTask Include="Assets\sprite\title\waku.png" />
+    <ImageContentTask Include="Assets\sprite\title\title.png">
+      <Filter>Assets\sprite\title</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\title\pressstart.png">
+      <Filter>Assets\sprite\title</Filter>
+    </ImageContentTask>
   </ItemGroup>
 </Project>

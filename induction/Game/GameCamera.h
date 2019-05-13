@@ -39,5 +39,6 @@ private:
 	CVector3 m_ToPos = { 0.0f,450.0f,0.0f };
 	Title* m_title = nullptr;
 	TitleGround* m_titleground = nullptr;
+	float m_degree = 0.0f;
 };
 

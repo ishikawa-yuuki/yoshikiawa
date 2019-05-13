@@ -10,6 +10,7 @@ TitleGround::TitleGround()
 TitleGround::~TitleGround()
 {
 	DeleteGO(m_skinModelRender);
+	DeleteGO(m_skinModelRender2);
 }
 
 bool TitleGround::Start()
@@ -21,7 +22,7 @@ bool TitleGround::Start()
 	m_skinModelRender2 = NewGO<prefab::CSkinModelRender>(0);
 	m_skinModelRender2->Init(L"modelData/TitleGround/titleground_doukutsu.cmo");
 	m_skinModelRender2->SetPosition(m_position);
-	m_skinModelRender2->SetScale(m_scale);
+	m_skinModelRender2->SetScale(m_scale * 0.98f);
 	m_skinModelRender2->SetActiveFlag(false);
 	m_skinModelRender->SetShadowReceiverFlag(true);
 	m_title = FindGO<Title>("Title");
@@ -30,13 +31,15 @@ bool TitleGround::Start()
 
 void TitleGround::Update()
 {
-	m_degree += m_adddegree * GameTime().GetFrameDeltaTime();
-	m_rotation.SetRotationDeg(CVector3::AxisX, m_degree);
-	m_skinModelRender->SetRotation(m_rotation);
-	if (m_title->isTransStageSelect()) {
-		m_skinModelRender2->SetActiveFlag(true);
-		m_degree2 += m_adddegree * GameTime().GetFrameDeltaTime();
-		m_rotation2.SetRotationDeg(CVector3::AxisX, m_degree2);
-		m_skinModelRender2->SetRotation(m_rotation2);
+	if (!m_title->isStop()) {
+		m_degree += m_adddegree * GameTime().GetFrameDeltaTime();
+		m_rotation.SetRotationDeg(CVector3::AxisX, m_degree);
+		m_skinModelRender->SetRotation(m_rotation);
+		if (m_title->isTransStageSelect()) {
+			m_skinModelRender2->SetActiveFlag(true);
+			m_degree2 += m_adddegree * GameTime().GetFrameDeltaTime();
+			m_rotation2.SetRotationDeg(CVector3::AxisX, m_degree2);
+			m_skinModelRender2->SetRotation(m_rotation2);
+		}
 	}
 }

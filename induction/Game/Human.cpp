@@ -29,7 +29,9 @@ Human::Human()
 Human::~Human()
 {
 	DeleteGO(m_skinModelRender);
-	DeleteGO(m_nearPointLight);
+	if (m_title == nullptr) {
+		DeleteGO(m_nearPointLight);
+	}
 }
 
 bool Human::Start()

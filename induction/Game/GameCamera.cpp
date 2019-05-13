@@ -45,8 +45,16 @@ void GameCamera::Update()
 	if (m_human->GetisDead() == false) {
 		if (m_human->GetisClear() == false) {
 			if (m_title != nullptr) {
-				m_PlayerPos = m_human->GetPosition();
-				m_degreey = 25.0f;
+				if (m_title->isStop()) {
+					m_degreey += m_titleground->GetSpeed() * GameTime().GetFrameDeltaTime();
+					CQuaternion qRot;
+					qRot.SetRotationDeg(CVector3::AxisX, m_titleground->GetSpeed() * GameTime().GetFrameDeltaTime());
+					qRot.Multiply(m_PlayerPos);
+				}
+				else {
+					m_PlayerPos = m_human->GetPosition();
+					m_degreey = 25.0f;
+				}
 			}
 			else {
 				m_PlayerPos = m_player->GetPosition();
@@ -105,7 +113,7 @@ void GameCamera::Hutu()
 		m_target.y += 20.0f;
 	}
 	if (m_title != nullptr) {
-		m_target += m_human->GetPosition();
+		m_target += m_PlayerPos;
 	}
 	else {
 		m_target += m_player->GetPosition();
