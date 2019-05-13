@@ -39,11 +39,13 @@ void Door::Update()
 			sound = NewGO<prefab::CSoundSource>(0);
 			sound->Init(L"sound/DoorStart.wav");
 			sound->Play(false);
+			sound->SetVolume(1.5f);
 		}
 		else if(m_timer == 0.2f) {
 			sound = NewGO<prefab::CSoundSource>(0);
 			sound->Init(L"sound/DoorOpen.wav");
 			sound->Play(false);
+			sound->SetVolume(1.5f);
 		}
 		m_timer += GameTime().GetFrameDeltaTime();
 		m_skin->PlayAnimation(enAnimationClip_OPEN, 0.2);
