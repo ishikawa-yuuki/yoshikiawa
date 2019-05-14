@@ -90,6 +90,7 @@ public:
 	{
 		m_qrot = rot;
 	}
+	const float m_speed = 0.3f;					//タイトル画面での移動速度
 private:
 	//スキンモデルレンダラー
 	prefab::CSkinModelRender* m_skinModelRender = nullptr;
@@ -144,7 +145,6 @@ private:
 	//m_enemy用タイマー
 	int m_enemytimer = 200;
 	TitleGround* m_titleground = nullptr;
-	const float m_speed = 0.3f;
 	float m_degree = 0.0f;
 };
 

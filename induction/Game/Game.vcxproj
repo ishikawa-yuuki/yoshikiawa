@@ -2067,6 +2067,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Preview|x64'">true</ExcludedFromBuild>
     </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\TitleGround\humant.FBX" />
     <MeshContentTask Include="Assets\modelData\TitleGround\human_title.FBX" />
     <MeshContentTask Include="Assets\modelData\TitleGround\titleground.FBX" />
     <MeshContentTask Include="Assets\modelData\TitleGround\titleground_doukutsu.FBX" />

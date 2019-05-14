@@ -58,28 +58,30 @@ bool Title::Start()
 		if (objdata.EqualObjectName(L"titleground")) {
 			return true;
 		}
-		//offƒ‰ƒ“ƒ^ƒ“
+		//Human‚ÌÀ•W‚ğæ“¾
 		else if (objdata.EqualObjectName(L"Human")) {
 		/*	m_human = NewGO<Human>(0, "Human");
 			m_human->SetPosition(objdata.position);
 			m_human->SetRotation(objdata.rotation);*/
-			m_camerataragetpos = objdata.position;
+			m_cameratargetpos = objdata.position;
+			m_cameratargetpos.x = 0.0f;
+			m_cameratargetpos.z = 0.0f;
 			return true;
 		}
-		//offƒ‰ƒ“ƒ^ƒ“
-		else if (objdata.EqualObjectName(L"point")) {
-			m_point = objdata.position;
+		//Player‚ğ¶¬
+		else if (objdata.EqualObjectName(L"player")) {
+			m_player = NewGO<Player>(0, "Player");
+			m_player->SetPosition(objdata.position);
+			m_playerposition = objdata.position;
 			return true;
 		}
-		return false;
+		return true;
 		});
+	m_playerposition.y = m_cameratargetpos.y;
 	m_titleground = NewGO<TitleGround>(0, "TitleGround");
 	m_human = NewGO<Human>(0, "Human");
 	m_human->SetPosition(CVector3(00.0f,0.0f,00.0f));
-	//m_player = NewGO<Player>(0, "Player");
-	//m_player->SetPosition(CVector3::Zero);
 	m_gamecamera = NewGO<GameCamera>(0, "GameCamera");
-
 	shadow::DirectionShadowMap().Disable();
 	//ŠÂ‹«Œõ‚ğ‚¨‚Ó‚Á‚Ó
 	LightManager().SetAmbientLight({ 0.05f, 0.05f, 0.05f });

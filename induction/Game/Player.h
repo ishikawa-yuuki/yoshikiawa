@@ -6,6 +6,7 @@ class GameCamera;
 class Human;
 class StarDust;
 class Title;
+class TitleGround;
 class Player : public IGameObject
 {
 private:
@@ -89,6 +90,7 @@ private:
 
 
 	prefab::CSoundSource* m_sound = nullptr;
-
+	TitleGround* m_titleground = nullptr;
+	CVector3 m_protposition = CVector3::Zero;
 };
 

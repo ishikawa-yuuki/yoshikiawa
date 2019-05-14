@@ -25,9 +25,14 @@ public:
 		return m_isstop;
 	}
 	//カメラの注視点を取得
-	CVector3 GetCameraTarget()
+	CVector3 GetCameraTarget() const
 	{
-		return m_camerataragetpos;
+		return m_cameratargetpos;
+	}
+	//プレイヤーの座標を取得
+	CVector3 GetPlayerPosition() const
+	{
+		return m_playerposition;
 	}
 private:
 	void GameStart();
@@ -91,6 +96,7 @@ private:
 	bool m_isstop = false;
 	float m_timer = 0.0f, m_time = 4.6f,m_time2 = 5.2;
 	prefab::CSky* m_sky = nullptr;
-	CVector3 m_camerataragetpos = CVector3::Zero;
+	CVector3 m_cameratargetpos = CVector3::Zero;
+	CVector3 m_playerposition = CVector3::Zero;
 };
 

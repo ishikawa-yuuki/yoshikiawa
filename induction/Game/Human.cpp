@@ -98,8 +98,8 @@ bool Human::Start()
 		//true‚É‚µ‚½‚ç–â‘è‚ª‚ ‚é“z‚¾‚¯false‚É’¼‚µ‚½B
 
 		m_skinModelRender = NewGO<prefab::CSkinModelRender>(0);
-		//m_skinModelRender->Init(L"modelData/TitleGround/human_title.cmo", m_animClip, enAnimationClip_num, enFbxUpAxisZ);
-		m_skinModelRender->Init(L"modelData/TitleGround/human_title.cmo");
+		m_skinModelRender->Init(L"modelData/TitleGround/humant.cmo", m_animClip, enAnimationClip_num, enFbxUpAxisZ);
+		//m_skinModelRender->Init(L"modelData/TitleGround/human_title.cmo");
 		m_charaCon.Init(
 			20.0f,
 			30.0f,
