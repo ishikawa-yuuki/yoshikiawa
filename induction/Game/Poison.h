@@ -19,8 +19,13 @@ public:
 	{
 		return &m_GhostObject;
 	}
+
 	void SetPoisonNumber(const int& num) {
-		n = num;
+		m_n = num;
+	};
+	//挙動を変える
+	void SetPoisonMoveNumber(const int& number) {
+		m_num = number;
 	};
 private:
 	
@@ -36,8 +41,13 @@ private:
 	//ガスを出すタイミングをずらすタイム
 	float m_time = 0.0f;
 	float m_volume = 0;
-	int n = 0;
-	int num = 0;
+    //何番か
+	int m_n = 0;
+	//どの動きをするか
+	//1ならレバーで動く
+	//2なら順番に動く
+	//3ならレバーの逆に動く(1の反転）
+	int m_num = 0;
 	//ガスの状態trueなら出てる
 	bool m_State = true;
 	

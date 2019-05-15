@@ -22,8 +22,13 @@ public:
 	void SetRot(const CQuaternion& rot) {
 		m_rot = rot;
 	}
+	//回転、スピード
 	void SetStoneNumber(const int& number) {
 		m_num = number;
+	};
+	//大きさが違うときのに使う用
+	void SetStoneScaleNum(const int& number) {
+		m_scalenum = number;
 	};
 	//ゴーストオブジェクトの情報を返す関数。
 	CPhysicsGhostObject* GetGhost()
@@ -52,6 +57,8 @@ private:
 	float m_angle = 0.0f;
 	//岩の音
 	float m_volume;
+	//岩の大きさによる変更
+	int m_scalenum = 0;
 	Player* m_player;
 	
 };

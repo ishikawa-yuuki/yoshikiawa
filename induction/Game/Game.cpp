@@ -313,6 +313,8 @@ void Game::Stage1()
 			Poison* m_poison = NewGO<Poison>(0, "Poison");
 			m_poison->SetPosition(objdata.position);
 			m_poison->SetPoisonNumber(num);
+			//ƒŒƒo[‚Å“®‚­
+			m_poison->SetPoisonMoveNumber(1);
 			m_poisonList.push_back(m_poison);
 
 
@@ -353,6 +355,8 @@ void Game::Stage2()
 			Poison* m_poison = NewGO<Poison>(0, "Poison");
 			m_poison->SetPosition(objdata.position);
 			m_poison->SetPoisonNumber(num);
+			//‡”Ô‚É•¬‚«o‚·
+			m_poison->SetPoisonMoveNumber(2);
 			m_poisonList.push_back(m_poison);
 
 
@@ -391,8 +395,12 @@ void Game::Stage2()
 		}
 		else if (objdata.ForwardMatchName(L"Stone")) {
 			int num = _wtoi(&objdata.name[5]);
-			Stone*m_stone = NewGO<Stone>(0, "Stone");
+			Stone* m_stone = NewGO<Stone>(0, "Stone");
 			m_stone->SetStoneNumber(num);
+			//Stone‚Q‚Ì’²®
+			if (num == 2) {
+				m_stone->SetStoneScaleNum(num);
+			}
 			m_stone->SetScale(objdata.scale);
 			m_stone->SetRot(objdata.rotation);
 			m_stone->SetPosition(objdata.position);

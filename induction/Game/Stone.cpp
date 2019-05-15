@@ -20,13 +20,14 @@ bool Stone::Start()
 	m_skin->SetPosition(m_position);
 	m_skin->SetScale(m_scale);
 	m_skin->SetRotation(m_rot);
-	if (m_num == 2) {
+	//Scale500�̏ꍇ
+	if (m_scalenum == 2) {
 		m_GhostObject.CreateBox(
 			m_position,
 			m_rot,
 			{ 650.0f,650.0f ,650.0f }//{100,100,100}
 		);
-	}
+	}//Scale600,700�̏ꍇ
 	else {
 		m_GhostObject.CreateBox(
 			m_position,
@@ -90,8 +91,6 @@ void Stone::Update()
 		m_angle = -ANGLE_SEED;
 		break;
 	}
-	/*m_moveSpeed.z = MOVE_SPEED;
-	m_axis = CVector3::AxisX;*/
 		if (!m_charaCon.IsOnGround()) {
 			
 			m_timer += GameTime().GetFrameDeltaTime();
