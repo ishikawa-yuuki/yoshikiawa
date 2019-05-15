@@ -1,0 +1,27 @@
+﻿################################################################################
+# この .gitignore ファイルは Microsoft(R) Visual Studio によって自動的に作成されました。
+################################################################################
+
+/induction/Game/Assets/modelData/StageSelect/_Users_CG1801_Desktop_git_yoshikiawa_induction_Game_Assets_modelData_StageSelect_STEELPLT.JPG.dds
+/induction/Game/Assets/modelData/StageSelect/_Users_CG1801_Desktop_git_yoshikiawa_induction_Game_Assets_modelData_StageSelect_point.png.dds
+/induction/Game/Assets/modelData/StageSelect/stageselect_ground.cmo
+/induction/Game/Assets/modelData/StageSelect/point.cmo
+/induction/Game/Assets/modelData/TitleGround/_Users_CG1801_Desktop_git_yoshikiawa_induction_Game_Assets_modelData_TitleGround_STEELPLT.JPG.dds
+/induction/Game/Assets/modelData/TitleGround/_Users_CG1801_Desktop_git_yoshikiawa_induction_Game_Assets_modelData_TitleGround_sougen.png.dds
+/induction/Game/Assets/modelData/TitleGround/_Users_CG1801_Desktop_git_yoshikiawa_induction_Game_Assets_modelData_TitleGround_skin.png.dds
+/induction/Game/Assets/modelData/TitleGround/_Users_CG1801_Desktop_git_yoshikiawa_induction_Game_Assets_modelData_TitleGround_kutu.png.dds
+/induction/Game/Assets/modelData/TitleGround/_Users_CG1801_Desktop_git_yoshikiawa_induction_Game_Assets_modelData_TitleGround_huku__white.png.dds
+/induction/Game/Assets/modelData/TitleGround/_Users_CG1801_Desktop_git_yoshikiawa_induction_Game_Assets_modelData_TitleGround_huku__grey.png.dds
+/induction/Game/Assets/modelData/TitleGround/_Users_CG1801_Desktop_git_yoshikiawa_induction_Game_Assets_modelData_TitleGround_huku.png.dds
+/induction/Game/Assets/modelData/TitleGround/_Users_CG1801_Desktop_git_yoshikiawa_induction_Game_Assets_modelData_TitleGround_ground.png.dds
+/induction/Game/Assets/modelData/TitleGround/titleground_doukutsu.cmo
+/induction/Game/Assets/modelData/TitleGround/titleground.cmo
+/induction/Game/Assets/modelData/TitleGround/human_title.cmo
+/induction/Game/Assets/modelData/TitleGround/humant.cmo
+/induction/Game/Assets/sprite/title/title.dds
+/induction/Game/Assets/sprite/title/start.dds
+/induction/Game/Assets/sprite/title/pressstart.dds
+/induction/Game/Assets/sprite/title/manual.dds
+/induction/Game/Assets/sprite/title/credit.dds
+/induction/Game/Assets/sprite/starsky.dds
+/induction/Game/Assets/sprite/sky.dds
