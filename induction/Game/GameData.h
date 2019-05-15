@@ -17,13 +17,13 @@ public:
 		enState_StageFirst = enState_Stage1,
 		enState_StageLast = enState_Stage3
 	};
-	//ゲームをクリアした！
+	//ステージをクリアした！
 	void SetStageClear() 
 	{
 		m_stageclear[m_stagenumber - 1] = true;
 	}
 	//ステージをクリアしているかどうかを取得
-	bool GetisStageClear(const int& number)
+	bool GetisStageClear(const StageNumber& number)
 	{
 		return m_stageclear[number - 1];
 	}
@@ -33,13 +33,13 @@ public:
 		m_stagenumber = number;
 	}
 	//選択したステージを取得
-	StageNumber GetStageNumber()
+	StageNumber GetStageNumber() const
 	{
 		return m_stagenumber;
 	}
 	static const int m_stagelimit = 3;								//ステージの数
 public:
-	bool m_stageclear[m_stagelimit] = { false,false,false };		//各ステージのクリア状況
+	bool m_stageclear[m_stagelimit] = { true,false,false };			//各ステージのクリア状況
 	StageNumber m_stagenumber = enState_Stage1;						//プレイヤーが選択したステージの番号
 };
 

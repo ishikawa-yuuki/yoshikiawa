@@ -18,9 +18,9 @@ class Exit;
 class Poison;
 class Lever;
 class Lightstand;
-class Stage_Number;
 class Door;
 class Stone;
+class GameData;
 class Game : public IGameObject
 {
 public:
@@ -71,7 +71,6 @@ private:
 	BackGround* m_background;
 	GameCamera * m_gamecamera;
 	Exit* m_exit;
-	Stage_Number* m_Stagenum;
 	Door* m_door;
 	/*prefab::CSkinModelRender* m_goal = nullptr;*/
 	prefab::CSpriteRender* m_sprite_Retire = nullptr;
@@ -105,5 +104,6 @@ private:
 	std::vector<Lightstand*>m_Lightstand1List;
 	std::vector<Stone*>m_StoneList;
 	prefab::CSky* m_sky = nullptr;
+	GameData* m_gamedata = nullptr;
 };
 

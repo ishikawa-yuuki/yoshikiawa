@@ -23,12 +23,12 @@ Title::~Title()
 	DeleteGO(m_human);
 	DeleteGO(m_titleground);
 	DeleteGO(m_gamecamera);
-	DeleteGO(m_ptLight);
+	//DeleteGO(m_ptLight);
 	for (auto menu : m_menuList) {
 		DeleteGO(menu);
 	}
 	DeleteGO(m_pressstart);
-	DeleteGO(m_sky);
+	//DeleteGO(m_sky);
 }
 
 bool Title::Start()
@@ -100,9 +100,10 @@ bool Title::Start()
 	//m_ptLight->SetAttn(attn);
 	m_fade = FindGO<Fade>("Fade");
 	m_fade->StartFadeIn();
-	//m_sky = NewGO<prefab::CSky>(0, "Sky");
-	////m_sky->SetSkyCubeMapFilePath(L"sprite/sky.dds");
-	//m_sky->SetPosition({ 0.0f,-1000.0f,0.0f });
+	m_sky = NewGO<prefab::CSky>(0, "Sky");
+	//m_sky->SetSkyCubeMapFilePath(L"sprite/sky.dds");
+	m_sky->SetScale({ 5000.0f,5000.0f,5000.0f });
+	m_sky->SetEmissionColor({ 0.05f, 0.05f, 0.05f });
 	return true;
 }
 

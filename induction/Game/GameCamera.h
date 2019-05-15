@@ -5,6 +5,8 @@ class Player;
 class Human;
 class Title;
 class TitleGround;
+class Stage_Select;
+class SSPlayer;
 class GameCamera : public IGameObject
 {
 public:
@@ -41,5 +43,10 @@ private:
 	TitleGround* m_titleground = nullptr;
 	float m_degree = 0.0f;
 	CVector3 m_titletarget;
+
+	//ステージセレクト
+	Stage_Select* m_stageselect = nullptr;
+	SSPlayer* m_ssplayer = nullptr;
+
 };
 

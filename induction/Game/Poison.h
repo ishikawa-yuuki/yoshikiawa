@@ -2,7 +2,7 @@
 #include "tkEngine/physics/tkPhysicsGhostObject.h"
 class Player;
 class Game;
-class Stage_Number;
+class GameData;
 class Poison : public IGameObject
 {
 public:
@@ -28,7 +28,7 @@ private:
 	Lever* m_lever ;
 	Player* m_player;
 	Game* m_game;
-	Stage_Number* m_Stagenum;
+	GameData* m_gamedata = nullptr;
 	CVector3 m_position = CVector3::Zero;
 	CVector3 m_scale = CVector3::Zero;
 	CPhysicsGhostObject m_GhostObject;

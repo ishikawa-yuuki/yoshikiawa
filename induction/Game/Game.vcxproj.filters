@@ -26,6 +26,9 @@
     <Filter Include="StageSelect">
       <UniqueIdentifier>{ed123ff3-e404-4eec-8ea2-bffbb0076765}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Assets\modelData\stageselect">
+      <UniqueIdentifier>{b73b9962-55f9-4433-b724-bcac207efbca}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -76,7 +79,6 @@
     <ClCompile Include="SSGameCamera.cpp">
       <Filter>StageSelect</Filter>
     </ClCompile>
-    <ClCompile Include="Stage_Number.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -129,7 +131,6 @@
     <ClInclude Include="SSGameCamera.h">
       <Filter>StageSelect</Filter>
     </ClInclude>
-    <ClInclude Include="Stage_Number.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc">
@@ -214,6 +215,12 @@
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\TitleGround\humant.FBX">
       <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\StageSelect\point.FBX">
+      <Filter>Assets\modelData\stageselect</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\StageSelect\stageselect_ground.FBX">
+      <Filter>Assets\modelData\stageselect</Filter>
     </MeshContentTask>
   </ItemGroup>
   <ItemGroup>

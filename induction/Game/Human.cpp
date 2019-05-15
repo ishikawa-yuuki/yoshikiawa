@@ -14,6 +14,7 @@
 #include "Stage_Select.h"
 #include "Title.h"
 #include "TitleGround.h"
+#include  "GameData.h"
 //ライトの強さを計算する。
 float CalcLightPower(CVector3 charaPos, CVector3 lightPos, CVector4 attn)
 {
@@ -556,6 +557,7 @@ void Human::isClear()
 			m_skinModelRender->PlayAnimation(enAnimationClip_clear, 0.2f);
 			m_Clear_one = true;
 			m_movespeed = CVector3::Zero;
+			GameData::GetInstance().SetStageClear();
 		}
 	}
 	if (m_Clear_one) {

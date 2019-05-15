@@ -17,9 +17,9 @@
 #include "Poison.h"
 #include "Lever.h"
 #include "Lightstand.h"
-#include "Stage_Number.h"
 #include "Door.h"
 #include "Stone.h"
+#include "GameData.h"
 Game::Game()
 {
 }
@@ -35,8 +35,8 @@ Game::~Game()
 	DeleteGO(m_exit);
 	DeleteGO(m_sky);
 	DeleteGO(m_gamecamera);
-	switch (m_Stagenum->GetStageNumber()) {
-	case 1:
+	switch (m_gamedata->GetStageNumber()) {
+	case GameData::enState_Stage1:
 		for (auto& moveBed : m_moveBedList) {
 			DeleteGO(moveBed);
 		}
@@ -59,7 +59,7 @@ Game::~Game()
 			DeleteGO(m_Lightstand);
 		}
 		break;
-	case 2:
+	case GameData::enState_Stage2:
 		for (auto& m_poison : m_poisonList) {
 			DeleteGO(m_poison);
 		}
@@ -80,7 +80,7 @@ Game::~Game()
 
 bool Game::Start()
 {
-	m_Stagenum = FindGO<Stage_Number>("Stage_Number");
+	m_gamedata = &GameData::GetInstance();
 	shadow::DirectionShadowMap().Disable();
 	//ŠÂ‹«Œõ‚ð‚¨‚Ó‚Á‚Ó
 	LightManager().SetAmbientLight({ 0.1f, 0.1f, 0.1f });
@@ -98,11 +98,11 @@ bool Game::Start()
 	m_sky = NewGO<prefab::CSky>(0, "Sky");
 	m_sky->SetScale({ 5000.0f,5000.0f,5000.0f });
 	m_sky->SetEmissionColor({ 0.05f, 0.05f, 0.05f });
-	switch (m_Stagenum->GetStageNumber()) {
-	case 1:
+	switch (m_gamedata->GetStageNumber()) {
+	case GameData::enState_Stage1:
 		Stage1();
 		break;
-	case 2:
+	case GameData::enState_Stage2:
 		Stage2();
 		break;
 	}
