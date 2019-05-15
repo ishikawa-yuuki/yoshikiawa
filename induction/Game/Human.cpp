@@ -12,8 +12,9 @@
 #include "Exit.h"
 #include "Light_Object.h"
 #include "Stage_Select.h"
-
-
+#include "Title.h"
+#include "TitleGround.h"
+#include  "GameData.h"
 //ライトの強さを計算する。
 float CalcLightPower(CVector3 charaPos, CVector3 lightPos, CVector4 attn)
 {
@@ -30,7 +31,9 @@ Human::Human()
 Human::~Human()
 {
 	DeleteGO(m_skinModelRender);
-	DeleteGO(m_nearPointLight);
+	if (m_title == nullptr) {
+		DeleteGO(m_nearPointLight);
+	}
 }
 
 bool Human::Start()
@@ -42,42 +45,88 @@ bool Human::Start()
 	
 	m_mistenemy = FindGO<MistEnemy>("mist");
 	m_exit = FindGO<Exit>("Exit");
+	m_title = FindGO<Title>("Title");
+	if (m_title == nullptr) {
+		m_animClip[enAnimationClip_idle].Load(L"animData/Human/idle.tka");
+		//m_animClip[enAnimationClip_walk].Load(L"animData/unityChan/walk.tka");
+		m_animClip[enAnimationClip_run].Load(L"animData/Human/run.tka");
+		//m_animClip[enAnimationClip_jump].Load(L"animData/unityChan/jump.tka");
+		//m_animClip[enAnimationClip_damage].Load(L"animData/unityChan/damage.tka");
+		m_animClip[enAnimationClip_KneelDown].Load(L"animData/Human/KneelDown.tka");
+		m_animClip[enAnimationClip_clear].Load(L"animData/Human/clear.tka");
+		//アニメクリップをすべてロード、全部使う必要は特にないです。
 
-	m_animClip[enAnimationClip_idle].Load(L"animData/Human/idle.tka");
-	//m_animClip[enAnimationClip_walk].Load(L"animData/unityChan/walk.tka");
-	m_animClip[enAnimationClip_run].Load(L"animData/Human/run.tka");
-	//m_animClip[enAnimationClip_jump].Load(L"animData/unityChan/jump.tka");
-	//m_animClip[enAnimationClip_damage].Load(L"animData/unityChan/damage.tka");
-	m_animClip[enAnimationClip_KneelDown].Load(L"animData/Human/KneelDown.tka");
-	m_animClip[enAnimationClip_clear].Load(L"animData/Human/clear.tka");
-	//アニメクリップをすべてロード、全部使う必要は特にないです。
 
+		for (int i = 0; i < enAnimationClip_num; i++) {
+			m_animClip[i].SetLoopFlag(true);
+		}
+		//for文でとりあえずロードした奴らすべてLoopFlagをtrueにした。
 
-	for (int i = 0; i < enAnimationClip_num; i++) {
-		m_animClip[i].SetLoopFlag(true);
+		//m_animClip[enAnimationClip_jump].SetLoopFlag(false);
+		m_animClip[enAnimationClip_KneelDown].SetLoopFlag(false);
+		//m_animClip[enAnimationClip_damage].SetLoopFlag(false);
+		m_animClip[enAnimationClip_clear].SetLoopFlag(false);
+		//trueにしたら問題がある奴だけfalseに直した。
+
+		m_skinModelRender = NewGO<prefab::CSkinModelRender>(0);
+		m_skinModelRender->Init(L"modelData/Human/Human.cmo", m_animClip, enAnimationClip_num, enFbxUpAxisZ);
+		m_charaCon.Init(
+			20.0f,
+			30.0f,
+			m_position
+		);
 	}
-	//for文でとりあえずロードした奴らすべてLoopFlagをtrueにした。
+	else {
+		m_animClip[enAnimationClip_idle].Load(L"animData/Human/idle.tka");
+		//m_animClip[enAnimationClip_walk].Load(L"animData/unityChan/walk.tka");
+		m_animClip[enAnimationClip_run].Load(L"animData/Human/run.tka");
+		//m_animClip[enAnimationClip_jump].Load(L"animData/unityChan/jump.tka");
+		//m_animClip[enAnimationClip_damage].Load(L"animData/unityChan/damage.tka");
+		m_animClip[enAnimationClip_KneelDown].Load(L"animData/Human/KneelDown.tka");
+		m_animClip[enAnimationClip_clear].Load(L"animData/Human/clear.tka");
+		//アニメクリップをすべてロード、全部使う必要は特にないです。
 
-	//m_animClip[enAnimationClip_jump].SetLoopFlag(false);
-	m_animClip[enAnimationClip_KneelDown].SetLoopFlag(false);
-	//m_animClip[enAnimationClip_damage].SetLoopFlag(false);
-	m_animClip[enAnimationClip_clear].SetLoopFlag(false);
-	//trueにしたら問題がある奴だけfalseに直した。
-	
-	m_skinModelRender = NewGO<prefab::CSkinModelRender>(0);
-	m_skinModelRender->Init(L"modelData/Human/Human.cmo",m_animClip,enAnimationClip_num,enFbxUpAxisZ);
-	m_charaCon.Init(
-		20.0f,
-		30.0f,
-		m_position
-	);
+
+		for (int i = 0; i < enAnimationClip_num; i++) {
+			m_animClip[i].SetLoopFlag(true);
+		}
+		//for文でとりあえずロードした奴らすべてLoopFlagをtrueにした。
+
+		//m_animClip[enAnimationClip_jump].SetLoopFlag(false);
+		m_animClip[enAnimationClip_KneelDown].SetLoopFlag(false);
+		//m_animClip[enAnimationClip_damage].SetLoopFlag(false);
+		m_animClip[enAnimationClip_clear].SetLoopFlag(false);
+		//trueにしたら問題がある奴だけfalseに直した。
+
+		m_skinModelRender = NewGO<prefab::CSkinModelRender>(0);
+		m_skinModelRender->Init(L"modelData/TitleGround/humant.cmo", m_animClip, enAnimationClip_num, enFbxUpAxisZ);
+		//m_skinModelRender->Init(L"modelData/TitleGround/human_title.cmo");
+		m_charaCon.Init(
+			20.0f,
+			30.0f,
+			m_position
+		);
+		m_titleground = FindGO<TitleGround>("TitleGround");
+	}
 	m_skinModelRender->SetShadowCasterFlag(true);
 	m_skinModelRender->SetEmissionColor({3.3f, 3.3f, 3.3f});
+	m_skinModelRender->SetPosition(m_position);
+	
 	return true;
 }
 
 void Human::Update()
 {
+	if (m_title != nullptr) {
+		if (m_title->isStop()) {
+			m_degree -= m_titleground->GetCutSpeed() * m_speed * GameTime().GetFrameDeltaTime();
+			CQuaternion rot;
+			rot.SetRotationDeg(CVector3::AxisX, m_degree);
+			m_skinModelRender->SetRotation(rot);
+		}
+		//m_skinModelRender->PlayAnimation(enAnimationClip_run, 0.2);
+		return;
+	}
 	AnimeControll();
 	//if (m_player->GetStartMove() == true) {
 		if (!m_StartMoveFin) {
@@ -508,6 +557,7 @@ void Human::isClear()
 			m_skinModelRender->PlayAnimation(enAnimationClip_clear, 0.2f);
 			m_Clear_one = true;
 			m_movespeed = CVector3::Zero;
+			GameData::GetInstance().SetStageClear();
 		}
 	}
 	if (m_Clear_one) {

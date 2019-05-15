@@ -24,7 +24,7 @@ void Credit::Update()
 {
 	if (m_isWaitFadeout) {
 		if (!m_fade->IsFade()) {
-			NewGO<Title>(0);
+			NewGO<Title>(0,"Title");
 			DeleteGO(this);
 		}
 	}

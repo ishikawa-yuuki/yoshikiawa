@@ -7,9 +7,8 @@
 #include "Game.h"
 #include "Fade.h"
 #include "Title.h"
-#include "Stage_Number.h"
-
-
+#include "GameCamera.h"
+#include "GameData.h"
 Stage_Select::Stage_Select()
 {
 }
@@ -19,31 +18,74 @@ Stage_Select::~Stage_Select()
 {
 	DeleteGO(m_ssPlayer);
 	DeleteGO(m_ssHuman);
-	DeleteGO(m_ssGC);
+	//DeleteGO(m_ssGC);
 	DeleteGO(m_skin);
-	for (int i = 0; i < point; i++) {
-		DeleteGO(m_ssPoint[i]);
+	DeleteGO(m_sky);
+	for (int i = 0; i < m_sspointList.size(); i++) {
+		DeleteGO(m_sspointList[i - 1]);
 	}
 }
 
 bool Stage_Select::Start()
 {
+	m_gamedata = &GameData::GetInstance();
 	//環境光をおふっふ
 	LightManager().SetAmbientLight({ 0.1f, 0.1f, 0.1f });
+	postEffect::Tonemap().SetLuminance(0.05f);
 	//シーンの明るさを落とす。
-	postEffect::Tonemap().SetLuminance(0.1f);
-	for (int i = 0; i < point; i++) {
-		m_ssPoint[i] = NewGO<SSPoint>(0, "SSPoint");
-		m_ssPoint[i]->m_position.x += i * 1200;
-	}
-	m_ssPlayer = NewGO<SSPlayer>(0, "SSPlayer");
-	m_ssHuman = NewGO<SSHuman>(0, "SSHuman");
-	m_ssGC = NewGO<SSGameCamera>(0, "SSGameCamera");
-	m_skin = NewGO<prefab::CSkinModelRender>(0);
-    m_skin->Init(L"modelData/StageSelect/SS.cmo");//仮ステージ
-	m_skin->SetScale({ 2.0f,2.0f, 2.0f });//
+	m_level.Init(L"level/stageselect/stageselect.tkl", [&](LevelObjectData & objdata) {
+		if (objdata.EqualObjectName(L"stageselect_ground")) {
+			m_skin = NewGO<prefab::CSkinModelRender>(0);
+			m_skin->Init(L"modelData/StageSelect/stageselect_ground.cmo");
+			m_skin->SetPosition(objdata.position);//
+			return true;
+		}
+		//Humanの座標を取得
+		else if (objdata.ForwardMatchName(L"Human")) {
+			int num = _wtoi(&objdata.name[5]);
+			if (num == 1) {
+				m_humanrot = objdata.rotation;
+			}
+			m_humanpositionList[num] = objdata.position;
+			return true;
+		}
+		//Playerを生成
+		else if (objdata.ForwardMatchName(L"player")) {
+			int num = _wtoi(&objdata.name[6]);
+
+			m_playerpositionList[num] = objdata.position;
+			return true;
+		}
+		else if (objdata.ForwardMatchName(L"light")) {
+			int num = _wtoi(&objdata.name[5]);
+			SSPoint* point = NewGO<SSPoint>(0, "Light");
+			point->SetPosition(objdata.position);
+			point->SetRotation(objdata.rotation);
+			point->SetNumber(GameData::StageNumber(num));
+			m_sspointList[num] = point;
+			return true;
+		}
+		return false;
+		});
+	m_pos = m_playerpositionList[1];
+	//m_ssGC = NewGO<SSGameCamera>(0, "SSGameCamera");
 	m_fade = FindGO<Fade>("Fade");
 	m_fade->StartFadeIn();
+	m_sky = NewGO<prefab::CSky>(0, "Sky");
+	m_sky->SetScale({ 5000.0f,5000.0f,5000.0f });
+	m_sky->SetEmissionColor({ 0.005f, 0.005f, 0.005f });
+	m_gamecamera = NewGO<GameCamera>(0, "GameCamera");
+	for (int i = 0; i < m_sspointList.size(); i++) {
+		m_sspointList[i + 1]->SetPlayerPosition(m_playerpositionList[i + 1]);
+		m_sspointList[i + 1]->SetHumanPosition(m_humanpositionList[i + 1]);
+	}
+	m_ssPlayer = NewGO<SSPlayer>(0, "SSPlayer");
+	m_ssPlayer->SetStageNumber(m_gamedata->GetStageNumber());
+	m_ssHuman = NewGO<SSHuman>(0, "SSHuman");
+	m_ssHuman->SetRotation(m_humanrot);
+	m_ssHuman->SetStageNumber(m_gamedata->GetStageNumber());
+	m_ssPlayer->SetPosition(m_playerpositionList[1]);
+	m_ssHuman->SetPosition(m_humanpositionList[1]);
 	return true;
 }
 
@@ -56,30 +98,13 @@ void Stage_Select::Update()
 			  DeleteGO(this);
 		     }
 		     else {
-				 switch (m_ssPlayer->GetStagenum()) {
-				 case 1:
-					 NewGO<Game>(0, "Game");
-					 DeleteGO(this);
-					 break;
-				 case 2:
-					 NewGO<Game>(0, "Game");
-					 DeleteGO(this);
-					 
-					 break;
-				 case 3:
-					 NewGO<Game>(0, "Game");
-					/* NewGO<Title>(0, "Title");
-					 Stage_Number* stagenum;
-					 stagenum = FindGO<Stage_Number>("Stage_Number");
-					 stagenum->IsTitle();*/
-					 DeleteGO(this);
-					 break;
-				 }
+				NewGO<Game>(0, "Game");
+				DeleteGO(this);
 			 }
 		 }
 	}
-	else if (m_ssPlayer->GetOK()) {
-		if (Pad(0).IsTrigger(enButtonA)) {
+	else {
+		if (m_ssPlayer->GetisStage()) {
 			m_isWaitFadeout = true;
 			m_fade->StartFadeOut();
 		}

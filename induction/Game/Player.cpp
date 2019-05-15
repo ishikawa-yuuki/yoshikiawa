@@ -4,6 +4,8 @@
 #include "Human.h"
 #include "StarDust.h"
 #include "tkEngine/light/tkPointLight.h"
+#include "Title.h"
+#include "TitleGround.h"
 Player::Player()
 {
 }
@@ -19,16 +21,20 @@ Player::~Player()
 
 bool Player::Start()
 {
+	m_title = FindGO<Title>("Title");
 	m_human = FindGO<Human>("Human");
 	//m_stardust = NewGO<StarDust>(0,"StarDust");
 	m_skin = NewGO<prefab::CSkinModelRender>(0);
 	m_skin->Init(L"modelData/siro.cmo");
 	m_skin->SetEmissionColor({50.0f, 50.0f, 20.0f});
+	m_skin->SetScale(CVector3::One * 1.0f);
 	m_effect = NewGO<prefab::CEffect>(0);
 	m_effect->Play(L"effect/blackhole.efk");
 	/*m_effect->Play(L"effect/hikari.efk");
 	m_effect->SetScale({ 30.0f,30.0f,30.0f });*/
-	m_position.y = 50.0f;
+	if (m_title == nullptr) {
+		m_position.y = 50.0f;
+	}
 	m_charaCon.Init(
 		20.0f,
 		20.0f,
@@ -44,12 +50,30 @@ bool Player::Start()
 	m_ptLight->SetAttn(m_pointLigDefaultAttn);
 	
 	
-	
+
+	m_titleground = FindGO<TitleGround>("TitleGround");
 	return true;
 }
 
 void Player::Update()
 {
+	if (m_title != nullptr) {
+		if (m_title->isStop()) {
+			CQuaternion rot;
+			rot.SetRotationDeg(CVector3::AxisX, m_titleground->GetCutSpeed() * m_human->m_speed);
+			rot.Multiply(m_position);
+		}
+		else {
+		/*	m_position = m_title->GetCameraTarget();
+			m_position.z -= 70.0f;
+			m_position.y += 150.0f;*/
+			m_skin->SetScale(CVector3::One * 0.05f);
+		}
+		CVector3 pos = m_title->GetPlayerPosition();
+		m_effect->SetPosition(pos);
+		m_skin->SetPosition(pos);
+		return;
+	}
 	//プレイヤーの光の色を変えてHumanに簡単な指示を出せるような
 	//そんなプログラムを考えてます、、、、
 	Color_Change();

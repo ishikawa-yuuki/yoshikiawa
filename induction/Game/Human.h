@@ -8,6 +8,8 @@ class MistEnemy;
 class Light_Object;
 class Light_Object2;
 class Exit;
+class Title;
+class TitleGround;
 class Human : public IGameObject
 {
 public:
@@ -78,6 +80,17 @@ public:
 	{
 		return m_nearPointLight;
 	}
+	//座標を設定
+	void SetPosition(const CVector3& pos)
+	{
+		m_position = pos;
+	}
+	//回転を設定
+	void SetRotation(const CQuaternion rot)
+	{
+		m_qrot = rot;
+	}
+	const float m_speed = 0.3f;					//タイトル画面での移動速度
 private:
 	//スキンモデルレンダラー
 	prefab::CSkinModelRender* m_skinModelRender = nullptr;
@@ -128,7 +141,10 @@ private:
 	float m_kari = 0.0;
 	//足の音
 	float m_volume = 0;
+	Title* m_title = nullptr;
 	//m_enemy用タイマー
 	int m_enemytimer = 200;
+	TitleGround* m_titleground = nullptr;
+	float m_degree = 0.0f;
 };
 

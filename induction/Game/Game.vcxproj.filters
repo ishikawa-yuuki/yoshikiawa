@@ -17,31 +17,36 @@
     <Filter Include="Assets\modelData\StageMap">
       <UniqueIdentifier>{b9ce4810-f6ad-4bfa-b733-a7e97502224c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Title">
+      <UniqueIdentifier>{5f2c9c31-07ea-4dd2-95b7-2d8734479554}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\sprite\title">
+      <UniqueIdentifier>{d6ecaaf7-a31c-48f3-8cfb-ada0d6aa0e61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StageSelect">
+      <UniqueIdentifier>{ed123ff3-e404-4eec-8ea2-bffbb0076765}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\modelData\stageselect">
+      <UniqueIdentifier>{b73b9962-55f9-4433-b724-bcac207efbca}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Human.cpp" />
-    <ClCompile Include="Title.cpp" />
-    <ClCompile Include="Stage_Select.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Fade.cpp" />
     <ClCompile Include="Help.cpp" />
     <ClCompile Include="Credit.cpp" />
     <ClCompile Include="GameCamera.cpp" />
-    <ClCompile Include="SSPlayer.cpp" />
-    <ClCompile Include="SSGameCamera.cpp" />
-    <ClCompile Include="SSHuman.cpp" />
     <ClCompile Include="GameOver.cpp" />
-    <ClCompile Include="SSPoint.cpp" />
     <ClCompile Include="Light_Object.cpp" />
     <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="MoveBed.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyMoveLoop.cpp" />
     <ClCompile Include="Path.cpp" />
-    <ClCompile Include="Stage_Number.cpp" />
     <ClCompile Include="MoveBed_zengo.cpp" />
     <ClCompile Include="Exit.cpp" />
     <ClCompile Include="MistEnemy.cpp" />
@@ -52,6 +57,28 @@
     <ClCompile Include="Hill.cpp" />
     <ClCompile Include="Door.cpp" />
     <ClCompile Include="Stone.cpp" />
+    <ClCompile Include="TitleGround.cpp">
+      <Filter>Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Title.cpp">
+      <Filter>Title</Filter>
+    </ClCompile>
+    <ClCompile Include="GameData.cpp" />
+    <ClCompile Include="Stage_Select.cpp">
+      <Filter>StageSelect</Filter>
+    </ClCompile>
+    <ClCompile Include="SSPoint.cpp">
+      <Filter>StageSelect</Filter>
+    </ClCompile>
+    <ClCompile Include="SSPlayer.cpp">
+      <Filter>StageSelect</Filter>
+    </ClCompile>
+    <ClCompile Include="SSHuman.cpp">
+      <Filter>StageSelect</Filter>
+    </ClCompile>
+    <ClCompile Include="SSGameCamera.cpp">
+      <Filter>StageSelect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -60,25 +87,18 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Human.h" />
-    <ClInclude Include="Title.h" />
-    <ClInclude Include="Stage_Select.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Fade.h" />
     <ClInclude Include="Help.h" />
     <ClInclude Include="Credit.h" />
     <ClInclude Include="GameCamera.h" />
-    <ClInclude Include="SSPlayer.h" />
-    <ClInclude Include="SSGameCamera.h" />
-    <ClInclude Include="SSHuman.h" />
     <ClInclude Include="GameOver.h" />
-    <ClInclude Include="SSPoint.h" />
     <ClInclude Include="Light_Object.h" />
     <ClInclude Include="BackGround.h" />
     <ClInclude Include="MoveBed.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyMoveLoop.h" />
     <ClInclude Include="Path.h" />
-    <ClInclude Include="Stage_Number.h" />
     <ClInclude Include="MoveBed_zengo.h" />
     <ClInclude Include="Exit.h" />
     <ClInclude Include="MistEnemy.h" />
@@ -89,6 +109,28 @@
     <ClInclude Include="Hill.h" />
     <ClInclude Include="Door.h" />
     <ClInclude Include="Stone.h" />
+    <ClInclude Include="TitleGround.h">
+      <Filter>Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Title.h">
+      <Filter>Title</Filter>
+    </ClInclude>
+    <ClInclude Include="GameData.h" />
+    <ClInclude Include="Stage_Select.h">
+      <Filter>StageSelect</Filter>
+    </ClInclude>
+    <ClInclude Include="SSPoint.h">
+      <Filter>StageSelect</Filter>
+    </ClInclude>
+    <ClInclude Include="SSPlayer.h">
+      <Filter>StageSelect</Filter>
+    </ClInclude>
+    <ClInclude Include="SSHuman.h">
+      <Filter>StageSelect</Filter>
+    </ClInclude>
+    <ClInclude Include="SSGameCamera.h">
+      <Filter>StageSelect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc">
@@ -159,6 +201,27 @@
     <MeshContentTask Include="Assets\modelData\Stone\Stone.fbx">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\TitleGround\titleground.FBX">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\TitleGround\titleground_doukutsu.FBX">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\siro.fbx">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\TitleGround\human_title.FBX">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\TitleGround\humant.FBX">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\StageSelect\point.FBX">
+      <Filter>Assets\modelData\stageselect</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\StageSelect\stageselect_ground.FBX">
+      <Filter>Assets\modelData\stageselect</Filter>
+    </MeshContentTask>
   </ItemGroup>
   <ItemGroup>
     <ImageContentTask Include="Assets\sprite\dummy.png">
@@ -180,6 +243,27 @@
       <Filter>Assets\sprite</Filter>
     </ImageContentTask>
     <ImageContentTask Include="Assets\sprite\arrow.png">
+      <Filter>Assets\sprite</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\title\credit.png">
+      <Filter>Assets\sprite\title</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\title\manual.png">
+      <Filter>Assets\sprite\title</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\title\start.png">
+      <Filter>Assets\sprite\title</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\title\title.png">
+      <Filter>Assets\sprite\title</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\title\pressstart.png">
+      <Filter>Assets\sprite\title</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\starsky.jpg">
+      <Filter>Assets\sprite</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\sky.png">
       <Filter>Assets\sprite</Filter>
     </ImageContentTask>
   </ItemGroup>

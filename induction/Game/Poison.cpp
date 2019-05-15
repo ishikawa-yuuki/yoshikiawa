@@ -3,7 +3,7 @@
 #include "Poison.h"
 #include "Lever.h"
 #include "Player.h"
-#include "Stage_Number.h"
+#include "GameData.h"
 Poison::Poison()
 {
 }
@@ -20,7 +20,7 @@ bool Poison::Start()
 	m_skin->SetPosition(m_position);
 	m_player = FindGO<Player>("Player");
 	m_game = FindGO<Game>("Game");
-	m_Stagenum = FindGO<Stage_Number>("Stage_Number");
+	m_gamedata = &GameData::GetInstance();
 	return true;
 }
 void Poison::Range() 
@@ -39,6 +39,7 @@ void Poison::Range()
 	else {
 		m_volume = 0.0f;
 	}
+	m_gamedata = &GameData::GetInstance();
 }
 void Poison::Update()
 {
@@ -70,7 +71,7 @@ void Poison::Update()
 		}
 		break;
 	//Stage2‚Ì“®‚«
-	case 2:
+	case GameData::enState_Stage2:
 		m_time += GameTime().GetFrameDeltaTime();
 		
 		switch (m_n) {

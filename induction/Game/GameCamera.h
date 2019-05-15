@@ -3,6 +3,10 @@
 #include "tkEngine/camera/tkSpringCamera.h"
 class Player;
 class Human;
+class Title;
+class TitleGround;
+class Stage_Select;
+class SSPlayer;
 class GameCamera : public IGameObject
 {
 public:
@@ -17,7 +21,7 @@ private:
 	CVector3 m_PlayerPos;
 	//角度
 	float m_degreexz = 0.0f;
-	float m_degreey = 0.0f;
+	float m_degreey = 30.0f;
 	//回転速度
 	float m_sdegreexz = 0.0f;
 	float m_sdegreey = 0.0f;
@@ -35,5 +39,14 @@ private:
 	//こっちが注視点です。
 	CVector3 m_target = CVector3::Zero;
 	CVector3 m_ToPos = { 0.0f,450.0f,0.0f };
+	Title* m_title = nullptr;
+	TitleGround* m_titleground = nullptr;
+	float m_degree = 0.0f;
+	CVector3 m_titletarget;
+
+	//ステージセレクト
+	Stage_Select* m_stageselect = nullptr;
+	SSPlayer* m_ssplayer = nullptr;
+
 };
 

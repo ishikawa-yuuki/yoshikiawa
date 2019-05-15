@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "BackGround.h"
 #include "SSPlayer.h"
-#include "Stage_Number.h"
+#include "GameData.h"
 
 BackGround::BackGround()
 {
@@ -16,20 +16,20 @@ BackGround::~BackGround()
 }
 bool BackGround::Start()
 {
-	m_stagenum = FindGO<Stage_Number>("Stage_Number");
+	m_gamedata = &GameData::GetInstance();
 	PhysicsWorld().SetDebugDrawMode(btIDebugDraw::DBG_DrawWireframe);
 	m_skinModelRender = NewGO<prefab::CSkinModelRender>(0);
 	m_sound = NewGO<prefab::CSoundSource>(0);
 	
-	switch (m_stagenum->GetStageNumber())
+	switch (m_gamedata->GetStageNumber())
 	{
-	case 1:
+	case GameData::enState_Stage1:
 		m_skinModelRender->Init(L"modelData/StageMap/Stage1.cmo");//仮ステージ
 		//CVector3 scale = { 20.0f,20.0f,20.0f };
 		//m_skinModelRender->SetScale(scale);//思ったより小さかったので20倍
 		m_physicsStaticObject.CreateMesh(m_position, CQuaternion::Identity, CVector3::One, m_skinModelRender);
 		break;
-	case 2:
+	case GameData::enState_Stage2:
 		m_skinModelRender->Init(L"modelData/StageMap/Stage2.cmo");//仮ステージ
 		//CVector3 scale = { 20.0f,20.0f,20.0f };
 		//m_skinModelRender->SetScale(scale);//思ったより小さかったので20倍
@@ -37,7 +37,7 @@ bool BackGround::Start()
 		//m_skinModelRender->SetPosition(m_position);
 		break;
 	}
-	if (m_stagenum->GetStageNumber() <= 3) {
+	if (m_gamedata->GetStageNumber() <= GameData::enState_Stage3) {
 		m_sound->Init(L"sound/wind.wav");
 		m_sound->SetVolume(0.1f);
 		m_sound->Play(true);
@@ -49,7 +49,6 @@ bool BackGround::Start()
 		mat->SetSpecularMap(m_refTexture.GetBody());
 		});
 	m_skinModelRender->SetShadowReceiverFlag(true);
-	DeleteGO(m_stagenum);
 	return true;
 }
 void BackGround::Update()
