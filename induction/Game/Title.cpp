@@ -171,7 +171,7 @@ void Title::GameStart()
 			}
 		}
 		else {
-			if (Pad(0).IsTrigger(enButtonStart)) {
+			if (Pad(0).IsPressAnyKey()) {
 				m_ispressstartbutton = true;
 			}
 		}

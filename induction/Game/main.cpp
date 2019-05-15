@@ -6,6 +6,7 @@
 #include "Fade.h"
 #include "GameData.h"
 #include "Stage_Select.h"
+#include "Game.h"
 namespace {
 	/*!
 	*@brief	低スペックPC向けにtkEngineのConfigを設定する。
@@ -141,9 +142,13 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	if (Engine().Init(initParam) == true) {
 		postEffect::Dof().Disable();
 		NewGO<Fade>(1, "Fade");
-		NewGO<Stage_Select>(0,"Stage_Select");
+	    GameData::GetInstance();
+
+
+		NewGO<Game>(0, "Game");
+		//NewGO<Stage_Select>(0,"Stage_Select");
 		//NewGO<Title>(0, "Title");
-		GameData* gamedata = &GameData::GetInstance();
+	
 		//ゲームループを実行。
 		Engine().RunGameLoop();
 	}

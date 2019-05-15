@@ -20,6 +20,7 @@
 #include "Door.h"
 #include "Stone.h"
 #include "GameData.h"
+#include "Stage_Select.h"
 Game::Game()
 {
 }
@@ -119,12 +120,19 @@ void Game::Update()
 {
 	if (m_isWaitFadeout) {
 		if (!m_fade->IsFade()) {
-			NewGO<Title>(0);
+			NewGO<Stage_Select>(0,"Stage_Select");
 			DeleteGO(this);
 		}
 	}
 	else {
-			Pose();
+		if (m_isgameover) {
+			m_timer2 += GameTime().GetFrameDeltaTime();
+			if (m_timer2 >= m_time2) {
+				m_fade->StartFadeOut();
+				m_isWaitFadeout = true;
+			}
+		}
+		Pose();
 	}
 	if (m_Gamesyuuryou) {
 		m_Gamesyuuryou = false;
@@ -154,18 +162,6 @@ void Game::Pose()
 		if (!m_damege) {
 			if (Pad(0).IsTrigger(enButtonStart)) {
 				m_isPose = true;
-
-				m_sprite_Retire = NewGO<prefab::CSpriteRender>(0);
-				m_sprite_toGame = NewGO<prefab::CSpriteRender>(0);
-				m_sprite_arrow = NewGO<prefab::CSpriteRender>(0);
-
-				m_sprite_Retire->Init(L"sprite/retire.dds", yoko, tate);
-				m_sprite_toGame->Init(L"sprite/BacktoGame.dds", yoko, tate);
-				m_sprite_arrow->Init(L"sprite/arrow.dds", 32.0f, 32.0f);
-
-				m_sprite_Retire->SetPosition(m_Retirepos);
-				m_sprite_toGame->SetPosition(m_toGamepos);
-				m_sprite_arrow->SetPosition(m_arrowpos);
 			}
 			return;
 		}
@@ -173,8 +169,8 @@ void Game::Pose()
 	else {
 		if (Pad(0).IsTrigger(enButtonRight)) {
 			switch (m_state) {
-			case retire:
-				m_state = togame;
+			case togame:
+				m_state = retire;
 				m_arrowpos.x = 0.0f;
 				break;
 			}
@@ -182,8 +178,8 @@ void Game::Pose()
 		else if (Pad(0).IsTrigger(enButtonLeft)) {
 			switch (m_state)
 			{
-			case Game::togame:
-				m_state = retire;
+			case Game::retire:
+				m_state = togame;
 				m_arrowpos.x = -400.0f;
 				break;
 			}
@@ -192,22 +188,16 @@ void Game::Pose()
 			switch (m_state)
 			{
 			case Game::retire:
-				DeleteGO(m_sprite_Retire);
-				DeleteGO(m_sprite_toGame);
-				DeleteGO(m_sprite_arrow);
 				m_isPose = false;
 				m_fade->StartFadeOut();
 				m_isWaitFadeout = true;
 				break;
 			case Game::togame:
-				DeleteGO(m_sprite_Retire);
-				DeleteGO(m_sprite_toGame);
-				DeleteGO(m_sprite_arrow);
 				m_isPose = false;
 				break;
 			}
 		}
-		m_sprite_arrow->SetPosition(m_arrowpos);
+	
 	}
 }
 void Game::Stage1()
@@ -409,4 +399,45 @@ void Game::Stage2()
 		}
 		return false;
 	});
+}
+
+void Game::PostRender(CRenderContext& renderContext) //何かを調べるためのポストレンダラ、今は移動スピード。
+{
+	if (m_human->GetisGameOver()) {
+		if (m_timer >= 1.0f) {
+			m_timer = 1.0f;
+			m_isgameover = true;
+		}
+		m_font.Begin(renderContext);
+		CVector4 Red = { m_timer,0.0f,0.0f,1.0f };
+		wchar_t aaa[20];
+		swprintf(aaa, L"GAME  OVER");
+		m_font.Draw(aaa, { 0.0f,200.0f }, Red, 0.0f, 2.3f);
+		m_font.End(renderContext);
+		m_timer += GameTime().GetFrameDeltaTime() / 2;
+	}
+	else if (m_isPose) {
+		CVector4 Yellow = { 1.0f,1.0f,0.0f,1.0f };
+		CVector4 Transparent = { 0.5f,0.5f,0.0f,1.0f };
+		m_font.Begin(renderContext);
+		if (m_state == retire) {
+			wchar_t aaa[20];
+			swprintf(aaa, L"RETIRE");
+			m_font.Draw(aaa, { 180.0f,00.0f }, Yellow, 0.0f, 1.3f);
+			wchar_t aaa2[20];
+			swprintf(aaa2, L"CONTINUE");
+			m_font.Draw(aaa2, { -200.0f,00.0f }, Transparent, 0.0f, 1.3f);
+
+		}
+		else {
+			wchar_t aaa[20];
+			swprintf(aaa, L"RETIRE");
+			m_font.Draw(aaa, { 180.0f,00.0f }, Transparent, 0.0f, 1.3f);
+			wchar_t aaa2[20];
+			swprintf(aaa2, L"CONTINUE");
+			m_font.Draw(aaa2, { -200.0f,00.0f }, Yellow, 0.0f, 1.3f);
+		}
+		m_font.End(renderContext);
+	}
+
 }

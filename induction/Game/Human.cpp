@@ -469,17 +469,7 @@ void Human::isDead()
 					) {
 					//‚±‚±‚ÅˆÃ“]
 					m_isGameOver = true;
-					m_fade->StartFadeOut();
-
 				}
-			}
-		}
-	}
-	if (!m_fade->IsFade()) {
-		if (m_isGameOver) {
-			if (!m_gameover_one) {
-				NewGO<GameOver>(0);
-				m_gameover_one = true;
 			}
 		}
 	}

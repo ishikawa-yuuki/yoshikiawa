@@ -31,6 +31,7 @@ public:
 	void Pose();
 	void Stage1();
 	void Stage2();
+	void PostRender(CRenderContext& renderContext); //何かを調べるためのポストレンダラ
 	//ここから下の関数はごり押しです・・・なんかいい書き方がある気がする・・・
 
 	//ゲームクラスを消したいときに使う関数、基本GameOverクラスから呼ばれる
@@ -73,9 +74,6 @@ private:
 	Exit* m_exit;
 	Door* m_door;
 	/*prefab::CSkinModelRender* m_goal = nullptr;*/
-	prefab::CSpriteRender* m_sprite_Retire = nullptr;
-	prefab::CSpriteRender* m_sprite_toGame = nullptr;
-	prefab::CSpriteRender* m_sprite_arrow = nullptr;
 	//trueなら画面を切り替える。
 	bool m_isWaitFadeout = false;
 	bool m_isPose = false;
@@ -87,7 +85,7 @@ private:
 		togame,
 		posenum
 	};
-	pose m_state = retire;
+	pose m_state = togame;
 	bool m_Gamesyuuryou = false;
 	bool m_damege = false;
 	//level
@@ -105,5 +103,10 @@ private:
 	std::vector<Stone*>m_StoneList;
 	prefab::CSky* m_sky = nullptr;
 	GameData* m_gamedata = nullptr;
+	CFont m_font;
+	bool m_isgameover = false;
+	float m_timer = 0.0f;
+	float m_timer2 = 0.0f;
+	const float m_time2 = 1.0f;
 };
 
