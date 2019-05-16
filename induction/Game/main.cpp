@@ -7,6 +7,7 @@
 #include "GameData.h"
 #include "Stage_Select.h"
 #include "Game.h"
+#include "Credit.h"
 namespace {
 	/*!
 	*@brief	低スペックPC向けにtkEngineのConfigを設定する。
@@ -148,6 +149,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		//NewGO<Game>(0, "Game");
 		//NewGO<Stage_Select>(0,"Stage_Select");
 		NewGO<Title>(0, "Title");
+		//NewGO<Credit>(0, "Credit");
 	
 		//ゲームループを実行。
 		Engine().RunGameLoop();
