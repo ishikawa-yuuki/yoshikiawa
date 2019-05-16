@@ -145,9 +145,9 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	    GameData::GetInstance();
 
 
-		NewGO<Game>(0, "Game");
+		//NewGO<Game>(0, "Game");
 		//NewGO<Stage_Select>(0,"Stage_Select");
-		//NewGO<Title>(0, "Title");
+		NewGO<Title>(0, "Title");
 	
 		//ゲームループを実行。
 		Engine().RunGameLoop();
