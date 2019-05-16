@@ -21,5 +21,8 @@ private:
 	bool m_addtimer = true;
 	bool m_stop = false;
 	bool m_owari = false;
+	bool m_transscene = false;
+	prefab::CSoundSource* m_bgm = nullptr;
+	float m_timer3 = 0.0f;
 };
 

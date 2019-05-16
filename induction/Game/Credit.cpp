@@ -11,6 +11,7 @@ Credit::Credit()
 Credit::~Credit()
 {
 	DeleteGO(m_sky);
+	DeleteGO(m_bgm);
 }
 bool Credit::Start()
 {
@@ -41,6 +42,10 @@ bool Credit::Start()
 	m_characterList[6] = L"使用ツール";
 	m_characterList[7] = L"3DSMAX\n\nEffekseer\n\nFireAlpaca";
 	m_characterList[8] = L"Presented by TeamBikklers";
+	m_bgm = NewGO<prefab::CSoundSource>(0);
+	m_bgm->Init(L"sound/credit.wav");
+	m_bgm->SetVolume(2.0f);
+	m_bgm->Play(false);
 	return true;
 }
 void Credit::Update()
@@ -51,7 +56,7 @@ void Credit::Update()
 			DeleteGO(this);
 		}
 	}
-	else if (m_owari) {
+	else if (m_transscene || Pad(0).IsTrigger(enButtonB)) {
 		m_isWaitFadeout = true;
 		m_fade->StartFadeOut();
 	}
@@ -59,43 +64,50 @@ void Credit::Update()
 
 void Credit::PostRender(CRenderContext& renderContext) //何かを調べるためのポストレンダラ、今は移動スピード。
 {
-	if (m_owari) {
-		return;
-	}
-	const float Timer2 = 2.0f;
+	
+	const float Timer2 = 2.4f;
+	const float Timer3 = 12.0f;
 	const float Scale = 1.6f;
-	const float Speed = 3.0f / 4.0f;
+	const float Speed = 3.0f / 5.7f;
 	CVector4 White = CVector4::White;
-	if (m_stop) {
-		m_timer2 += GameTime().GetFrameDeltaTime() * Speed;
-		if (m_timer2 >= Timer2) {
-			m_stop = false;
-			m_timer2 = 0.0f;
+	if (m_owari) {
+		m_timer3 += GameTime().GetFrameDeltaTime();
+		if (m_timer3 >= Timer3) {
+			m_transscene = true;
 		}
 	}
-	else {
-		if (m_addtimer) {
-			m_timer += GameTime().GetFrameDeltaTime() * Speed;
+	else if (!m_owari) {
+		if (m_stop) {
+			m_timer2 += GameTime().GetFrameDeltaTime() * Speed;
+			if (m_timer2 >= Timer2) {
+				m_stop = false;
+				m_timer2 = 0.0f;
+			}
 		}
 		else {
-			m_timer -= GameTime().GetFrameDeltaTime() * Speed;
-		}
-
-		if (m_timer >= 1.0f && m_addtimer) {
-			m_timer = 1.0f;
-			m_addtimer = false;
-			m_stop = true;
-		}
-		else if (m_timer <= 0.2f && !m_addtimer) {
-			if (m_number + 1 == m_characterList.size()) {
-				m_owari = true;
-				return;
+			if (m_addtimer) {
+				m_timer += GameTime().GetFrameDeltaTime() * Speed;
 			}
-			m_timer = 0.2f;
-			m_addtimer = true;
-			m_number += 1;
-		}
+			else {
+				m_timer -= GameTime().GetFrameDeltaTime() * Speed;
+			}
 
+			if (m_timer >= 1.0f && m_addtimer) {
+				m_timer = 1.0f;
+				m_addtimer = false;
+				m_stop = true;
+				if (m_number + 1 == m_characterList.size()) {
+					m_owari = true;
+					return;
+				}
+			}
+			else if (m_timer <= 0.2f && !m_addtimer) {
+				m_timer = 0.2f;
+				m_addtimer = true;
+				m_number += 1;
+			}
+
+		}
 	}
 	White = White * m_timer;
 	White.w = 1.0f;
