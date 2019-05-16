@@ -177,9 +177,6 @@
     <MeshContentTask Include="Assets\modelData\StageObject\Lightstand01.fbx">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\Human\Human.fbx">
-      <Filter>Assets\modelData</Filter>
-    </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\StageObject\Torches.fbx">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
@@ -221,6 +218,9 @@
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\StageSelect\stageselect_ground.FBX">
       <Filter>Assets\modelData\stageselect</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Human\Human.fbx">
+      <Filter>Assets\modelData</Filter>
     </MeshContentTask>
   </ItemGroup>
   <ItemGroup>
