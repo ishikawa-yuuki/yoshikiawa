@@ -40,7 +40,6 @@
     <ClCompile Include="Help.cpp" />
     <ClCompile Include="Credit.cpp" />
     <ClCompile Include="GameCamera.cpp" />
-    <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="Light_Object.cpp" />
     <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="MoveBed.cpp" />
@@ -92,7 +91,6 @@
     <ClInclude Include="Help.h" />
     <ClInclude Include="Credit.h" />
     <ClInclude Include="GameCamera.h" />
-    <ClInclude Include="GameOver.h" />
     <ClInclude Include="Light_Object.h" />
     <ClInclude Include="BackGround.h" />
     <ClInclude Include="MoveBed.h" />

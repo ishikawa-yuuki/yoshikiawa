@@ -3,7 +3,6 @@
 #include "Player.h"
 #include "MistEnemy.h"
 #include "Game.h"
-#include "GameOver.h"
 #include "MoveBed.h"
 #include "MoveBed_zengo.h"
 #include "Poison.h"
@@ -79,7 +78,7 @@ bool Human::Start()
 	else {
 		m_animClip[enAnimationClip_idle].Load(L"animData/Human/idle.tka");
 		//m_animClip[enAnimationClip_walk].Load(L"animData/unityChan/walk.tka");
-		m_animClip[enAnimationClip_run].Load(L"animData/Human/run.tka");
+		m_animClip[enAnimationClip_run].Load(L"animData/title/run.tka");
 		//m_animClip[enAnimationClip_jump].Load(L"animData/unityChan/jump.tka");
 		//m_animClip[enAnimationClip_damage].Load(L"animData/unityChan/damage.tka");
 		m_animClip[enAnimationClip_KneelDown].Load(L"animData/Human/KneelDown.tka");
@@ -124,7 +123,7 @@ void Human::Update()
 			rot.SetRotationDeg(CVector3::AxisX, m_degree);
 			m_skinModelRender->SetRotation(rot);
 		}
-		//m_skinModelRender->PlayAnimation(enAnimationClip_run, 0.2);
+		m_skinModelRender->PlayAnimation(enAnimationClip_run, 0.2);
 		return;
 	}
 	AnimeControll();

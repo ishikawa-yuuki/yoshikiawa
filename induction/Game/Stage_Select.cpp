@@ -24,6 +24,7 @@ Stage_Select::~Stage_Select()
 	for (int i = 0; i < m_sspointList.size(); i++) {
 		DeleteGO(m_sspointList[i - 1]);
 	}
+	DeleteGO(m_gamecamera);
 }
 
 bool Stage_Select::Start()
