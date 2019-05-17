@@ -17,6 +17,7 @@ Player::~Player()
 	DeleteGO(m_ptLight);
 	//DeleteGO(m_stardust);
 	DeleteGO(m_skin);
+	DeleteGO(m_sound);
 }
 
 bool Player::Start()
