@@ -15,7 +15,7 @@ public:
 		enState_Stage2,
 		enState_Stage3,
 		enState_StageFirst = enState_Stage1,
-		enState_StageLast = enState_Stage3
+		enState_StageLast = enState_Stage2
 	};
 	//ステージをクリアした！
 	void SetStageClear() 
