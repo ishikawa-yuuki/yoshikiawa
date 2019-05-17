@@ -48,7 +48,7 @@ void Poison::Update()
 	case 1:
 		if (leverList[m_n]->IsStateLever()) {
 			if (m_timer >= 0.5f) {
-				prefab::CEffect* effect = NewGO<prefab::CEffect>(0);
+				prefab::CEffect* effect = NewGO<prefab::CEffect>(0,m_gamedata->GetEffectName());
 				effect->Play(L"effect/Poison_01.efk");
 				effect->SetPosition(m_position);
 				prefab::CSoundSource* ss = NewGO<prefab::CSoundSource>(0);
@@ -83,7 +83,7 @@ void Poison::Update()
 			}
 			else if (m_time >= 0 || m_time >= 14.0f) {
 				if (m_timer >= 0.5f) {
-					prefab::CEffect* effect = NewGO<prefab::CEffect>(0);
+					prefab::CEffect* effect = NewGO<prefab::CEffect>(0, m_gamedata->GetEffectName());
 					effect->Play(L"effect/Poison_01.efk");
 					effect->SetPosition(m_position);
 					prefab::CSoundSource* ss = NewGO<prefab::CSoundSource>(0);
@@ -113,7 +113,7 @@ void Poison::Update()
 			}
 			else if (m_time >= 4.0f) {
 				if (m_timer >= 0.5f) {
-					prefab::CEffect* effect = NewGO<prefab::CEffect>(0);
+					prefab::CEffect* effect = NewGO<prefab::CEffect>(0, m_gamedata->GetEffectName());
 					effect->Play(L"effect/Poison_01.efk");
 					effect->SetPosition(m_position);
 					prefab::CSoundSource* ss = NewGO<prefab::CSoundSource>(0);
@@ -141,7 +141,7 @@ void Poison::Update()
 			}
 			else if (m_time >= 9.0f) {
 				if (m_timer >= 0.5f) {
-					prefab::CEffect* effect = NewGO<prefab::CEffect>(0);
+					prefab::CEffect* effect = NewGO<prefab::CEffect>(0, m_gamedata->GetEffectName());
 					effect->Play(L"effect/Poison_01.efk");
 					effect->SetPosition(m_position);
 					prefab::CSoundSource* ss = NewGO<prefab::CSoundSource>(0);
@@ -168,7 +168,7 @@ void Poison::Update()
 	case 3:
 		if (!leverList[m_n]->IsStateLever()) {
 			if (m_timer >= 0.5f) {
-				prefab::CEffect* effect = NewGO<prefab::CEffect>(0);
+				prefab::CEffect* effect = NewGO<prefab::CEffect>(0, m_gamedata->GetEffectName());
 				effect->Play(L"effect/Poison_01.efk");
 				effect->SetPosition(m_position);
 				prefab::CSoundSource* ss = NewGO<prefab::CSoundSource>(0);

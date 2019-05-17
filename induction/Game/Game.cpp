@@ -90,7 +90,10 @@ Game::~Game()
 		}
 		break;
 	}
-	
+	QueryGOs<prefab::CEffect>(m_gamedata->GetEffectName(), [&](prefab::CEffect* effect) {
+		DeleteGO(effect);
+		return true;
+		});
 }
 
 bool Game::Start()

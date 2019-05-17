@@ -40,7 +40,6 @@
     <ClCompile Include="Help.cpp" />
     <ClCompile Include="Credit.cpp" />
     <ClCompile Include="GameCamera.cpp" />
-    <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="Light_Object.cpp" />
     <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="MoveBed.cpp" />
@@ -92,7 +91,6 @@
     <ClInclude Include="Help.h" />
     <ClInclude Include="Credit.h" />
     <ClInclude Include="GameCamera.h" />
-    <ClInclude Include="GameOver.h" />
     <ClInclude Include="Light_Object.h" />
     <ClInclude Include="BackGround.h" />
     <ClInclude Include="MoveBed.h" />
@@ -177,9 +175,6 @@
     <MeshContentTask Include="Assets\modelData\StageObject\Lightstand01.fbx">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\Human\Human.fbx">
-      <Filter>Assets\modelData</Filter>
-    </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\StageObject\Torches.fbx">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
@@ -224,6 +219,9 @@
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\StageMap\Stage3.fbx">
       <Filter>Assets\modelData\StageMap</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Human\Human.fbx">
+      <Filter>Assets\modelData</Filter>
     </MeshContentTask>
   </ItemGroup>
   <ItemGroup>

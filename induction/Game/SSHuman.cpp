@@ -57,6 +57,7 @@ void SSHuman::Update()
 		break;
 	case SSPlayer::enState_TransStage:
 		TransStage();
+		break;
 	}
 	Animation_Turn();
 	m_skin->SetPosition(m_position);
@@ -66,6 +67,7 @@ void SSHuman::Stop()
 {
 	if (m_ssplayer->GetisMoveHuman()) {
 		m_state = SSPlayer::enState_TransStage;
+		TransStage();
 	}
 	else if (m_stage != m_ssplayer->GetStagenum()) {
 		m_sspoint = m_stageselect->GetStagePoint(m_ssplayer->GetStagenum());
