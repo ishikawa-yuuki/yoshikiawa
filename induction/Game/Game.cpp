@@ -75,6 +75,20 @@ Game::~Game()
 		}
 		DeleteGO(m_door);
 		break;
+	case GameData::enState_Stage3:
+		for (auto& m_poison : m_poisonList) {
+			DeleteGO(m_poison);
+		}
+		for (auto& m_lever : m_leverList) {
+			DeleteGO(m_lever);
+		}
+		for (auto& m_Lightstand : m_Lightstand1List) {
+			DeleteGO(m_Lightstand);
+		}
+		for (auto& m_stone : m_StoneList) {
+			DeleteGO(m_stone);
+		}
+		break;
 	}
 	
 }
@@ -105,6 +119,9 @@ bool Game::Start()
 		break;
 	case GameData::enState_Stage2:
 		Stage2();
+		break;
+	case GameData::enState_Stage3:
+		Stage3();
 		break;
 	}
 
@@ -407,6 +424,83 @@ void Game::Stage2()
 		}
 		return false;
 	});
+}
+void Game::Stage3()
+{
+	m_level.Init(L"level/level_Stage03.tkl", [&](LevelObjectData & objdata) {
+		if (objdata.EqualObjectName(L"Stage3")) {
+			m_background = NewGO<BackGround>(0, "BackGround");
+			m_background->SetPosition(objdata.position);
+			return true;
+		}
+		//オブジェクトねーーむ確認
+		else if (objdata.EqualObjectName(L"Goal")) {
+			m_exit = NewGO<Exit>(0, "Exit");
+			m_exit->SetPosition(objdata.position);
+			m_exit->SetQrot(objdata.rotation);
+			m_exit->SetScale(objdata.scale);
+			return true;
+		}
+		else if (objdata.ForwardMatchName(L"huzitubo")) {
+			int num = _wtoi(&objdata.name[8]);
+			Poison* m_poison = NewGO<Poison>(0, "Poison");
+			m_poison->SetPosition(objdata.position);
+			////レバーで噴き出す
+			if (num == 0 ||num == 1) {
+				m_poison->SetPoisonNumber(num);
+				m_poison->SetPoisonMoveNumber(1);
+			}//常に噴き出す
+			if (num == 4){
+				m_poison->SetPoisonNumber(num);
+				m_poison->SetPoisonMoveNumber(num);
+		     }
+			if (num == 3) {
+				m_poison->SetPoisonNumber(1);
+				m_poison->SetPoisonMoveNumber(num);
+				
+			}
+			m_poisonList.push_back(m_poison);
+			return true;
+		}
+		else if (objdata.ForwardMatchName(L"Lever")) {
+			int num = _wtoi(&objdata.name[5]);
+			Lever* m_lever = NewGO<Lever>(n, "Lever");
+			m_lever->SetPosition(objdata.position);
+			m_lever->SetRotation(objdata.rotation);
+			m_lever->SetScale(objdata.scale);
+			m_lever->SetLeverTime(1);
+			m_leverList.push_back(m_lever);
+
+			return true;
+		}
+		else if (objdata.ForwardMatchName(L"Stone")) {
+			int num = _wtoi(&objdata.name[5]);
+			Stone* m_stone = NewGO<Stone>(0, "Stone");
+			m_stone->SetStoneNumber(num);
+			//Stone２の調整
+			m_stone->SetStoneScaleNum(0);
+			m_stone->SetScale(objdata.scale);
+			m_stone->SetRot(objdata.rotation);
+			m_stone->SetPosition(objdata.position);
+			m_stone->SetProtPosition(objdata.position);
+
+			m_StoneList.push_back(m_stone);
+			return true;
+		}
+		else if (objdata.ForwardMatchName(L"Lightstand")) {
+			int num = _wtoi(&objdata.name[10]);
+			Lightstand* m_Lightstand = NewGO<Lightstand>(0, "Lightstand");
+			m_Lightstand->SetNum(num);
+			m_Lightstand->SetPosition(objdata.position);
+			m_Lightstand->SetRotation(objdata.rotation);
+			m_Lightstand->SetScale(objdata.scale);
+
+			m_Lightstand1List.push_back(m_Lightstand);
+			return true;
+		}
+		return false;
+	});
+
 }
 
 void Game::PostRender(CRenderContext& renderContext) //何かを調べるためのポストレンダラ、今は移動スピード。

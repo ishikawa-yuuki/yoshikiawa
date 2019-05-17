@@ -50,13 +50,14 @@ private:
 	const float MOVE_SPEED = 11.5f * 60.0f;
 	const float MOVE_SPEED_HIGH = 13.0f * 60.0f;
 	const float ANGLE_SEED = 6.0f;
+	float pos = 0;
 	float m_timer = 0;
 	//Šâ‚Ì“]‚ª‚éŒü‚«‚ğŒˆ‚ß‚éB
 	int m_num = 0;
 	//Šâ‚Ì‰ñ“]
 	float m_angle = 0.0f;
 	//Šâ‚Ì‰¹
-	float m_volume;
+	float m_volume = 0.0f;
 	//Šâ‚Ì‘å‚«‚³‚É‚æ‚é•ÏX
 	int m_scalenum = 0;
 	Player* m_player;

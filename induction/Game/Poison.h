@@ -24,6 +24,10 @@ public:
 		m_n = num;
 	};
 	//挙動を変える
+	//1ならレバーで動く
+	//2なら順番に動く
+	//3ならレバーの逆に動く(1の反転）
+	//4なら常に出る
 	void SetPoisonMoveNumber(const int& number) {
 		m_num = number;
 	};
@@ -47,6 +51,7 @@ private:
 	//1ならレバーで動く
 	//2なら順番に動く
 	//3ならレバーの逆に動く(1の反転）
+	//4なら常に出る
 	int m_num = 0;
 	//ガスの状態trueなら出てる
 	bool m_State = true;
