@@ -447,8 +447,7 @@ void Human::isDead()
 		//敵もギミックもないので今のところはボタン押すだけで死ぬスペランカーです。
 		if (!m_Clear_one) {//クリア状態でないなら下へ
 			if (!m_siboustop) {
-				if (Pad(0).IsTrigger(enButtonB)
-					|| m_isDead) {
+				if (m_isDead) {
 					//叫び声
 					prefab::CSoundSource* sound = nullptr;
 					sound = NewGO<prefab::CSoundSource>(0);

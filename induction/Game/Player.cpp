@@ -181,7 +181,7 @@ void Player::Color_Change()
 {
 	
 	//停止ではなくブラックホールモードになりました。使用はまだ変わってませんが…
-	if (Pad(0).IsTrigger(enButtonUp)) {
+	if (Pad(0).IsTrigger(enButtonA)) {
 		switch (m_color) {
 		case hikari_hutu:
 			m_explosionTimer = 0.0f;
@@ -189,6 +189,18 @@ void Player::Color_Change()
 			m_sound = NewGO<prefab::CSoundSource>(0);
 			m_sound->Init(L"sound/BlackHoleUpdate.wav");
 			m_sound->Play(true);
+			break;
+		case hikari_black:
+			m_color = hikari_hutu;
+			m_effect->Release();
+			m_effect->Play(L"effect/hikari.efk");
+			m_effect->SetScale({ 0.0f,0.0f,0.0f });
+			m_skin->SetEmissionColor({ 50.0f, 50.0f, 20.0f });
+			m_attn = m_pointLigDefaultAttn;
+			m_ptLight->SetAttn(m_attn);
+			m_sound->Release();
+			break;
+		}
 #if 0
 			///*m_effect = NewGO<prefab::CEffect>(0);*/
 			//m_effect->Release();
@@ -203,22 +215,7 @@ void Player::Color_Change()
 			///*m_effect->SetPosition(m_position);*/
 		case hikari_explosion:
 #endif
-
-		}
 		
 
-	}
-	else if (Pad(0).IsTrigger(enButtonDown)) {
-		switch (m_color){
-		case hikari_black:
-			m_color = hikari_hutu;
-			m_effect->Release();
-			m_effect->Play(L"effect/hikari.efk");
-			m_effect->SetScale({ 0.0f,0.0f,0.0f });
-			m_skin->SetEmissionColor({ 50.0f, 50.0f, 20.0f });
-			m_attn = m_pointLigDefaultAttn;
-			m_ptLight->SetAttn(m_attn);
-			m_sound->Release();
-		}
 	}
 }
