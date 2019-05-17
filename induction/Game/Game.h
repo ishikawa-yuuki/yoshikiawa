@@ -21,6 +21,7 @@ class Lightstand;
 class Door;
 class Stone;
 class GameData;
+class CheckPoint;
 class Game : public IGameObject
 {
 public:
@@ -108,5 +109,7 @@ private:
 	float m_timer = 0.0f;
 	float m_timer2 = 0.0f;
 	const float m_time2 = 1.0f;
+	CheckPoint* m_checkpoint = nullptr;
+	const wchar_t* m_checkpointname = L"CheckPoint";
 };
 

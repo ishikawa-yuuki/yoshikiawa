@@ -1765,6 +1765,7 @@
     <ClCompile Include="BackGround.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Low|x64'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="CheckPoint.cpp" />
     <ClCompile Include="Credit.cpp" />
     <ClCompile Include="Door.cpp" />
     <ClCompile Include="Enemy.cpp" />
@@ -1825,6 +1826,7 @@
     <ClInclude Include="BackGround.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Low|x64'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="CheckPoint.h" />
     <ClInclude Include="Credit.h" />
     <ClInclude Include="Door.h" />
     <ClInclude Include="Enemy.h" />

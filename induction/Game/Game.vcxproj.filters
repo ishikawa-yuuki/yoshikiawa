@@ -78,6 +78,7 @@
     <ClCompile Include="SSGameCamera.cpp">
       <Filter>StageSelect</Filter>
     </ClCompile>
+    <ClCompile Include="CheckPoint.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -129,6 +130,7 @@
     <ClInclude Include="SSGameCamera.h">
       <Filter>StageSelect</Filter>
     </ClInclude>
+    <ClInclude Include="CheckPoint.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc">

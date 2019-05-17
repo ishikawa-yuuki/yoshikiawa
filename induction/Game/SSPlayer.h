@@ -17,6 +17,8 @@ public:
 	void Move(); 
 	void Stop();
 	void TransStage();
+	void Choice();
+	void PostRender(CRenderContext& renderContext); //何かを調べるためのポストレンダラ
 	// プレイヤーの場所を返す関数。
 	CVector3 GetPosition() const 
 	{ 
@@ -59,6 +61,7 @@ public:
 	enum State {
 		enState_Move,					//移動
 		enState_Stop,					//停止
+		enState_Choice,					//チェックポイントから始めるかどうか選択
 		enState_TransStage				//ゲームに遷移
 	};
 	const float m_speed = 500.0f;
@@ -82,6 +85,12 @@ private:
 	GameData* m_gamedata = nullptr;
 	SSHuman* m_sshuman = nullptr;
 	float m_timer = 0.0f;
-
+	CFont m_font;
+	enum StateS {
+		enState_Yes,
+		enState_No
+	};
+	StateS m_states = enState_Yes;
+	bool m_kettei = true;
 };
 
