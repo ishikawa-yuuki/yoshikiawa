@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "Lever.h"
 #include "Game.h"
+#include "GameData.h"
 Lightstand::Lightstand()
 {
 }
@@ -69,7 +70,7 @@ bool Lightstand::Start()
 	Attn.x = 1000.0f;
 	Attn.y = 10.0f;
 	m_pointLight->SetAttn(Attn);
-	
+	m_gamedata = &GameData::GetInstance();
 	return true;
 }
 void Lightstand::Range()
@@ -95,7 +96,7 @@ void Lightstand::Update()
 	if (m_State) {
 		if (leverList[Levernum]->IsStateLever()) {
 			if (m_timer >= 0.5f) {
-				prefab::CEffect* effect = NewGO<prefab::CEffect>(0);
+				prefab::CEffect* effect = NewGO<prefab::CEffect>(0,m_gamedata->GetEffectName());
 				effect->Play(L"effect/Fire.efk");
 				effect->SetPosition(m_position);
 				m_timer = 0.0f;
@@ -108,7 +109,7 @@ void Lightstand::Update()
 	}
 	else {
 		if (m_timer >= 0.5f) {
-			prefab::CEffect* effect = NewGO<prefab::CEffect>(0);
+			prefab::CEffect* effect = NewGO<prefab::CEffect>(0, m_gamedata->GetEffectName());
 			effect->Play(L"effect/Fire.efk");
 			effect->SetPosition(m_position);
 			m_timer = 0.0f;

@@ -37,9 +37,15 @@ public:
 	{
 		return m_stagenumber;
 	}
+	//エフェクトの名前を取得
+	const char* GetEffectName()
+	{
+		return m_effectname;
+	}
 	static const int m_stagelimit = 3;								//ステージの数
 public:
 	bool m_stageclear[m_stagelimit] = { true,false,false };			//各ステージのクリア状況
 	StageNumber m_stagenumber = enState_Stage1;						//プレイヤーが選択したステージの番号
+	const char* m_effectname = "Effect";							//ステージ終了時に強制的に消去したいエフェクトに名前を付けるときに使う
 };
 

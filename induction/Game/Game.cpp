@@ -76,7 +76,10 @@ Game::~Game()
 		DeleteGO(m_door);
 		break;
 	}
-	
+	QueryGOs<prefab::CEffect>(m_gamedata->GetEffectName(), [&](prefab::CEffect* effect) {
+		DeleteGO(effect);
+		return true;
+		});
 }
 
 bool Game::Start()

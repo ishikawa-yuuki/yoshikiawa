@@ -50,6 +50,5 @@ private:
 	int m_num = 0;
 	//ƒKƒX‚Ìó‘Ôtrue‚È‚ço‚Ä‚é
 	bool m_State = true;
-	
 };
 
