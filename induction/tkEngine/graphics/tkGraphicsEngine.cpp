@@ -129,12 +129,13 @@ namespace tkEngine{
 			sizeof(m_featureDataThreading)
 			);
 		
-		
+#if 0
 		if (m_featureDataThreading.DriverCommandLists == TRUE) {
 			//デバイズがディファードコンテキストに対応しているので
 			//ディファードコンテキストを作成。
 			m_pd3dDevice->CreateDeferredContext(0, &m_pDeferredDeviceContext);
 		}
+#endif
 		return true;
 	}
 	

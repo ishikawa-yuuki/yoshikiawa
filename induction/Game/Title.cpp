@@ -64,8 +64,8 @@ bool Title::Start()
 			m_human->SetPosition(objdata.position);
 			m_human->SetRotation(objdata.rotation);*/
 			m_cameratargetpos = objdata.position;
-			/*m_cameratargetpos.x = 0.0f;
-			m_cameratargetpos.z = 0.0f;*/
+			m_cameratargetpos.x = 0.0f;
+			m_cameratargetpos.z = 0.0f;
 			return true;
 		}
 		//Player‚ğ¶¬

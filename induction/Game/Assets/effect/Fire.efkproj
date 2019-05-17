@@ -97,7 +97,7 @@
               </PVA>
             </ScalingValues>
             <RendererCommonValues>
-              <ColorTexture>../../../tkTools/Effekseer132/Sample/01_Pierre01/Texture/Smoke.png</ColorTexture>
+              <ColorTexture>Texture/Smoke.png</ColorTexture>
               <AlphaBlend>2</AlphaBlend>
               <FadeInType>1</FadeInType>
               <FadeIn>
