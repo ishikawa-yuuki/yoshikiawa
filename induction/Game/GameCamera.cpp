@@ -46,6 +46,11 @@ bool GameCamera::Start()
 
 void GameCamera::Update()
 {
+	m_refreshTimer -= GameTime().GetFrameDeltaTime();
+	if (m_refreshTimer > 0.0f) {
+		m_springCamera.Refresh();
+		
+	}
 	if (m_stageselect != nullptr) {
 		if (!m_ssplayer->GetisTransStage()) {
 			m_PlayerPos = m_ssplayer->GetPosition();
@@ -68,11 +73,11 @@ void GameCamera::Update()
 		//follow();
 		//m_target.z += 350.0f;
 		//視点z
-		MainCamera().SetTarget(m_target);
+		m_springCamera.SetTarget(m_target);
 		//座標
-		MainCamera().SetPosition(m_position);
+		m_springCamera.SetPosition(m_position);
 		//カメラの更新。
-		MainCamera().Update();
+		m_springCamera.Update();
 	}
 	else if (m_human->GetisDead() == false) {
 		if (m_human->GetisClear() == false) {
@@ -129,11 +134,11 @@ void GameCamera::Update()
 			//follow();
 			//m_target.z += 350.0f;
 			//視点z
-			MainCamera().SetTarget(m_target);
+			m_springCamera.SetTarget(m_target);
 			//座標
-			MainCamera().SetPosition(m_position);
+			m_springCamera.SetPosition(m_position);
 			//カメラの更新。
-			MainCamera().Update();
+			m_springCamera.Update();
 
 		}
 	}
@@ -185,7 +190,7 @@ void GameCamera::Hutu()
 
 	ToPos *= 2;
 	//m_toPos.y = 0.0f;
-	m_target -= ToPos;
+	//m_target -= ToPos;
 	ToPos *= 1.5f;
 	/*toPos.x = -r * cos(radianx);
 	toPos.y = r * sin(radiany);
@@ -197,25 +202,71 @@ void GameCamera::Hutu()
 void GameCamera::follow()
 {
 	//プレイヤーに追従するばねカメラ
-	//横方向には自由に回転させることができるようにしたい。
-	CVector3 Old_Topos = m_ToPos;
-	CVector3 HumanPos = m_human->GetPosition();
-	CVector3 diff = m_PlayerPos - HumanPos;
-	float len = diff.LengthSq();
-	if (len >= 300.0f*300.0f) {
-		m_ToPos += {0.0f, 4.0f, 0.0f};//だんだん離れる
-		if (m_ToPos.y > 950.0f) {
-			m_ToPos = Old_Topos; //カメラが光に離れすぎないよう固定
-		}
-	}
-	else if (len <= 150.f) {
-		m_ToPos -= {0.0f, 6.0f, 0.0f};//どんどん近寄る
-		if (m_ToPos.y < 450.0f) {
-			m_ToPos = Old_Topos;//カメラが光に寄りすぎないよう固定
-		}
-	}
-	CVector3 CameraPos = m_PlayerPos + m_ToPos;
-	MainCamera().SetTarget(m_PlayerPos);//プレイヤーの位置を注視点にする。
-	MainCamera().SetPosition(CameraPos);
-	MainCamera().Update();
+	
+	//CVector3 HumanPos = m_human->GetPosition();
+	//HumanPos.y += 50.0f;
+
+	//
+	//CVector3 Old_Topos = m_ToPos;
+	////カメラを更新。
+	////注視点を計算する。
+	//CVector3 target = m_player->m_position;
+	////プレイヤの足元からちょっと上を注視点とする。
+	//target.y += 50.0f;
+
+	//CVector3 toCameraPosOld = m_toCameraPos;
+	////パッドの入力を使ってカメラを回す。
+	//float x = Pad(0).GetRStickXF();
+	//float y = Pad(0).GetRStickYF();
+	////Y軸周りの回転
+	//CQuaternion qRot;
+	//qRot.SetRotationDeg(CVector3::AxisY, 2.0f * x);
+	//qRot.Multiply(m_toCameraPos);
+	////X軸周りの回転。
+	//CVector3 axisX;
+	//axisX.Cross(CVector3::AxisY, m_toCameraPos);
+	//axisX.Normalize();
+	//qRot.SetRotationDeg(axisX, 2.0f * y);
+	//qRot.Multiply(m_toCameraPos);
+	////カメラの回転の上限をチェックする。
+	////注視点から視点までのベクトルを正規化する。
+	////正規化すると、ベクトルの大きさが１になる。
+	////大きさが１になるということは、ベクトルから強さがなくなり、方向のみの情報となるということ。
+	//CVector3 toPosDir = m_toCameraPos;
+	//toPosDir.Normalize();
+	//if (toPosDir.y < -0.5f) {
+	//	//カメラが上向きすぎ。
+	//	m_toCameraPos = toCameraPosOld;
+	//}
+	//else if (toPosDir.y > 0.8f) {
+	//	//カメラが下向きすぎ。
+	//	m_toCameraPos = toCameraPosOld;
+	//}
+	//
+	////視点を計算する。
+	//CVector3 pos = target + m_toCameraPos;
+	////バネカメラに注視点と視点を設定する。
+	//m_springCamera.SetTarget(target);
+	//m_springCamera.SetPosition(pos);
+
+	////バネカメラの更新。
+	//m_springCamera.Update();
+	////float len = diff.LengthSq();
+	////if (len >= 300.0f*300.0f) {
+	////	m_ToPos += {0.0f, 4.0f, 0.0f};//だんだん離れる
+	////	if (m_ToPos.y > 950.0f) {
+	////		m_ToPos = Old_Topos; //カメラが光に離れすぎないよう固定
+	////	}
+	////}
+	////else if (len <= 150.f) {
+	////	m_ToPos -= {0.0f, 6.0f, 0.0f};//どんどん近寄る
+	////	if (m_ToPos.y < 450.0f) {
+	////		m_ToPos = Old_Topos;//カメラが光に寄りすぎないよう固定
+	////	}
+	////}
+
+	//CVector3 CameraPos = m_PlayerPos + m_ToPos;
+	//MainCamera().SetTarget(m_PlayerPos);//プレイヤーの位置を注視点にする。
+	//MainCamera().SetPosition(CameraPos);
+	//MainCamera().Update();
 }
