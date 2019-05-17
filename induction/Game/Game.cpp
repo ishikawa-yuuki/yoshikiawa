@@ -67,6 +67,9 @@ Game::~Game()
 		for (auto& m_lever : m_leverList) {
 			DeleteGO(m_lever);
 		}
+		for (auto& m_lightobject : m_lightobjectList) {
+			DeleteGO(m_lightobject);
+		}
 		for (auto& m_Lightstand : m_Lightstand1List) {
 			DeleteGO(m_Lightstand);
 		}
@@ -423,6 +426,16 @@ void Game::Stage2()
 			m_door = NewGO<Door>(0, "Door");
 			m_door->SetPosition(objdata.position);
 			m_door->SetScale(objdata.scale);
+			return true;
+		}
+		//offƒ‰ƒ“ƒ^ƒ“
+		else if (objdata.ForwardMatchName(L"lanthanum1")) {
+			Light_Object* m_lightobject = NewGO<Light_Object>(0, "LightObject");
+			m_lightobject->SetPosition(objdata.position);//ŽŽŒ±‚µ‚½‚¢‚È‚ç{0,0,0}
+			m_lightobject->SetScale(objdata.scale);
+			m_lightobject->SetRotation(objdata.rotation);
+			m_lightobjectList.push_back(m_lightobject);
+
 			return true;
 		}
 		return false;
