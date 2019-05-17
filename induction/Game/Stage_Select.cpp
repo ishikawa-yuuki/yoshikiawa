@@ -85,8 +85,8 @@ bool Stage_Select::Start()
 	m_ssHuman = NewGO<SSHuman>(0, "SSHuman");
 	m_ssHuman->SetRotation(m_humanrot);
 	m_ssHuman->SetStageNumber(m_gamedata->GetStageNumber());
-	m_ssPlayer->SetPosition(m_playerpositionList[1]);
-	m_ssHuman->SetPosition(m_humanpositionList[1]);
+	m_ssPlayer->SetPosition(m_playerpositionList[m_gamedata->GetStageNumber()]);
+	m_ssHuman->SetPosition(m_humanpositionList[m_gamedata->GetStageNumber()]);
 	return true;
 }
 

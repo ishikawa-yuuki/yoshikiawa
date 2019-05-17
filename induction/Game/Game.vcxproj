@@ -1904,7 +1904,11 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_Low|x64'">false</ExcludedFromBuild>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Human\Human.fbx">
+<<<<<<< HEAD
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Preview_Middle|x64'">true</ExcludedFromBuild>
+=======
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Preview_Low|x64'">true</ExcludedFromBuild>
+>>>>>>> 9ceb6a41cf164ba58f94fa49efc14a58c98e29f7
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Lever\Lever.fbx">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Middle|x64'">true</ExcludedFromBuild>
@@ -1996,6 +2000,9 @@
       </ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Preview_Middle|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_Low|x64'">false</ExcludedFromBuild>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\StageMap\Stage3.fbx">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Preview_Middle|x64'">false</ExcludedFromBuild>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\StageMap\stage_test.fbx">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Middle|x64'">true</ExcludedFromBuild>

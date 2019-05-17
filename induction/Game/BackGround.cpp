@@ -36,6 +36,13 @@ bool BackGround::Start()
 		m_physicsStaticObject.CreateMesh(m_position, CQuaternion::Identity, CVector3::One, m_skinModelRender);
 		//m_skinModelRender->SetPosition(m_position);
 		break;
+	case  GameData::enState_Stage3:
+		m_skinModelRender->Init(L"modelData/StageMap/Stage3.cmo");//仮ステージ
+		//CVector3 scale = { 20.0f,20.0f,20.0f };
+		//m_skinModelRender->SetScale(scale);//思ったより小さかったので20倍
+		m_physicsStaticObject.CreateMesh(m_position, CQuaternion::Identity, CVector3::One, m_skinModelRender);
+		//m_skinModelRender->SetPosition(m_position);
+		break;
 	}
 	if (m_gamedata->GetStageNumber() <= GameData::enState_Stage3) {
 		m_sound->Init(L"sound/wind.wav");

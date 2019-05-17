@@ -51,6 +51,15 @@ void SSPlayer::Update()
 
 void SSPlayer::Move()
 {
+	if (Pad(0).IsTrigger(enButtonRight)) {
+		if (m_stage > m_sspoint->GetStageNumber()) {
+			m_sspoint = m_SS->GetStagePoint(GameData::StageNumber(m_stage));
+		}
+	}
+	else if (Pad(0).IsTrigger(enButtonLeft)) {
+		if (m_stage < m_sspoint->GetStageNumber())
+			m_sspoint = m_SS->GetStagePoint(GameData::StageNumber(m_stage));
+	}
 	CVector3 move = m_sspoint->GetPlayerPosition() - m_position;
 	CVector3 diff = move;
 	move.Normalize();
@@ -60,8 +69,6 @@ void SSPlayer::Move()
 		m_stage = m_sspoint->GetStageNumber();
 		m_state = enState_Stop;
 	}
-
-
 }
 
 void SSPlayer::Stop()

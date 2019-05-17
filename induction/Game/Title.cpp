@@ -119,8 +119,10 @@ void Title::Update()
 		break;
 	case enState_TransScene:
 		TransScene();
+		break;
 	case enState_TransStageSelect:
 		TransStageSelect();
+		break;
 	}
 }
 
@@ -172,6 +174,11 @@ void Title::GameStart()
 		}
 		else {
 			if (Pad(0).IsPressAnyKey()) {
+				prefab::CSoundSource* ss;
+				ss = NewGO<prefab::CSoundSource>(0);
+				ss->Init(L"sound/select.wav");
+				ss->SetVolume(0.5f);
+				ss->Play(false);
 				m_ispressstartbutton = true;
 			}
 		}

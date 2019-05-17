@@ -3,6 +3,7 @@
 #include "tkEngine/light/tkPointLight.h"
 class Player;
 class Game;
+class GameData;
 class Lightstand : public IGameObject
 {
 public:
@@ -46,5 +47,6 @@ private:
 	bool m_State = false;
 	Player* m_player;
 	Game* m_game;
+	GameData* m_gamedata;
 };
 
