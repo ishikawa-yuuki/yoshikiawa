@@ -71,7 +71,7 @@ void Poison::Update()
 		}
 		break;
 	//Stage2‚Ì“®‚«
-	case GameData::enState_Stage2:
+	case 2:
 		m_time += GameTime().GetFrameDeltaTime();
 		
 		switch (m_n) {
@@ -189,6 +189,26 @@ void Poison::Update()
 		else if (leverList[m_n]->IsStateLever()) {
 			m_GhostObject.Release();
 		}
+		break;
+	case 4:
+		if (m_timer >= 0.5f) {
+			prefab::CEffect* effect = NewGO<prefab::CEffect>(0);
+			effect->Play(L"effect/Poison_01.efk");
+			effect->SetPosition(m_position);
+			prefab::CSoundSource* ss = NewGO<prefab::CSoundSource>(0);
+			ss->Init(L"sound/Gas.wav");
+			Range();
+			ss->SetVolume(m_volume);
+			ss->SetPosition(m_position);
+			ss->Play(false);
+			m_timer = 0.0f;
+		}
+		m_timer += GameTime().GetFrameDeltaTime();
+		m_GhostObject.CreateBox(
+			m_position,
+			CQuaternion::Identity,
+			{ 100.0f, 500.0f, 100.0f }
+		);
 		break;
 	}
 

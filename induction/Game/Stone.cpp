@@ -27,6 +27,7 @@ bool Stone::Start()
 			m_rot,
 			{ 650.0f,650.0f ,650.0f }//{100,100,100}
 		);
+		pos = 300;
 	}//Scale600,700ÇÃèÍçá
 	else {
 		m_GhostObject.CreateBox(
@@ -34,6 +35,7 @@ bool Stone::Start()
 			m_rot,
 			{ 820.0f,700.0f ,800.0f }//{100,100,100}
 		);
+		pos = 320;
 	}
 	m_sound = NewGO<prefab::CSoundSource>(0);
 	m_sound->Init(L"sound/Stone2.wav");
@@ -81,7 +83,7 @@ void Stone::Update()
 		m_angle = ANGLE_SEED;
 		break;
 	case 2:
-		m_moveSpeed.z = MOVE_SPEED_HIGH;
+		m_moveSpeed.z = MOVE_SPEED;//_HIGH;
 		m_axis = CVector3::AxisX;
 		m_angle = ANGLE_SEED;
 		break;
@@ -89,6 +91,11 @@ void Stone::Update()
 		m_moveSpeed.z = -MOVE_SPEED;
 		m_axis = CVector3::AxisX;
 		m_angle = -ANGLE_SEED;
+		break;
+	case 4:
+		m_moveSpeed.x = -MOVE_SPEED;
+		m_axis = CVector3::AxisX;
+		m_angle = ANGLE_SEED;
 		break;
 	}
 		if (!m_charaCon.IsOnGround()) {
@@ -107,7 +114,7 @@ void Stone::Update()
 			m_position = m_charaCon.Execute(m_moveSpeed, GameTime().GetFrameDeltaTime());
 			m_skinposition = m_position;
 			//base 50
-			m_skinposition.y += 300;
+			m_skinposition.y += pos;
 			//ñàÉtÉåÅ[ÉÄè≠ÇµÇ√Ç¬âÒì]Ç≥ÇπÇƒÇ¢Ç≠ÅB
 			CQuaternion addRot;
 			addRot.SetRotationDeg(

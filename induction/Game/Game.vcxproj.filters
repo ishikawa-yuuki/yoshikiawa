@@ -219,6 +219,9 @@
     <MeshContentTask Include="Assets\modelData\StageSelect\stageselect_ground.FBX">
       <Filter>Assets\modelData\stageselect</Filter>
     </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\StageMap\Stage3.fbx">
+      <Filter>Assets\modelData\StageMap</Filter>
+    </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Human\Human.fbx">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
