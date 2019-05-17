@@ -28,7 +28,7 @@ Title::~Title()
 		DeleteGO(menu);
 	}
 	DeleteGO(m_pressstart);
-	//DeleteGO(m_sky);
+	DeleteGO(m_sky);
 }
 
 bool Title::Start()

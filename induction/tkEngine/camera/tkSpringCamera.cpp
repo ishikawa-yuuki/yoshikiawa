@@ -163,6 +163,7 @@ namespace tkEngine {
 	*/
 	void CSpringCamera::Update()
 	{
+		
 		UpdateSpringCamera();
 		if (m_isEnableCollisionSolver && !m_isRefresh){
 			CVector3 result;
