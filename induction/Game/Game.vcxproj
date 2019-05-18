@@ -1906,7 +1906,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_Low|x64'">false</ExcludedFromBuild>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Human\Human.fbx">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Preview_Middle|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Preview_Middle|x64'">true</ExcludedFromBuild>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Lever\Lever.fbx">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Middle|x64'">true</ExcludedFromBuild>
@@ -2236,11 +2236,13 @@
   <ItemGroup>
     <ImageContentTask Include="Assets\sprite\starsky.jpg">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_Low|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Preview_Middle|x64'">true</ExcludedFromBuild>
     </ImageContentTask>
   </ItemGroup>
   <ItemGroup>
     <ImageContentTask Include="Assets\sprite\sky.png">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_Low|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Preview_Middle|x64'">true</ExcludedFromBuild>
     </ImageContentTask>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

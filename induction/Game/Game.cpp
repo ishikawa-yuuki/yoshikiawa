@@ -183,8 +183,8 @@ void Game::Update()
 		shadow::OminiDirectionShadowMap().SetNearClip(10.0f);
 	}
 	if (m_checkpoint != nullptr) {
-		CVector3 diff = m_player->GetPosition() - m_checkpoint->GetPosition();
-		if (diff.LengthSq() <= 40.0f) {
+		CVector3 diff = m_human->GetPosition() - m_checkpoint->GetPosition();
+		if (diff.LengthSq() <= 400.0f*400.0f) {
 			m_gamedata->SetStageCheck();
 			m_checkpoint->SetPass(true);
 		}
