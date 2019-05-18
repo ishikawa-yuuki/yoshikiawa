@@ -464,7 +464,7 @@ void Game::Stage2()
 			m_checkpoint = NewGO<CheckPoint>(0, "CheckPoint");
 			m_checkpoint->SetPosition(objdata.position);
 			m_checkpoint->SetPass(m_gamedata->GetisStageCheck(m_gamedata->GetStageNumber()));
-			return;
+			return true;
 		}
 		return false;
 	});
@@ -547,7 +547,7 @@ void Game::Stage3()
 			m_checkpoint = NewGO<CheckPoint>(0, "CheckPoint");
 			m_checkpoint->SetPosition(objdata.position);
 			m_checkpoint->SetPass(m_gamedata->GetisStageCheck(m_gamedata->GetStageNumber()));
-			return;
+			return true;
 		}
 		return false;
 	});
