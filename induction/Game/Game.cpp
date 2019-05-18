@@ -183,8 +183,8 @@ void Game::Update()
 		shadow::OminiDirectionShadowMap().SetNearClip(10.0f);
 	}
 	if (m_checkpoint != nullptr) {
-		CVector3 diff = m_player->GetPosition() - m_checkpoint->GetPosition();
-		if (diff.LengthSq() <= 40.0f) {
+		CVector3 diff = m_human->GetPosition() - m_checkpoint->GetPosition();
+		if (diff.LengthSq() <= 400.0f*400.0f) {
 			m_gamedata->SetStageCheck();
 			m_checkpoint->SetPass(true);
 		}
@@ -464,7 +464,7 @@ void Game::Stage2()
 			m_checkpoint = NewGO<CheckPoint>(0, "CheckPoint");
 			m_checkpoint->SetPosition(objdata.position);
 			m_checkpoint->SetPass(m_gamedata->GetisStageCheck(m_gamedata->GetStageNumber()));
-			return;
+			return true;
 		}
 		return false;
 	});
@@ -547,7 +547,7 @@ void Game::Stage3()
 			m_checkpoint = NewGO<CheckPoint>(0, "CheckPoint");
 			m_checkpoint->SetPosition(objdata.position);
 			m_checkpoint->SetPass(m_gamedata->GetisStageCheck(m_gamedata->GetStageNumber()));
-			return;
+			return true;
 		}
 		return false;
 	});
