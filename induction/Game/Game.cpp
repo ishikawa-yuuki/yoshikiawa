@@ -21,6 +21,7 @@
 #include "Stone.h"
 #include "GameData.h"
 #include "Stage_Select.h"
+#include "CheckPoint.h"
 Game::Game()
 {
 }
@@ -97,6 +98,9 @@ Game::~Game()
 		DeleteGO(effect);
 		return true;
 		});
+	if (m_checkpoint != nullptr) {
+		DeleteGO(m_checkpoint);
+	}
 }
 
 bool Game::Start()
@@ -135,8 +139,11 @@ bool Game::Start()
 
 	//全方位シャドウを有効にする
 	shadow::OminiDirectionShadowMap().Enable();
-
-	return true;
+	if (m_gamedata->GetisStartCheckPoint() && m_checkpoint != nullptr) {
+		m_human->SetPosition(m_checkpoint->GetPosition());
+		m_player->SetPosition(m_checkpoint->GetPosition());
+	}
+ 	return true;
 }
 
 void Game::Update()
@@ -174,6 +181,13 @@ void Game::Update()
 		shadow::OminiDirectionShadowMap().SetDistanceAffectedByLight(nearPointLig->GetAttn().x);
 		shadow::OminiDirectionShadowMap().SetShadowBias(0.002f);
 		shadow::OminiDirectionShadowMap().SetNearClip(10.0f);
+	}
+	if (m_checkpoint != nullptr) {
+		CVector3 diff = m_human->GetPosition() - m_checkpoint->GetPosition();
+		if (diff.LengthSq() <= 400.0f*400.0f) {
+			m_gamedata->SetStageCheck();
+			m_checkpoint->SetPass(true);
+		}
 	}
 }
 
@@ -344,6 +358,13 @@ void Game::Stage1()
 			m_Lightstand1List.push_back(m_Lightstand);
 			return true;
 		}
+		//オブジェクトねーーむ確認
+		else if (objdata.EqualObjectName(m_checkpointname)) {
+			m_checkpoint = NewGO<CheckPoint>(0, "CheckPoint");
+			m_checkpoint->SetPosition(objdata.position);
+			m_checkpoint->SetPass(m_gamedata->GetisStageCheck(m_gamedata->GetStageNumber()));
+			return true;
+		}
 		return false;
 		});
 }
@@ -438,6 +459,13 @@ void Game::Stage2()
 
 			return true;
 		}
+
+		else if (objdata.EqualObjectName(m_checkpointname)) {
+			m_checkpoint = NewGO<CheckPoint>(0, "CheckPoint");
+			m_checkpoint->SetPosition(objdata.position);
+			m_checkpoint->SetPass(m_gamedata->GetisStageCheck(m_gamedata->GetStageNumber()));
+			return true;
+		}
 		return false;
 	});
 }
@@ -512,6 +540,13 @@ void Game::Stage3()
 			m_Lightstand->SetScale(objdata.scale);
 
 			m_Lightstand1List.push_back(m_Lightstand);
+			return true;
+		}
+
+		else if (objdata.EqualObjectName(m_checkpointname)) {
+			m_checkpoint = NewGO<CheckPoint>(0, "CheckPoint");
+			m_checkpoint->SetPosition(objdata.position);
+			m_checkpoint->SetPass(m_gamedata->GetisStageCheck(m_gamedata->GetStageNumber()));
 			return true;
 		}
 		return false;

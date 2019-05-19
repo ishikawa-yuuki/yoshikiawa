@@ -40,5 +40,6 @@ private:
 	std::unordered_map<int, CVector3> m_humanpositionList;    //Humanの座標のリスト
 	std::unordered_map<int, SSPoint*> m_sspointList;		  //ステージの明かりのリスト
 	CVector3 m_pos;
+	
 };
 
