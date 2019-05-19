@@ -15,7 +15,7 @@ public:
 		enState_Stage2,
 		enState_Stage3,
 		enState_StageFirst = enState_Stage1,
-		enState_StageLast = enState_Stage2
+		enState_StageLast = enState_Stage3
 	};
 	//ステージをクリアした！
 	void SetStageClear() 
@@ -64,7 +64,7 @@ public:
 	}
 	static const int m_stagelimit = 3;								//ステージの数
 public:
-	bool m_stageclear[m_stagelimit] = { false,false,false };		//各ステージのクリア状況
+	bool m_stageclear[m_stagelimit] = { true,true,false };			//各ステージのクリア状況
 	bool m_stagecheck[m_stagelimit] = { false,false,false };		//チェックポイントの通過状況
 	StageNumber m_stagenumber = enState_Stage1;						//プレイヤーが選択したステージの番号
 	const char* m_effectname = "Effect";							//ステージ終了時に強制的に消去したいエフェクトに名前を付けるときに使う
