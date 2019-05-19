@@ -95,8 +95,8 @@ void Hill::Kill()
 	CVector3 diff = m_human->GetPosition() - m_position;
 	if (diff.LengthSq() <= Distance) {
 		diff.Normalize();
-		float dot = m_parallel.Dot(diff);
-		if (dot * M_PI <= Degree) {
+		float angle = acosf(m_parallel.Dot(diff));
+		if (angle * M_PI <= Degree) {
 			m_human->isKill();
 		}
 	}
