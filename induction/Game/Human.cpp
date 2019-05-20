@@ -334,14 +334,6 @@ void Human::Light_Move()
 			}
 			else {
 				m_movespeed = CVector3::Zero;
-				//ミストエネミーを呼ぶもの
-				if (!mistflag) {
-					m_enemytimer--;
-				}
-				if (m_enemytimer < 0) {
-					mistflag = true;
-					m_enemytimer = Random().GetRandInt() % 500 + 200;
-				}
 			}
 		}
 		else
@@ -355,6 +347,14 @@ void Human::Light_Move()
 	}
 	else {
 		m_movespeed.y -= 10000.0f*GameTime().GetFrameDeltaTime();
+	}
+	//ミストエネミーを呼ぶもの
+	if (!mistflag) {
+		m_enemytimer -= 1 * 60.0f * GameTime().GetFrameDeltaTime();
+	}
+	if (m_enemytimer < 0) {
+		mistflag = true;
+		m_enemytimer = Random().GetRandInt() % 1000 + 500;
 	}
 	//動く床と自分のスピードを足す。
 	CVector3 pos = m_movespeed + m_Bedspeed;
