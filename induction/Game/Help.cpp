@@ -2,7 +2,7 @@
 #include "Help.h"
 #include "Fade.h"
 #include "Title.h"
-
+#include "Game.h"
 Help::Help()
 {
 }
@@ -24,8 +24,14 @@ void Help::Update()
 {
 	if (m_isWaitFadeout) {
 		if (!m_fade->IsFade()) {
-			NewGO<Title>(0,"Title");
-			DeleteGO(this);
+			if (m_istransstage) {
+				NewGO<Game>(0, "Game");
+				DeleteGO(this);
+			}
+			else {
+				NewGO<Title>(0, "Title");
+				DeleteGO(this);
+			}
 		}
 	}
 	else if (Pad(0).IsTrigger(enButtonB)) {

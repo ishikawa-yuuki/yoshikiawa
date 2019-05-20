@@ -9,6 +9,7 @@
 #include "Title.h"
 #include "GameCamera.h"
 #include "GameData.h"
+#include "Help.h"
 Stage_Select::Stage_Select()
 {
 }
@@ -99,8 +100,15 @@ void Stage_Select::Update()
 			  DeleteGO(this);
 		     }
 		     else {
-				NewGO<Game>(0, "Game");
-				DeleteGO(this);
+				if (!m_gamedata->GetisFirstEnterStage()) {
+					m_gamedata->SetisEnterStage();
+					NewGO<Help>(0, "Help")->SetisTransStage();
+					DeleteGO(this);
+				}
+				else {
+					NewGO<Game>(0, "Game");
+					DeleteGO(this);
+				}
 			 }
 		 }
 	}
