@@ -49,12 +49,13 @@ void Hill::Update()
 	Kill();
 	m_skinModelRender->SetPosition(m_position);
 	m_skinModelRender->SetRotation(m_rotation);
+	m_skinModelRender->SetScale(m_scale);
 }
 
 void Hill::Move()
 {
-	const float Distance = 300.0f * 300.0f;
-	const float Speed = 150.0f * 150.0f;
+	const float Distance = 700.0f * 700.0f;
+	const float Speed = 100.0f;
 
 	CVector3 diff = m_human->GetPosition() - m_position;
 	if (diff.LengthSq() >= Distance) {
@@ -69,7 +70,7 @@ void Hill::Move()
 
 void Hill::Stop()
 {
-	const float Distance = 150.0f * 150.0f;
+	const float Distance = 400.0f * 400.0f;
 
 	CVector3 diff = m_human->GetPosition() - m_position;
 	if (diff.LengthSq() <= Distance) {
@@ -78,15 +79,16 @@ void Hill::Stop()
 }
 
 void Hill::Turn()
-{
+{/*
 	CVector3 speed = m_movespeed;
 	speed.y = 0.0f;
 	speed.Normalize();
 	m_rotation.SetRotationDeg(CVector3::AxisY, atan2f(speed.x, speed.z));
 	m_parallel = CVector3::AxisZ;
-	m_rotation.Multiply(m_parallel);
+	m_rotation.Multiply(m_parallel);*/
+	float angle = atan2(m_movespeed.x, m_movespeed.z);
+	m_rotation.SetRotation(CVector3::AxisY, angle);
 }
-
 void Hill::Kill()
 {
 	const float Distance = 30.0f * 30.0f;

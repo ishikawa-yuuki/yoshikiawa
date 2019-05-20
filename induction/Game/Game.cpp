@@ -92,6 +92,9 @@ Game::~Game()
 		for (auto& m_stone : m_StoneList) {
 			DeleteGO(m_stone);
 		}
+		for (auto& m_hill : m_hillList) {
+			DeleteGO(m_hill);
+		}
 		break;
 	}
 	QueryGOs<prefab::CEffect>(m_gamedata->GetEffectName(), [&](prefab::CEffect* effect) {
@@ -485,9 +488,10 @@ void Game::Stage3()
 			m_exit->SetScale(objdata.scale);
 			return true;
 		}
+		//ガス
 		else if (objdata.ForwardMatchName(L"huzitubo")) {
 			int num = _wtoi(&objdata.name[8]);
-			Poison* m_poison = NewGO<Poison>(0, "Poison");
+			Poison* m_poison = NewGO<Poison>(n, "Poison");
 			m_poison->SetPosition(objdata.position);
 			////レバーで噴き出す
 			if (num == 0 ||num == 1) {
@@ -506,6 +510,7 @@ void Game::Stage3()
 			m_poisonList.push_back(m_poison);
 			return true;
 		}
+		//レバー
 		else if (objdata.ForwardMatchName(L"Lever")) {
 			int num = _wtoi(&objdata.name[5]);
 			Lever* m_lever = NewGO<Lever>(n, "Lever");
@@ -517,9 +522,10 @@ void Game::Stage3()
 
 			return true;
 		}
+		//岩
 		else if (objdata.ForwardMatchName(L"Stone")) {
 			int num = _wtoi(&objdata.name[5]);
-			Stone* m_stone = NewGO<Stone>(0, "Stone");
+			Stone* m_stone = NewGO<Stone>(n, "Stone");
 			m_stone->SetStoneNumber(num);
 			//Stone２の調整
 			m_stone->SetStoneScaleNum(0);
@@ -531,6 +537,7 @@ void Game::Stage3()
 			m_StoneList.push_back(m_stone);
 			return true;
 		}
+		//松明
 		else if (objdata.ForwardMatchName(L"Lightstand")) {
 			int num = _wtoi(&objdata.name[10]);
 			Lightstand* m_Lightstand = NewGO<Lightstand>(0, "Lightstand");
@@ -542,7 +549,16 @@ void Game::Stage3()
 			m_Lightstand1List.push_back(m_Lightstand);
 			return true;
 		}
-
+		//ヒル
+		else if (objdata.EqualObjectName(L"Hill")) {
+			Hill* m_hill = NewGO<Hill>(0, "Hill");
+			m_hill->SetPosition(objdata.position);
+			m_hill->SetRotation(objdata.rotation);
+			m_hill->SetScale(objdata.scale);
+			m_hillList.push_back(m_hill);
+			return true;
+		}
+		//チェックポイント
 		else if (objdata.EqualObjectName(m_checkpointname)) {
 			m_checkpoint = NewGO<CheckPoint>(0, "CheckPoint");
 			m_checkpoint->SetPosition(objdata.position);

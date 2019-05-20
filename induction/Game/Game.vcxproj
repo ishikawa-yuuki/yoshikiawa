@@ -1765,7 +1765,9 @@
     <ClCompile Include="BackGround.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Low|x64'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="CheckPoint.cpp" />
+    <ClCompile Include="CheckPoint.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Preview_Middle|x64'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Credit.cpp" />
     <ClCompile Include="Door.cpp" />
     <ClCompile Include="Enemy.cpp" />
@@ -1776,7 +1778,9 @@
     <ClCompile Include="GameCamera.cpp" />
     <ClCompile Include="GameData.cpp" />
     <ClCompile Include="Help.cpp" />
-    <ClCompile Include="Hill.cpp" />
+    <ClCompile Include="Hill.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Preview_Middle|x64'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Human.cpp" />
     <ClCompile Include="Lever.cpp" />
     <ClCompile Include="Lightstand.cpp" />
