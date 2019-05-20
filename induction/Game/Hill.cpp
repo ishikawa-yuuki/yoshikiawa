@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "Hill.h"
 #include "Human.h"
-
+#define _USE_MATH_DEFINES //M_PI(â~é¸ó¶)ÇåƒÇ—èoÇµ
+#include <math.h>
 Hill::Hill()
 {
 }
@@ -32,19 +33,71 @@ bool Hill::Start()
 
 void Hill::Update()
 {
-	CVector3 diff_h = m_human->GetPosition() - m_position;
-	diff_h.y = 0.0f;
-	if (m_timer < 60) {
-		m_timer += 20 * GameTime().GetFrameDeltaTime();
-		diff_h.Normalize();
-		m_position += diff_h * 50.0f * GameTime().GetFrameDeltaTime();
+	if (m_human == nullptr) {
+		m_human = FindGO<Human>("Human");
+		return;
+	}
+	switch (m_state) {
+	case enState_Stop:
+		Stop();
+		break;
+	case enState_Move:
+		Move();
+		break;
+	}
+	Turn();
+	Kill();
+	m_skinModelRender->SetPosition(m_position);
+	m_skinModelRender->SetRotation(m_rotation);
+}
+
+void Hill::Move()
+{
+	const float Distance = 300.0f * 300.0f;
+	const float Speed = 150.0f * 150.0f;
+
+	CVector3 diff = m_human->GetPosition() - m_position;
+	if (diff.LengthSq() >= Distance) {
+		m_state = enState_Stop;
 	}
 	else {
-		m_timer += 20 * GameTime().GetFrameDeltaTime();
-		m_position = m_position;
-		if (m_timer > 100) {
-			m_timer = 0;
+		diff.Normalize();
+		m_movespeed = diff * Speed * GameTime().GetFrameDeltaTime();
+		m_position += m_movespeed;
+	}
+}
+
+void Hill::Stop()
+{
+	const float Distance = 150.0f * 150.0f;
+
+	CVector3 diff = m_human->GetPosition() - m_position;
+	if (diff.LengthSq() <= Distance) {
+		m_state = enState_Move;
+	}
+}
+
+void Hill::Turn()
+{
+	CVector3 speed = m_movespeed;
+	speed.y = 0.0f;
+	speed.Normalize();
+	m_rotation.SetRotationDeg(CVector3::AxisY, atan2f(speed.x, speed.z));
+	m_parallel = CVector3::AxisZ;
+	m_rotation.Multiply(m_parallel);
+}
+
+void Hill::Kill()
+{
+	const float Distance = 30.0f * 30.0f;
+	const float Degree = 30.0f;
+
+	CVector3 diff = m_human->GetPosition() - m_position;
+	if (diff.LengthSq() <= Distance) {
+		diff.Normalize();
+		float angle = acosf(m_parallel.Dot(diff));
+		if (angle * M_PI <= Degree) {
+			m_human->isKill();
 		}
 	}
-	m_skinModelRender->SetPosition(m_position);
 }
