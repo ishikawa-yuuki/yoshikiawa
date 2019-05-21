@@ -65,6 +65,17 @@ public:
 	{
 		return m_startcheckpoint;
 	}
+	//始めてステージに入ったかどうかを取得
+	bool GetisFirstEnterStage()
+	{
+		return m_isfirstenterstage;
+	}
+	//ステージに入った！
+	void SetisEnterStage()
+	{
+		m_isfirstenterstage = true;
+	}
+	static const int m_stagelimit = 3;								//ステージの数
 	static const int m_stagelimit = 6;								//ステージの数
 public:
 	bool m_stageclear[m_stagelimit] = { true,true,true,true,true,true };			//各ステージのクリア状況
@@ -72,5 +83,6 @@ public:
 	StageNumber m_stagenumber = enState_Stage1;						//プレイヤーが選択したステージの番号
 	const char* m_effectname = "Effect";							//ステージ終了時に強制的に消去したいエフェクトに名前を付けるときに使う
 	bool m_startcheckpoint = false;									//チェックポイントから始めるかどうか
+	bool m_isfirstenterstage = false;
 };
 

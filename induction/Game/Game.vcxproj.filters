@@ -225,6 +225,9 @@
     <MeshContentTask Include="Assets\modelData\Human\Human.fbx">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\StageMap\Stage4.fbx">
+      <Filter>Assets\modelData\StageMap</Filter>
+    </MeshContentTask>
   </ItemGroup>
   <ItemGroup>
     <ImageContentTask Include="Assets\sprite\dummy.png">
