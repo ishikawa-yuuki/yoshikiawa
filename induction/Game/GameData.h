@@ -75,7 +75,7 @@ public:
 	{
 		m_isfirstenterstage = true;
 	}
-	static const int m_stagelimit = 3;								//ステージの数
+	
 	static const int m_stagelimit = 6;								//ステージの数
 public:
 	bool m_stageclear[m_stagelimit] = { true,true,true,true,true,true };			//各ステージのクリア状況
