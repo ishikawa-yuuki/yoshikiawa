@@ -18,11 +18,11 @@ bool TitleGround::Start()
 	m_skinModelRender = NewGO<prefab::CSkinModelRender>(0);
 	m_skinModelRender->Init(L"modelData/TitleGround/titleground.cmo");
 	m_skinModelRender->SetPosition(m_position);
-	m_skinModelRender->SetScale(m_scale);
+	m_skinModelRender->SetScale(m_scale*2.5f);
 	m_skinModelRender2 = NewGO<prefab::CSkinModelRender>(0);
 	m_skinModelRender2->Init(L"modelData/TitleGround/titleground_doukutsu.cmo");
-	m_skinModelRender2->SetPosition(m_position);
-	m_skinModelRender2->SetScale(m_scale * 0.98f);
+	m_skinModelRender2->SetPosition(m_position*0.95);
+	m_skinModelRender2->SetScale(m_scale);
 	m_skinModelRender2->SetActiveFlag(false);
 	m_skinModelRender->SetShadowReceiverFlag(true);
 	m_title = FindGO<Title>("Title");

@@ -149,7 +149,7 @@ void SSPlayer::PostRender(CRenderContext& renderContext) //‰½‚©‚ğ’²‚×‚é‚½‚ß‚Ìƒ|ƒ
 		const float Scale2 = 1.0;
 		m_font.Begin(renderContext);
 		wchar_t aaa[20];
-		swprintf(aaa, L"ƒ`ƒFƒbƒNƒ|ƒCƒ“ƒg‚©‚çn‚ß‚Ü‚·‚©H");
+		swprintf(aaa, L"ƒ`ƒFƒbƒNƒ|ƒCƒ“ƒg‚©‚ç‚Í‚¶‚ß‚Ü‚·‚©");
 		m_font.Draw(aaa, { 0.0f,200.0f }, CVector4::White, 0.0f, Scale1);
 		if (m_states == enState_Yes) {
 			wchar_t aaa[20];
