@@ -14,6 +14,10 @@ public:
 	void SetScale(const CVector3& scale) {
 		m_scale = scale;
 	}
+	void SetNum(int number)
+	{
+		num = number;
+	}
 private:
 	Game* m_game;
 	prefab::CSkinModelRender* m_skin = nullptr;
@@ -28,5 +32,7 @@ private:
 	};
 	//アニメーションクリップ詰め合わせ
 	CAnimationClip m_animClip[enAnimationClip_num];
+	//0なら二つ、1なら一つ
+	int num = 0;
 };
 

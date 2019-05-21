@@ -33,6 +33,7 @@ public:
 	void Stage1();
 	void Stage2();
 	void Stage3();
+	void Stage4();
 	void PostRender(CRenderContext& renderContext); //何かを調べるためのポストレンダラ
 	//ここから下の関数はごり押しです・・・なんかいい書き方がある気がする・・・
 

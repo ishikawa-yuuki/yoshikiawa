@@ -31,7 +31,7 @@ bool Lightstand::Start()
 			CQuaternion::Identity,
 			{ 100.0f, 500.0f, 100.0f }
 		);
-		m_position.y = 10;
+		m_position.y += 50;
 	}
 	else if (num == 1) {
 		m_skin = NewGO<prefab::CSkinModelRender>(0);

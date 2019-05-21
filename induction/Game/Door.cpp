@@ -33,22 +33,44 @@ void Door::Update()
 {
 	prefab::CSoundSource* sound = nullptr;
 	const auto& leverList = m_game->GetLeverList();
-	if (leverList[0]->IsStateLever()&& leverList[1]->IsStateLever()) {
-		//”à‚ÌŠJ‚­‰¹
-		if (m_timer == 0) {
-			sound = NewGO<prefab::CSoundSource>(0);
-			sound->Init(L"sound/DoorStart.wav");
-			sound->Play(false);
-			sound->SetVolume(1.5f);
+	if (num == 0) {
+		if (leverList[0]->IsStateLever() && leverList[1]->IsStateLever()) {
+			//”à‚ÌŠJ‚­‰¹
+			if (m_timer == 0) {
+				sound = NewGO<prefab::CSoundSource>(0);
+				sound->Init(L"sound/DoorStart.wav");
+				sound->Play(false);
+				sound->SetVolume(1.5f);
+			}
+			else if (m_timer == 0.2f) {
+				sound = NewGO<prefab::CSoundSource>(0);
+				sound->Init(L"sound/DoorOpen.wav");
+				sound->Play(false);
+				sound->SetVolume(1.5f);
+			}
+			m_timer += GameTime().GetFrameDeltaTime();
+			m_skin->PlayAnimation(enAnimationClip_OPEN, 0.2);
+			m_StaticObject.Release();
 		}
-		else if(m_timer == 0.2f) {
-			sound = NewGO<prefab::CSoundSource>(0);
-			sound->Init(L"sound/DoorOpen.wav");
-			sound->Play(false);
-			sound->SetVolume(1.5f);
+	}
+	else if (num == 1) {
+		if (leverList[0]->IsStateLever() ) {
+			//”à‚ÌŠJ‚­‰¹
+			if (m_timer == 0) {
+				sound = NewGO<prefab::CSoundSource>(0);
+				sound->Init(L"sound/DoorStart.wav");
+				sound->Play(false);
+				sound->SetVolume(1.5f);
+			}
+			else if (m_timer == 0.2f) {
+				sound = NewGO<prefab::CSoundSource>(0);
+				sound->Init(L"sound/DoorOpen.wav");
+				sound->Play(false);
+				sound->SetVolume(1.5f);
+			}
+			m_timer += GameTime().GetFrameDeltaTime();
+			m_skin->PlayAnimation(enAnimationClip_OPEN, 0.2);
+			m_StaticObject.Release();
 		}
-		m_timer += GameTime().GetFrameDeltaTime();
-		m_skin->PlayAnimation(enAnimationClip_OPEN, 0.2);
-		m_StaticObject.Release();
 	}
 }

@@ -39,7 +39,7 @@ private:
 	prefab::CPointLight* m_pointLight = nullptr;
 	CVector3 m_position = CVector3::Zero;
 	CQuaternion m_rot = CQuaternion::Identity;
-	CVector3 m_scale = CVector3::Zero;
+	CVector3 m_scale = CVector3::One;
 	CPhysicsStaticObject m_StaticObject;
 	float m_timer = 0.0f;
 	float m_volume = 0.0f;

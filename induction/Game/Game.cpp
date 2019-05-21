@@ -96,6 +96,22 @@ Game::~Game()
 			DeleteGO(m_hill);
 		}
 		break;
+	case GameData::enState_Stage4:
+		for (auto& m_poison : m_poisonList) {
+			DeleteGO(m_poison);
+		}
+		for (auto& m_lever : m_leverList) {
+			DeleteGO(m_lever);
+		}
+		/*for (auto& m_Lightstand : m_Lightstand1List) {
+			DeleteGO(m_Lightstand);
+		}*/
+		
+		for (auto& m_hill : m_hillList) {
+			DeleteGO(m_hill);
+		}
+		DeleteGO(m_door);
+		break;
 	}
 	QueryGOs<prefab::CEffect>(m_gamedata->GetEffectName(), [&](prefab::CEffect* effect) {
 		DeleteGO(effect);
@@ -338,6 +354,7 @@ void Game::Stage1()
 
 			return true;
 		}
+		//ガス
 		else if (objdata.ForwardMatchName(L"huzitubo")) {
 			int num = _wtoi(&objdata.name[8]);
 			Poison* m_poison = NewGO<Poison>(0, "Poison");
@@ -350,6 +367,7 @@ void Game::Stage1()
 
 			return true;
 		}
+		//松明
 		else if (objdata.ForwardMatchName(L"Lightstand")) {
 			int num = _wtoi(&objdata.name[10]);
 			Lightstand* m_Lightstand = NewGO<Lightstand>(0, "Lightstand");
@@ -387,6 +405,7 @@ void Game::Stage2()
 			m_exit->SetScale(objdata.scale);
 			return true;
 		}
+		//ガス
 		else if (objdata.ForwardMatchName(L"huzitubo")) {
 			int num = _wtoi(&objdata.name[8]);
 			Poison* m_poison = NewGO<Poison>(0, "Poison");
@@ -399,6 +418,7 @@ void Game::Stage2()
 
 			return true;
 		}
+		//レバー
 		else if (objdata.ForwardMatchName(L"Lever")) {
 			int num = _wtoi(&objdata.name[5]);
 			Lever* m_lever = NewGO<Lever>(n, "Lever");
@@ -410,6 +430,7 @@ void Game::Stage2()
 
 			return true;
 		}
+		//松明
 		else if (objdata.ForwardMatchName(L"Lightstand")) {
 			//Lightstandの種類
 			int num = _wtoi(&objdata.name[10]);
@@ -430,6 +451,7 @@ void Game::Stage2()
 			m_Lightstand1List.push_back(m_Lightstand);
 			return true;
 		}
+		//岩
 		else if (objdata.ForwardMatchName(L"Stone")) {
 			int num = _wtoi(&objdata.name[5]);
 			Stone* m_stone = NewGO<Stone>(0, "Stone");
@@ -446,10 +468,12 @@ void Game::Stage2()
 			m_StoneList.push_back(m_stone);
 			return true;
 		}
+		//ドア
 		else if (objdata.EqualObjectName(L"Door")) {
 			m_door = NewGO<Door>(0, "Door");
 			m_door->SetPosition(objdata.position);
 			m_door->SetScale(objdata.scale);
+			m_door->SetNum(0);
 			return true;
 		}
 		//offランタン
@@ -569,7 +593,72 @@ void Game::Stage3()
 	});
 
 }
+void Game::Stage4()
+{
+	m_level.Init(L"level/level_Stage04.tkl", [&](LevelObjectData & objdata) {
+		if (objdata.EqualObjectName(L"Stage4")) {
+			m_background = NewGO<BackGround>(0, "BackGround");
+			m_background->SetPosition(objdata.position);
+			return true;
+		}
+		//オブジェクトねーーむ確認
+		else if (objdata.EqualObjectName(L"Goal")) {
+			m_exit = NewGO<Exit>(0, "Exit");
+			m_exit->SetPosition(objdata.position);
+			m_exit->SetQrot(objdata.rotation);
+			m_exit->SetScale(objdata.scale);
+			return true;
+		}
+		//ヒル
+		else if (objdata.EqualObjectName(L"Hill")) {
+			Hill* m_hill = NewGO<Hill>(0, "Hill");
+			m_hill->SetPosition(objdata.position);
+			m_hill->SetRotation(objdata.rotation);
+			m_hill->SetScale(objdata.scale);
+			m_hillList.push_back(m_hill);
+			return true;
+		}
+		//ドア
+		else if (objdata.EqualObjectName(L"Door")) {
+			m_door = NewGO<Door>(0, "Door");
+			m_door->SetPosition(objdata.position);
+			m_door->SetScale(objdata.scale);
+			m_door->SetNum(1);
+			return true;
+		}
+		//レバー
+		else if (objdata.ForwardMatchName(L"Lever")) {
+			int num = _wtoi(&objdata.name[5]);
+			Lever* m_lever = NewGO<Lever>(n, "Lever");
+			m_lever->SetPosition(objdata.position);
+			m_lever->SetRotation(objdata.rotation);
+			m_lever->SetScale(objdata.scale);
+			m_lever->SetLeverTime(num);
+			m_leverList.push_back(m_lever);
 
+			return true;
+		}
+		//ガス
+		else if (objdata.ForwardMatchName(L"huzitubo")) {
+			int num = _wtoi(&objdata.name[8]);
+			Poison* m_poison = NewGO<Poison>(n, "Poison");
+			m_poison->SetPosition(objdata.position);
+			//常に噴き出す
+			if (num == 4) {
+				m_poison->SetPoisonNumber(num);
+				m_poison->SetPoisonMoveNumber(num);
+			}
+			else {
+				m_poison->SetPoisonNumber(num);
+				m_poison->SetPoisonMoveNumber(2);
+
+			}
+			m_poisonList.push_back(m_poison);
+			return true;
+		}
+		return false;
+	});
+}
 void Game::PostRender(CRenderContext& renderContext) //何かを調べるためのポストレンダラ、今は移動スピード。
 {
 	if (m_human->GetisGameOver()) {
