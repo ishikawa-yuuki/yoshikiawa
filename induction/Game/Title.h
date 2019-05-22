@@ -12,6 +12,7 @@ public:
 	~Title();
 	bool Start();
 	void Update();
+	void PostRender(CRenderContext& renderContext); //何かを調べるためのポストレンダラ
 	//タイトルシーンの選択
 	void Choice(); 
 	//ステージセレクト画面に遷移するかどうか
@@ -51,8 +52,8 @@ private:
 	prefab::CSpriteRender* m_spriteRender = nullptr;
 	prefab::CSpriteRender* m_arrow = nullptr;
 	prefab::CSoundSource* m_bgm = nullptr;
-	prefab::CSpriteRender* m_pressstart = nullptr;
-	std::vector <prefab::CSpriteRender*> m_menuList;
+	//prefab::CSpriteRender* m_pressstart = nullptr;
+	//std::vector <prefab::CSpriteRender*> m_menuList;
 	// 弓の初期位置、select1の横にある。
 	CVector3 m_arrowPos{ 250.0f,-80.0f,0.0f };
 	TitleGround* m_titleground = nullptr;
@@ -70,17 +71,17 @@ private:
 	CLevel m_level;
 	bool m_istransstageselect = false;
 	//メニューに移行するまで
- 	float m_alphatitle = 0.0f, m_alphastart = 0.0f;
+ 	float m_alphatitle = 0.0f, m_alphastart = 0.2f;
 	float m_starttime = 1.0f;
 	bool m_isaddalphastart = true;
 	bool m_ispressstartbutton = false;
 	//メニュー選択からシーン移行まで
-	float m_alphamenu = 0.0f;							//α値
+	float m_alphamenu = 0.2f,m_alphamenu2 = 0.2f;		//α値
 	const float m_translucentalphamenu = 0.5f;			//選択されてないやつは半透明にする
 	bool m_ispressAbutton = false;						//Aボタンが押されたかどうか
 	enum Select {
 		//stage選択画面
-		enState_StageSelect,
+		enState_StageSelect = 1,
 		//操作方法画面
 		enState_Manual,
 		//クレジット
@@ -98,5 +99,6 @@ private:
 	prefab::CSky* m_sky = nullptr;
 	CVector3 m_cameratargetpos = CVector3::Zero;
 	CVector3 m_playerposition = CVector3::Zero;
+	CFont m_font;
 };
 

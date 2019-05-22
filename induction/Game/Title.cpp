@@ -24,10 +24,10 @@ Title::~Title()
 	DeleteGO(m_titleground);
 	DeleteGO(m_gamecamera);
 	//DeleteGO(m_ptLight);
-	for (auto menu : m_menuList) {
-		DeleteGO(menu);
-	}
-	DeleteGO(m_pressstart);
+	//for (auto menu : m_menuList) {
+	//	DeleteGO(menu);
+	//}
+	//DeleteGO(m_pressstart);
 	DeleteGO(m_sky);
 }
 
@@ -36,10 +36,10 @@ bool Title::Start()
 	m_spriteRender = NewGO<prefab::CSpriteRender>(0);
 	m_spriteRender->Init(L"sprite/title/title.dds",1280.0f,720.0f);
 	m_spriteRender->SetMulColor(m_transparent);
-	m_pressstart = NewGO<prefab::CSpriteRender>(0);
-	m_pressstart->Init(L"sprite/title/pressstart.dds", 1280.0f, 720.0f);
-	m_pressstart->SetMulColor(m_transparent);
-	m_menuList.push_back(NewGO<prefab::CSpriteRender>(0));
+	//m_pressstart = NewGO<prefab::CSpriteRender>(0);
+	//m_pressstart->Init(L"sprite/title/pressstart.dds", 1280.0f, 720.0f);
+	//m_pressstart->SetMulColor(m_transparent);
+	/*m_menuList.push_back(NewGO<prefab::CSpriteRender>(0));
 	m_menuList[0]->Init(L"sprite/title/start.dds", 1280.0f, 720.0f);
 	m_menuList.push_back(NewGO<prefab::CSpriteRender>(0));
 	m_menuList[1]->Init(L"sprite/title/manual.dds", 1280.0f, 720.0f);
@@ -47,7 +47,7 @@ bool Title::Start()
 	m_menuList[2]->Init(L"sprite/title/credit.dds", 1280.0f, 720.0f);
 	for (auto menu : m_menuList) {
 		menu->SetMulColor(m_transparent);
-	}	
+	}	*/
 	m_arrow = NewGO<prefab::CSpriteRender>(0);
 	m_arrow->Init(L"sprite/arrow.dds", 32.0f, 32.0f);
 	m_arrow->SetMulColor(m_transparent);
@@ -132,7 +132,7 @@ void Title::GameStart()
 	if (m_alphastart > 1.0f && m_isaddalphastart) {
 		m_isaddalphastart = false;
 	}
-	else if (m_alphastart < 0.0f && !m_isaddalphastart) {
+	else if (m_alphastart <= 0.2f && !m_isaddalphastart) {
 		m_isaddalphastart = true;
 	}
 	if (m_ispressstartbutton) {
@@ -186,17 +186,19 @@ void Title::GameStart()
 	}
 	
 	m_spriteRender->SetMulColor({ 1.0f,1.0f,1.0f,m_alphatitle });
-	m_pressstart->SetMulColor({ 1.0f,1.0f,1.0f,m_alphastart });
+	//m_pressstart->SetMulColor({ 1.0f,1.0f,1.0f,m_alphastart });
 }
 
 void Title::SelectMenu()
 {
 	if (m_ispressAbutton) {
-		if (m_alphamenu > 0.0001f) {
-			m_alphamenu -= GameTime().GetFrameDeltaTime();
+		if (m_alphamenu > 0.2f) {
+			m_alphamenu -= GameTime().GetFrameDeltaTime() / 2;
+			m_alphamenu2 -= GameTime().GetFrameDeltaTime();
 		}
-		if (m_alphamenu <= 0.0f) {
-			m_alphamenu = 0.0f;
+		else {
+			m_alphamenu = 0.2f;
+			m_alphamenu2;
 			if (m_select == enState_StageSelect) {
 				m_state = enState_TransStageSelect;
 				m_istransstageselect = true;
@@ -210,24 +212,27 @@ void Title::SelectMenu()
 		
 	}
 	else {
-		if (m_alphamenu < 1.0f) {
-			m_alphamenu += GameTime().GetFrameDeltaTime();
-			if (m_alphamenu >= 1.0f) {
-				m_alphamenu = 1.0f;
+		if (m_alphamenu < 0.5f) {
+			m_alphamenu += GameTime().GetFrameDeltaTime() / 2;
+			m_alphamenu2 += GameTime().GetFrameDeltaTime();
+			if (m_alphamenu >= 0.5f) {
+				m_alphamenu = 0.5f;
+				m_alphamenu2 = 1.0f;
+
 			}
 		}
 		else {
 			Choice();
 		}
 	}
-	for (int i = 0; i < m_menuList.size(); i++) {
+	/*for (int i = 0; i < m_menuList.size(); i++) {
 		if (i == m_select) {
 			m_menuList[i]->SetMulColor({ 1.0f,1.0f,1.0f,m_alphamenu });
 		}
 		else {
 			m_menuList[i]->SetMulColor({ 1.0f,1.0f,1.0f,m_alphamenu / 2.0f });
 		}
-	}
+	}*/
 }
 void Title::Choice()
 {
@@ -304,5 +309,35 @@ void Title::TransStageSelect()
 			m_isstop = true;
 		}
 		
+	}
+}
+
+void Title::PostRender(CRenderContext& renderContext)
+{
+	if (m_state == enState_GameStart) {
+		m_font.Begin(renderContext);
+		wchar_t aaa[20];
+		swprintf(aaa, L"PRESS ANYKEY");
+		m_font.Draw(aaa, { 0.0f,-280.0f }, { m_alphastart,m_alphastart,m_alphastart,1.0f }, 0.0f,1.3f);
+		m_font.End(renderContext);
+	}
+	else if (m_state == enState_SelectMenu) {
+		std::vector<const wchar_t*> List;
+		List.push_back(L"START");
+		List.push_back(L"MANUAL");
+		List.push_back(L"CREDIT");
+		m_font.Begin(renderContext);
+		CVector2 pos = { 300.0f,-50.0f };
+		const float PLUS = -90.0f;
+		for (int i = 0; i < enState_Last; i++) {
+			if (i + 1 == m_select) {
+				m_font.Draw(List[i], pos, { m_alphamenu2,m_alphamenu2,m_alphamenu2,1.0f }, 0.0f, 1.3f, { 0.0f,1.0f });
+			}
+			else {
+				m_font.Draw(List[i], pos, { m_alphamenu,m_alphamenu,m_alphamenu,1.0f }, 0.0f, 1.3f, { 0.0f,1.0f });
+			}
+			pos.y += PLUS;
+		}
+		m_font.End(renderContext);
 	}
 }
