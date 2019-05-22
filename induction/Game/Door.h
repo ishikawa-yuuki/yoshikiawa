@@ -14,6 +14,9 @@ public:
 	void SetScale(const CVector3& scale) {
 		m_scale = scale;
 	}
+	void SetRot(const CQuaternion& rot) {
+		m_rot = rot;
+	}
 	void SetNum(int number)
 	{
 		num = number;
@@ -24,6 +27,7 @@ private:
 	CPhysicsStaticObject m_StaticObject;
 	CVector3 m_position = CVector3::Zero;
 	CVector3 m_scale = CVector3::Zero;
+	CQuaternion m_rot = CQuaternion::Identity;
 	float m_timer = 0.0f;
 	enum DoorAnimationClip {
 		enAnimationClip_STOP,

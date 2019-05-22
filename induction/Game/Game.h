@@ -75,7 +75,7 @@ private:
 	BackGround* m_background;
 	GameCamera * m_gamecamera;
 	Exit* m_exit;
-	Door* m_door;
+	
 	/*prefab::CSkinModelRender* m_goal = nullptr;*/
 	//true‚È‚ç‰æ–Ê‚ğØ‚è‘Ö‚¦‚éB
 	bool m_isWaitFadeout = false;
@@ -104,6 +104,7 @@ private:
 	std::vector<Poison*>m_poisonList;
 	std::vector<Lightstand*>m_Lightstand1List;
 	std::vector<Stone*>m_StoneList;
+	std::vector<Door*>m_DoorList;
 	prefab::CSky* m_sky = nullptr;
 	GameData* m_gamedata = nullptr;
 	CFont m_font;

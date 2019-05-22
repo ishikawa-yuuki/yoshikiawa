@@ -540,7 +540,7 @@ void Human::isClear()
 		m_movespeed.z -= 6000.0f * GameTime().GetFrameDeltaTime();
 	}
 	else {
-		if (diff.LengthSq() < 70.0f*70.0f
+		if (diff.LengthSq() < 100.0f*100.0f
 			&& !m_Clear_one) {
 			m_skinModelRender->PlayAnimation(enAnimationClip_clear, 0.2f);
 			m_Clear_one = true;
