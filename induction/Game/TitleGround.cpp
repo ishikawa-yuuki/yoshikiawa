@@ -19,12 +19,12 @@ bool TitleGround::Start()
 	m_skinModelRender->Init(L"modelData/TitleGround/titleground.cmo");
 	m_skinModelRender->SetPosition(m_position);
 	m_skinModelRender->SetScale(m_scale*2.5f);
+	m_skinModelRender->SetShadowReceiverFlag(true);
 	m_skinModelRender2 = NewGO<prefab::CSkinModelRender>(0);
 	m_skinModelRender2->Init(L"modelData/TitleGround/titleground_doukutsu.cmo");
 	m_skinModelRender2->SetPosition(m_position*0.95);
 	m_skinModelRender2->SetScale(m_scale);
 	m_skinModelRender2->SetActiveFlag(false);
-	m_skinModelRender->SetShadowReceiverFlag(true);
 	m_title = FindGO<Title>("Title");
 	return true;
 }
@@ -36,10 +36,12 @@ void TitleGround::Update()
 		m_rotation.SetRotationDeg(CVector3::AxisX, m_degree);
 		m_skinModelRender->SetRotation(m_rotation);
 		if (m_title->isTransStageSelect()) {
+			//m_skinModelRender->SetShadowCasterFlag(true);
 			m_skinModelRender2->SetActiveFlag(true);
 			m_degree2 += m_adddegree * GameTime().GetFrameDeltaTime();
 			m_rotation2.SetRotationDeg(CVector3::AxisX, m_degree2);
 			m_skinModelRender2->SetRotation(m_rotation2);
+			m_skinModelRender2->SetEmissionColor({ 0.2f, 0.2f, 0.2f });
 		}
 	}
 	else {

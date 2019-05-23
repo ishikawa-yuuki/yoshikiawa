@@ -33,9 +33,7 @@ bool Player::Start()
 	m_effect->Play(L"effect/blackhole.efk");
 	/*m_effect->Play(L"effect/hikari.efk");
 	m_effect->SetScale({ 30.0f,30.0f,30.0f });*/
-	if (m_title == nullptr) {
-		m_position.y = 50.0f;
-	}
+
 	m_charaCon.Init(
 		20.0f,
 		20.0f,
@@ -53,6 +51,13 @@ bool Player::Start()
 	
 
 	m_titleground = FindGO<TitleGround>("TitleGround");
+	m_skin->SetShadowCasterFlag(true);
+	if (m_title == nullptr) {
+		m_position.y = 50.0f;
+	}
+	else {
+		m_ptLight->SetColor({ 10.0f, 10.0f, 10.0f });
+	}
 	return true;
 }
 
@@ -60,19 +65,21 @@ void Player::Update()
 {
 	if (m_title != nullptr) {
 		if (m_title->isStop()) {
+			m_degree -= m_titleground->GetCutSpeed() * m_human->m_speed * GameTime().GetFrameDeltaTime();
 			CQuaternion rot;
-			rot.SetRotationDeg(CVector3::AxisX, m_titleground->GetCutSpeed() * m_human->m_speed);
+			rot.SetRotationDeg(CVector3::AxisX, -m_titleground->GetCutSpeed() * m_human->m_speed * GameTime().GetFrameDeltaTime());
 			rot.Multiply(m_position);
 		}
 		else {
 		/*	m_position = m_title->GetCameraTarget();
 			m_position.z -= 70.0f;
 			m_position.y += 150.0f;*/
-			m_skin->SetScale(CVector3::One * 0.05f);
+			m_skin->SetScale(CVector3::One * 0.15f);
 		}
-		CVector3 pos = m_title->GetPlayerPosition();
-		m_effect->SetPosition(pos);
-		m_skin->SetPosition(pos);
+		//CVector3 pos = m_title->GetPlayerPosition();
+		m_effect->SetPosition(m_position);
+		m_skin->SetPosition(m_position);
+		m_ptLight->SetPosition(m_position);
 		return;
 	}
 	//プレイヤーの光の色を変えてHumanに簡単な指示を出せるような
