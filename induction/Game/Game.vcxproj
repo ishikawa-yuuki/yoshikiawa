@@ -1800,6 +1800,7 @@
     <ClCompile Include="SSPoint.cpp" />
     <ClCompile Include="Stage_Select.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Preview_Low|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Middle|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="StarDust.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -2018,6 +2019,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Preview_Middle|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Middle|x64'">true</ExcludedFromBuild>
     </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\StageMap\Stage5.fbx" />
     <MeshContentTask Include="Assets\modelData\StageMap\stage_test.fbx">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Middle|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>

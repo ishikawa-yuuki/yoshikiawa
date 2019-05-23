@@ -52,11 +52,11 @@ bool BackGround::Start()
 		break;
 	//テスト
 	case  GameData::enState_Stage5:
-		//m_skinModelRender->Init(L"modelData/StageMap/Stage7.cmo");//7ステージ
-		////CVector3 scale = { 20.0f,20.0f,20.0f };
-		////m_skinModelRender->SetScale(scale);//思ったより小さかったので20倍
-		//m_physicsStaticObject.CreateMesh(m_position, CQuaternion::Identity, CVector3::One, m_skinModelRender);
-		////m_skinModelRender->SetPosition(m_position);
+		m_skinModelRender->Init(L"modelData/StageMap/Stage5.cmo");//7ステージ
+		//CVector3 scale = { 20.0f,20.0f,20.0f };
+		//m_skinModelRender->SetScale(scale);//思ったより小さかったので20倍
+		m_physicsStaticObject.CreateMesh(m_position, CQuaternion::Identity, CVector3::One, m_skinModelRender);
+		//m_skinModelRender->SetPosition(m_position);
 		break;
 	
 	}
