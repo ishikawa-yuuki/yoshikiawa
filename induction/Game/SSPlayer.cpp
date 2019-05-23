@@ -55,12 +55,16 @@ void SSPlayer::Update()
 
 void SSPlayer::Move()
 {
-	if (Pad(0).IsTrigger(enButtonRight)) {
+	//ƒXƒeƒBƒbƒN‚Ì“ü—Í—Ê‚ðŽó‚¯Žæ‚é
+	float L_Stick_X = Pad(0).GetLStickXF();
+	if (Pad(0).IsTrigger(enButtonRight)
+		||L_Stick_X > 0.5f) {
 		if (m_stage > m_sspoint->GetStageNumber()) {
 			m_sspoint = m_SS->GetStagePoint(GameData::StageNumber(m_stage));
 		}
 	}
-	else if (Pad(0).IsTrigger(enButtonLeft)) {
+	else if (Pad(0).IsTrigger(enButtonLeft)
+		||L_Stick_X < -0.5f) {
 		if (m_stage < m_sspoint->GetStageNumber())
 			m_sspoint = m_SS->GetStagePoint(GameData::StageNumber(m_stage));
 	}
@@ -77,8 +81,10 @@ void SSPlayer::Move()
 
 void SSPlayer::Stop()
 {
+	float L_Stick_X = Pad(0).GetLStickXF();
 	if (m_sshuman->GetisStop() && m_stage == m_sshuman->GetStageNumber()) {
-		if (Pad(0).IsTrigger(enButtonRight)) {
+		if (Pad(0).IsTrigger(enButtonRight)
+			|| L_Stick_X > 0.5f) {
 			if (m_stage == GameData::enState_StageLast) {
 				return;
 			}
@@ -87,7 +93,8 @@ void SSPlayer::Stop()
 				m_state = enState_Move;
 			/*}*/
 		}
-		else if (Pad(0).IsTrigger(enButtonLeft)) {
+		else if (Pad(0).IsTrigger(enButtonLeft)
+			|| L_Stick_X < -0.5f) {
 			if (m_stage == GameData::enState_StageFirst) {
 				return;
 			}
@@ -149,7 +156,7 @@ void SSPlayer::PostRender(CRenderContext& renderContext) //‰½‚©‚ð’²‚×‚é‚½‚ß‚Ìƒ|ƒ
 		const float Scale2 = 1.0;
 		m_font.Begin(renderContext);
 		wchar_t aaa[20];
-		swprintf(aaa, L"ƒ`ƒFƒbƒNƒ|ƒCƒ“ƒg‚©‚ç‚Í‚¶‚ß‚Ü‚·‚©");
+		swprintf(aaa, L"ƒ`ƒFƒbƒNƒ|ƒCƒ“ƒg‚©‚ç‚Í‚¶‚ß‚Ü‚·‚©?");
 		m_font.Draw(aaa, { 0.0f,200.0f }, CVector4::White, 0.0f, Scale1);
 		if (m_states == enState_Yes) {
 			wchar_t aaa[20];

@@ -115,6 +115,11 @@ private:
 	};
 	//アニメーションクリップ詰め合わせ
 	CAnimationClip m_animClip[enAnimationClip_num];
+	enum HumanAnimationClip2 {
+		enAnimationClip_run2,
+		enAnimationClip_num2
+	};
+	CAnimationClip m_animClip2[enAnimationClip_num2];
 	//調べるためのフォント、何かに使うかも
 	CFont m_font;
 	//初動が終わったかを返す。
