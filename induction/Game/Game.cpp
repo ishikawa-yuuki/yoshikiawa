@@ -77,7 +77,9 @@ Game::~Game()
 		for (auto& m_stone : m_StoneList) {
 			DeleteGO(m_stone);
 		}
-		DeleteGO(m_door);
+		for (auto& door : m_DoorList) {
+			DeleteGO(door);
+		}
 		break;
 	case GameData::enState_Stage3:
 		for (auto& m_poison : m_poisonList) {
@@ -103,14 +105,15 @@ Game::~Game()
 		for (auto& m_lever : m_leverList) {
 			DeleteGO(m_lever);
 		}
-		/*for (auto& m_Lightstand : m_Lightstand1List) {
+		for (auto& m_Lightstand : m_Lightstand1List) {
 			DeleteGO(m_Lightstand);
-		}*/
-		
+		}
 		for (auto& m_hill : m_hillList) {
 			DeleteGO(m_hill);
 		}
-		DeleteGO(m_door);
+		for (auto& door : m_DoorList) {
+			DeleteGO(door);
+		}
 		break;
 	}
 	//QueryGOs<prefab::CEffect>(m_gamedata->GetEffectName(), [&](prefab::CEffect* effect) {
@@ -151,6 +154,9 @@ bool Game::Start()
 		break;
 	case GameData::enState_Stage3:
 		Stage3();
+		break;
+	case GameData::enState_Stage4:
+		Stage4();
 		break;
 	}
 
@@ -470,10 +476,11 @@ void Game::Stage2()
 		}
 		//ドア
 		else if (objdata.EqualObjectName(L"Door")) {
-			m_door = NewGO<Door>(0, "Door");
-			m_door->SetPosition(objdata.position);
-			m_door->SetScale(objdata.scale);
-			m_door->SetNum(0);
+			Door*door = NewGO<Door>(0, "Door");
+			door->SetPosition(objdata.position);
+			door->SetScale(objdata.scale);
+			door->SetNum(0);
+			m_DoorList.push_back(door);
 			return true;
 		}
 		//offランタン
@@ -620,10 +627,12 @@ void Game::Stage4()
 		}
 		//ドア
 		else if (objdata.EqualObjectName(L"Door")) {
-			m_door = NewGO<Door>(0, "Door");
-			m_door->SetPosition(objdata.position);
-			m_door->SetScale(objdata.scale);
-			m_door->SetNum(1);
+			Door* door = NewGO<Door>(0, "Door");
+			door->SetPosition(objdata.position);
+			door->SetScale(objdata.scale);
+			door->SetRot(objdata.rotation);
+			door->SetNum(1);
+			m_DoorList.push_back(door);
 			return true;
 		}
 		//レバー
@@ -654,6 +663,24 @@ void Game::Stage4()
 
 			}
 			m_poisonList.push_back(m_poison);
+			return true;
+		}
+		//松明
+		else if (objdata.ForwardMatchName(L"Lightstand")) {
+			int num = _wtoi(&objdata.name[10]);
+			Lightstand* m_Lightstand = NewGO<Lightstand>(0, "Lightstand");
+			m_Lightstand->SetNum(num);
+			m_Lightstand->SetPosition(objdata.position);
+			m_Lightstand->SetRotation(objdata.rotation);
+			m_Lightstand->SetScale(objdata.scale);
+			m_Lightstand1List.push_back(m_Lightstand);
+			return true;
+		}
+		//チェックポイント
+		else if (objdata.EqualObjectName(m_checkpointname)) {
+			m_checkpoint = NewGO<CheckPoint>(0, "CheckPoint");
+			m_checkpoint->SetPosition(objdata.position);
+			m_checkpoint->SetPass(m_gamedata->GetisStageCheck(m_gamedata->GetStageNumber()));
 			return true;
 		}
 		return false;

@@ -22,9 +22,10 @@ bool Door::Start()
 	m_skin->Init(L"modelData/Door/Door.cmo", m_animClip, enAnimationClip_num);
 	m_skin->SetPosition(m_position);
 	m_skin->SetScale(m_scale); 
+	m_skin->SetRotation(m_rot);
 	m_StaticObject.CreateBox(
 		m_position,
-		CQuaternion::Identity,
+		m_rot,
 		{ 800.0f, 1000.0f, 80.0f }
 	); 
 	return true;
