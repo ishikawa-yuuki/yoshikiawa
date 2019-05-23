@@ -40,6 +40,7 @@ bool Stage_Select::Start()
 			m_skin = NewGO<prefab::CSkinModelRender>(0);
 			m_skin->Init(L"modelData/StageSelect/stageselect_ground.cmo");
 			m_skin->SetPosition(objdata.position);//
+			m_physicsStaticObject.CreateMesh(CVector3::Zero, CQuaternion::Identity, CVector3::One, m_skin);
 			return true;
 		}
 		//Human‚ÌÀ•W‚ğæ“¾
