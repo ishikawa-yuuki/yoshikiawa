@@ -115,6 +115,29 @@ Game::~Game()
 			DeleteGO(door);
 		}
 		break;
+	case GameData::enState_Stage5:
+		for (auto& m_poison : m_poisonList) {
+			DeleteGO(m_poison);
+		}
+		for (auto& m_hill : m_hillList) {
+			DeleteGO(m_hill);
+		}
+		for (auto& m_lightobject : m_lightobjectList) {
+			DeleteGO(m_lightobject);
+		}
+		/*for (auto& m_poison : m_poisonList) {
+			DeleteGO(m_poison);
+		}
+		for (auto& m_lever : m_leverList) {
+			DeleteGO(m_lever);
+		}
+		for (auto& moveBed : m_moveBedList) {
+			DeleteGO(moveBed);
+		}
+		for (auto& moveBed_zengo_long : m_moveBed_zengo2List) {
+			DeleteGO(moveBed_zengo_long);
+		}*/
+		break;
 	}
 	//QueryGOs<prefab::CEffect>(m_gamedata->GetEffectName(), [&](prefab::CEffect* effect) {
 	//	DeleteGO(effect);
@@ -157,6 +180,9 @@ bool Game::Start()
 		break;
 	case GameData::enState_Stage4:
 		Stage4();
+		break;
+	case GameData::enState_Stage5:
+		Stage5();
 		break;
 	}
 
@@ -685,6 +711,64 @@ void Game::Stage4()
 		}
 		return false;
 	});
+}
+void Game::Stage5()
+{
+	m_level.Init(L"level/level_Stage05.tkl", [&](LevelObjectData & objdata) {
+			if (objdata.EqualObjectName(L"Stage5")) {
+				m_background = NewGO<BackGround>(0, "BackGround");
+				m_background->SetPosition(objdata.position);
+				return true;
+			}
+			//オブジェクトねーーむ確認
+			else if (objdata.EqualObjectName(L"Goal")) {
+				m_exit = NewGO<Exit>(0, "Exit");
+				m_exit->SetPosition(objdata.position);
+				m_exit->SetQrot(objdata.rotation);
+				m_exit->SetScale(objdata.scale);
+				return true;
+			}
+			
+			//ガス
+			else if (objdata.ForwardMatchName(L"huzitubo")) {
+				int num = _wtoi(&objdata.name[8]);
+				Poison* m_poison = NewGO<Poison>(n, "Poison");
+				m_poison->SetPosition(objdata.position);
+					m_poison->SetPoisonNumber(num);
+					m_poison->SetPoisonMoveNumber(num);
+				m_poisonList.push_back(m_poison);
+				return true;
+			}
+			//ヒル
+			else if (objdata.EqualObjectName(L"Hill")) {
+				Hill* m_hill = NewGO<Hill>(0, "Hill");
+				m_hill->SetPosition(objdata.position);
+				m_hill->SetRotation(objdata.rotation);
+				m_hill->SetScale(objdata.scale);
+				m_hillList.push_back(m_hill);
+				return true;
+			}
+			//大きいランタン
+			else if (objdata.EqualObjectName(L"Big_lanthanum")) {
+				Light_Object* m_biglightObject = NewGO<Light_Object>(0, "Big_LightObject");
+				m_biglightObject->SetPosition(objdata.position);
+				m_biglightObject->SetScale(objdata.scale);
+				m_biglightObject->SetRotation(objdata.rotation);
+				m_biglightObject->SetLight();
+				m_biglightObject->Biglight();
+				m_lightobjectList.push_back(m_biglightObject);
+				return true;
+			}
+			//チェックポイント
+			else if (objdata.EqualObjectName(m_checkpointname)) {
+				m_checkpoint = NewGO<CheckPoint>(0, "CheckPoint");
+				m_checkpoint->SetPosition(objdata.position);
+				m_checkpoint->SetPass(m_gamedata->GetisStageCheck(m_gamedata->GetStageNumber()));
+				return true;
+			}
+			return false;
+	});
+	
 }
 void Game::PostRender(CRenderContext& renderContext) //何かを調べるためのポストレンダラ、今は移動スピード。
 {
