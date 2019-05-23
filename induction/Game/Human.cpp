@@ -356,7 +356,7 @@ void Human::Light_Move()
 	}
 	if (m_enemytimer < 0) {
 		mistflag = true;
-		m_enemytimer = Random().GetRandInt() % 1000 + 500;
+		m_enemytimer = Random().GetRandInt() % 1500 + 600;
 	}
 	//動く床と自分のスピードを足す。
 	CVector3 pos = m_movespeed + m_Bedspeed;
