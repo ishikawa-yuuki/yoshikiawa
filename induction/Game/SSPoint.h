@@ -1,5 +1,6 @@
 #pragma once
 #include "GameData.h"
+#include "tkEngine/light/tkPointLight.h"
 //ステージのposition
 class SSPoint : public IGameObject
 {
