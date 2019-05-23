@@ -1,6 +1,7 @@
 #pragma once
 #include "SSPlayer.h"
 #include "GameData.h"
+#include "tkEngine/character/tkCharacterController.h"
 class SSPlayer;
 class Stage_Select;
 class SSpoint;
@@ -69,6 +70,7 @@ private:
 	};
 	//アニメーションクリップ詰め合わせ
 	CAnimationClip m_animClip[enAnimationClip_num];
+	CCharacterController m_charaCon;
 	//CFont m_font;
 };
 

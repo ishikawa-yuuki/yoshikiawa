@@ -14,6 +14,12 @@ SSHuman::~SSHuman()
 }
 bool SSHuman::Start()
 {
+	m_charaCon.Init(
+		20.0f,
+		30.0f,
+		m_position
+	);
+
 	m_animClip[enAnimationClip_idle].Load(L"animData/Human/idle.tka");
 	//m_animClip[enAnimationClip_walk].Load(L"animData/unityChan/walk.tka");
 	m_animClip[enAnimationClip_run].Load(L"animData/Human/run.tka");
@@ -82,9 +88,10 @@ void SSHuman::Move()
 	CVector3 diff = m_movespeed;
 	m_movespeed.Normalize();
 	m_movespeed *= m_ssplayer->m_speed;
-	m_position += m_movespeed * GameTime().GetFrameDeltaTime();
+	m_position = m_charaCon.Execute(m_movespeed, GameTime().GetFrameDeltaTime());
 	if (diff.LengthSq() <= m_ssplayer->m_distance) {
 		m_position = m_sspoint->GetHumanPosition();
+		m_charaCon.SetPosition(m_position);
 		m_state = SSPlayer::enState_Stop;
 	}
 }
@@ -114,7 +121,7 @@ void SSHuman::TransStage()
 {
 	m_movespeed = CVector3::Zero;
 	m_movespeed.z = -m_ssplayer->m_transspeed;
-	m_position += m_movespeed * GameTime().GetFrameDeltaTime();
+	m_position += m_position = m_charaCon.Execute(m_movespeed, GameTime().GetFrameDeltaTime());
 }
 
 /*void SSHuman::PostRender(CRenderContext& renderContext) //何かを調べるためのポストレンダラ、今は移動スピード。
