@@ -1,5 +1,6 @@
 #include <unordered_map>
 #include "GameData.h"
+#include "tkEngine/Physics/tkPhysicsStaticObject.h"
 #pragma once
 class Fade;
 class SSPlayer;
@@ -40,6 +41,7 @@ private:
 	std::unordered_map<int, CVector3> m_humanpositionList;    //Humanの座標のリスト
 	std::unordered_map<int, SSPoint*> m_sspointList;		  //ステージの明かりのリスト
 	CVector3 m_pos;
+	CPhysicsStaticObject m_physicsStaticObject;
 	
 };
 
