@@ -88,7 +88,7 @@ bool Title::Start()
 	//全方位シャドウを有効にする
 	shadow::OminiDirectionShadowMap().Enable();
 	//シーンの明るさを落とす。
-	postEffect::Tonemap().SetLuminance(0.2f);
+	postEffect::Tonemap().SetLuminance(0.1f);
 	//m_ptLight = NewGO<prefab::CPointLight>(0);
 	//CVector3 pointlightpos = m_human->GetPosition();
 	//pointlightpos.y += 100.0f;
@@ -159,7 +159,7 @@ void Title::GameStart()
 		}
 		//α値が0まで下がる(タイトルが表示されてない)場合、
 		//メニュー画面に移行
-		if (m_alphatitle < 0.0f) {
+		else{
 			m_alphatitle = 0.0f;
 			m_alphastart = 0.0f;
 			m_state = enState_SelectMenu;
