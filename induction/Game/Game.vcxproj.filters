@@ -138,9 +138,6 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <MeshContentTask Include="Assets\modelData\unityChan.fbx">
-      <Filter>Assets\modelData</Filter>
-    </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\StageSelect\SS.fbx">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
@@ -165,9 +162,6 @@
     <MeshContentTask Include="Assets\modelData\StageMap\stage_test.fbx">
       <Filter>Assets\modelData\StageMap</Filter>
     </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\BlackUnityChan.fbx">
-      <Filter>Assets\modelData</Filter>
-    </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Poison\huzitubo.fbx">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
@@ -181,15 +175,6 @@
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\StageObject\Lightstand02.fbx">
-      <Filter>Assets\modelData</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\StageMap\Stage1.fbx">
-      <Filter>Assets\modelData\StageMap</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\StageMap\Stage2.fbx">
-      <Filter>Assets\modelData\StageMap</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\Hill\Hill.fbx">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Door\Door.fbx">
@@ -212,21 +197,6 @@
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\TitleGround\humant.FBX">
       <Filter>Assets\modelData</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\StageSelect\point.FBX">
-      <Filter>Assets\modelData\stageselect</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\StageSelect\stageselect_ground.FBX">
-      <Filter>Assets\modelData\stageselect</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\StageMap\Stage3.fbx">
-      <Filter>Assets\modelData\StageMap</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\Human\Human.fbx">
-      <Filter>Assets\modelData</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\StageMap\Stage4.fbx">
-      <Filter>Assets\modelData\StageMap</Filter>
     </MeshContentTask>
   </ItemGroup>
   <ItemGroup>
