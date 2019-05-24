@@ -48,6 +48,7 @@ bool Title::Start()
 	for (auto menu : m_menuList) {
 		menu->SetMulColor(m_transparent);
 	}	*/
+	
 	m_arrow = NewGO<prefab::CSpriteRender>(0);
 	m_arrow->Init(L"sprite/arrow.dds", 32.0f, 32.0f);
 	m_arrow->SetMulColor(m_transparent);
@@ -84,7 +85,7 @@ bool Title::Start()
 	m_gamecamera = NewGO<GameCamera>(0, "GameCamera");
 	shadow::DirectionShadowMap().Disable();
 	//環境光をおふっふ
-	LightManager().SetAmbientLight({ 0.05f, 0.05f, 0.05f });
+	LightManager().SetAmbientLight({ 0.01f, 0.01f, 0.01f });
 	//全方位シャドウを有効にする
 	shadow::OminiDirectionShadowMap().Enable();
 	//シーンの明るさを落とす。
@@ -104,17 +105,18 @@ bool Title::Start()
 	//m_sky->SetSkyCubeMapFilePath(L"sprite/sky.dds");
 	m_sky->SetScale({ 5000.0f,5000.0f,5000.0f });
 	m_sky->SetEmissionColor({ 0.05f, 0.05f, 0.05f });
-	
 	shadow::OminiDirectionShadowMap().SetLightPosition(m_player->GetPosition());
 	//全方位シャドウの影響範囲を設定する。
-	shadow::OminiDirectionShadowMap().SetDistanceAffectedByLight(100000);
+	shadow::OminiDirectionShadowMap().SetDistanceAffectedByLight(1000);
 	return true;
 }
 
 
 void Title::Update()
 {
-	shadow::OminiDirectionShadowMap().SetLightPosition(m_player->GetPosition());
+	CVector3 pos = m_player->GetPosition();
+	//pos.y += 100;
+	shadow::OminiDirectionShadowMap().SetLightPosition(pos);
 	switch (m_state) {
 	case enState_GameStart:
 		GameStart();

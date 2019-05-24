@@ -56,6 +56,7 @@ bool Player::Start()
 		m_position.y = 50.0f;
 	}
 	else {
+		m_skin->SetEmissionColor({ 2.3f, 2.3f, 0.0f });
 		m_ptLight->SetColor({ 10.0f, 10.0f, 10.0f });
 	}
 	return true;
@@ -74,7 +75,7 @@ void Player::Update()
 		/*	m_position = m_title->GetCameraTarget();
 			m_position.z -= 70.0f;
 			m_position.y += 150.0f;*/
-			m_skin->SetScale(CVector3::One * 0.15f);
+			//m_skin->SetScale(CVector3::One * 0);
 		}
 		//CVector3 pos = m_title->GetPlayerPosition();
 		m_effect->SetPosition(m_position);
