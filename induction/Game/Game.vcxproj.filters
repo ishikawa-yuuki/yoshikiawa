@@ -198,6 +198,30 @@
     <MeshContentTask Include="Assets\modelData\TitleGround\humant.FBX">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
+<<<<<<< HEAD
+=======
+    <MeshContentTask Include="Assets\modelData\StageSelect\point.FBX">
+      <Filter>Assets\modelData\stageselect</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\StageSelect\stageselect_ground.FBX">
+      <Filter>Assets\modelData\stageselect</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\StageMap\Stage3.fbx">
+      <Filter>Assets\modelData\StageMap</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Human\Human.fbx">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\StageMap\Stage4.fbx">
+      <Filter>Assets\modelData\StageMap</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\StageMap\Stage5.fbx">
+      <Filter>Assets\modelData\StageMap</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\StageMap\Stage7.fbx">
+      <Filter>Assets\modelData\StageMap</Filter>
+    </MeshContentTask>
+>>>>>>> 1ebfe5b2d6ae02bf5ef5c8eb2281019946999998
   </ItemGroup>
   <ItemGroup>
     <ImageContentTask Include="Assets\sprite\dummy.png">

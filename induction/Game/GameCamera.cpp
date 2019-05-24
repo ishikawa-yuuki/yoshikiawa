@@ -25,7 +25,7 @@ bool GameCamera::Start()
 	//カメラを設定。
 	//ニアクリップとファークリップ設定(仮)
 	MainCamera().SetNear(10.0f);
-	MainCamera().SetFar(10000.0f);
+	MainCamera().SetFar(20000.0f);
 	MainCamera().SetUpdateProjMatrixFunc(CCamera::enUpdateProjMatrixFunc_Perspective);
 	//ばねカメラの初期化
 	m_springCamera.Init(

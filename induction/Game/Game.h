@@ -34,6 +34,8 @@ public:
 	void Stage2();
 	void Stage3();
 	void Stage4();
+	void Stage5();
+	void Stage6();
 	void PostRender(CRenderContext& renderContext); //何かを調べるためのポストレンダラ
 	//ここから下の関数はごり押しです・・・なんかいい書き方がある気がする・・・
 

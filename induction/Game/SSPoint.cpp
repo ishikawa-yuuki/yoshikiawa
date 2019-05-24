@@ -14,7 +14,7 @@ SSPoint::~SSPoint()
 bool SSPoint::Start()
 {
 	m_skin = NewGO<prefab::CSkinModelRender>(0);
-	m_skin->Init(L"modelData/StageSelect/StagePoint.cmo");//仮ステージ
+	m_skin->Init(L"modelData/LightObject/lanthanum.cmo");//仮ステージ
 	GameData* gamedata = &GameData::GetInstance();
 	if (gamedata->GetisStageClear(m_stagenumber)) {
 		m_state = enState_Clear;
