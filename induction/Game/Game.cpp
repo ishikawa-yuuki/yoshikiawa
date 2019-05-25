@@ -125,6 +125,9 @@ Game::~Game()
 		for (auto& m_lightobject : m_lightobjectList) {
 			DeleteGO(m_lightobject);
 		}
+		for (auto& m_Lightstand : m_Lightstand1List) {
+			DeleteGO(m_Lightstand);
+		}
 		break;
 	case GameData::enState_Stage6:
 		for (auto& m_poison : m_poisonList) {
@@ -753,6 +756,16 @@ void Game::Stage5()
 				m_hillList.push_back(m_hill);
 				return true;
 			}
+			//onランタン
+			else if (objdata.EqualObjectName(L"lanthanum2")) {
+				Light_Object* m_onlightObject = NewGO<Light_Object>(0, "OnLightObject");
+				m_onlightObject->SetPosition(objdata.position);
+				m_onlightObject->SetScale(objdata.scale);
+				m_onlightObject->SetRotation(objdata.rotation);
+				m_onlightObject->SetLight();
+				m_lightobjectList.push_back(m_onlightObject);
+				return true;
+			}
 			//大きいランタン
 			else if (objdata.EqualObjectName(L"Big_lanthanum")) {
 				Light_Object* m_biglightObject = NewGO<Light_Object>(0, "Big_LightObject");
@@ -762,6 +775,17 @@ void Game::Stage5()
 				m_biglightObject->SetLight();
 				m_biglightObject->Biglight();
 				m_lightobjectList.push_back(m_biglightObject);
+				return true;
+			}
+			//松明
+			else if (objdata.ForwardMatchName(L"Lightstand")) {
+				int num = _wtoi(&objdata.name[10]);
+				Lightstand* m_Lightstand = NewGO<Lightstand>(0, "Lightstand");
+				m_Lightstand->SetNum(num);
+				m_Lightstand->SetPosition(objdata.position);
+				m_Lightstand->SetRotation(objdata.rotation);
+				m_Lightstand->SetScale(objdata.scale);
+				m_Lightstand1List.push_back(m_Lightstand);
 				return true;
 			}
 			//チェックポイント
