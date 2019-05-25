@@ -38,6 +38,7 @@ bool SSHuman::Start()
 	m_skin = NewGO<prefab::CSkinModelRender>(0);
 	m_skin->Init(L"modelData/Human/Human.cmo", m_animClip, enAnimationClip_num, enFbxUpAxisZ);
 	m_skin->SetPosition(m_position);
+	m_skin->SetShadowCasterFlag(true);
 	m_stageselect = FindGO<Stage_Select>("Stage_Select");
 	return true;
 }

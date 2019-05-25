@@ -27,6 +27,7 @@ bool SSPoint::Start()
 			m_state = enState_noRelease;
 		}
 	}
+	m_skin->SetShadowCasterFlag(true);
 	return true;
 }
 void SSPoint::Update()

@@ -92,5 +92,6 @@ private:
 	prefab::CSoundSource* m_sound = nullptr;
 	TitleGround* m_titleground = nullptr;
 	CVector3 m_protposition = CVector3::Zero;
+	float m_degree = 0.0f;
 };
 

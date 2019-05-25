@@ -16,7 +16,7 @@ Title::Title()
 
 Title::~Title()
 {
-	DeleteGO(m_spriteRender);
+	//DeleteGO(m_spriteRender);
 	DeleteGO(m_arrow);
 	DeleteGO(m_bgm);
 	DeleteGO(m_player);
@@ -33,9 +33,9 @@ Title::~Title()
 
 bool Title::Start()
 {
-	m_spriteRender = NewGO<prefab::CSpriteRender>(0);
-	m_spriteRender->Init(L"sprite/title/title.dds",1280.0f,720.0f);
-	m_spriteRender->SetMulColor(m_transparent);
+	//m_spriteRender = NewGO<prefab::CSpriteRender>(0);
+	//m_spriteRender->Init(L"sprite/title/title.dds",1280.0f,720.0f);
+	//m_spriteRender->SetMulColor(m_transparent);
 	//m_pressstart = NewGO<prefab::CSpriteRender>(0);
 	//m_pressstart->Init(L"sprite/title/pressstart.dds", 1280.0f, 720.0f);
 	//m_pressstart->SetMulColor(m_transparent);
@@ -48,6 +48,7 @@ bool Title::Start()
 	for (auto menu : m_menuList) {
 		menu->SetMulColor(m_transparent);
 	}	*/
+	
 	m_arrow = NewGO<prefab::CSpriteRender>(0);
 	m_arrow->Init(L"sprite/arrow.dds", 32.0f, 32.0f);
 	m_arrow->SetMulColor(m_transparent);
@@ -84,7 +85,7 @@ bool Title::Start()
 	m_gamecamera = NewGO<GameCamera>(0, "GameCamera");
 	shadow::DirectionShadowMap().Disable();
 	//環境光をおふっふ
-	LightManager().SetAmbientLight({ 0.05f, 0.05f, 0.05f });
+	LightManager().SetAmbientLight({ 0.01f, 0.01f, 0.01f });
 	//全方位シャドウを有効にする
 	shadow::OminiDirectionShadowMap().Enable();
 	//シーンの明るさを落とす。
@@ -104,12 +105,18 @@ bool Title::Start()
 	//m_sky->SetSkyCubeMapFilePath(L"sprite/sky.dds");
 	m_sky->SetScale({ 5000.0f,5000.0f,5000.0f });
 	m_sky->SetEmissionColor({ 0.05f, 0.05f, 0.05f });
+	shadow::OminiDirectionShadowMap().SetLightPosition(m_player->GetPosition());
+	//全方位シャドウの影響範囲を設定する。
+	shadow::OminiDirectionShadowMap().SetDistanceAffectedByLight(1000);
 	return true;
 }
 
 
 void Title::Update()
 {
+	CVector3 pos = m_player->GetPosition();
+	//pos.y += 100;
+	shadow::OminiDirectionShadowMap().SetLightPosition(pos);
 	switch (m_state) {
 	case enState_GameStart:
 		GameStart();
@@ -185,7 +192,7 @@ void Title::GameStart()
 
 	}
 	
-	m_spriteRender->SetMulColor({ 1.0f,1.0f,1.0f,m_alphatitle });
+	//m_spriteRender->SetMulColor({ 1.0f,1.0f,1.0f,m_alphatitle });
 	//m_pressstart->SetMulColor({ 1.0f,1.0f,1.0f,m_alphastart });
 }
 
@@ -316,6 +323,9 @@ void Title::PostRender(CRenderContext& renderContext)
 {
 	if (m_state == enState_GameStart) {
 		m_font.Begin(renderContext);
+		wchar_t aaa2[20];
+		swprintf(aaa2, L"INDUCTION");
+		m_font.Draw(aaa2, { -300.0f,320.0f }, CVector4::White, 0.0f, 2.5f);
 		wchar_t aaa[20];
 		swprintf(aaa, L"PRESS ANYKEY");
 		m_font.Draw(aaa, { 0.0f,-280.0f }, { m_alphastart,m_alphastart,m_alphastart,1.0f }, 0.0f,1.3f);

@@ -65,7 +65,7 @@ bool Lightstand::Start()
 	m_sound->SetVolume(m_volume);
 	m_sound->Play(true);
 	m_pointLight = NewGO<prefab::CPointLight>(0);
-	m_pointLight->SetColor({10.0,10.0,10.0});
+	m_pointLight->SetColor({1000.0,10.0,10.0});
 	CVector3 Attn;
 	Attn.x = 1000.0f;
 	Attn.y = 10.0f;
