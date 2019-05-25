@@ -138,9 +138,6 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <MeshContentTask Include="Assets\modelData\unityChan.fbx">
-      <Filter>Assets\modelData</Filter>
-    </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\StageSelect\SS.fbx">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
@@ -165,9 +162,6 @@
     <MeshContentTask Include="Assets\modelData\StageMap\stage_test.fbx">
       <Filter>Assets\modelData\StageMap</Filter>
     </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\BlackUnityChan.fbx">
-      <Filter>Assets\modelData</Filter>
-    </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Poison\huzitubo.fbx">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
@@ -181,15 +175,6 @@
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\StageObject\Lightstand02.fbx">
-      <Filter>Assets\modelData</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\StageMap\Stage1.fbx">
-      <Filter>Assets\modelData\StageMap</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\StageMap\Stage2.fbx">
-      <Filter>Assets\modelData\StageMap</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\Hill\Hill.fbx">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Door\Door.fbx">
@@ -213,6 +198,8 @@
     <MeshContentTask Include="Assets\modelData\TitleGround\humant.FBX">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
+<<<<<<< HEAD
+=======
     <MeshContentTask Include="Assets\modelData\StageSelect\point.FBX">
       <Filter>Assets\modelData\stageselect</Filter>
     </MeshContentTask>
@@ -234,6 +221,7 @@
     <MeshContentTask Include="Assets\modelData\StageMap\Stage7.fbx">
       <Filter>Assets\modelData\StageMap</Filter>
     </MeshContentTask>
+>>>>>>> 1ebfe5b2d6ae02bf5ef5c8eb2281019946999998
   </ItemGroup>
   <ItemGroup>
     <ImageContentTask Include="Assets\sprite\dummy.png">

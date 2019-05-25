@@ -41,6 +41,7 @@ bool Stage_Select::Start()
 			m_skin->Init(L"modelData/StageSelect/stageselect_ground.cmo");
 			m_skin->SetPosition(objdata.position);//
 			m_physicsStaticObject.CreateMesh(CVector3::Zero, CQuaternion::Identity, CVector3::One, m_skin);
+			m_skin->SetShadowReceiverFlag(true);
 			return true;
 		}
 		//Humanの座標を取得
@@ -90,11 +91,18 @@ bool Stage_Select::Start()
 	m_ssHuman->SetStageNumber(m_gamedata->GetStageNumber());
 	m_ssPlayer->SetPosition(m_playerpositionList[m_gamedata->GetStageNumber()]);
 	m_ssHuman->SetPosition(m_humanpositionList[m_gamedata->GetStageNumber()]);
+	//全方位シャドウ関係
+	shadow::DirectionShadowMap().Disable();
+	shadow::OminiDirectionShadowMap().Enable();
+	//全方位シャドウの影響範囲を設定する。
+	shadow::OminiDirectionShadowMap().SetDistanceAffectedByLight(1000);
+	shadow::OminiDirectionShadowMap().SetLightPosition(m_ssPlayer->GetPosition());
 	return true;
 }
 
 void Stage_Select::Update()
 {
+	shadow::OminiDirectionShadowMap().SetLightPosition(m_ssPlayer->GetPosition());
 	if (m_isWaitFadeout) {
 		if (!m_fade->IsFade()) {
 		    if(m_Tile) {

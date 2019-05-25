@@ -49,7 +49,7 @@ private:
 	};
 	State m_state = enState_GameStart;
 	const CVector4 m_transparent = CVector4(1.0f, 1.0f, 1.0f, 0.0f);		//画像を透明(表示させない時)にこれをカラー乗算させる
-	prefab::CSpriteRender* m_spriteRender = nullptr;
+	//prefab::CSpriteRender* m_spriteRender = nullptr;
 	prefab::CSpriteRender* m_arrow = nullptr;
 	prefab::CSoundSource* m_bgm = nullptr;
 	//prefab::CSpriteRender* m_pressstart = nullptr;
@@ -95,7 +95,7 @@ private:
 	//ステージセレクト画面に移行
 	CVector3 m_point = CVector3::Zero;
 	bool m_isstop = false;
-	float m_timer = 0.0f, m_time = 4.6f,m_time2 = 5.2;
+	float m_timer = 0.0f, m_time = 3.0f,m_time2 = 5.2;
 	prefab::CSky* m_sky = nullptr;
 	CVector3 m_cameratargetpos = CVector3::Zero;
 	CVector3 m_playerposition = CVector3::Zero;

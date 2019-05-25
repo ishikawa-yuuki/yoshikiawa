@@ -32,5 +32,8 @@ private:
 	const float m_cutdegree = -0.5f * 40.0f;
 	float m_degree = 0.0f, m_degree2 = 0.0f;
 	Title* m_title;
+	prefab::CPointLight* m_ptLight = nullptr;
+	const CVector3 m_pointLigDefaultAttn = { 10000.0f, 10.0f, 0.0f };
+	CVector3 m_lightposBase = { 15.288 , 2772.341 , 2458.6 };
 };
 
