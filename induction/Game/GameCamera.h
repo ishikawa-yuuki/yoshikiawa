@@ -1,5 +1,5 @@
 #pragma once
-
+#include "GameData.h"
 #include "tkEngine/camera/tkSpringCamera.h"
 class Player;
 class Human;
@@ -17,6 +17,11 @@ public:
 	void follow();
 	void Hutu();
 	void isBlackHole();
+	void SetCameraDegree(const GameData::CameraDegree& degree)
+	{
+		m_degreexz = degree.s_degreexz;
+		m_degreey = degree.s_degreey;
+	}
 private:
 	// ‰~‚Ì’†SÀ•W‚Å‚·B
 	CVector3 m_PlayerPos;

@@ -209,6 +209,7 @@ bool Game::Start()
 		CVector3 m_pos = m_checkpoint->GetPosition();
 		m_pos.x += 500.0f;
 		m_player->SetPosition(m_pos);
+		m_gamecamera->SetCameraDegree(m_gamedata->GetCheckPointCameraDegree());
 	}
  	return true;
 }
