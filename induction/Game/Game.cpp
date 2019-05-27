@@ -68,9 +68,9 @@ Game::~Game()
 		for (auto& m_lever : m_leverList) {
 			DeleteGO(m_lever);
 		}
-		for (auto& m_lightobject : m_lightobjectList) {
+		/*for (auto& m_lightobject : m_lightobjectList) {
 			DeleteGO(m_lightobject);
-		}
+		}*/
 		for (auto& m_Lightstand : m_Lightstand1List) {
 			DeleteGO(m_Lightstand);
 		}
@@ -91,6 +91,9 @@ Game::~Game()
 		for (auto& m_Lightstand : m_Lightstand1List) {
 			DeleteGO(m_Lightstand);
 		}
+		for (auto& m_lightobject : m_lightobjectList) {
+			DeleteGO(m_lightobject);
+		}
 		for (auto& m_stone : m_StoneList) {
 			DeleteGO(m_stone);
 		}
@@ -108,6 +111,9 @@ Game::~Game()
 		for (auto& m_Lightstand : m_Lightstand1List) {
 			DeleteGO(m_Lightstand);
 		}
+		for (auto& m_lightobject : m_lightobjectList) {
+			DeleteGO(m_lightobject);
+		}
 		for (auto& m_hill : m_hillList) {
 			DeleteGO(m_hill);
 		}
@@ -124,6 +130,9 @@ Game::~Game()
 		}
 		for (auto& m_lightobject : m_lightobjectList) {
 			DeleteGO(m_lightobject);
+		}
+		for (auto& m_Lightstand : m_Lightstand1List) {
+			DeleteGO(m_Lightstand);
 		}
 		break;
 	case GameData::enState_Stage6:
@@ -197,7 +206,9 @@ bool Game::Start()
 	shadow::OminiDirectionShadowMap().Enable();
 	if (m_gamedata->GetisStartCheckPoint() && m_checkpoint != nullptr) {
 		m_human->SetPosition(m_checkpoint->GetPosition());
-		m_player->SetPosition(m_checkpoint->GetPosition());
+		CVector3 m_pos = m_checkpoint->GetPosition();
+		m_pos.x += 500.0f;
+		m_player->SetPosition(m_pos);
 	}
  	return true;
 }
@@ -301,16 +312,16 @@ void Game::Stage1()
 			m_background = NewGO<BackGround>(0, "BackGround");
 			return true;
 		}
-		//offランタン
-		else if (objdata.ForwardMatchName(L"lanthanum1")) {
-			Light_Object* m_lightobject = NewGO<Light_Object>(0, "LightObject");
-			m_lightobject->SetPosition(objdata.position);//試験したいなら{0,0,0}
-			m_lightobject->SetScale(objdata.scale);
-			m_lightobject->SetRotation(objdata.rotation);
-			m_lightobjectList.push_back(m_lightobject);
+		////offランタン
+		//else if (objdata.ForwardMatchName(L"lanthanum1")) {
+		//	Light_Object* m_lightobject = NewGO<Light_Object>(0, "LightObject");
+		//	m_lightobject->SetPosition(objdata.position);//試験したいなら{0,0,0}
+		//	m_lightobject->SetScale(objdata.scale);
+		//	m_lightobject->SetRotation(objdata.rotation);
+		//	m_lightobjectList.push_back(m_lightobject);
 
-			return true;
-		}
+		//	return true;
+		//}
 		//onランタン
 		else if (objdata.EqualObjectName(L"lanthanum2")) {
 			Light_Object* m_onlightObject = NewGO<Light_Object>(0, "OnLightObject");
@@ -514,16 +525,16 @@ void Game::Stage2()
 			m_DoorList.push_back(door);
 			return true;
 		}
-		//offランタン
-		else if (objdata.ForwardMatchName(L"lanthanum1")) {
-			Light_Object* m_lightobject = NewGO<Light_Object>(0, "LightObject");
-			m_lightobject->SetPosition(objdata.position);//試験したいなら{0,0,0}
-			m_lightobject->SetScale(objdata.scale);
-			m_lightobject->SetRotation(objdata.rotation);
-			m_lightobjectList.push_back(m_lightobject);
+		////offランタン
+		//else if (objdata.ForwardMatchName(L"lanthanum1")) {
+		//	Light_Object* m_lightobject = NewGO<Light_Object>(0, "LightObject");
+		//	m_lightobject->SetPosition(objdata.position);//試験したいなら{0,0,0}
+		//	m_lightobject->SetScale(objdata.scale);
+		//	m_lightobject->SetRotation(objdata.rotation);
+		//	m_lightobjectList.push_back(m_lightobject);
 
-			return true;
-		}
+		//	return true;
+		//}
 
 		else if (objdata.EqualObjectName(m_checkpointname)) {
 			m_checkpoint = NewGO<CheckPoint>(0, "CheckPoint");
@@ -609,6 +620,16 @@ void Game::Stage3()
 			m_Lightstand->SetScale(objdata.scale);
 
 			m_Lightstand1List.push_back(m_Lightstand);
+			return true;
+		}
+		//onランタン
+		else if (objdata.EqualObjectName(L"lanthanum2")) {
+			Light_Object* m_onlightObject = NewGO<Light_Object>(0, "OnLightObject");
+			m_onlightObject->SetPosition(objdata.position);
+			m_onlightObject->SetScale(objdata.scale);
+			m_onlightObject->SetRotation(objdata.rotation);
+			m_onlightObject->SetLight();
+			m_lightobjectList.push_back(m_onlightObject);
 			return true;
 		}
 		//ヒル
@@ -707,6 +728,16 @@ void Game::Stage4()
 			m_Lightstand1List.push_back(m_Lightstand);
 			return true;
 		}
+		//onランタン
+		else if (objdata.EqualObjectName(L"lanthanum2")) {
+			Light_Object* m_onlightObject = NewGO<Light_Object>(0, "OnLightObject");
+			m_onlightObject->SetPosition(objdata.position);
+			m_onlightObject->SetScale(objdata.scale);
+			m_onlightObject->SetRotation(objdata.rotation);
+			m_onlightObject->SetLight();
+			m_lightobjectList.push_back(m_onlightObject);
+			return true;
+		}
 		//チェックポイント
 		else if (objdata.EqualObjectName(m_checkpointname)) {
 			m_checkpoint = NewGO<CheckPoint>(0, "CheckPoint");
@@ -753,6 +784,16 @@ void Game::Stage5()
 				m_hillList.push_back(m_hill);
 				return true;
 			}
+			//onランタン
+			else if (objdata.EqualObjectName(L"lanthanum2")) {
+				Light_Object* m_onlightObject = NewGO<Light_Object>(0, "OnLightObject");
+				m_onlightObject->SetPosition(objdata.position);
+				m_onlightObject->SetScale(objdata.scale);
+				m_onlightObject->SetRotation(objdata.rotation);
+				m_onlightObject->SetLight();
+				m_lightobjectList.push_back(m_onlightObject);
+				return true;
+			}
 			//大きいランタン
 			else if (objdata.EqualObjectName(L"Big_lanthanum")) {
 				Light_Object* m_biglightObject = NewGO<Light_Object>(0, "Big_LightObject");
@@ -762,6 +803,17 @@ void Game::Stage5()
 				m_biglightObject->SetLight();
 				m_biglightObject->Biglight();
 				m_lightobjectList.push_back(m_biglightObject);
+				return true;
+			}
+			//松明
+			else if (objdata.ForwardMatchName(L"Lightstand")) {
+				int num = _wtoi(&objdata.name[10]);
+				Lightstand* m_Lightstand = NewGO<Lightstand>(0, "Lightstand");
+				m_Lightstand->SetNum(num);
+				m_Lightstand->SetPosition(objdata.position);
+				m_Lightstand->SetRotation(objdata.rotation);
+				m_Lightstand->SetScale(objdata.scale);
+				m_Lightstand1List.push_back(m_Lightstand);
 				return true;
 			}
 			//チェックポイント
