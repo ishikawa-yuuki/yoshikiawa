@@ -68,9 +68,9 @@ Game::~Game()
 		for (auto& m_lever : m_leverList) {
 			DeleteGO(m_lever);
 		}
-		for (auto& m_lightobject : m_lightobjectList) {
+		/*for (auto& m_lightobject : m_lightobjectList) {
 			DeleteGO(m_lightobject);
-		}
+		}*/
 		for (auto& m_Lightstand : m_Lightstand1List) {
 			DeleteGO(m_Lightstand);
 		}
@@ -312,16 +312,16 @@ void Game::Stage1()
 			m_background = NewGO<BackGround>(0, "BackGround");
 			return true;
 		}
-		//offランタン
-		else if (objdata.ForwardMatchName(L"lanthanum1")) {
-			Light_Object* m_lightobject = NewGO<Light_Object>(0, "LightObject");
-			m_lightobject->SetPosition(objdata.position);//試験したいなら{0,0,0}
-			m_lightobject->SetScale(objdata.scale);
-			m_lightobject->SetRotation(objdata.rotation);
-			m_lightobjectList.push_back(m_lightobject);
+		////offランタン
+		//else if (objdata.ForwardMatchName(L"lanthanum1")) {
+		//	Light_Object* m_lightobject = NewGO<Light_Object>(0, "LightObject");
+		//	m_lightobject->SetPosition(objdata.position);//試験したいなら{0,0,0}
+		//	m_lightobject->SetScale(objdata.scale);
+		//	m_lightobject->SetRotation(objdata.rotation);
+		//	m_lightobjectList.push_back(m_lightobject);
 
-			return true;
-		}
+		//	return true;
+		//}
 		//onランタン
 		else if (objdata.EqualObjectName(L"lanthanum2")) {
 			Light_Object* m_onlightObject = NewGO<Light_Object>(0, "OnLightObject");
@@ -525,16 +525,16 @@ void Game::Stage2()
 			m_DoorList.push_back(door);
 			return true;
 		}
-		//offランタン
-		else if (objdata.ForwardMatchName(L"lanthanum1")) {
-			Light_Object* m_lightobject = NewGO<Light_Object>(0, "LightObject");
-			m_lightobject->SetPosition(objdata.position);//試験したいなら{0,0,0}
-			m_lightobject->SetScale(objdata.scale);
-			m_lightobject->SetRotation(objdata.rotation);
-			m_lightobjectList.push_back(m_lightobject);
+		////offランタン
+		//else if (objdata.ForwardMatchName(L"lanthanum1")) {
+		//	Light_Object* m_lightobject = NewGO<Light_Object>(0, "LightObject");
+		//	m_lightobject->SetPosition(objdata.position);//試験したいなら{0,0,0}
+		//	m_lightobject->SetScale(objdata.scale);
+		//	m_lightobject->SetRotation(objdata.rotation);
+		//	m_lightobjectList.push_back(m_lightobject);
 
-			return true;
-		}
+		//	return true;
+		//}
 
 		else if (objdata.EqualObjectName(m_checkpointname)) {
 			m_checkpoint = NewGO<CheckPoint>(0, "CheckPoint");
