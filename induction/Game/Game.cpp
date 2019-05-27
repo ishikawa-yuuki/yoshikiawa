@@ -91,6 +91,9 @@ Game::~Game()
 		for (auto& m_Lightstand : m_Lightstand1List) {
 			DeleteGO(m_Lightstand);
 		}
+		for (auto& m_lightobject : m_lightobjectList) {
+			DeleteGO(m_lightobject);
+		}
 		for (auto& m_stone : m_StoneList) {
 			DeleteGO(m_stone);
 		}
@@ -107,6 +110,9 @@ Game::~Game()
 		}
 		for (auto& m_Lightstand : m_Lightstand1List) {
 			DeleteGO(m_Lightstand);
+		}
+		for (auto& m_lightobject : m_lightobjectList) {
+			DeleteGO(m_lightobject);
 		}
 		for (auto& m_hill : m_hillList) {
 			DeleteGO(m_hill);
@@ -200,7 +206,9 @@ bool Game::Start()
 	shadow::OminiDirectionShadowMap().Enable();
 	if (m_gamedata->GetisStartCheckPoint() && m_checkpoint != nullptr) {
 		m_human->SetPosition(m_checkpoint->GetPosition());
-		m_player->SetPosition(m_checkpoint->GetPosition());
+		CVector3 m_pos = m_checkpoint->GetPosition();
+		m_pos.x += 500.0f;
+		m_player->SetPosition(m_pos);
 	}
  	return true;
 }
@@ -614,6 +622,16 @@ void Game::Stage3()
 			m_Lightstand1List.push_back(m_Lightstand);
 			return true;
 		}
+		//onランタン
+		else if (objdata.EqualObjectName(L"lanthanum2")) {
+			Light_Object* m_onlightObject = NewGO<Light_Object>(0, "OnLightObject");
+			m_onlightObject->SetPosition(objdata.position);
+			m_onlightObject->SetScale(objdata.scale);
+			m_onlightObject->SetRotation(objdata.rotation);
+			m_onlightObject->SetLight();
+			m_lightobjectList.push_back(m_onlightObject);
+			return true;
+		}
 		//ヒル
 		else if (objdata.EqualObjectName(L"Hill")) {
 			Hill* m_hill = NewGO<Hill>(0, "Hill");
@@ -708,6 +726,16 @@ void Game::Stage4()
 			m_Lightstand->SetRotation(objdata.rotation);
 			m_Lightstand->SetScale(objdata.scale);
 			m_Lightstand1List.push_back(m_Lightstand);
+			return true;
+		}
+		//onランタン
+		else if (objdata.EqualObjectName(L"lanthanum2")) {
+			Light_Object* m_onlightObject = NewGO<Light_Object>(0, "OnLightObject");
+			m_onlightObject->SetPosition(objdata.position);
+			m_onlightObject->SetScale(objdata.scale);
+			m_onlightObject->SetRotation(objdata.rotation);
+			m_onlightObject->SetLight();
+			m_lightobjectList.push_back(m_onlightObject);
 			return true;
 		}
 		//チェックポイント

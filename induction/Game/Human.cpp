@@ -165,7 +165,13 @@ void Human::GameStartMove()
 		m_StartMoveFin = true;
 	}
 	else {
-		m_movespeed.z = -400.0f;
+		auto humanspeed = 400.0f;
+		m_movespeed = m_player->GetPosition() - m_position;
+		m_movespeed.y = 0.0f;
+		m_movespeed.Normalize();
+		m_movespeed = m_movespeed * humanspeed;
+		//m_movespeed *= diff.LengthSq() / (400.0f * 400.0f) * 12.0f;
+		//-400.0f;
 		//m_position += m_movespeed;
 	}
 
