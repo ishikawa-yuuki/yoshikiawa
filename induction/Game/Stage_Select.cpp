@@ -77,7 +77,7 @@ bool Stage_Select::Start()
 	m_fade->StartFadeIn();
 	m_sky = NewGO<prefab::CSky>(0, "Sky");
 	//m_sky->SetSkyCubeMapFilePath(L"sprite/naibu.dds");
-	m_sky->SetScale({ 18000.0f,6000.0f,6000.0f });
+	m_sky->SetScale({ 24000.0f,5000.0f,5000.0f });
 	m_sky->SetEmissionColor({ 0.01f, 0.01f, 0.01f });
 	m_gamecamera = NewGO<GameCamera>(0, "GameCamera");
 	for (int i = 0; i < m_sspointList.size(); i++) {

@@ -46,87 +46,29 @@ bool GameCamera::Start()
 
 void GameCamera::Update()
 {
+	const int explosion = 2;
+	//isBlackHole();
+	//GetColorで返されたのがexplosionでなければこっち
 	m_refreshTimer -= GameTime().GetFrameDeltaTime();
-	if (m_refreshTimer > 0.0f) {
-		m_springCamera.Refresh();
-		
-	}
-	if (m_stageselect != nullptr) {
-		if (!m_ssplayer->GetisTransStage()) {
-			m_PlayerPos = m_ssplayer->GetPosition();
-		}
-		CVector3 stickR;
-		stickR.x = -Pad(0).GetRStickXF();	//アナログスティックのxの入力量を取得。
-		stickR.y = Pad(0).GetLStickYF();	//アナログスティックのxの入力量を取得。
-		stickR.z = 0.0f;
-		//右スティックの入力
-		//右スティック
-		m_sdegreexz = -stickR.x * 1.5f;
-		//m_sdegreey = -stickR.y * 1.5f;
-		//回転度加算
-		m_degreey += m_sdegreey;
-		m_degreexz += m_sdegreexz;
-		//角度をラジアン単位に直す
-		m_radianx = M_PI / 180 * m_degreexz;
-		m_radiany = M_PI / 180 * m_degreey;
-		Hutu();
-		//follow();
-		//m_target.z += 350.0f;
-		//視点z
-		m_springCamera.SetTarget(m_target);
-		//座標
-		m_springCamera.SetPosition(m_position);
-		//カメラの更新。
-		m_springCamera.Update();
-	}
-	else if (m_human->GetisDead() == false) {
-		if (m_human->GetisClear() == false) {
-			if (m_title != nullptr) {
-				if (m_title->isStop()) {
-					/*	m_degreey += m_titleground->GetCutSpeed() * GameTime().GetFrameDeltaTime();
-						CVector3 pos = m_titletarget;
-						pos.Cross(CVector3::AxisY);
-						CQuaternion qRot;
-						qRot.SetRotationDeg(pos, -m_titleground->GetCutSpeed() * GameTime().GetFrameDeltaTime());
-						qRot.Multiply(m_PlayerPos);*/
-				}
-				else {
-					m_PlayerPos = m_title->GetCameraTarget();
-					m_titletarget = m_PlayerPos;
-					m_titletarget.Normalize();
-					m_degreey = 25.0f;
-				}
-			}
-			else {
-				m_PlayerPos = m_player->GetPosition();
-				CVector3 stickR;
-				stickR.x = -Pad(0).GetRStickXF();	//アナログスティックのxの入力量を取得。
-				stickR.y = Pad(0).GetLStickYF();	//アナログスティックのxの入力量を取得。
-				stickR.z = 0.0f;
-				//右スティックの入力
-				//右スティック
-				m_sdegreexz = -stickR.x * 1.5f;
-				//m_sdegreey = -stickR.y * 1.5f;
-			}
+		if (m_refreshTimer > 0.0f) {
+			m_springCamera.Refresh();
 
+		}
+		if (m_stageselect != nullptr) {
+			if (!m_ssplayer->GetisTransStage()) {
+				m_PlayerPos = m_ssplayer->GetPosition();
+			}
+			CVector3 stickR;
+			stickR.x = -Pad(0).GetRStickXF();	//アナログスティックのxの入力量を取得。
+			stickR.y = Pad(0).GetLStickYF();	//アナログスティックのxの入力量を取得。
+			stickR.z = 0.0f;
+			//右スティックの入力
+			//右スティック
+			m_sdegreexz = -stickR.x * 1.5f;
+			//m_sdegreey = -stickR.y * 1.5f;
 			//回転度加算
 			m_degreey += m_sdegreey;
 			m_degreexz += m_sdegreexz;
-			//上下方向のカメラ移動を固定
-			//m_degreey = 30.0f;
-			/*if (m_degreey >= 30.0f) {//cameraを上方向に動かすプログラム
-			m_degreey = 30.0f;         //ただしあまり強く上には動かない。
-			}
-			if (m_degreey <= 10.0f) {
-			m_degreey = 10.0f;
-			}*/
-			/*if (m_degreexz >= 70.0f) {
-			m_degreexz = 70.0f;
-			}
-			if (m_degreexz <= -70.0f) {
-			m_degreexz = -70.0f;
-			}*/
-
 			//角度をラジアン単位に直す
 			m_radianx = M_PI / 180 * m_degreexz;
 			m_radiany = M_PI / 180 * m_degreey;
@@ -139,9 +81,77 @@ void GameCamera::Update()
 			m_springCamera.SetPosition(m_position);
 			//カメラの更新。
 			m_springCamera.Update();
-
 		}
-	}
+		else if (m_human->GetisDead() == false) {
+			if (m_human->GetisClear() == false) {
+				if (m_title != nullptr) {
+					if (m_title->isStop()) {
+						/*	m_degreey += m_titleground->GetCutSpeed() * GameTime().GetFrameDeltaTime();
+							CVector3 pos = m_titletarget;
+							pos.Cross(CVector3::AxisY);
+							CQuaternion qRot;
+							qRot.SetRotationDeg(pos, -m_titleground->GetCutSpeed() * GameTime().GetFrameDeltaTime());
+							qRot.Multiply(m_PlayerPos);*/
+					}
+					else {
+						m_PlayerPos = m_title->GetCameraTarget();
+						m_titletarget = m_PlayerPos;
+						m_titletarget.Normalize();
+						m_degreey = 25.0f;
+					}
+				}
+				else {
+					m_PlayerPos = m_player->GetPosition();
+					CVector3 stickR;
+					stickR.x = -Pad(0).GetRStickXF();	//アナログスティックのxの入力量を取得。
+					stickR.y = Pad(0).GetLStickYF();	//アナログスティックのxの入力量を取得。
+					stickR.z = 0.0f;
+					//右スティックの入力
+					//右スティック
+					m_sdegreexz = -stickR.x * 1.5f;
+					//m_sdegreey = -stickR.y * 1.5f;
+				}
+
+				//回転度加算
+				m_degreey += m_sdegreey;
+				m_degreexz += m_sdegreexz;
+				//上下方向のカメラ移動を固定
+				//m_degreey = 30.0f;
+				/*if (m_degreey >= 30.0f) {//cameraを上方向に動かすプログラム
+				m_degreey = 30.0f;         //ただしあまり強く上には動かない。
+				}
+				if (m_degreey <= 10.0f) {
+				m_degreey = 10.0f;
+				}*/
+				/*if (m_degreexz >= 70.0f) {
+				m_degreexz = 70.0f;
+				}
+				if (m_degreexz <= -70.0f) {
+				m_degreexz = -70.0f;
+				}*/
+
+				//角度をラジアン単位に直す
+				m_radianx = M_PI / 180 * m_degreexz;
+				m_radiany = M_PI / 180 * m_degreey;
+				Hutu();
+				//Playerがブラックホールになる前の状態の時
+				if (m_player != nullptr) {
+					if (m_player->GetColor() == explosion) {
+						//縦にカメラが揺れる。ちょっとガクガクしている。
+						m_position.y += Random().GetRandInt() % 4000 * GameTime().GetFrameDeltaTime();
+					}
+				}
+				//follow();
+				//m_target.z += 350.0f;
+				//視点z
+				m_springCamera.SetTarget(m_target);
+				//座標
+				m_springCamera.SetPosition(m_position);
+				//カメラの更新。
+				m_springCamera.Update();
+
+			}
+		}
 }
 
 void GameCamera::Hutu()
@@ -197,7 +207,6 @@ void GameCamera::Hutu()
 	toPos.z=r*(sin(radianx)+cos(radiany));*/
 	//toPos.z = r * sin(radianx);
 }
-
 //今は使えないfollow関数、
 void GameCamera::follow()
 {

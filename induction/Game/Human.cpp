@@ -179,62 +179,6 @@ void Human::GameStartMove()
 	m_position = m_charaCon.Execute(m_movespeed, GameTime().GetFrameDeltaTime());
 }
 
-void Human::Move()
-{
-	/*const int light_Yellow = 0;
-	const int light_Red = 1;
-	if (!m_Clear_one) {
-		if (m_player->GetColor() == light_Yellow) {
-			//死なない時の普通の処理
-			if (!m_isDead) {
-				CVector3 diff = m_position - m_player->GetPosition();
-				//Yの数値は除外
-				diff.y = 0.0f;
-				if (diff.LengthSq() <= 105.0f * 105.0f) {//プレイヤーと近ければhumanは止まる
-					m_movespeed = CVector3::Zero;
-				}
-				else {
-					auto humanspeed = 30.0f;
-					m_movespeed = m_player->GetPosition() - m_position;
-					m_movespeed.y = 0.0f;
-					m_movespeed.Normalize();
-
-					m_movespeed *= diff.LengthSq() / (400.0f * 400.0f) * 12.0f;
-					if (diff.LengthSq() >= 800.0f*800.0f) {//プレイヤーと離れすぎたときにだせるmovespeedの最高速
-						diff.y = 0.0f;
-						diff.Normalize();
-						diff *= -30.0f;//-だと近づく+なら遠のく
-						m_movespeed = diff;
-						m_movespeed = m_movespeed * humanspeed;// *GameTime().GetFrameDeltaTime();
-					}
-					else {//playerと離れすぎず近すぎないときの処理
-						m_movespeed = m_movespeed * humanspeed;// *GameTime().GetFrameDeltaTime();
-					}
-				}
-			}
-			else
-			{
-				//死んだときの処理
-				m_movespeed = CVector3::Zero;
-			}
-		}
-		else if (m_player->GetColor() == light_Red) {//赤色になった時の処理、とりあえず止まってる
-			m_movespeed = CVector3::Zero;
-			m_movespeed.y -= 10000.0f*GameTime().GetFrameDeltaTime();
-		}
-
-		if (m_charaCon.IsOnGround()) {
-			m_movespeed.y = 0.0f;
-		}
-		else {
-			m_movespeed.y -= 10000.0f*GameTime().GetFrameDeltaTime();
-		}
-	}
-	//動く床と自分のスピードを足す。
-	CVector3 pos = m_movespeed + m_Bedspeed;
-	m_position = m_charaCon.Execute(pos, GameTime().GetFrameDeltaTime());*/
-}
-
 void Human::TakingMove()
 {
 	if (!m_Clear_one) {

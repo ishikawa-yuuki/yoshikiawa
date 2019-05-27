@@ -19,8 +19,7 @@ public:
 	void Update();
 	//ゲーム最初に行う関数。
 	void GameStartMove();
-	//ゲーム中の普通の動きをするときの関数
-	void Move();
+	//キャラの回転
 	void Turn();
 	//Mistenemyに連れていかれているときの処理
 	void TakingMove();

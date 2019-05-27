@@ -17,7 +17,7 @@ private:
 		hikari_black,
 		hikari_explosion
 	};
-	Color m_color = hikari_hutu;
+	
 public:
 	Player();
 	~Player();
@@ -50,6 +50,9 @@ public:
 			break;
 		case hikari_black:
 			number = 1;
+			break;
+		case hikari_explosion:
+			number = 2;
 			break;
 		}
 		return number;
@@ -88,10 +91,10 @@ private:
 	//ブラックホールになる時に光があふれる感じを調整するための変数
 	float m_ahureru = 0;
 
-
 	prefab::CSoundSource* m_sound = nullptr;
 	TitleGround* m_titleground = nullptr;
 	CVector3 m_protposition = CVector3::Zero;
 	float m_degree = 0.0f;
+	Color m_color = hikari_hutu;
 };
 

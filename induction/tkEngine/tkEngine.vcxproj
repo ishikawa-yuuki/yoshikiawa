@@ -1056,6 +1056,7 @@
       <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Debug_Low|x64'">$(SolutionDir)\Assets\modelData\preset\%(Filename).cmo</ContentOutput>
       <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Preview_Low|x64'">$(SolutionDir)\Assets\modelData\preset\%(Filename).cmo</ContentOutput>
       <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Preview_Middle|x64'">$(SolutionDir)\Assets\modelData\preset\%(Filename).cmo</ContentOutput>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Middle|x64'">true</ExcludedFromBuild>
     </MeshContentTask>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

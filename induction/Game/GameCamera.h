@@ -16,6 +16,7 @@ public:
 	void Update();
 	void follow();
 	void Hutu();
+	void isBlackHole();
 private:
 	// ‰~‚Ì’†SÀ•W‚Å‚·B
 	CVector3 m_PlayerPos;
