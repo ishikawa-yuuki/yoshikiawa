@@ -15,10 +15,6 @@
     <ImageContentTask Include="Assets\sprite\title\pressstart.png" />
     <ImageContentTask Include="Assets\sprite\starsky.jpg" />
     <ImageContentTask Include="Assets\sprite\sky.png" />
-    <ImageContentTask Include="Assets\sprite\setumei.png" />
-    <ImageContentTask Include="Assets\sprite\setumei2.png" />
-    <ImageContentTask Include="Assets\sprite\setumei_text.png" />
-    <ImageContentTask Include="Assets\sprite\setumei2_text.png" />
     <ImageContentTask Include="Assets\sprite\setumei_teisei2.png" />
     <ImageContentTask Include="Assets\sprite\setumei_teisei.png" />
   </ItemGroup>
