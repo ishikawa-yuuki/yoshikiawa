@@ -2002,18 +2002,18 @@
     <MeshContentTask Include="Assets\modelData\StageMap\Stage3.fbx">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Preview_Middle|x64'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Middle|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Middle|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_Low|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Preview_Low|x64'">true</ExcludedFromBuild>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\StageMap\Stage4.fbx">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Preview_Middle|x64'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Middle|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Middle|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_Low|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Preview_Low|x64'">true</ExcludedFromBuild>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\StageMap\Stage5.fbx">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Middle|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Middle|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_Low|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Preview_Low|x64'">true</ExcludedFromBuild>
     </MeshContentTask>
