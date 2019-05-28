@@ -25,6 +25,10 @@ public:
 	{
 		m_scale = scale;
 	}
+	void SetKill(const int& num)
+	{
+		m_num = num;
+	}
 private:
 	prefab::CSkinModelRender* m_skinModelRender = nullptr;
 	CVector3 m_position = CVector3::Zero;
@@ -43,6 +47,8 @@ private:
 	State m_state = enState_Stop;
 	CAnimationClip m_animeClip[enAnimationClip_num];
 	int m_timer = 0;
+	int m_num = 0;
+	bool kill = false;
 	Human* m_human = nullptr;
 };
 

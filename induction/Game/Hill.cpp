@@ -37,16 +37,20 @@ void Hill::Update()
 		m_human = FindGO<Human>("Human");
 		return;
 	}
-	switch (m_state) {
-	case enState_Stop:
-		Stop();
-		break;
-	case enState_Move:
-		Move();
-		break;
-	}
-	Turn();
+	
+		switch (m_state) {
+		case enState_Stop:
+			Stop();
+			break;
+		case enState_Move:
+			Move();
+			break;
+		}
+		if (!kill) {
+		Turn();
+	     }
 	Kill();
+	
 	m_skinModelRender->SetPosition(m_position);
 	m_skinModelRender->SetRotation(m_rotation);
 	m_skinModelRender->SetScale(m_scale);
@@ -91,15 +95,36 @@ void Hill::Turn()
 }
 void Hill::Kill()
 {
-	const float Distance = 30.0f * 30.0f;
-	const float Degree = 30.0f;
+	if (m_num == 1) {
+		const float Distance = 100.0f * 100.0f;
+		const float Degree = 60.0f;
 
-	CVector3 diff = m_human->GetPosition() - m_position;
-	if (diff.LengthSq() <= Distance) {
-		diff.Normalize();
-		float angle = acosf(m_parallel.Dot(diff));
-		if (angle * M_PI <= Degree) {
-			m_human->isKill();
+		CVector3 diff = m_human->GetPosition() - m_position;
+		if (diff.LengthSq() <= Distance) {
+			diff.Normalize();
+			float angle = acosf(m_parallel.Dot(diff));
+			if (angle * M_PI <= Degree) {
+				m_human->isKill();
+				kill = true;
+				m_movespeed = CVector3::Zero;
+			}
+		}
+	}
+	else {
+
+
+		const float Distance = 30.0f * 30.0f;
+		const float Degree = 30.0f;
+
+		CVector3 diff = m_human->GetPosition() - m_position;
+		if (diff.LengthSq() <= Distance) {
+			diff.Normalize();
+			float angle = acosf(m_parallel.Dot(diff));
+			if (angle * M_PI <= Degree) {
+				m_human->isKill();
+				kill = true;
+				m_movespeed = CVector3::Zero;
+			}
 		}
 	}
 }

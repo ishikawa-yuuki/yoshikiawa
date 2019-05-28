@@ -27,15 +27,15 @@ bool Stone::Start()
 			m_rot,
 			{ 650.0f,650.0f ,650.0f }//{100,100,100}
 		);
-		pos = 300;
+		pos = 310;
 	}//Scale600,700�̏ꍇ
 	else {
 		m_GhostObject.CreateBox(
 			m_position,
 			m_rot,
-			{ 820.0f,700.0f ,800.0f }//{100,100,100}
+			{ 800.0f,700.0f ,800.0f }//{100,100,100}
 		);
-		pos = 320;
+		pos = 330;
 	}
 	m_sound = NewGO<prefab::CSoundSource>(0);
 	m_sound->Init(L"sound/Stone2.wav");

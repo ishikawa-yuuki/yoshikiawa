@@ -68,9 +68,9 @@ Game::~Game()
 		for (auto& m_lever : m_leverList) {
 			DeleteGO(m_lever);
 		}
-		/*for (auto& m_lightobject : m_lightobjectList) {
+		for (auto& m_lightobject : m_lightobjectList) {
 			DeleteGO(m_lightobject);
-		}*/
+		}
 		for (auto& m_Lightstand : m_Lightstand1List) {
 			DeleteGO(m_Lightstand);
 		}
@@ -179,6 +179,9 @@ bool Game::Start()
 	m_sky = NewGO<prefab::CSky>(0, "Sky");
 	m_sky->SetScale({ 5000.0f,5000.0f,5000.0f });
 	m_sky->SetEmissionColor({ 0.05f, 0.05f, 0.05f });
+
+	
+	//m_pos.x += 500.0f;
 	switch (m_gamedata->GetStageNumber()) {
 	case GameData::enState_Stage1:
 		Stage1();
@@ -206,8 +209,28 @@ bool Game::Start()
 	shadow::OminiDirectionShadowMap().Enable();
 	if (m_gamedata->GetisStartCheckPoint() && m_checkpoint != nullptr) {
 		m_human->SetPosition(m_checkpoint->GetPosition());
+		//ごり押し
 		CVector3 m_pos = m_checkpoint->GetPosition();
-		m_pos.x += 500.0f;
+	  switch (m_gamedata->GetStageNumber()) {
+	   case GameData::enState_Stage1:
+		m_pos.x -= 500.0f;
+		break;
+	   case GameData::enState_Stage2:
+		   m_pos.z -= 500.0f;
+		break;
+	   case GameData::enState_Stage3:
+		m_pos.z -= 500.0f;
+		break;
+	   case GameData::enState_Stage4:
+		   m_pos.x += 500.0f;
+		break;
+	   case GameData::enState_Stage5:
+		   m_pos.z -= 500.0f;
+		break;
+	   case GameData::enState_Stage6:
+		
+		break;
+	   }
 		m_player->SetPosition(m_pos);
 	}
  	return true;
@@ -251,7 +274,7 @@ void Game::Update()
 	}
 	if (m_checkpoint != nullptr) {
 		CVector3 diff = m_human->GetPosition() - m_checkpoint->GetPosition();
-		if (diff.LengthSq() <= 400.0f*400.0f) {
+		if (diff.LengthSq() <= 550.0f*550.0f) {
 			m_gamedata->SetStageCheck();
 			m_checkpoint->SetPass(true);
 		}
@@ -481,14 +504,14 @@ void Game::Stage2()
 		//松明
 		else if (objdata.ForwardMatchName(L"Lightstand")) {
 			//Lightstandの種類
-			int num = _wtoi(&objdata.name[10]);
+			//int num = _wtoi(&objdata.name[10]);
 			//Lightstandを手動でオンオフにする。
 			int lever = _wtoi(&objdata.name[11]);
 			
 			Lightstand* m_Lightstand = NewGO<Lightstand>(0, "Lightstand");
 			//???numを使ってできない。
 			m_Lightstand->SetNum(1);
-			if (lever ==0||lever == 1) {
+			if (lever == 0 || lever == 1) {
 				m_Lightstand->LightLever();
 				m_Lightstand->SetLeverNum(lever);
 			}
@@ -525,17 +548,16 @@ void Game::Stage2()
 			m_DoorList.push_back(door);
 			return true;
 		}
-		////offランタン
-		//else if (objdata.ForwardMatchName(L"lanthanum1")) {
-		//	Light_Object* m_lightobject = NewGO<Light_Object>(0, "LightObject");
-		//	m_lightobject->SetPosition(objdata.position);//試験したいなら{0,0,0}
-		//	m_lightobject->SetScale(objdata.scale);
-		//	m_lightobject->SetRotation(objdata.rotation);
-		//	m_lightobjectList.push_back(m_lightobject);
-
-		//	return true;
-		//}
-
+		//onランタン
+		else if (objdata.EqualObjectName(L"lanthanum2")) {
+			Light_Object* m_onlightObject = NewGO<Light_Object>(0, "OnLightObject");
+			m_onlightObject->SetPosition(objdata.position);
+			m_onlightObject->SetScale(objdata.scale);
+			m_onlightObject->SetRotation(objdata.rotation);
+			m_onlightObject->SetLight();
+			m_lightobjectList.push_back(m_onlightObject);
+			return true;
+		}
 		else if (objdata.EqualObjectName(m_checkpointname)) {
 			m_checkpoint = NewGO<CheckPoint>(0, "CheckPoint");
 			m_checkpoint->SetPosition(objdata.position);
@@ -776,8 +798,10 @@ void Game::Stage5()
 				return true;
 			}
 			//ヒル
-			else if (objdata.EqualObjectName(L"Hill")) {
+			else if (objdata.ForwardMatchName(L"Hill")) {
+				int num = _wtoi(&objdata.name[4]);
 				Hill* m_hill = NewGO<Hill>(0, "Hill");
+				m_hill->SetKill(num);
 				m_hill->SetPosition(objdata.position);
 				m_hill->SetRotation(objdata.rotation);
 				m_hill->SetScale(objdata.scale);
