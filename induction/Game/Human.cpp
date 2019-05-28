@@ -395,7 +395,7 @@ void Human::AnimeControll()
 
 void Human::isDead()
 {
-	if (!m_game->GetifPose()) {//!= true修正
+	if (!m_game->GetisPose()) {//!= true修正
 		//敵もギミックもないので今のところはボタン押すだけで死ぬスペランカーです。
 		if (!m_Clear_one) {//クリア状態でないなら下へ
 			if (!m_siboustop) {
