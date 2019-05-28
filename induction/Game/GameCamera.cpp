@@ -8,6 +8,8 @@
 #include "TitleGround.h"
 #include "Stage_Select.h"
 #include "SSPlayer.h"
+#include "Game.h"
+
 GameCamera::GameCamera()
 {
 }
@@ -19,7 +21,6 @@ GameCamera::~GameCamera()
 
 bool GameCamera::Start()
 {
-	 
 	m_player = FindGO<Player>("Player");
 	m_human = FindGO<Human>("Human");
 	//カメラを設定。
@@ -87,8 +88,7 @@ void GameCamera::Update()
 				if (m_title != nullptr) {
 					if (m_title->isStop()) {
 						/*	m_degreey += m_titleground->GetCutSpeed() * GameTime().GetFrameDeltaTime();
-							CVector3 pos = m_titletarget;
-							pos.Cross(CVector3::AxisY);
+							CVector3 pos = m_titletarget;							pos.Cross(CVector3::AxisY);
 							CQuaternion qRot;
 							qRot.SetRotationDeg(pos, -m_titleground->GetCutSpeed() * GameTime().GetFrameDeltaTime());
 							qRot.Multiply(m_PlayerPos);*/
@@ -137,7 +137,7 @@ void GameCamera::Update()
 				//Playerがブラックホールになる前の状態の時
 				if (m_player != nullptr) {
 					if (m_player->GetColor() == explosion) {
-						//縦にカメラが揺れる。ちょっとガクガクしている。
+						//縦にカメラが揺れる。ガクガクしている。
 						m_position.y += Random().GetRandInt() % 5000 * GameTime().GetFrameDeltaTime();
 						m_position.x += Random().GetRandInt() % 1200 * GameTime().GetFrameDeltaTime();
 

@@ -16,7 +16,6 @@ public:
 	void Update();
 	void follow();
 	void Hutu();
-	void isBlackHole();
 	void SetCameraDegree(const GameData::CameraDegree& degree)
 	{
 		m_degreexz = degree.s_degreexz;
@@ -53,6 +52,5 @@ private:
 	//ステージセレクト
 	Stage_Select* m_stageselect = nullptr;
 	SSPlayer* m_ssplayer = nullptr;
-
 };
 

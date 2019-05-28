@@ -1,9 +1,11 @@
 #pragma once
+class GameCamera;
 class GameData
 {
 private:
 	GameData();
 	~GameData();
+	GameCamera* m_gamecamera;
 public:
 	static GameData& GetInstance()
 	{
@@ -87,11 +89,13 @@ public:
 	static const int m_stagelimit = 6;								//ステージの数
 public:
 	bool m_stageclear[m_stagelimit] = { true,true,true,true,true,true };			//各ステージのクリア状況
-	bool m_stagecheck[m_stagelimit] = {	true,false,false,false,false,false };		//チェックポイントの通過状況
+	bool m_stagecheck[m_stagelimit] = {	true,true,true,true,true,true };		//チェックポイントの通過状況
 	std::vector<CameraDegree> m_cameradegreelist;									//各チェックポイントのカメラの角度
 	StageNumber m_stagenumber = enState_Stage1;						//プレイヤーが選択したステージの番号
 	const char* m_effectname = "Effect";							//ステージ終了時に強制的に消去したいエフェクトに名前を付けるときに使う
 	bool m_startcheckpoint = false;									//チェックポイントから始めるかどうか
 	bool m_isfirstenterstage = false;
+	//ｙの回転は固定されている
+	const float degleeY = 30.0f;                                          
 };
 
