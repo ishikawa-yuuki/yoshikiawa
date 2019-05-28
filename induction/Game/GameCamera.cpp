@@ -138,7 +138,9 @@ void GameCamera::Update()
 				if (m_player != nullptr) {
 					if (m_player->GetColor() == explosion) {
 						//c‚ÉƒJƒƒ‰‚ª—h‚ê‚éB‚¿‚å‚Á‚ÆƒKƒNƒKƒN‚µ‚Ä‚¢‚éB
-						m_position.y += Random().GetRandInt() % 4000 * GameTime().GetFrameDeltaTime();
+						m_position.y += Random().GetRandInt() % 5000 * GameTime().GetFrameDeltaTime();
+						m_position.x += Random().GetRandInt() % 1200 * GameTime().GetFrameDeltaTime();
+
 					}
 				}
 				//follow();

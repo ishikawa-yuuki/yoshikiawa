@@ -33,13 +33,13 @@ bool Credit::Start()
 	//m_sky->SetSkyCubeMapFilePath(L"sprite/sky.dds");
 	m_sky->SetScale({ 500.0f,500.0f,500.0f });
 	m_sky->SetEmissionColor({ 0.05f, 0.05f, 0.05f });
-	m_characterList[0] = L"制作";
-	m_characterList[1] = L"メインプログラマー\n\n　 Yoshinaga　Satoshi";
-	m_characterList[2] = L"サブプログラマー\n\n 　Ishikawa　Yuuki";
-	m_characterList[3] = L"サブプログラマー\n\n 　Komura　Athushi";
-	m_characterList[4] = L"開発環境";
+	m_characterList[0] = L"Team Member";
+	m_characterList[1] = L"Main Programmer\n\n　 Yoshinaga　Satoshi";
+	m_characterList[2] = L"Sub Programmer\n\n 　Ishikawa　Yuuki";
+	m_characterList[3] = L"Sub Programmer\n\n 　Komura　Athushi";
+	m_characterList[4] = L"Development Environment";//前　開発環境
 	m_characterList[5] = L"C++\n\nVisual Studio2017\n\nVisual Studio2019";
-	m_characterList[6] = L"使用ツール";
+	m_characterList[6] = L"ToolUsed";//前　使用ツール
 	m_characterList[7] = L"3DSMAX\n\nEffekseer\n\nFireAlpaca";
 	m_characterList[8] = L"Presented by TeamBikklers";
 	m_bgm = NewGO<prefab::CSoundSource>(0);
