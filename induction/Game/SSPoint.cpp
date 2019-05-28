@@ -10,6 +10,9 @@ SSPoint::SSPoint()
 SSPoint::~SSPoint()
 {
 	DeleteGO(m_skin);
+	if (m_pointlight != nullptr) {
+		DeleteGO(m_pointlight);
+	}
 }
 bool SSPoint::Start()
 {
@@ -18,6 +21,13 @@ bool SSPoint::Start()
 	GameData* gamedata = &GameData::GetInstance();
 	if (gamedata->GetisStageClear(m_stagenumber)) {
 		m_state = enState_Clear;
+		m_pointlight = NewGO<prefab::CPointLight>(0);
+		m_lightpos = m_position;
+		//m_position‚æ‚è­‚µã‚É
+		m_lightpos.y += 100.0f;
+		m_pointlight->SetAttn(m_Attn);
+		m_pointlight->SetColor(m_color);
+		m_pointlight->SetPosition(m_position);
 	}
 	else {
 		if (gamedata->GetisStageClear(GameData::StageNumber(m_stagenumber - 1))) {

@@ -60,6 +60,9 @@ public:
 		return m_state;
 	}
 private:
+	CVector3 m_Attn = { 200.0f,1.0f,1.0f };
+	CVector3 m_color = { 500.0f,500.0f,500.0f };
+	CVector3 m_lightpos = CVector3::Zero;
 	State m_state = enState_noRelease;
 	CVector3 m_position = CVector3::Zero;
 	prefab::CSkinModelRender* m_skin = nullptr;
@@ -67,5 +70,6 @@ private:
 	CVector3 m_playerposition = CVector3::Zero;
 	CVector3 m_humanposition = CVector3::Zero;
 	CQuaternion m_rotation = CQuaternion::Identity;
+	prefab::CPointLight* m_pointlight = nullptr;
 };
 

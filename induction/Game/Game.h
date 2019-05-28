@@ -46,7 +46,7 @@ public:
 		return m_Gamesyuuryou;
 	}
 	//ポーズ中であるかどうかの関数、敵やギミックがこれで止まるかも
-	bool GetifPose() const
+	bool GetisPose() const
 	{
 		return m_isPose;
 	}

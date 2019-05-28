@@ -232,6 +232,7 @@ bool Game::Start()
 		break;
 	   }
 		m_player->SetPosition(m_pos);
+		m_gamecamera->SetCameraDegree(m_gamedata->GetCheckPointCameraDegree());
 	}
  	return true;
 }
