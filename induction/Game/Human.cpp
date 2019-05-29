@@ -395,7 +395,7 @@ void Human::AnimeControll()
 
 void Human::isDead()
 {
-	if (!m_game->GetisPose()) {//!= true修正
+	//if (!m_game->GetisPose()) {//!= true修正
 		//敵もギミックもないので今のところはボタン押すだけで死ぬスペランカーです。
 		if (!m_Clear_one) {//クリア状態でないなら下へ
 			if (!m_siboustop) {
@@ -422,8 +422,9 @@ void Human::isDead()
 				}
 			}
 		}
-	}
+	//}
 }
+
 //動くオブジェクトの判定
 void Human::Hanntei()
 {
@@ -498,6 +499,7 @@ void Human::isClear()
 			m_Clear_one = true;
 			m_movespeed = CVector3::Zero;
 			GameData::GetInstance().SetStageClear();
+			m_game->SetisClear();
 		}
 	}
 	if (m_Clear_one) {

@@ -35,7 +35,6 @@ public:
 	void Stage3();
 	void Stage4();
 	void Stage5();
-	void Stage6();
 	void PostRender(CRenderContext& renderContext); //何かを調べるためのポストレンダラ
 	//ここから下の関数はごり押しです・・・なんかいい書き方がある気がする・・・
 
@@ -66,6 +65,24 @@ public:
 	}
 	const std::vector<Poison*>& GetPoisonList() {
 		return m_poisonList;
+	}
+	void SetisClear()
+	{
+		m_isclear = true;
+	}
+	bool GetisClear()
+	{
+		return m_isclear;
+	}
+	//trueだと反応しないようにしようね
+	bool isButton() const
+	{
+		return m_isbutton;
+	}
+	//falseにすっぺ
+	void SetisButton()
+	{
+		m_isbutton = false;
 	}
 private:
 	/*ポインタ群*/
@@ -116,5 +133,7 @@ private:
 	const float m_time2 = 1.0f;
 	CheckPoint* m_checkpoint = nullptr;
 	const wchar_t* m_checkpointname = L"CheckPoint";
+	bool m_isclear = false;
+	bool m_isbutton = false;
 };
 

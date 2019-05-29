@@ -6,6 +6,7 @@ class GameCamera;
 class Human;
 class StarDust;
 class Title;
+class Game;
 class TitleGround;
 class Player : public IGameObject
 {
@@ -78,6 +79,7 @@ private:
 	GameCamera* m_gamecamera = nullptr;
 	Human* m_human = nullptr;
 	StarDust* m_stardust = nullptr;
+	Game* m_game = nullptr;
 	CCharacterController m_charaCon;
 	prefab::CPointLight* m_ptLight = nullptr;
 	//’Êíó‘Ô‚ÌŒõ‚Ì—ÍB‰Šú‰»—p

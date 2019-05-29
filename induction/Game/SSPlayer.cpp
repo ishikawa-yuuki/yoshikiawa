@@ -88,10 +88,10 @@ void SSPlayer::Stop()
 			if (m_stage == GameData::enState_StageLast) {
 				return;
 			}
-			/*if (m_gamedata->GetisStageClear(m_stage)) {*/
+			if (m_gamedata->GetisStageClear(m_stage)) {
 				m_sspoint = m_SS->GetStagePoint(GameData::StageNumber(m_stage + 1));
 				m_state = enState_Move;
-			/*}*/
+			}
 		}
 		else if (Pad(0).IsTrigger(enButtonLeft)
 			|| L_Stick_X < -0.5f) {

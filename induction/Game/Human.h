@@ -71,8 +71,9 @@ public:
 	//humanを倒すときの関数、enemyとかが使うと思います。
 	void isKill() 
 	{
-		if (!m_isDead) {
+		if (!m_isDead && !m_isGameOver) {
 			m_isDead = true;
+			m_isGameOver = true;
 		}
 	}
 	prefab::CPointLight* GetNearPointLight() const

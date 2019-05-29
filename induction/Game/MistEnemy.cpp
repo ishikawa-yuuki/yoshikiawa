@@ -12,8 +12,12 @@ MistEnemy::MistEnemy()
 
 MistEnemy::~MistEnemy()
 {
-	DeleteGO(m_effect);
-	DeleteGO(m_sound);
+	if (m_effect != nullptr) {
+		DeleteGO(m_effect);
+	}
+	if (m_sound != nullptr) {
+		DeleteGO(m_sound);
+	}
 }
 
 bool MistEnemy::Start()
@@ -30,22 +34,33 @@ bool MistEnemy::Start()
 	/*m_sound->SetPosition(m_position);*/
 	m_sound->SetVolume(0.0f);
 	m_sound->Play(true);
+	m_game = FindGO<Game>("Game");
 	return true;
+	
 }
 
 void MistEnemy::Update()
 {
-	//‰¹m_moya‚ªtrue‚È‚ç‰¹‚ªo‚é
-	if (m_moya) {
-		m_sound->SetVolume(1.0f);
+	if (m_game->GetisClear()) {
+		if (m_effect != nullptr) {
+			DeleteGO(m_effect);
+			m_effect = nullptr;
+			DeleteGO(m_sound);
+			m_sound = nullptr;
+		}
 	}
 	else {
-		m_sound->SetVolume(0.0f);
+		//‰¹m_moya‚ªtrue‚È‚ç‰¹‚ªo‚é
+		if (m_moya && m_sound != nullptr) {
+			m_sound->SetVolume(1.0f);
+		}
+		else if (m_sound != nullptr) {
+			m_sound->SetVolume(0.0f);
+		}
+		Atari();
+		m_position += m_moveSpeed * GameTime().GetFrameDeltaTime();
+		m_effect->SetPosition(m_position);
 	}
-	Atari();
-	m_position += m_moveSpeed * GameTime().GetFrameDeltaTime();
-	m_effect->SetPosition(m_position);
-
 }
 
 void MistEnemy::Atari()
