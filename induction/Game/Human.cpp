@@ -503,7 +503,7 @@ void Human::isClear()
 		}
 	}
 	else {
-		if (diff.LengthSq() < 200.0f*200.0f
+		if (diff.LengthSq() < 800.0f*800.0f
 			&& !m_Clear_one) {
 			m_skinModelRender->PlayAnimation(enAnimationClip_clear, 0.2f);
 			m_Clear_one = true;
