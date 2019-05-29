@@ -275,7 +275,12 @@ void Human::Light_Move()
 				auto humanspeed = 300.0f;
 				m_movespeed = m_nearPointLight->GetPosition() - m_position;
 				auto len = m_movespeed.Length();
-				if (len > 200.0f) {
+				if (GameData::GetInstance().GetStageNumber() == GameData::enState_Stage3 && len > 240.0f) {
+					m_movespeed.y = 0.0f;
+					m_movespeed.Normalize();
+					m_movespeed = m_movespeed * humanspeed;
+				}
+				else if (GameData::GetInstance().GetStageNumber() != GameData::enState_Stage3 && len > 200.0f) {
 					m_movespeed.y = 0.0f;
 					m_movespeed.Normalize();
 					m_movespeed = m_movespeed * humanspeed;
@@ -490,7 +495,12 @@ void Human::isClear()
 	diff.y = 0.0f;
 	if (!m_skinModelRender->IsPlayingAnimation()  && m_Clear_one) {
 		m_skinModelRender->PlayAnimation(enAnimationClip_run, 0.2f);
-		m_movespeed.z -= 6000.0f * GameTime().GetFrameDeltaTime();
+		if (GameData::GetInstance().GetStageNumber() == GameData::enState_Stage3) {
+			m_movespeed.x = 6000.0f * GameTime().GetFrameDeltaTime();
+		}
+		else {
+			m_movespeed.z -= 6000.0f * GameTime().GetFrameDeltaTime();
+		}
 	}
 	else {
 		if (diff.LengthSq() < 200.0f*200.0f
