@@ -316,9 +316,11 @@ void Game::Pose()
 				m_isPose = false;
 				m_fade->StartFadeOut();
 				m_isWaitFadeout = true;
+				m_isbutton = true;
 				break;
 			case Game::togame:
 				m_isPose = false;
+				m_isbutton = true;
 				break;
 			}
 		}

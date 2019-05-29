@@ -40,12 +40,14 @@ void Door::Update()
 			if (m_timer == 0) {
 				sound = NewGO<prefab::CSoundSource>(0);
 				sound->Init(L"sound/DoorStart.wav");
+				sound->SetVolume(3.0f);
 				sound->Play(false);
 				sound->SetVolume(1.5f);
 			}
 			else if (m_timer == 0.2f) {
 				sound = NewGO<prefab::CSoundSource>(0);
 				sound->Init(L"sound/DoorOpen.wav");
+				sound->SetVolume(3.0f);
 				sound->Play(false);
 				sound->SetVolume(1.5f);
 			}

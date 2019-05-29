@@ -12,10 +12,10 @@ MistEnemy::MistEnemy()
 
 MistEnemy::~MistEnemy()
 {
-	if (m_effect == nullptr) {
+	if (m_effect != nullptr) {
 		DeleteGO(m_effect);
 	}
-	if (m_sound == nullptr) {
+	if (m_sound != nullptr) {
 		DeleteGO(m_sound);
 	}
 }
@@ -42,22 +42,25 @@ bool MistEnemy::Start()
 void MistEnemy::Update()
 {
 	if (m_game->GetisClear()) {
-		DeleteGO(m_effect);
-		m_effect = nullptr;
-		DeleteGO(m_sound);
-		m_sound = nullptr;
-	}
-	//‰¹m_moya‚ªtrue‚È‚ç‰¹‚ªo‚é
-	if (m_moya) {
-		m_sound->SetVolume(1.0f);
+		if (m_effect != nullptr) {
+			DeleteGO(m_effect);
+			m_effect = nullptr;
+			DeleteGO(m_sound);
+			m_sound = nullptr;
+		}
 	}
 	else {
-		m_sound->SetVolume(0.0f);
+		//‰¹m_moya‚ªtrue‚È‚ç‰¹‚ªo‚é
+		if (m_moya && m_sound != nullptr) {
+			m_sound->SetVolume(1.0f);
+		}
+		else if (m_sound != nullptr) {
+			m_sound->SetVolume(0.0f);
+		}
+		Atari();
+		m_position += m_moveSpeed * GameTime().GetFrameDeltaTime();
+		m_effect->SetPosition(m_position);
 	}
-	Atari();
-	m_position += m_moveSpeed * GameTime().GetFrameDeltaTime();
-	m_effect->SetPosition(m_position);
-
 }
 
 void MistEnemy::Atari()

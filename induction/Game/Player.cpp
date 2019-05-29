@@ -103,6 +103,7 @@ void Player::Update()
 			prefab::CSoundSource* sound = nullptr;
 			sound = NewGO<prefab::CSoundSource>(0);
 			sound->Init(L"sound/BlackHoleStart.wav");
+			sound->SetVolume(5.0f);
 			sound->Play(false);
 			endAttn = { 1000.0f + m_ahureru, 10.0f, 1.0f };
 			m_effect = NewGO<prefab::CEffect>(0);
@@ -199,42 +200,48 @@ void Player::Color_Change()
 	
 	//停止ではなくブラックホールモードになりました。使用はまだ変わってませんが…
 	if (!m_game->GetisPose()) {
-		if (Pad(0).IsTrigger(enButtonA)) {
-			switch (m_color) {
-			case hikari_hutu:
-				m_explosionTimer = 0.0f;
-				m_color = hikari_explosion;
-				m_sound = NewGO<prefab::CSoundSource>(0);
-				m_sound->Init(L"sound/BlackHoleUpdate.wav");
-				m_sound->Play(true);
-				break;
-			case hikari_black:
-				m_color = hikari_hutu;
-				m_effect->Release();
-				m_effect->Play(L"effect/hikari.efk");
-				m_effect->SetScale({ 0.0f,0.0f,0.0f });
-				m_skin->SetEmissionColor({ 50.0f, 50.0f, 20.0f });
-				m_attn = m_pointLigDefaultAttn;
-				m_ptLight->SetAttn(m_attn);
-				m_sound->Release();
-				break;
-			}
+		if (m_game->isButton()) {
+			m_game->SetisButton();
+		}
+		else {
+			if (Pad(0).IsTrigger(enButtonA)) {
+				switch (m_color) {
+				case hikari_hutu:
+					m_explosionTimer = 0.0f;
+					m_color = hikari_explosion;
+					m_sound = NewGO<prefab::CSoundSource>(0);
+					m_sound->Init(L"sound/BlackHoleUpdate.wav");
+					m_sound->SetVolume(5.0);
+					m_sound->Play(true);
+					break;
+				case hikari_black:
+					m_color = hikari_hutu;
+					m_effect->Release();
+					m_effect->Play(L"effect/hikari.efk");
+					m_effect->SetScale({ 0.0f,0.0f,0.0f });
+					m_skin->SetEmissionColor({ 50.0f, 50.0f, 20.0f });
+					m_attn = m_pointLigDefaultAttn;
+					m_ptLight->SetAttn(m_attn);
+					m_sound->Release();
+					break;
+				}
 #if 0
-			///*m_effect = NewGO<prefab::CEffect>(0);*/
-			//m_effect->Release();
-			//m_effect->Play(L"effect/blackhole.efk");
-			//m_effect->SetScale({ 100.0f,100.0f,100.0f });
-			//m_skin->SetEmissionColor({ 0.5f, 0.5f, 0.2f });
-			//CVector3 attn;
-			//attn.x = 100.0f;
-			//attn.y = 10.0f;
-			//attn.z = 1.0f;
-			//m_ptLight->SetAttn(attn);
-			///*m_effect->SetPosition(m_position);*/
+				///*m_effect = NewGO<prefab::CEffect>(0);*/
+				//m_effect->Release();
+				//m_effect->Play(L"effect/blackhole.efk");
+				//m_effect->SetScale({ 100.0f,100.0f,100.0f });
+				//m_skin->SetEmissionColor({ 0.5f, 0.5f, 0.2f });
+				//CVector3 attn;
+				//attn.x = 100.0f;
+				//attn.y = 10.0f;
+				//attn.z = 1.0f;
+				//m_ptLight->SetAttn(attn);
+				///*m_effect->SetPosition(m_position);*/
 		case hikari_explosion:
 #endif
 
 
+			}
 		}
 	}
 }

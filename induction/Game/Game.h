@@ -74,6 +74,16 @@ public:
 	{
 		return m_isclear;
 	}
+	//true‚¾‚Æ”½‰ž‚µ‚È‚¢‚æ‚¤‚É‚µ‚æ‚¤‚Ë
+	bool isButton() const
+	{
+		return m_isbutton;
+	}
+	//false‚É‚·‚Á‚Ø
+	void SetisButton()
+	{
+		m_isbutton = false;
+	}
 private:
 	/*ƒ|ƒCƒ“ƒ^ŒQ*/
 	Fade * m_fade = nullptr;
@@ -124,5 +134,6 @@ private:
 	CheckPoint* m_checkpoint = nullptr;
 	const wchar_t* m_checkpointname = L"CheckPoint";
 	bool m_isclear = false;
+	bool m_isbutton = false;
 };
 
