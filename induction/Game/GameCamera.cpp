@@ -59,17 +59,17 @@ void GameCamera::Update()
 			if (!m_ssplayer->GetisTransStage()) {
 				m_PlayerPos = m_ssplayer->GetPosition();
 			}
-			CVector3 stickR;
-			stickR.x = -Pad(0).GetRStickXF();	//アナログスティックのxの入力量を取得。
-			stickR.y = Pad(0).GetLStickYF();	//アナログスティックのxの入力量を取得。
-			stickR.z = 0.0f;
-			//右スティックの入力
-			//右スティック
-			m_sdegreexz = -stickR.x * 1.5f;
-			//m_sdegreey = -stickR.y * 1.5f;
-			//回転度加算
-			m_degreey += m_sdegreey;
-			m_degreexz += m_sdegreexz;
+			//CVector3 stickR;
+			//stickR.x = -Pad(0).GetRStickXF();	//アナログスティックのxの入力量を取得。
+			//stickR.y = Pad(0).GetLStickYF();	//アナログスティックのxの入力量を取得。
+			//stickR.z = 0.0f;
+			////右スティックの入力
+			////右スティック
+			//m_sdegreexz = -stickR.x * 1.5f;
+			////m_sdegreey = -stickR.y * 1.5f;
+			////回転度加算
+			//m_degreey += m_sdegreey;
+			//m_degreexz += m_sdegreexz;
 			//角度をラジアン単位に直す
 			m_radianx = M_PI / 180 * m_degreexz;
 			m_radiany = M_PI / 180 * m_degreey;
