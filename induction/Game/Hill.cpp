@@ -43,6 +43,17 @@ void Hill::Update()
 			Stop();
 			break;
 		case enState_Move:
+			m_timer += GameTime().GetFrameDeltaTime();
+			if (m_timer > 1.0f)
+			{
+				prefab::CSoundSource* sound = nullptr;
+				sound = NewGO<prefab::CSoundSource>(0);
+				sound->Init(L"sound/hill.wav");
+				sound->SetVolume(3.0f);
+				sound->Play(false);
+				m_timer = 0.0f;
+			}
+			
 			Move();
 			break;
 		}

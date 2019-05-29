@@ -46,7 +46,7 @@ private:
 	};
 	State m_state = enState_Stop;
 	CAnimationClip m_animeClip[enAnimationClip_num];
-	int m_timer = 0;
+	float m_timer = 0.0f;
 	int m_num = 0;
 	bool kill = false;
 	Human* m_human = nullptr;

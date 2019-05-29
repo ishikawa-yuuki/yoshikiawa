@@ -101,6 +101,7 @@ void Player::Update()
 			prefab::CSoundSource* sound = nullptr;
 			sound = NewGO<prefab::CSoundSource>(0);
 			sound->Init(L"sound/BlackHoleStart.wav");
+			sound->SetVolume(5.0f);
 			sound->Play(false);
 			endAttn = { 1000.0f + m_ahureru, 10.0f, 1.0f };
 			m_effect = NewGO<prefab::CEffect>(0);
@@ -197,7 +198,9 @@ void Player::Color_Change()
 			m_color = hikari_explosion;
 			m_sound = NewGO<prefab::CSoundSource>(0);
 			m_sound->Init(L"sound/BlackHoleUpdate.wav");
+			m_sound->SetVolume(5.0f);
 			m_sound->Play(true);
+			
 			break;
 		case hikari_black:
 			m_color = hikari_hutu;
