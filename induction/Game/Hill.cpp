@@ -49,7 +49,7 @@ void Hill::Update()
 				prefab::CSoundSource* sound = nullptr;
 				sound = NewGO<prefab::CSoundSource>(0);
 				sound->Init(L"sound/hill.wav");
-				sound->SetVolume(3.0f);
+				sound->SetVolume(1.0f);
 				sound->Play(false);
 				m_timer = 0.0f;
 			}
