@@ -12,8 +12,12 @@ MistEnemy::MistEnemy()
 
 MistEnemy::~MistEnemy()
 {
-	DeleteGO(m_effect);
-	DeleteGO(m_sound);
+	if (m_effect == nullptr) {
+		DeleteGO(m_effect);
+	}
+	if (m_sound == nullptr) {
+		DeleteGO(m_sound);
+	}
 }
 
 bool MistEnemy::Start()
@@ -30,11 +34,19 @@ bool MistEnemy::Start()
 	/*m_sound->SetPosition(m_position);*/
 	m_sound->SetVolume(0.0f);
 	m_sound->Play(true);
+	m_game = FindGO<Game>("Game");
 	return true;
+	
 }
 
 void MistEnemy::Update()
 {
+	if (m_game->GetisClear()) {
+		DeleteGO(m_effect);
+		m_effect = nullptr;
+		DeleteGO(m_sound);
+		m_sound = nullptr;
+	}
 	//‰¹m_moya‚ªtrue‚È‚ç‰¹‚ªo‚é
 	if (m_moya) {
 		m_sound->SetVolume(1.0f);

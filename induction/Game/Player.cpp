@@ -3,6 +3,7 @@
 #include "GameCamera.h"
 #include "Human.h"
 #include "StarDust.h"
+#include "Game.h"
 #include "tkEngine/light/tkPointLight.h"
 #include "Title.h"
 #include "TitleGround.h"
@@ -24,6 +25,7 @@ bool Player::Start()
 {
 	m_title = FindGO<Title>("Title");
 	m_human = FindGO<Human>("Human");
+	m_game = FindGO<Game>("Game");
 	//m_stardust = NewGO<StarDust>(0,"StarDust");
 	m_skin = NewGO<prefab::CSkinModelRender>(0);
 	m_skin->Init(L"modelData/siro.cmo");
@@ -161,27 +163,33 @@ void Player::GameStartMove()
 void Player::Move()
 {
 	if (!m_human->GetisDead()) {// == false
-		if (!m_human->GetisClear() ) {//== false
-			//光の速度
-			const float pl_speed = 600.0f;
-			float L_Stick_X = Pad(0).GetLStickXF();
-			float L_Stick_Y = Pad(0).GetLStickYF();
+		if (!m_human->GetisClear()) {//== false
+			if (!m_game->GetisPose()) {
+				//光の速度
+				const float pl_speed = 600.0f;
+				float L_Stick_X = Pad(0).GetLStickXF();
+				float L_Stick_Y = Pad(0).GetLStickYF();
 
-			//カメラの前方向の取得
-			CVector3 CameraForword = MainCamera().GetForward();
-			//カメラの横方向の取得
-			CVector3 CameraRight = MainCamera().GetRight();
+				//カメラの前方向の取得
+				CVector3 CameraForword = MainCamera().GetForward();
+				//カメラの横方向の取得
+				CVector3 CameraRight = MainCamera().GetRight();
 
-			CameraForword.y = 0.0f;
-			//方向情報・前
-			CameraForword.Normalize();
-			CameraRight.y = 0.0f;
-			//方向情報・横
-			CameraRight.Normalize();
-			m_moveSpeed = CVector3::Zero;
-			m_moveSpeed += CameraForword * L_Stick_Y * pl_speed;
-			m_moveSpeed += CameraRight * L_Stick_X * pl_speed;
-			m_position = m_charaCon.Execute(m_moveSpeed, GameTime().GetFrameDeltaTime());
+				CameraForword.y = 0.0f;
+				//方向情報・前
+				CameraForword.Normalize();
+				CameraRight.y = 0.0f;
+				//方向情報・横
+				CameraRight.Normalize();
+				m_moveSpeed = CVector3::Zero;
+				m_moveSpeed += CameraForword * L_Stick_Y * pl_speed;
+				m_moveSpeed += CameraRight * L_Stick_X * pl_speed;
+				m_position = m_charaCon.Execute(m_moveSpeed, GameTime().GetFrameDeltaTime());
+			}
+			else {
+				m_moveSpeed = CVector3::Zero;
+				m_position = m_charaCon.Execute(m_moveSpeed, GameTime().GetFrameDeltaTime());
+			}
 		}
 	}
 }
@@ -190,26 +198,27 @@ void Player::Color_Change()
 {
 	
 	//停止ではなくブラックホールモードになりました。使用はまだ変わってませんが…
-	if (Pad(0).IsTrigger(enButtonA)) {
-		switch (m_color) {
-		case hikari_hutu:
-			m_explosionTimer = 0.0f;
-			m_color = hikari_explosion;
-			m_sound = NewGO<prefab::CSoundSource>(0);
-			m_sound->Init(L"sound/BlackHoleUpdate.wav");
-			m_sound->Play(true);
-			break;
-		case hikari_black:
-			m_color = hikari_hutu;
-			m_effect->Release();
-			m_effect->Play(L"effect/hikari.efk");
-			m_effect->SetScale({ 0.0f,0.0f,0.0f });
-			m_skin->SetEmissionColor({ 50.0f, 50.0f, 20.0f });
-			m_attn = m_pointLigDefaultAttn;
-			m_ptLight->SetAttn(m_attn);
-			m_sound->Release();
-			break;
-		}
+	if (!m_game->GetisPose()) {
+		if (Pad(0).IsTrigger(enButtonA)) {
+			switch (m_color) {
+			case hikari_hutu:
+				m_explosionTimer = 0.0f;
+				m_color = hikari_explosion;
+				m_sound = NewGO<prefab::CSoundSource>(0);
+				m_sound->Init(L"sound/BlackHoleUpdate.wav");
+				m_sound->Play(true);
+				break;
+			case hikari_black:
+				m_color = hikari_hutu;
+				m_effect->Release();
+				m_effect->Play(L"effect/hikari.efk");
+				m_effect->SetScale({ 0.0f,0.0f,0.0f });
+				m_skin->SetEmissionColor({ 50.0f, 50.0f, 20.0f });
+				m_attn = m_pointLigDefaultAttn;
+				m_ptLight->SetAttn(m_attn);
+				m_sound->Release();
+				break;
+			}
 #if 0
 			///*m_effect = NewGO<prefab::CEffect>(0);*/
 			//m_effect->Release();
@@ -224,7 +233,8 @@ void Player::Color_Change()
 			///*m_effect->SetPosition(m_position);*/
 		case hikari_explosion:
 #endif
-		
 
+
+		}
 	}
 }

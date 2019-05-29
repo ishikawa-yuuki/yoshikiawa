@@ -4,6 +4,7 @@ class Player;
 class Human;
 class Light_Object;
 class Light_Object2;
+class Game;
 class MistEnemy : public IGameObject
 {
 public:
@@ -36,6 +37,7 @@ private:
 	CVector3 m_moveSpeed = CVector3::Zero;
 	Player* m_player;
 	Human* m_human;
+	Game* m_game = nullptr;
 	//プレイヤーから逃げるフラグ
 	bool m_escape_flag = false;
 	//人を連れていくフラグ

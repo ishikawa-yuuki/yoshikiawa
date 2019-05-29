@@ -71,7 +71,6 @@
     <MeshContentTask Include="Assets\modelData\StageMap\Stage3.fbx" />
     <MeshContentTask Include="Assets\modelData\StageMap\Stage4.fbx" />
     <MeshContentTask Include="Assets\modelData\StageMap\Stage5.fbx" />
-    <MeshContentTask Include="Assets\modelData\StageMap\Stage7.fbx" />
     <MeshContentTask Include="Assets\modelData\StageMap\stage_test.fbx" />
     <MeshContentTask Include="Assets\modelData\StageObject\Lightstand01.fbx" />
     <MeshContentTask Include="Assets\modelData\StageObject\Lightstand02.fbx" />

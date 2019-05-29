@@ -9,6 +9,7 @@
 #include "Human.h"
 #include "Player.h"
 #include "GameCamera.h"
+#include "GameData.h"
 Title::Title()
 {
 }
@@ -284,10 +285,13 @@ void Title::Choice()
 
 void Title::TransScene()
 {
+	GameData* gamedata = &GameData::GetInstance();
 	if (m_isWaitFadeout) {
 	if (!m_fade->IsFade()) {
 		if (m_select == enState_Manual) {
 			NewGO<Help>(0, "Help");
+			//マニュアルを最初に選んだ人にはステージ最初には読ませないようにする。
+			gamedata->SetisEnterStage();
 			DeleteGO(this);
 		}
 		else if (m_select == enState_Credit) {
