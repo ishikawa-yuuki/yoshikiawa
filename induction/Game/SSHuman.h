@@ -72,5 +72,6 @@ private:
 	CAnimationClip m_animClip[enAnimationClip_num];
 	CCharacterController m_charaCon;
 	//CFont m_font;
+	float m_timer = 0.0f;
 };
 

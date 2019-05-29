@@ -93,11 +93,19 @@ void SSHuman::Move()
 
 void SSHuman::Animation_Turn()
 {
+	m_timer += GameTime().GetFrameDeltaTime();
 	const float run_true = 7.0f*7.0f;
 	const float walk_true = 1.0f*1.0f;
 	const float time = 0.2f;
 	if (m_movespeed.LengthSq() > walk_true && m_state != SSPlayer::enState_Stop) {
 		m_skin->PlayAnimation(enAnimationClip_run, time);
+		if (m_timer >= 0.4) {
+			prefab::CSoundSource* ss = NewGO<prefab::CSoundSource>(0);
+			ss->Init(L"sound/run.wav");
+			ss->SetVolume(0.5);
+			ss->Play(false);
+			m_timer = 0;
+		}
 		CVector3 pos = m_movespeed;
 		pos.y = 0.0f;
 		pos.Normalize();
