@@ -40,6 +40,11 @@ public:
 		m_lastlight = true;
 		return m_lastlight;
 	}
+	//ラストナンバーの番号をサーチ
+	void Lastlightnumber(const int &num)
+	{
+		m_lastlightnum = num;
+	}
 	//これが呼ばれたら初期状態のライトはonになる
 	bool SetLight()
 	{
@@ -77,6 +82,12 @@ private:
 	bool m_biglight = false;
 	//最後のステージで配置されるランタンかどうか
 	bool m_lastlight = false;
+	//最後のランタンの種類
+	int m_lastlightnum = 0;
+	//前、中央、後方のライトナンバー
+	const int flont = 1;
+	const int center = 2;
+	const int back = 3;
 	//ライト。
 	prefab::CDirectionLight* m_lig = nullptr;
 	//ライトの方向。

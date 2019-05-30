@@ -820,6 +820,7 @@ void Game::Stage5()
 			}
 			//‘å‚«‚¢ƒ‰ƒ“ƒ^ƒ“
 			else if (objdata.EqualObjectName(L"Big_lanthanum")) {
+				int num = _wtoi(&objdata.name[13]);
 				Light_Object* m_biglightObject = NewGO<Light_Object>(0, "Big_LightObject");
 				m_biglightObject->SetPosition(objdata.position);
 				m_biglightObject->SetScale(objdata.scale);
@@ -832,9 +833,11 @@ void Game::Stage5()
 			//ÅŒã‚Éİ’u‚µ‚Ä‚¢‚éƒ‰ƒ“ƒ^ƒ“
 			else if (objdata.ForwardMatchName(L"Lastlanthanum")) {
 				Light_Object* m_LastlightObject = NewGO<Light_Object>(0, "LastLightObject");
+				int num = _wtoi(&objdata.name[13]);
 				m_LastlightObject->SetPosition(objdata.position);
 				m_LastlightObject->SetScale(objdata.scale);
 				m_LastlightObject->SetRotation(objdata.rotation);
+				m_LastlightObject->Lastlightnumber(num);
 				m_LastlightObject->Lastlight();
 				m_lightobjectList.push_back(m_LastlightObject);
 				return true;

@@ -164,8 +164,8 @@ void MistEnemy::Atari()
 				m_escape_flag = false;
 				m_state = enNormal;
 			}
-			if (m_Deathtimer != 0) {
-				m_Deathtimer = 0;
+			if (m_Deathtimer != 0.0f) {
+				m_Deathtimer = 0.0f;
 			}
 			if (m_moya) {
 				m_moya = false;
@@ -177,7 +177,7 @@ void MistEnemy::Atari()
 			difp.Normalize();
 			difp *= -300.0f;
 			m_moveSpeed = difp;
-			m_Deathtimer += 50 * GameTime().GetFrameDeltaTime();
+			m_Deathtimer += 50.0f * GameTime().GetFrameDeltaTime();
 
 			//•ß‚Ü‚Á‚½ó‘Ô‚Ì‚ÍŒõ‚Æƒqƒg‚Ì‹——£‚ÅŒvZ‚µ‚Ü‚·B
 			//MisteEnemy‚ª•Ç‚É“ü‚Á‚½‚ç‚Ç‚¤‚µ‚æ‚¤‚à‚È‚¢‚Ì‚Åc
@@ -197,8 +197,8 @@ void MistEnemy::Atari()
 				}
 			}
 
-			if (m_Deathtimer > 300) {
-				m_Deathtimer = 0;
+			if (m_Deathtimer > 400.0f) {
+				m_Deathtimer = 0.0f;
 				m_human->isKill();
 			}
 		}

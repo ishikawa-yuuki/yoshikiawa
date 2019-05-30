@@ -105,12 +105,36 @@ void Light_Object::Update()
 	if (m_lastlight) {
 		if (m_human->GetisLastStageClear()
 			&&!m_isLightOn) {
-			m_isLightOn = true;
-			m_effect = NewGO<prefab::CEffect>(0);
-			m_effect->Play(L"effect/spotlight.efk");
-			m_effect->SetScale({ 4.0f, 4.0f, 4.0f });
-			InitPointLight();
-			m_effect->SetPosition(m_position);
+			static float timer = 0.0f;
+			timer += 1 * GameTime().GetFrameDeltaTime();
+			if (m_lastlightnum == flont) {
+				m_isLightOn = true;
+				m_effect = NewGO<prefab::CEffect>(0);
+				m_effect->Play(L"effect/spotlight.efk");
+				m_effect->SetScale({ 4.0f, 4.0f, 4.0f });
+				InitPointLight();
+				m_effect->SetPosition(m_position);
+			}
+			else if (m_lastlightnum == center) {
+				if (timer > 0.8f) {
+					m_isLightOn = true;
+					m_effect = NewGO<prefab::CEffect>(0);
+					m_effect->Play(L"effect/spotlight.efk");
+					m_effect->SetScale({ 4.0f, 4.0f, 4.0f });
+					InitPointLight();
+					m_effect->SetPosition(m_position);
+				}
+			}
+			else if (m_lastlightnum == back) {
+				if (timer > 1.6f) {
+					m_isLightOn = true;
+					m_effect = NewGO<prefab::CEffect>(0);
+					m_effect->Play(L"effect/spotlight.efk");
+					m_effect->SetScale({ 4.0f, 4.0f, 4.0f });
+					InitPointLight();
+					m_effect->SetPosition(m_position);
+				}
+			}
 		}
 	}
 }

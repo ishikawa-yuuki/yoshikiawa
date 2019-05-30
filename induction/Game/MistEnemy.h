@@ -45,7 +45,7 @@ private:
 	//クールタイマー,休憩時間
 	int m_cool_timer = 0;
 	//ぶちころタイマー、一定数値以上で死ぬ
-	int m_Deathtimer = 0;
+	float m_Deathtimer = 0.0f;
 	//あんまりうろうろしないようにするタイマー
 	int m_kaerutimer = 200;
 	//最初だけ記録する
