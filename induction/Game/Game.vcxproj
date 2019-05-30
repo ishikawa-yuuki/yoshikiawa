@@ -2017,6 +2017,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Middle|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_Low|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Preview_Low|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\StageMap\stage_test.fbx">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Middle|x64'">true</ExcludedFromBuild>
@@ -2096,6 +2097,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Preview_Middle|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Middle|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Preview_Low|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Stone\Stone.fbx">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Preview_Low|x64'">true</ExcludedFromBuild>

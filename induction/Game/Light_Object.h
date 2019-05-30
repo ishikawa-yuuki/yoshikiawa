@@ -28,10 +28,17 @@ public:
 	void SetRotation(const CQuaternion& rot) {
 		m_rot = rot;
 	}
+	//名前の通りライトが大きくなる
 	bool Biglight()
 	{
 		m_biglight = true;
 		return  m_biglight;
+	}
+	//これが呼ばれたら少しだけ仕様が違うライトになる
+	bool Lastlight()
+	{
+		m_lastlight = true;
+		return m_lastlight;
 	}
 	//これが呼ばれたら初期状態のライトはonになる
 	bool SetLight()
@@ -66,7 +73,10 @@ private:
 	Human* m_human;
 	//ライトがオンなのかどうか
 	bool m_isLightOn = false;
+	//ライトが大きいかどうか
 	bool m_biglight = false;
+	//最後のステージで配置されるランタンかどうか
+	bool m_lastlight = false;
 	//ライト。
 	prefab::CDirectionLight* m_lig = nullptr;
 	//ライトの方向。

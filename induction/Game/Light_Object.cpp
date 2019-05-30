@@ -101,6 +101,18 @@ void Light_Object::Update()
 			m_ptLight->SetAttn(attn);
 		}
 	}
+	//‚±‚±‚©‚çLastlight‚ÌƒR[ƒh‚ð‘‚­
+	if (m_lastlight) {
+		if (m_human->GetisLastStageClear()
+			&&!m_isLightOn) {
+			m_isLightOn = true;
+			m_effect = NewGO<prefab::CEffect>(0);
+			m_effect->Play(L"effect/spotlight.efk");
+			m_effect->SetScale({ 4.0f, 4.0f, 4.0f });
+			InitPointLight();
+			m_effect->SetPosition(m_position);
+		}
+	}
 }
 
 void Light_Object::InitPointLight()
@@ -110,20 +122,26 @@ void Light_Object::InitPointLight()
 	pointlightpos.y = 100.0f;
 	m_ptLight->SetPosition(pointlightpos);//ˆÊ’uŒˆ‚ß
 	
-	
-	if (m_biglight) {
-		CVector3 color = { 20000.0f,20000.0f,25000.0f, };
+	if (m_lastlight) {
+		CVector3 color = { 5000.0f,5000.0f,5000.0f, };
 		m_ptLight->SetColor(color);//FŒˆ‚ß
+		attn.x = 1000.0f;//Œõ‚Ì‰e‹¿”ÍˆÍ‹——£
+		attn.y = 5.0f;//Œõ‚ÌŒ¸Š
+		m_ptLight->SetAttn(attn);//‰e‹¿”ÍˆÍ‚ÆŒ¸Š‚Ì‹­‚³
+	}
+	else if (m_biglight) {
+		CVector3 color = { 20000.0f,20000.0f,25000.0f, };
+		m_ptLight->SetColor(color);
 		attn.x = 1200.0f;
 		attn.y = 2.0f;
 		m_ptLight->SetAttn(attn);
 	}
 	else {
 		CVector3 color = { 2000.0f,2000.0f,2500.0f, };
-		m_ptLight->SetColor(color);//FŒˆ‚ß
-		attn.x = 1000.0f;//Œõ‚Ì‰e‹¿”ÍˆÍ‹——£
-		attn.y = 10.0f;//Œõ‚ÌŒ¸Š
-		m_ptLight->SetAttn(attn);//‰e‹¿”ÍˆÍ‚ÆŒ¸Š‚Ì‹­‚³
+		m_ptLight->SetColor(color);
+		attn.x = 1000.0f;
+		attn.y = 10.0f;
+		m_ptLight->SetAttn(attn);
 	}
 }
 

@@ -60,6 +60,11 @@ public:
 	{
 		return m_Clear_one;
 	}
+	//最終ステージをクリアしたかどうかを返す関数
+	bool GetisLastStageClear()const
+	{
+		return m_allstageclear;
+	}
 	//ゲームオーバーかどうか返す関数
 	bool GetisGameOver()const {
 		return m_isGameOver;
@@ -152,6 +157,6 @@ private:
 	TitleGround* m_titleground = nullptr;
 	float m_degree = 0.0f;
 	//全てクリアー！
-	bool allstageclear = false;
+	bool m_allstageclear = false;
 };
 

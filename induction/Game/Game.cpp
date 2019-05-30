@@ -835,6 +835,7 @@ void Game::Stage5()
 				m_LastlightObject->SetPosition(objdata.position);
 				m_LastlightObject->SetScale(objdata.scale);
 				m_LastlightObject->SetRotation(objdata.rotation);
+				m_LastlightObject->Lastlight();
 				m_lightobjectList.push_back(m_LastlightObject);
 				return true;
 			}

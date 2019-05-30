@@ -498,7 +498,7 @@ void Human::isClear()
 		m_skinModelRender->PlayAnimation(enAnimationClip_run, 0.2f);
 		if (GameData::GetInstance().GetStageNumber() == GameData::enState_StageLast) {
 			m_movespeed.z -= 6000.0f * GameTime().GetFrameDeltaTime();
-			allstageclear = true;
+			m_allstageclear = true;
 		}
 		else if (GameData::GetInstance().GetStageNumber() == GameData::enState_Stage3) {
 			m_movespeed.x = 6000.0f * GameTime().GetFrameDeltaTime();
@@ -520,9 +520,9 @@ void Human::isClear()
 	if (m_Clear_one) {
 		m_timer += 1 * GameTime().GetFrameDeltaTime();
 		//m_timerfrag‚Â‚¯‚éB
-		if (allstageclear&&
+		if (m_allstageclear&&
 			m_timer >= 6.0f) {
-			allstageclear = false;
+			m_allstageclear = false;
 			m_timer = 0.0f;
 			m_game->GameOwari();
 			NewGO<Credit>(0,"Credit");
