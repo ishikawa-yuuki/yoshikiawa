@@ -151,5 +151,7 @@ private:
 	int m_enemytimer = 200;
 	TitleGround* m_titleground = nullptr;
 	float m_degree = 0.0f;
+	//全てクリアー！
+	bool allstageclear = false;
 };
 

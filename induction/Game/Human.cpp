@@ -13,7 +13,8 @@
 #include "Stage_Select.h"
 #include "Title.h"
 #include "TitleGround.h"
-#include  "GameData.h"
+#include "GameData.h"
+#include "Credit.h"
 //ライトの強さを計算する。
 float CalcLightPower(CVector3 charaPos, CVector3 lightPos, CVector4 attn)
 {
@@ -495,7 +496,11 @@ void Human::isClear()
 	diff.y = 0.0f;
 	if (!m_skinModelRender->IsPlayingAnimation()  && m_Clear_one) {
 		m_skinModelRender->PlayAnimation(enAnimationClip_run, 0.2f);
-		if (GameData::GetInstance().GetStageNumber() == GameData::enState_Stage3) {
+		if (GameData::GetInstance().GetStageNumber() == GameData::enState_StageLast) {
+			m_movespeed.z -= 6000.0f * GameTime().GetFrameDeltaTime();
+			allstageclear = true;
+		}
+		else if (GameData::GetInstance().GetStageNumber() == GameData::enState_Stage3) {
 			m_movespeed.x = 6000.0f * GameTime().GetFrameDeltaTime();
 		}
 		else {
@@ -515,7 +520,14 @@ void Human::isClear()
 	if (m_Clear_one) {
 		m_timer += 1 * GameTime().GetFrameDeltaTime();
 		//m_timerfragつける。
-		if (m_timer >= 6.0f) {
+		if (allstageclear&&
+			m_timer >= 6.0f) {
+			allstageclear = false;
+			m_timer = 0.0f;
+			m_game->GameOwari();
+			NewGO<Credit>(0,"Credit");
+		}
+		else if (m_timer >= 6.0f) {
 			m_timer = 0.0f;
 			m_game->GameOwari();
 			NewGO<Stage_Select>(0,"Stage_Select");
