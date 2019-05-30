@@ -830,7 +830,7 @@ void Game::Stage5()
 				return true;
 			}
 			//ÅŒã‚Éİ’u‚µ‚Ä‚¢‚éƒ‰ƒ“ƒ^ƒ“
-			else if (objdata.EqualObjectName(L"Lastlanthanum")) {
+			else if (objdata.ForwardMatchName(L"Lastlanthanum")) {
 				Light_Object* m_LastlightObject = NewGO<Light_Object>(0, "LastLightObject");
 				m_LastlightObject->SetPosition(objdata.position);
 				m_LastlightObject->SetScale(objdata.scale);
