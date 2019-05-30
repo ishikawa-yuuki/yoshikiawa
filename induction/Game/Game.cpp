@@ -829,6 +829,15 @@ void Game::Stage5()
 				m_lightobjectList.push_back(m_biglightObject);
 				return true;
 			}
+			//ÅŒã‚Éİ’u‚µ‚Ä‚¢‚éƒ‰ƒ“ƒ^ƒ“
+			else if (objdata.EqualObjectName(L"Lastlanthanum")) {
+				Light_Object* m_LastlightObject = NewGO<Light_Object>(0, "LastLightObject");
+				m_LastlightObject->SetPosition(objdata.position);
+				m_LastlightObject->SetScale(objdata.scale);
+				m_LastlightObject->SetRotation(objdata.rotation);
+				m_lightobjectList.push_back(m_LastlightObject);
+				return true;
+			}
 			//¼–¾
 			else if (objdata.ForwardMatchName(L"Lightstand")) {
 				int num = _wtoi(&objdata.name[10]);
